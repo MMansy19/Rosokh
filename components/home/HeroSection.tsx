@@ -1,8 +1,12 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { BookOpen, Headphones, Calendar, BarChart3, ArrowRight, Play } from 'lucide-react';
+
+interface HeroSectionProps {
+  locale: string;
+  messages: any;
+}
 
 const features = [
   { key: 'quran', href: '/quran', icon: BookOpen, color: 'text-primary' },
@@ -11,11 +15,7 @@ const features = [
   { key: 'analytics', href: '/analytics', icon: BarChart3, color: 'text-info' },
 ];
 
-export function HeroSection() {
-  const t = useTranslations('home.hero');
-  const tNav = useTranslations('common.navigation');
-  const tActions = useTranslations('common.actions');
-  const locale = useLocale();
+export function HeroSection({ locale, messages }: HeroSectionProps) {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -39,16 +39,14 @@ export function HeroSection() {
               <span className="block text-primary arabic-text text-3xl md:text-4xl lg:text-5xl mt-2">
                 رسوخ
               </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted max-w-3xl mx-auto leading-relaxed">
-              {t('subtitle')}
+            </h1>            <p className="text-xl md:text-2xl text-muted max-w-3xl mx-auto leading-relaxed">
+              {messages?.home?.hero?.subtitle || "Your comprehensive Islamic multimedia platform"}
             </p>
           </div>
 
           {/* Description */}
-          <div className="max-w-4xl mx-auto animate-slideInRight">
-            <p className="text-lg md:text-xl text-muted leading-relaxed">
-              {t('description')}
+          <div className="max-w-4xl mx-auto animate-slideInRight">            <p className="text-lg md:text-xl text-muted leading-relaxed">
+              {messages?.home?.hero?.description || "Discover the beauty of Islamic knowledge through Quran reading, audio recitations, and spiritual growth tools."}
             </p>
           </div>
 
@@ -59,7 +57,7 @@ export function HeroSection() {
               className="btn-primary flex items-center space-x-2 rtl:space-x-reverse px-8 py-4 text-lg group"
             >
               <BookOpen className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
-              <span>{tActions('read')} {tNav('quran')}</span>
+              <span>{messages?.common?.actions?.read || "Read"} {messages?.common?.navigation?.quran || "Quran"}</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform duration-200" />
             </Link>
             
@@ -68,7 +66,7 @@ export function HeroSection() {
               className="btn-secondary flex items-center space-x-2 rtl:space-x-reverse px-8 py-4 text-lg group"
             >
               <Play className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
-              <span>{tActions('listen')} {tNav('audio')}</span>
+              <span>{messages?.common?.actions?.listen || "Listen"} {messages?.common?.navigation?.audio || "Audio"}</span>
             </Link>
           </div>
 
@@ -86,12 +84,11 @@ export function HeroSection() {
                   <div className="flex flex-col items-center space-y-3">
                     <div className={`p-3 rounded-lg bg-primary/10 ${feature.color} group-hover:bg-primary/20 transition-colors duration-200`}>
                       <Icon className="w-8 h-8" />
-                    </div>
-                    <h3 className="font-semibold text-foreground text-center">
-                      {tNav(feature.key)}
+                    </div>                    <h3 className="font-semibold text-foreground text-center">
+                      {messages?.common?.navigation?.[feature.key] || feature.key}
                     </h3>
                     <p className="text-sm text-muted text-center leading-relaxed">
-                      {t(`features.${feature.key}`)}
+                      {messages?.home?.hero?.features?.[feature.key] || `Explore ${feature.key}`}
                     </p>
                   </div>
                 </Link>
@@ -103,15 +100,15 @@ export function HeroSection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16 max-w-3xl mx-auto">
             <div className="text-center space-y-2 animate-fadeIn">
               <div className="text-3xl md:text-4xl font-bold text-primary">114</div>
-              <div className="text-muted">{t('stats.surahs')}</div>
+              <div className="text-muted">{messages?.home?.hero?.stats?.surahs || "Surahs"}</div>
             </div>
             <div className="text-center space-y-2 animate-fadeIn" style={{ animationDelay: '0.2s' }}>
               <div className="text-3xl md:text-4xl font-bold text-accent">6,236</div>
-              <div className="text-muted">{t('stats.verses')}</div>
+              <div className="text-muted">{messages?.home?.hero?.stats?.verses || "Verses"}</div>
             </div>
             <div className="text-center space-y-2 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
               <div className="text-3xl md:text-4xl font-bold text-success">3</div>
-              <div className="text-muted">{t('stats.languages')}</div>
+              <div className="text-muted">{messages?.home?.hero?.stats?.languages || "Languages"}</div>
             </div>
           </div>
         </div>

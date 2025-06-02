@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import { Amiri, Inter } from "next/font/google";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import "../globals.css";
-import { ThemeProvider } from '@/components/providers/ThemeProvider';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { getMessages } from "@/utils/translations";
 
 const amiri = Amiri({
   subsets: ['arabic', 'latin'],
   variable: '--font-amiri',
   weight: ['400', '700'],
   display: 'swap',
+  fallback: ['Arial', 'sans-serif'],
 });
 
 const inter = Inter({
@@ -19,48 +18,77 @@ const inter = Inter({
   variable: '--font-inter',
   weight: ['400', '500', '600', '700'],
   display: 'swap',
+  fallback: ['system-ui', 'arial'],
 });
 
-export const metadata: Metadata = {
-  title: "Rosokh - Islamic Multimedia Platform | منصة رسوخ الإسلامية",
-  description: "Rosokh is a modern Islamic multimedia platform for Quran reading, audio recitations, and spiritual learning. Free, fast, and available in Arabic, English, and Russian.",
-  keywords: "Quran, Islamic, Audio, Recitation, Hijri Calendar, Prayer Times, Khatma, Islamic Learning",
-  openGraph: {
-    title: "Rosokh - Islamic Multimedia Platform",
-    description: "Your comprehensive Islamic platform for Quran, audio, and spiritual growth",
-    type: "website",
-    locale: "en_US",
-  },
-};
+// Define the metadata with dynamic locale
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const messages = await getMessages(locale);
+
+  return {
+    title: {
+      template: `%s | ${locale === "ar" ? "منصة رسوخ الإسلامية" : "Rosokh - Islamic Platform"}`,
+      default: messages?.home?.title || "Rosokh - Islamic Multimedia Platform",
+    },
+    description: messages?.home?.description || "Rosokh is a modern Islamic multimedia platform for Quran reading, audio recitations, and spiritual learning.",
+    keywords: messages?.seo?.keywords || "Quran, Islamic, Audio, Recitation, Hijri Calendar, Prayer Times, Khatma, Islamic Learning",
+    alternates: {
+      canonical: `/`,
+      languages: {
+        en: `/en`,
+        ar: `/ar`,
+        ru: `/ru`,
+      },
+    },
+    openGraph: {
+      title: "Rosokh - Islamic Multimedia Platform",
+      description: "Your comprehensive Islamic platform for Quran, audio, and spiritual growth",
+      type: "website",
+      locale: locale === "ar" ? "ar_SA" : "en_US",
+    },
+  };
+}
 
 interface RootLayoutProps {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
 export default async function RootLayout({
   children,
-  params: { locale }
+  params,
 }: RootLayoutProps) {
-  const messages = await getMessages();
-  const direction = locale === 'ar' ? 'rtl' : 'ltr';
-  
+  const { locale } = await params;
+  const dir = locale === "ar" ? "rtl" : "ltr";
+  const fontClass = locale === "ar" ? 
+    `${amiri.variable}` : 
+    `${inter.variable}`;
+  const messages = await getMessages(locale);
+
   return (
-    <html lang={locale} dir={direction} suppressHydrationWarning>
-      <body
-        className={`${amiri.variable} ${inter.variable} antialiased bg-background text-foreground transition-colors duration-300`}
-      >
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <div className="min-h-screen flex flex-col">
-              <Header />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
-          </ThemeProvider>
-        </NextIntlClientProvider>
+    <html lang={locale} dir={dir} className={`${fontClass}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className="antialiased min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
+        <Header 
+          locale={locale} 
+          messages={messages}
+        />
+        <main className="flex-1">
+          <div className="animate-fadeIn">{children}</div>
+        </main>
+        <Footer 
+          locale={locale} 
+          messages={messages}
+        />
       </body>
     </html>
   );

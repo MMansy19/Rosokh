@@ -1,14 +1,14 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { Heart, Github, Mail, Phone, MapPin } from 'lucide-react';
 
-export function Footer() {
-  const t = useTranslations('common');
-  const tFooter = useTranslations('footer');
-  const locale = useLocale();
+interface FooterProps {
+  locale: string;
+  messages: any;
+}
 
+export function Footer({ locale, messages }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -25,20 +25,18 @@ export function Footer() {
                 <span className="font-bold text-lg text-foreground">Rosokh</span>
                 <span className="text-xs text-muted -mt-1">رسوخ</span>
               </div>
-            </div>
-            <p className="text-muted text-sm leading-relaxed max-w-xs">
-              {tFooter('description')}
+            </div>            <p className="text-muted text-sm leading-relaxed max-w-xs">
+              {messages?.footer?.description || "Rosokh is a modern Islamic multimedia platform for spiritual growth and learning."}
             </p>
             <div className="flex items-center space-x-1 rtl:space-x-reverse text-sm text-muted">
-              <span>{tFooter('made_with')}</span>
+              <span>{messages?.footer?.made_with || "Made with"}</span>
               <Heart className="w-4 h-4 text-red-500 animate-pulse" />
-              <span>{tFooter('for_ummah')}</span>
+              <span>{messages?.footer?.for_ummah || "for the Ummah"}</span>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">{tFooter('quick_links')}</h3>
+          {/* Quick Links */}          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">{messages?.footer?.quick_links || "Quick Links"}</h3>
             <ul className="space-y-2">
               {[
                 { key: 'quran', href: '/quran' },
@@ -51,27 +49,25 @@ export function Footer() {
                     href={`/${locale}${link.href}`}
                     className="text-muted hover:text-primary transition-colors duration-200 text-sm"
                   >
-                    {t(`navigation.${link.key}`)}
+                    {messages?.common?.navigation?.[link.key] || link.key}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Features */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">{tFooter('features')}</h3>
+          {/* Features */}          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">{messages?.footer?.features || "Features"}</h3>
             <ul className="space-y-2 text-sm text-muted">
-              <li>{tFooter('feature_free')}</li>
-              <li>{tFooter('feature_multilingual')}</li>
-              <li>{tFooter('feature_offline')}</li>
-              <li>{tFooter('feature_responsive')}</li>
+              <li>{messages?.footer?.feature_free || "100% Free"}</li>
+              <li>{messages?.footer?.feature_multilingual || "Multilingual Support"}</li>
+              <li>{messages?.footer?.feature_offline || "Offline Capable"}</li>
+              <li>{messages?.footer?.feature_responsive || "Responsive Design"}</li>
             </ul>
           </div>
 
-          {/* Contact */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">{tFooter('contact')}</h3>
+          {/* Contact */}          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">{messages?.footer?.contact || "Contact"}</h3>
             <div className="space-y-3">
               <a
                 href="mailto:info@rosokh.com"
@@ -82,7 +78,7 @@ export function Footer() {
               </a>
               <div className="flex items-center space-x-2 rtl:space-x-reverse text-muted text-sm">
                 <MapPin className="w-4 h-4" />
-                <span>{tFooter('location')}</span>
+                <span>{messages?.footer?.location || "Global"}</span>
               </div>
               <a
                 href="https://github.com/rosokh-platform"
@@ -99,28 +95,27 @@ export function Footer() {
 
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-muted">
-              © {currentYear} Rosokh Platform. {tFooter('rights_reserved')}
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">            <div className="text-sm text-muted">
+              © {currentYear} Rosokh Platform. {messages?.footer?.rights_reserved || "All rights reserved."}
             </div>
             <div className="flex items-center space-x-6 rtl:space-x-reverse text-sm">
               <Link
                 href={`/${locale}/privacy`}
                 className="text-muted hover:text-primary transition-colors duration-200"
               >
-                {tFooter('privacy')}
+                {messages?.footer?.privacy || "Privacy Policy"}
               </Link>
               <Link
                 href={`/${locale}/terms`}
                 className="text-muted hover:text-primary transition-colors duration-200"
               >
-                {tFooter('terms')}
+                {messages?.footer?.terms || "Terms of Service"}
               </Link>
               <Link
                 href={`/${locale}/about`}
                 className="text-muted hover:text-primary transition-colors duration-200"
               >
-                {tFooter('about')}
+                {messages?.footer?.about || "About"}
               </Link>
             </div>
           </div>

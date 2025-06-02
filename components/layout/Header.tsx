@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
-import { useTheme } from '@/components/providers/ThemeProvider';
 import { 
   Menu, 
   X, 
@@ -13,19 +11,24 @@ import {
   BookOpen, 
   Headphones, 
   Video, 
-  GameController2, 
+  Gamepad2, 
   Calendar, 
   BarChart3, 
   Mail,
   Home
 } from 'lucide-react';
 
+interface HeaderProps {
+  locale: string;
+  messages: any;
+}
+
 const navigation = [
   { key: 'home', href: '/', icon: Home },
   { key: 'quran', href: '/quran', icon: BookOpen },
   { key: 'audio', href: '/audio', icon: Headphones },
   { key: 'video', href: '/videos', icon: Video },
-  { key: 'games', href: '/games', icon: GameController2 },
+  { key: 'games', href: '/games', icon: Gamepad2 },
   { key: 'khatma', href: '/khatma', icon: BookOpen },
   { key: 'calendar', href: '/calendar', icon: Calendar },
   { key: 'analytics', href: '/analytics', icon: BarChart3 },
@@ -38,14 +41,25 @@ const languages = [
   { code: 'ru', name: 'Русский', dir: 'ltr' },
 ];
 
-export function Header() {
+export function Header({ locale, messages }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-  const t = useTranslations('common.navigation');
-  const tActions = useTranslations('common.actions');
-  const locale = useLocale();
+  const [theme, setTheme] = useState('light');
   const currentLang = languages.find(lang => lang.code === locale);
+
+  useEffect(() => {
+    // Check for saved theme preference or default to 'light'
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -90,7 +104,7 @@ export function Header() {
                   className="flex items-center space-x-2 rtl:space-x-reverse text-muted hover:text-primary transition-colors duration-200 group"
                 >
                   <Icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
-                  <span className="font-medium">{t(item.key)}</span>
+                  <span className="font-medium">{messages?.common?.navigation?.[item.key] || item.key}</span>
                 </Link>
               );
             })}
@@ -103,7 +117,7 @@ export function Header() {
               <button
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 className="flex items-center space-x-2 rtl:space-x-reverse p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
-                aria-label={tActions('language')}
+                aria-label={messages?.common?.actions?.language || "Language"}
               >
                 <Globe className="w-5 h-5 text-muted" />
                 <span className="text-sm font-medium text-muted">{currentLang?.name}</span>
@@ -133,7 +147,7 @@ export function Header() {
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
-              aria-label={tActions('toggle_theme')}
+              aria-label={messages?.common?.actions?.toggle_theme || "Toggle theme"}
             >
               {theme === 'light' ? (
                 <Moon className="w-5 h-5 text-muted" />
@@ -174,7 +188,7 @@ export function Header() {
                     className="flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-secondary transition-colors duration-200 group"
                   >
                     <Icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-200" />
-                    <span className="font-medium text-foreground">{t(item.key)}</span>
+                    <span className="font-medium text-foreground">{messages?.common?.navigation?.[item.key] || item.key}</span>
                   </Link>
                 );
               })}
@@ -184,7 +198,7 @@ export function Header() {
             <div className="pt-4 border-t border-border space-y-2">
               {/* Language Selector */}
               <div className="space-y-2">
-                <p className="text-sm font-medium text-muted px-3">{tActions('language')}</p>
+                <p className="text-sm font-medium text-muted px-3">{messages?.common?.actions?.language || "Language"}</p>
                 {languages.map((lang) => (
                   <button
                     key={lang.code}

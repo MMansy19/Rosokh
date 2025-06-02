@@ -1,8 +1,12 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { BookOpen, Users, Download, Globe, Clock, Heart } from 'lucide-react';
+
+interface StatsSectionProps {
+  locale: string;
+  messages: any;
+}
 
 interface StatItem {
   key: string;
@@ -125,19 +129,17 @@ function AnimatedCounter({
   );
 }
 
-export function StatsSection() {
-  const t = useTranslations('home.stats');
+export function StatsSection({ locale, messages }: StatsSectionProps) {
 
   return (
     <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            {t('title')}
+        <div className="text-center space-y-4 mb-16">          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+            {messages?.home?.stats?.title || "Platform Statistics"}
           </h2>
           <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto leading-relaxed">
-            {t('subtitle')}
+            {messages?.home?.stats?.subtitle || "Discover the scope of our Islamic multimedia platform"}
           </p>
         </div>
 
@@ -162,12 +164,11 @@ export function StatsSection() {
                         targetValue={stat.value} 
                         suffix={stat.suffix || ''} 
                       />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {t(`items.${stat.key}.title`)}
+                    </div>                    <h3 className="text-lg font-semibold text-foreground">
+                      {messages?.home?.stats?.items?.[stat.key]?.title || stat.key}
                     </h3>
                     <p className="text-muted text-sm leading-relaxed">
-                      {t(`items.${stat.key}.description`)}
+                      {messages?.home?.stats?.items?.[stat.key]?.description || `${stat.key} description`}
                     </p>
                   </div>
                 </div>
@@ -179,15 +180,14 @@ export function StatsSection() {
         {/* Islamic Quote */}
         <div className="text-center pt-16 max-w-4xl mx-auto">
           <div className="card bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 border-primary/20">
-            <div className="space-y-6">
-              <div className="quran-text text-2xl md:text-3xl text-primary">
-                {t('quote.arabic')}
+            <div className="space-y-6">              <div className="quran-text text-2xl md:text-3xl text-primary">
+                {messages?.home?.stats?.quote?.arabic || "وَنَزَّلْنَا عَلَيْكَ الْكِتَابَ تِبْيَانًا لِّكُلِّ شَيْءٍ"}
               </div>
               <div className="text-lg md:text-xl text-muted italic">
-                {t('quote.translation')}
+                {messages?.home?.stats?.quote?.translation || "And We have sent down to you the Book as clarification for all things"}
               </div>
               <div className="text-sm text-muted font-medium">
-                {t('quote.reference')}
+                {messages?.home?.stats?.quote?.reference || "Quran 16:89"}
               </div>
             </div>
           </div>
@@ -208,9 +208,8 @@ export function StatsSection() {
             >
               <div className={`text-2xl font-bold ${metric.color}`}>
                 {metric.value}
-              </div>
-              <div className="text-sm text-muted">
-                {t(`metrics.${metric.key}`)}
+              </div>              <div className="text-sm text-muted">
+                {messages?.home?.stats?.metrics?.[metric.key] || metric.key}
               </div>
             </div>
           ))}

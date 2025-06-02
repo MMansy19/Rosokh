@@ -1,12 +1,11 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { 
   BookOpen, 
   Headphones, 
   Video, 
-  GameController2, 
+  Gamepad2, 
   Calendar, 
   BarChart3, 
   Download,
@@ -16,6 +15,11 @@ import {
   Heart,
   Users
 } from 'lucide-react';
+
+interface FeaturesSectionProps {
+  locale: string;
+  messages: any;
+}
 
 const mainFeatures = [
   {
@@ -38,7 +42,7 @@ const mainFeatures = [
   },
   {
     key: 'khatma_tracker',
-    icon: GameController2,
+    icon: Gamepad2,
     href: '/khatma',
     color: 'from-info/20 to-info/5'
   },
@@ -65,21 +69,17 @@ const additionalFeatures = [
   { key: 'offline_access', icon: Download }
 ];
 
-export function FeaturesSection() {
-  const t = useTranslations('home.features');
-  const tNav = useTranslations('common.navigation');
-  const locale = useLocale();
+export function FeaturesSection({ locale, messages }: FeaturesSectionProps) {
 
   return (
     <section className="py-20 bg-surface/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            {t('title')}
+        <div className="text-center space-y-4 mb-16">          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+            {messages?.home?.features?.title || "Comprehensive Islamic Platform"}
           </h2>
           <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto leading-relaxed">
-            {t('subtitle')}
+            {messages?.home?.features?.subtitle || "Discover all the tools you need for your Islamic journey in one beautiful platform"}
           </p>
         </div>
 
@@ -98,18 +98,17 @@ export function FeaturesSection() {
                     <div className="p-4 bg-white/80 dark:bg-background/80 rounded-xl group-hover:scale-110 transition-transform duration-300">
                       <Icon className="w-10 h-10 text-primary" />
                     </div>
-                    
-                    <h3 className="text-xl font-bold text-foreground">
-                      {t(`main.${feature.key}.title`)}
+                      <h3 className="text-xl font-bold text-foreground">
+                      {messages?.home?.features?.main?.[feature.key]?.title || feature.key}
                     </h3>
                     
                     <p className="text-muted leading-relaxed">
-                      {t(`main.${feature.key}.description`)}
+                      {messages?.home?.features?.main?.[feature.key]?.description || `Explore ${feature.key} features`}
                     </p>
                     
                     <div className="pt-2">
                       <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                        {t('explore')} →
+                        {messages?.home?.features?.explore || "Explore"} →
                       </span>
                     </div>
                   </div>
@@ -121,12 +120,11 @@ export function FeaturesSection() {
 
         {/* Additional Features */}
         <div className="space-y-12">
-          <div className="text-center">
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              {t('additional.title')}
+          <div className="text-center">            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              {messages?.home?.features?.additional?.title || "Why Choose Rosokh?"}
             </h3>
             <p className="text-muted max-w-2xl mx-auto">
-              {t('additional.subtitle')}
+              {messages?.home?.features?.additional?.subtitle || "Discover the features that make Rosokh special"}
             </p>
           </div>
 
@@ -143,12 +141,11 @@ export function FeaturesSection() {
                     <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors duration-300">
                       <Icon className="w-6 h-6 text-primary" />
                     </div>
-                    <div className="flex-1 space-y-2">
-                      <h4 className="font-semibold text-foreground">
-                        {t(`additional.${feature.key}.title`)}
+                    <div className="flex-1 space-y-2">                      <h4 className="font-semibold text-foreground">
+                        {messages?.home?.features?.additional?.[feature.key]?.title || feature.key}
                       </h4>
                       <p className="text-sm text-muted leading-relaxed">
-                        {t(`additional.${feature.key}.description`)}
+                        {messages?.home?.features?.additional?.[feature.key]?.description || `${feature.key} feature description`}
                       </p>
                     </div>
                   </div>
@@ -160,19 +157,18 @@ export function FeaturesSection() {
 
         {/* Call to Action */}
         <div className="text-center pt-16">
-          <div className="card bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 border-primary/20 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-foreground mb-4">
-              {t('cta.title')}
+          <div className="card bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 border-primary/20 max-w-2xl mx-auto">            <h3 className="text-2xl font-bold text-foreground mb-4">
+              {messages?.home?.features?.cta?.title || "Ready to Begin Your Journey?"}
             </h3>
             <p className="text-muted mb-6">
-              {t('cta.description')}
+              {messages?.home?.features?.cta?.description || "Start exploring the Quran and deepen your Islamic knowledge today"}
             </p>
             <Link
               href={`/${locale}/quran`}
               className="btn-primary inline-flex items-center space-x-2 rtl:space-x-reverse px-8 py-3"
             >
               <BookOpen className="w-5 h-5" />
-              <span>{t('cta.button')}</span>
+              <span>{messages?.home?.features?.cta?.button || "Start Reading"}</span>
             </Link>
           </div>
         </div>
