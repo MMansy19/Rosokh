@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const LOCALES = ['en', 'ar'];
+const LOCALES = ['en', 'ar', 'ru'];
 const DEFAULT_LOCALE = 'ar';
 
 function isMissingLocale(pathname: string): boolean {
