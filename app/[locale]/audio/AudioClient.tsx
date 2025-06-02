@@ -24,6 +24,23 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Generate deterministic waveform heights based on track ID
+  const generateWaveformHeights = (trackId: string) => {
+    const heights = [];
+    for (let i = 0; i < 20; i++) {
+      // Use a simple hash function to generate deterministic heights
+      const hash = trackId.charCodeAt(0) + i * 37;
+      const height = 20 + (hash % 60); // Heights between 20% and 80%
+      heights.push(height);
+    }
+    return heights;
+  };
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   // Sample audio tracks - in production, these would come from Google Drive API
   const audioTracks: AudioTrack[] = [
@@ -265,20 +282,32 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                     {messages?.audio?.categories?.[track.category] || track.category}
                   </span>
                 </div>
-              </div>
-
-              {/* Waveform placeholder */}
+              </div>              {/* Waveform placeholder */}
               <div className="flex items-center gap-1 h-8 opacity-30">
-                {Array.from({ length: 20 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="bg-islamic-300 dark:bg-gray-600 rounded-full"
-                    style={{
-                      width: '2px',
-                      height: `${Math.random() * 100}%`,
-                    }}
-                  />
-                ))}
+                {isHydrated ? (
+                  generateWaveformHeights(track.id).map((height, i) => (
+                    <div
+                      key={i}
+                      className="bg-islamic-300 dark:bg-gray-600 rounded-full"
+                      style={{
+                        width: '2px',
+                        height: `${height}%`,
+                      }}
+                    />
+                  ))
+                ) : (
+                  // Static placeholder for SSR
+                  Array.from({ length: 20 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="bg-islamic-300 dark:bg-gray-600 rounded-full"
+                      style={{
+                        width: '2px',
+                        height: '50%',
+                      }}
+                    />
+                  ))
+                )}
               </div>
             </div>
           ))}

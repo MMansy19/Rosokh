@@ -71,13 +71,13 @@ export default async function RootLayout({
   const messages = await getMessages(locale);
 
   return (
-    <html lang={locale} dir={dir} className={`${fontClass}`}>
+    <html  className={`${fontClass}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="antialiased min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
+      <body lang={locale} dir={dir} className="antialiased min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
         <Header 
           locale={locale} 
           messages={messages}
