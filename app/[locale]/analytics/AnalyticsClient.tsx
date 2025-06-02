@@ -294,7 +294,7 @@ export default function AnalyticsClient({
                       onClick={() => setSelectedPeriod("week")}
                       className={`text-muted px-3 py-1 rounded text-sm transition-colors duration-200 ${
                         selectedPeriod === "week"
-                          ? "bg-islamic-500 text-white"
+                          ? "bg-primary text-white"
                           : "hover:bg-buttonHover hover:text-foreground"
                       }`}
                     >
@@ -304,7 +304,7 @@ export default function AnalyticsClient({
                       onClick={() => setSelectedPeriod("month")}
                       className={`text-muted px-3 py-1 rounded text-sm transition-colors duration-200 ${
                         selectedPeriod === "month"
-                          ? "bg-islamic-500 text-white"
+                          ? "bg-primary text-white"
                           : "hover:bg-buttonHover hover:text-foreground"
                       }`}
                     >
@@ -318,10 +318,10 @@ export default function AnalyticsClient({
                   {chartData.map((value, index) => (
                     <div
                       key={index}
-                      className="flex-1 bg-islamic-100 dark:bg-gray-700 rounded-t flex flex-col justify-end relative group"
+                      className="flex-1 bg-surface rounded-t flex flex-col justify-end relative group"
                     >
                       <div
-                        className="bg-gradient-to-t from-islamic-500 to-tosca-500 rounded-t transition-all duration-300"
+                        className="bg-gradient-to-t from-primary to-secondary rounded-t transition-all duration-300"
                         style={{ height: `${(value / maxValue) * 100}%` }}
                       ></div>
                       <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -395,14 +395,14 @@ export default function AnalyticsClient({
                   .map(([surah, count]) => (
                     <div
                       key={surah}
-                      className="p-4 bg-islamic-50 dark:bg-gray-700 rounded-lg"
+                      className="p-4 bg-surface rounded-lg"
                     >
                       <div className="flex justify-between items-center">
                         <div>
-                          <div className="font-semibold text-islamic-800">
+                          <div className="font-semibold text-foreground">
                             {messages?.analytics?.surah || "Surah"} {surah}
                           </div>
-                          <div className="text-sm text-islamic-600">
+                          <div className="text-sm text-muted">
                             {count}{" "}
                             {messages?.analytics?.sessions || "sessions"}
                           </div>
@@ -455,7 +455,7 @@ export default function AnalyticsClient({
             </p>
             <a
               href="/quran"
-              className="inline-block px-8 py-4 bg-islamic-500 text-white rounded-lg hover:bg-islamic-600 transition-colors duration-200 text-lg"
+              className="inline-block px-8 py-4 bg-primary text-white rounded-lg hover:bg-primaryHover transition-colors duration-200 text-lg"
             >
               {messages?.analytics?.startReadingQuran || "Start Reading Quran"}
             </a>

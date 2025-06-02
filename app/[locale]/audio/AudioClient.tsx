@@ -233,7 +233,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
 
               <button
                 onClick={() => playTrack(currentTrack)}
-                className="w-16 h-16 bg-islamic-500 text-white rounded-full flex items-center justify-center hover:bg-islamic-600 transition-colors duration-200"
+                className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center hover:bg-buttonHover transition-colors duration-200"
               >
                 {isPlaying ? "⏸️" : "▶️"}
               </button>
@@ -247,9 +247,9 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                 max={duration || 0}
                 value={currentTime}
                 onChange={handleSeek}
-                className="w-full h-2 bg-islamic-200  rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-surface rounded-lg appearance-none cursor-pointer"
               />
-              <div className="flex justify-between text-sm text-islamic-600 mt-1">
+              <div className="flex justify-between text-sm text-muted mt-1">
                 <span>{formatTime(currentTime)}</span>
                 <span>{formatTime(duration)}</span>
               </div>
@@ -265,30 +265,30 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
             <div
               key={track.id}
               className={`card group rounded-lg shadow-lg p-6 transition-all duration-200 hover:shadow-xl cursor-pointer ${
-                currentTrack?.id === track.id ? "ring-2 ring-islamic-500" : ""
+                currentTrack?.id === track.id ? "ring-2 ring-primary" : ""
               }`}
               onClick={() => playTrack(track)}
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <h3 className="font-bold text-islamic-800 mb-1">
+                  <h3 className="font-bold text-foreground mb-1">
                     {track.title}
                   </h3>
                   {track.arabicTitle && (
-                    <p className="text-islamic-600 font-amiri mb-2">
+                    <p className="text-muted font-amiri mb-2">
                       {track.arabicTitle}
                     </p>
                   )}
-                  <p className="text-sm text-islamic-500 mb-1">
+                  <p className="text-sm text-muted mb-1">
                     {track.reciter}
                   </p>
-                  <p className="text-xs text-islamic-400">
+                  <p className="text-xs text-muted">
                     {track.duration}
                   </p>
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-islamic-100  rounded-full flex items-center justify-center mb-2">
+                  <div className="w-12 h-12 bg-surface rounded-full flex items-center justify-center mb-2">
                     {currentTrack?.id === track.id && isPlaying ? "⏸️" : "▶️"}
                   </div>
                   <span
@@ -313,7 +313,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                   ? generateWaveformHeights(track.id).map((height, i) => (
                       <div
                         key={i}
-                        className="bg-islamic-300  rounded-full"
+                        className="bg-primary rounded-full"
                         style={{
                           width: "2px",
                           height: `${height}%`,
@@ -324,7 +324,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                     Array.from({ length: 20 }).map((_, i) => (
                       <div
                         key={i}
-                        className="bg-islamic-300  rounded-full"
+                        className="bg-primary rounded-full"
                         style={{
                           width: "2px",
                           height: "50%",
@@ -339,10 +339,10 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
         {filteredTracks.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🎵</div>
-            <h2 className="text-2xl font-bold text-islamic-800 mb-4">
+            <h2 className="text-2xl font-bold text-foreground mb-4">
               {messages?.audio?.noTracks || "No tracks found"}
             </h2>
-            <p className="text-islamic-600">
+            <p className="text-muted">
               {messages?.audio?.tryDifferentCategory ||
                 "Try selecting a different category"}
             </p>
@@ -351,17 +351,17 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
 
         {/* Features Section */}
         <div className="mt-12 card group rounded-lg shadow-lg p-8">
-          <h2 className="text-2xl font-bold text-islamic-800 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
             {messages?.audio?.features || "Audio Library Features"}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-3xl mb-3">📖</div>
-              <h3 className="font-semibold text-islamic-800 mb-2">
+              <h3 className="font-semibold text-foreground mb-2">
                 {messages?.audio?.quranRecitations || "Quran Recitations"}
               </h3>
-              <p className="text-sm text-islamic-600">
+              <p className="text-sm text-muted">
                 {messages?.audio?.quranDesc ||
                   "Beautiful recitations by renowned qaris"}
               </p>
@@ -369,10 +369,10 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
 
             <div className="text-center">
               <div className="text-3xl mb-3">🤲</div>
-              <h3 className="font-semibold text-islamic-800 mb-2">
+              <h3 className="font-semibold text-foreground mb-2">
                 {messages?.audio?.duas || "Duas & Adhkar"}
               </h3>
-              <p className="text-sm text-islamic-600">
+              <p className="text-sm text-muted">
                 {messages?.audio?.duasDesc ||
                   "Daily supplications and remembrance"}
               </p>
@@ -380,10 +380,10 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
 
             <div className="text-center">
               <div className="text-3xl mb-3">🎓</div>
-              <h3 className="font-semibold text-islamic-800 mb-2">
+              <h3 className="font-semibold text-foreground mb-2">
                 {messages?.audio?.lectures || "Islamic Lectures"}
               </h3>
-              <p className="text-sm text-islamic-600">
+              <p className="text-sm text-muted">
                 {messages?.audio?.lecturesDesc ||
                   "Educational content by scholars"}
               </p>
@@ -391,10 +391,10 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
 
             <div className="text-center">
               <div className="text-3xl mb-3">🎵</div>
-              <h3 className="font-semibold text-islamic-800 mb-2">
+              <h3 className="font-semibold text-foreground mb-2">
                 {messages?.audio?.nasheeds || "Nasheeds"}
               </h3>
-              <p className="text-sm text-islamic-600">
+              <p className="text-sm text-muted">
                 {messages?.audio?.nasheedsDesc ||
                   "Inspiring Islamic songs and chants"}
               </p>

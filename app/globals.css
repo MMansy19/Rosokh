@@ -8,6 +8,8 @@
   --color-accent: #daa520; /* Golden Sand */
   --color-background: #fdfdfd; /* Pure White with warmth */
   --color-surface: #f8faf9; /* Enhanced surface */
+  --color-surface-child: #e5e7eb; /* gray-200 */
+  --color-button: #2e8b57; /* Primary button color */
   --color-hover-button: #e0f2f1; /* Light Green for hover effects */
   --color-focus-button: #c8e6c9; /* Focus state for buttons */
   --color-active-button: #a5d6a7; /* Active state for buttons */
@@ -50,9 +52,11 @@
   --color-accent: #fbbf24; /* Brighter Golden Sand */
   --color-background: #111827; /* Rich dark background */
   --color-surface: #1f2937; /* Dark surface */
-  --color-hover-button: #374151; /* Darker hover effect */
-  --color-focus-button: #4b5563; /* Darker focus state */
-  --color-active-button: #6b7280; /* Darker active state */
+  --color-surface-child: #374151; /* Darker gray-700 */
+  --color-button: #4ade80; /* Primary button color */
+  --color-hover-button: #a7f3d0; /* Lighter hover effect */
+  --color-focus-button: #6ee7b7; /* Lighter focus state */
+  --color-active-button: #34d399; /* Lighter active state */
   --color-disabled-button: #374151; /* Darker disabled state */
   --color-foreground: #f9fafb; /* Maps to text-primary */
   --color-text-primary: #f9fafb;
@@ -311,23 +315,23 @@ body {
 
 /* Ensure Tailwind classes work with CSS variables */
 .bg-surface {
-  background-color: var(--color-surface) !important;
+  background-color: var(--color-surface);
 }
 
 .hover\:bg-buttonHover:hover {
-  background-color: var(--color-hover-button) !important;
+  background-color: var(--color-hover-button);
 }
 
 .active\:bg-buttonActive:active {
-  background-color: var(--color-active-button) !important;
+  background-color: var(--color-active-button);
 }
 
 .text-foreground {
-  color: var(--color-foreground) !important;
+  color: var(--color-foreground);
 }
 
 .text-muted {
-  color: var(--color-muted) !important;
+  color: var(--color-muted);
 }
 
 /* Custom Scrollbar */
@@ -593,3 +597,67 @@ body {
   pointer-events: none;
   z-index: 0;
 }
+
+.progress-bar {
+  background-color: var(--color-primary);
+}
+.bg-surfaceChild {
+  background-color: var(--color-surface-child);
+}
+.bg-surface {
+  background-color: var(--color-surface);
+}
+.bg-button {
+  background-color: var(--color-button);
+}
+.bg-hoverButton {
+  background-color: var(--color-hover-button);
+}
+.bg-focusButton {
+  background-color: var(--color-focus-button);
+}
+.bg-activeButton {
+  background-color: var(--color-active-button);
+}
+.bg-disabledButton {
+  background-color: var(--color-disabled-button);
+}
+.text-primary {
+  color: var(--color-text-primary);
+}
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+.text-muted {
+  color: var(--color-text-muted);
+}
+.text-foreground {
+  color: var(--color-foreground);
+}
+.text-error {
+  color: var(--color-error);
+}
+.text-success {
+  color: var(--color-success);
+}
+.text-warning {
+  color: var(--color-warning);
+}
+.text-info {
+  color: var(--color-info);
+}
+.border {
+  border-color: var(--color-border);
+}
+.border-primary {
+  border-color: var(--color-primary);
+}
+.border-secondary {
+  border-color: var(--color-secondary);
+}
+.border-accent {
+  border-color: var(--color-accent);
+}
+.border-error {
+  border-color: var(--color-error);
+}         

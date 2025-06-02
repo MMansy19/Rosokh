@@ -361,13 +361,11 @@ export default function CalendarClient({
             <div className="mt-8 card group rounded-lg shadow-lg p-6">
               <h3 className="text-xl font-bold text-islamic-800 dark:text-islamic-200 mb-4">
                 {messages?.calendar?.eventsThisMonth || "Events This Month"}
-              </h3>
-
-              <div className="space-y-4">
+              </h3>                <div className="space-y-4">
                 {islamicEvents.map((event, index) => (
                   <div
                     key={index}
-                    className="flex items-start gap-4 p-4 bg-islamic-50 rounded-lg"
+                    className="flex items-start gap-4 p-4 bg-surface rounded-lg"
                   >
                     <div
                       className={`w-3 h-3 rounded-full mt-1 ${

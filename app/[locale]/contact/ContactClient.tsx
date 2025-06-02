@@ -169,7 +169,7 @@ export default function ContactClient({
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-islamic-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground mb-2">
                     {messages?.contact?.name || "Name"} *
                   </label>
                   <input
@@ -178,7 +178,7 @@ export default function ContactClient({
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder={
                       messages?.contact?.namePlaceholder || "Your full name"
                     }
@@ -186,7 +186,7 @@ export default function ContactClient({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-islamic-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground mb-2">
                     {messages?.contact?.email || "Email"} *
                   </label>
                   <input
@@ -195,7 +195,7 @@ export default function ContactClient({
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder={
                       messages?.contact?.emailPlaceholder ||
                       "your.email@example.com"
@@ -205,14 +205,14 @@ export default function ContactClient({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-islamic-700 mb-2">
+                <label className="block text-sm font-medium text-foreground mb-2">
                   {messages?.contact?.category || "Category"}
                 </label>
                 <select
                   name="category"
                   value={formData.category}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                 >
                   <option value="general">
                     {messages?.contact?.categories?.general ||
@@ -236,7 +236,7 @@ export default function ContactClient({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-islamic-700 mb-2">
+                <label className="block text-sm font-medium text-foreground mb-2">
                   {messages?.contact?.subject || "Subject"} *
                 </label>
                 <input
@@ -245,7 +245,7 @@ export default function ContactClient({
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder={
                     messages?.contact?.subjectPlaceholder ||
                     "Brief description of your message"
@@ -254,7 +254,7 @@ export default function ContactClient({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-islamic-700 mb-2">
+                <label className="block text-sm font-medium text-foreground mb-2">
                   {messages?.contact?.message || "Message"} *
                 </label>
                 <textarea
@@ -263,7 +263,7 @@ export default function ContactClient({
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                   placeholder={
                     messages?.contact?.messagePlaceholder ||
                     "Please provide as much detail as possible..."
@@ -332,17 +332,17 @@ export default function ContactClient({
                   >
                     <div className="text-2xl">{method.icon}</div>
                     <div className="flex-1">
-                      <h4 className="font-semibold">
+                      <h4 className="font-semibold text-foreground mb-1">
                         {method.title}
                       </h4>
-                      <p className="text-sm text-islamic-600">
+                      <p className="text-sm text-muted">
                         {method.description}
                       </p>
-                      <p className="text-sm text-islamic-500 font-mono">
+                      <p className="text-sm text-muted font-mono">
                         {method.value}
                       </p>
                     </div>
-                    <div className="text-islamic-400">
+                    <div className="text-muted">
                       →
                     </div>
                   </a>
@@ -363,11 +363,11 @@ export default function ContactClient({
                       <span className="font-medium">
                         {item.question}
                       </span>
-                      <span className="text-islamic-500 group-open:rotate-180 transition-transform duration-200">
+                      <span className="text-muted group-open:rotate-180 transition-transform duration-200">
                         ↓
                       </span>
                     </summary>
-                    <div className="p-3 text-islamic-600 text-sm">
+                    <div className="p-3 text-muted text-sm">
                       {item.answer}
                     </div>
                   </details>
