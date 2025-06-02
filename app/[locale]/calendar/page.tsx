@@ -4,11 +4,12 @@ import CalendarClient from './CalendarClient';
 export default async function CalendarPage({
   params
 }: {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
-  const messages = await getMessages(params.locale);
+  const { locale } = await params;
+  const messages = await getMessages(locale);
 
   return (
-    <CalendarClient locale={params.locale} messages={messages} />
+    <CalendarClient locale={locale} messages={messages} />
   );
 }

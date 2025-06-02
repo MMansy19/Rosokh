@@ -63,7 +63,9 @@ export default async function RootLayout({
   params,
 }: RootLayoutProps) {
   const { locale } = await params;
-  const dir = locale === "ar" ? "rtl" : "ltr";
+  const dir = 
+    // locale === "ar" ? "rtl" :
+  "ltr";
   const fontClass = locale === "ar" ? 
     `${amiri.variable}` : 
     `${inter.variable}`;

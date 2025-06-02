@@ -4,11 +4,12 @@ import ContactClient from './ContactClient';
 export default async function ContactPage({
   params
 }: {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
-  const messages = await getMessages(params.locale);
+  const { locale } = await params;
+  const messages = await getMessages(locale);
 
   return (
-    <ContactClient locale={params.locale} messages={messages} />
+    <ContactClient locale={locale} messages={messages} />
   );
 }

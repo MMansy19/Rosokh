@@ -4,11 +4,12 @@ import AnalyticsClient from './AnalyticsClient';
 export default async function AnalyticsPage({
   params
 }: {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
-  const messages = await getMessages(params.locale);
+  const { locale } = await params;
+  const messages = await getMessages(locale);
 
   return (
-    <AnalyticsClient locale={params.locale} messages={messages} />
+    <AnalyticsClient locale={locale} messages={messages} />
   );
 }

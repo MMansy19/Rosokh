@@ -4,11 +4,12 @@ import KhatmaClient from './KhatmaClient';
 export default async function KhatmaPage({
   params
 }: {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
-  const messages = await getMessages(params.locale);
+  const { locale } = await params;
+  const messages = await getMessages(locale);
 
   return (
-    <KhatmaClient locale={params.locale} messages={messages} />
+    <KhatmaClient locale={locale} messages={messages} />
   );
 }

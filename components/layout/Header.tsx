@@ -8,7 +8,6 @@ import {
   X, 
   Sun, 
   Moon, 
-  Globe, 
   BookOpen, 
   Headphones, 
   Video, 
@@ -104,7 +103,7 @@ export function Header({ locale, messages }: HeaderProps) {
                 className="flex items-center space-x-2 rtl:space-x-reverse p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
                 aria-label={messages?.common?.actions?.language || "Language"}
               >
-                <Globe className="w-5 h-5 text-muted" />
+                <BookOpen className="w-5 h-5 text-muted" />
                 <span className="text-sm font-medium text-muted">{currentLang?.name}</span>
               </button>
               

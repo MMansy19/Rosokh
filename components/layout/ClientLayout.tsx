@@ -13,11 +13,13 @@ interface ClientLayoutProps {
 export function ClientLayout({ children, locale, messages }: ClientLayoutProps) {
   return (
     <ThemeProvider>
-      <Header locale={locale} messages={messages} />
-      <main className="flex-1">
-        <div className="animate-fadeIn">{children}</div>
-      </main>
-      <Footer locale={locale} messages={messages} />
+      <div className="min-h-screen flex flex-col">
+          <Header locale={locale} messages={messages} />
+          <main className="flex-1">
+              <div className="animate-fadeIn">{children}</div>
+          </main>
+          <Footer locale={locale} messages={messages} />
+      </div>
     </ThemeProvider>
   );
 }

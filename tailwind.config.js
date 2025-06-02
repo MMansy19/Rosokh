@@ -54,6 +54,7 @@ module.exports = {
         },
       },
     },
-  },
-  plugins: [],
+  },  plugins: [
+    require('tailwindcss-logical'),
+  ],
 }
