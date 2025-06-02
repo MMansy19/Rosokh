@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Amiri, Inter } from "next/font/google";
 import "../globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { ClientLayout } from "@/components/layout/ClientLayout";
 import { getMessages } from "@/utils/translations";
 
 const amiri = Amiri({
@@ -78,17 +77,9 @@ export default async function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body lang={locale} dir={dir} className="antialiased min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
-        <Header 
-          locale={locale} 
-          messages={messages}
-        />
-        <main className="flex-1">
-          <div className="animate-fadeIn">{children}</div>
-        </main>
-        <Footer 
-          locale={locale} 
-          messages={messages}
-        />
+        <ClientLayout locale={locale} messages={messages}>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useTheme } from '@/components/providers/ThemeProvider';
 import { 
   Menu, 
   X, 
@@ -28,8 +29,7 @@ const navigation = [
   { key: 'quran', href: '/quran', icon: BookOpen },
   { key: 'audio', href: '/audio', icon: Headphones },
   { key: 'video', href: '/videos', icon: Video },
-  { key: 'games', href: '/games', icon: Gamepad2 },
-  { key: 'khatma', href: '/khatma', icon: BookOpen },
+  { key: 'khatma', href: '/khatma', icon: Gamepad2 },
   { key: 'calendar', href: '/calendar', icon: Calendar },
   { key: 'analytics', href: '/analytics', icon: BarChart3 },
   { key: 'contact', href: '/contact', icon: Mail },
@@ -44,23 +44,8 @@ const languages = [
 export function Header({ locale, messages }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const [theme, setTheme] = useState('light');
+  const { theme, toggleTheme } = useTheme();
   const currentLang = languages.find(lang => lang.code === locale);
-
-  useEffect(() => {
-    // Check for saved theme preference or default to 'light'
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
-  };
-
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';

@@ -40,13 +40,12 @@ export function HeroSection({ locale, messages }: HeroSectionProps) {
                 رسوخ
               </span>
             </h1>            <p className="text-xl md:text-2xl text-muted max-w-3xl mx-auto leading-relaxed">
-              {messages?.home?.hero?.subtitle || "Your comprehensive Islamic multimedia platform"}
+              {messages?.home?.subtitle || "Your comprehensive Islamic multimedia platform"}
             </p>
-          </div>
-
-          {/* Description */}
-          <div className="max-w-4xl mx-auto animate-slideInRight">            <p className="text-lg md:text-xl text-muted leading-relaxed">
-              {messages?.home?.hero?.description || "Discover the beauty of Islamic knowledge through Quran reading, audio recitations, and spiritual growth tools."}
+          </div>          {/* Description */}
+          <div className="max-w-4xl mx-auto animate-slideInRight">
+            <p className="text-lg md:text-xl text-muted leading-relaxed">
+              {messages?.home?.description || "Discover the beauty of Islamic knowledge through Quran reading, audio recitations, and spiritual growth tools."}
             </p>
           </div>
 

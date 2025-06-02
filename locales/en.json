@@ -34,10 +34,27 @@
       "save": "Save",
       "cancel": "Cancel"
     }
-  },
-  "home": {
+  },  "home": {
     "title": "Welcome to Rosokh",
     "subtitle": "Discover the Holy Quran through a comprehensive, free digital experience",
+    "description": "Discover the beauty of Islamic knowledge through Quran reading, audio recitations, and spiritual growth tools.",
+    "hero": {
+      "features": {
+        "quran": "Browse the Holy Quran with Arabic text and translations",
+        "audio": "Listen to beautiful recitations from renowned reciters",
+        "video": "Watch Islamic lectures and educational content",
+        "games": "Interactive games to enhance Quran memorization",
+        "khatma": "Track your Quran reading progress",
+        "calendar": "Stay updated with Hijri dates and prayer times",
+        "analytics": "Monitor your views and downloads with analytics",
+        "contact": "Get in touch with us for support"
+      },
+      "stats": {
+        "surahs": "Surahs",
+        "verses": "Verses", 
+        "languages": "Languages"
+      }
+    },
     "features": {
       "quran_reading": {
         "title": "Quran Reading",
@@ -78,6 +95,28 @@
     "verses_count": "{count} verses",
     "bismillah": "In the name of Allah, the Most Gracious, the Most Merciful",
     "loading": "Loading the Holy Quran..."
+  },  "audio": {
+    "title": "Islamic Audio Library",
+    "description": "Listen to Quran recitations, duas, lectures, and nasheeds",
+    "by": "By",
+    "categories": {
+      "all": "All",
+      "quran": "Quran",
+      "dua": "Duas",
+      "lecture": "Lectures",
+      "nasheed": "Nasheeds"
+    },
+    "noTracks": "No tracks found",
+    "tryDifferentCategory": "Try selecting a different category",
+    "features": "Audio Library Features",
+    "quranRecitations": "Quran Recitations",
+    "quranDesc": "Beautiful recitations by renowned qaris",
+    "duas": "Duas & Adhkar",
+    "duasDesc": "Daily supplications and remembrance",
+    "lectures": "Islamic Lectures",
+    "lecturesDesc": "Educational content by scholars",
+    "nasheeds": "Nasheeds",
+    "nasheedsDesc": "Inspiring Islamic songs and chants"
   },
   "audio_player": {
     "by_reciter": "Reciter: {name}",

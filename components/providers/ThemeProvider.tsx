@@ -24,14 +24,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(initialTheme);
     applyTheme(initialTheme);
   }, []);
-
   const applyTheme = (newTheme: Theme) => {
     const root = document.documentElement;
+    // Remove both old approaches
+    root.removeAttribute('data-theme');
+    root.classList.remove('dark', 'light');
+    
+    // Apply new theme using data-theme attribute (matches CSS)
     if (newTheme === 'dark') {
       root.setAttribute('data-theme', 'dark');
-    } else {
-      root.removeAttribute('data-theme');
     }
+    // Light mode is the default, no attribute needed
   };
 
   const toggleTheme = () => {
