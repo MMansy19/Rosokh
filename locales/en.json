@@ -1,0 +1,171 @@
+{
+  "platform_description": {
+    "title": "Rosokh: Islamic Multimedia Platform",
+    "description": "Rosokh is an innovative Islamic platform delivering a comprehensive digital experience for Quran recitation, audio, video, and interactive games. Designed to be ultra-fast, completely free, and trilingual (Arabic, English, Russian), it features a Hijri calendar, Khatma tracking, and an analytics dashboard. Built with a modern, green-tosca geometric design and zero heavy dependencies, Rosokh ensures high performance and accessibility across all devices."
+  },
+  "common": {
+    "navigation": {
+      "home": "Home",
+      "quran": "Quran",
+      "audio": "Audio",
+      "video": "Videos",
+      "games": "Games",
+      "khatma": "Khatma",
+      "calendar": "Calendar",
+      "analytics": "Analytics",
+      "contact": "Contact Us"
+    },
+    "actions": {
+      "read": "Read",
+      "listen": "Listen",
+      "play": "Play",
+      "download": "Download",
+      "share": "Share",
+      "toggle_theme": "Toggle Theme",
+      "language": "Change Language"
+    },
+    "general": {
+      "loading": "Loading...",
+      "error": "An error occurred, please try again",
+      "success": "Success",
+      "back": "Back",
+      "next": "Next",
+      "previous": "Previous",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "home": {
+    "title": "Welcome to Rosokh",
+    "subtitle": "Discover the Holy Quran through a comprehensive, free digital experience",
+    "features": {
+      "quran_reading": {
+        "title": "Quran Reading",
+        "description": "Browse the Holy Quran with Arabic text and translations in multiple languages"
+      },
+      "audio_recitations": {
+        "title": "Audio Recitations",
+        "description": "Listen to beautiful recitations from renowned reciters with speed control"
+      },
+      "memorization_games": {
+        "title": "Memorization Games",
+        "description": "Interactive games to enhance Quran memorization in a fun way"
+      },
+      "khatma_tracking": {
+        "title": "Khatma Tracking",
+        "description": "Track your Quran reading progress with daily plans and statistics"
+      },
+      "calendar": {
+        "title": "Hijri Calendar",
+        "description": "Stay updated with accurate Hijri dates and prayer times"
+      },
+      "analytics": {
+        "title": "Analytics Dashboard",
+        "description": "Monitor your views and downloads with detailed analytics"
+      }
+    },
+    "cta": "Start Your Journey Now"
+  },
+  "quran_reader": {
+    "title": "Quran Reader",
+    "select_chapter": "Select Chapter",
+    "show_translation": "Show Translation",
+    "show_transliteration": "Show Transliteration",
+    "font_size": "Font Size",
+    "play_audio": "Play Audio",
+    "translation_by": "Translation by: {name}",
+    "verse": "Verse {number}",
+    "verses_count": "{count} verses",
+    "bismillah": "In the name of Allah, the Most Gracious, the Most Merciful",
+    "loading": "Loading the Holy Quran..."
+  },
+  "audio_player": {
+    "by_reciter": "Reciter: {name}",
+    "download": "Download",
+    "quality": "High Quality - Free from Google Drive",
+    "speed": "Speed",
+    "loading": "Loading audio..."
+  },
+  "memorization_games": {
+    "title": "Memorization Games",
+    "fill_blank": "Fill in the Blank",
+    "match_pairs": "Match Pairs",
+    "sequence_order": "Correct Order",
+    "start_game": "Start Game",
+    "score": "Score: {score}",
+    "question": "Question {current} of {total}",
+    "correct": "Correct!",
+    "incorrect": "Incorrect",
+    "game_complete": "Game Completed! Score: {score}/{total}",
+    "loading": "Preparing game..."
+  },
+  "khatma_tracker": {
+    "title": "Khatma Tracker",
+    "start_khatma": "Start New Khatma",
+    "custom_plan": "Custom Plan",
+    "days": "{count} days",
+    "pages_per_day": "{count} pages/day",
+    "progress": "Complete: {percentage}%",
+    "chapters_completed": "{count}/114 chapters completed",
+    "streak": "{count} day streak",
+    "days_remaining": "{count} days remaining",
+    "pages_daily": "{count} pages per day",
+    "chapter_progress": "Chapter Progress",
+    "on_track": "On Track",
+    "slightly_behind": "Slightly Behind",
+    "behind": "Behind",
+    "start_prompt": "Start your journey to complete the Holy Quran"
+  },
+  "calendar": {
+    "title": "Islamic Calendar",
+    "hijri_date": "Hijri Date",
+    "prayer_times": "Prayer Times",
+    "next_prayer": "Next Prayer",
+    "fajr": "Fajr",
+    "sunrise": "Sunrise",
+    "dhuhr": "Dhuhr",
+    "asr": "Asr",
+    "maghrib": "Maghrib",
+    "isha": "Isha",
+    "current_time": "Current Time",
+    "holiday": "Holiday: {name}",
+    "loading": "Loading Islamic data..."
+  },
+  "analytics": {
+    "title": "Analytics Dashboard",
+    "total_views": "Total Views",
+    "total_downloads": "Total Downloads",
+    "top_content": "Top Viewed Content",
+    "content_type": "Content Type",
+    "views": "Views",
+    "downloads": "Downloads",
+    "engagement": "Engagement",
+    "avg_time": "Avg Time",
+    "week": "Week",
+    "month": "Month",
+    "year": "Year",
+    "quran": "Quran",
+    "audio": "Audio",
+    "video": "Video",
+    "article": "Article"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "success": "Your message was sent successfully",
+    "error": "Failed to send message, please try again"
+  },
+  "footer": {
+    "about": "About Rosokh",
+    "about_text": "Rosokh is a free Islamic platform aimed at fostering a connection with the Holy Quran through modern technology and user-friendly design",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "faq": "FAQ"
+    },
+    "copyright": "© 2025 Rosokh. All rights reserved"
+  }
+}
