@@ -2,6 +2,22 @@
 
 import { useState, useRef, useEffect } from "react";
 
+import {
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  SkipBack,
+  SkipForward,
+  Repeat,
+  Shuffle,
+  Mic,
+  Clock,
+  Heart,
+  Star,
+  Search,
+} from "lucide-react";
+
 interface AudioTrack {
   id: string;
   title: string;
@@ -166,11 +182,11 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
     <div className="min-h-screen text-foreground transition-colors duration-300">
       <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="flex flex-col items-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">
             {messages?.audio?.title || "Islamic Audio Library"}
           </h1>
-          <div className="text-4xl mb-4">🎵</div>
+          <Mic className="mx-auto text-4xl" />
           <p className="text-lg text-muted max-w-2xl mx-auto">
             {messages?.audio?.description ||
               "Listen to Quran recitations, duas, lectures, and nasheeds"}
@@ -186,7 +202,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
                   selectedCategory === category
-                    ? "bg-primary text-white"
+                    ? "bg-primary"
                     : "text-foreground hover:bg-secondary"
                 }`}
               >
@@ -202,15 +218,15 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
           <div className="bg-surface rounded-lg shadow-lg p-6 mb-8 border border-border">
             <div className="flex items-center justify-between mb-4">
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-islamic-800">
+                <h3 className="text-xl font-bold text-foreground">
                   {currentTrack.title}
                 </h3>
                 {currentTrack.arabicTitle && (
-                  <p className="text-lg text-islamic-600 font-amiri">
+                  <p className="text-lg text-muted font-amiri">
                     {currentTrack.arabicTitle}
                   </p>
                 )}
-                <p className="text-sm text-islamic-500">
+                <p className="text-sm text-muted">
                   {messages?.audio?.by || "By"} {currentTrack.reciter}
                 </p>
               </div>
