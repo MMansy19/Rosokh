@@ -1,7 +1,17 @@
-'use client';
+import { getMessages } from '@/utils/translations';
+import ContactClient from './ContactClient';
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+export default async function ContactPage({
+  params
+}: {
+  params: { locale: string }
+}) {
+  const messages = await getMessages(params.locale);
+
+  return (
+    <ContactClient locale={params.locale} messages={messages} />
+  );
+}
 
 export default function ContactPage() {
   const t = useTranslations('contact');

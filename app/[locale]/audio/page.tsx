@@ -1,26 +1,17 @@
-'use client';
+import { getMessages } from '@/utils/translations';
+import AudioClient from './AudioClient';
 
-import { useState, useRef, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+export default async function AudioPage({
+  params
+}: {
+  params: { locale: string }
+}) {
+  const messages = await getMessages(params.locale);
 
-interface AudioTrack {
-  id: string;
-  title: string;
-  arabicTitle?: string;
-  reciter: string;
-  duration: string;
-  url: string;
-  category: 'quran' | 'dua' | 'lecture' | 'nasheed';
+  return (
+    <AudioClient locale={params.locale} messages={messages} />
+  );
 }
-
-export default function AudioPage() {
-  const t = useTranslations('audio');
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [currentTrack, setCurrentTrack] = useState<AudioTrack | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   // Sample audio tracks - in production, these would come from Google Drive API
   const audioTracks: AudioTrack[] = [
