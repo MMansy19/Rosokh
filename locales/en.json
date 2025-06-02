@@ -357,6 +357,38 @@
       "asr": "Asr",
       "maghrib": "Maghrib",
       "isha": "Isha"
+    },
+    "events": {
+      "islamic_new_year": {
+        "title": "Islamic New Year",
+        "arabicTitle": "رأس السنة الهجرية",
+        "description": "The beginning of the Islamic calendar year"
+      },
+      "day_of_ashura": {
+        "title": "Day of Ashura",
+        "arabicTitle": "يوم عاشوراء",
+        "description": "The 10th day of Muharram, a day of fasting"
+      },
+      "isra_and_miraj": {
+        "title": "Isra and Miraj",
+        "arabicTitle": "الإسراء والمعراج",
+        "description": "The night journey of Prophet Muhammad (PBUH)"
+      },
+      "start_of_ramadan": {
+        "title": "Start of Ramadan",
+        "arabicTitle": "بداية شهر رمضان",
+        "description": "The beginning of the holy month of fasting"
+      },
+      "eid_al_fitr": {
+        "title": "Eid al-Fitr",
+        "arabicTitle": "عيد الفطر",
+        "description": "The festival of breaking the fast"
+      },
+      "eid_al_adha": {
+        "title": "Eid al-Adha",
+        "arabicTitle": "عيد الأضحى",
+        "description": "The festival of sacrifice"
+      }
     }
   },
   "analytics": {
@@ -393,7 +425,31 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "Get in touch with our team",
-    "description": "We're here to help with any questions about Rosokh",
+    "description": "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "sendMessage": "Send us a Message",
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email",
+    "emailPlaceholder": "your.email@example.com",
+    "subject": "Subject",
+    "subjectPlaceholder": "Brief description of your message",
+    "message": "Message",
+    "messagePlaceholder": "Please provide as much detail as possible...",
+    "category": "Category",
+    "categories": {
+      "general": "General Inquiry",
+      "technical": "Technical Support",
+      "feature": "Feature Request",
+      "bug": "Bug Report",
+      "feedback": "Feedback"
+    },
+    "sending": "Sending...",
+    "thankYou": "Thank You!",
+    "messageReceived": "Your message has been received. We'll get back to you soon.",
+    "supportHours": "Support Hours",
+    "phoneSupport": "Phone Support",
+    "chatSupport": "Chat Support",
+    "emailSupport": "Email Support",
     "form": {
       "name": "Full Name",
       "email": "Email Address",
@@ -448,6 +504,8 @@
     "feature_responsive": "Mobile Responsive",
     "contact": "Contact",
     "location": "Global Platform",
+    "email": "info@rosokh.com",
+    "github": "GitHub",
     "rights_reserved": "All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",

@@ -49,8 +49,9 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: "Rosokh - Islamic Multimedia Platform",
+      title: messages?.seo?.title || "Rosokh - Islamic Multimedia Platform",
       description:
+        messages?.seo?.description ||
         "Your comprehensive Islamic platform for Quran, audio, and spiritual growth",
       type: "website",
       locale: locale === "ar" ? "ar_SA" : "en_US",

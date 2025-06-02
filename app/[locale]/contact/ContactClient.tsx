@@ -178,7 +178,7 @@ export default function ContactClient({
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder={
                       messages?.contact?.namePlaceholder || "Your full name"
                     }
@@ -195,7 +195,7 @@ export default function ContactClient({
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder={
                       messages?.contact?.emailPlaceholder ||
                       "your.email@example.com"
@@ -212,7 +212,7 @@ export default function ContactClient({
                   name="category"
                   value={formData.category}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                 >
                   <option value="general">
                     {messages?.contact?.categories?.general ||
@@ -245,7 +245,7 @@ export default function ContactClient({
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder={
                     messages?.contact?.subjectPlaceholder ||
                     "Brief description of your message"
@@ -263,7 +263,7 @@ export default function ContactClient({
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                   placeholder={
                     messages?.contact?.messagePlaceholder ||
                     "Please provide as much detail as possible..."

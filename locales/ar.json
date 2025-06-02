@@ -364,6 +364,38 @@
       "asr": "العصر",
       "maghrib": "المغرب",
       "isha": "العشاء"
+    },
+    "events": {
+      "islamic_new_year": {
+        "title": "رأس السنة الهجرية",
+        "arabicTitle": "رأس السنة الهجرية",
+        "description": "بداية السنة الهجرية الجديدة"
+      },
+      "day_of_ashura": {
+        "title": "يوم عاشوراء",
+        "arabicTitle": "يوم عاشوراء",
+        "description": "اليوم العاشر من محرم، يوم صيام"
+      },
+      "isra_and_miraj": {
+        "title": "الإسراء والمعراج",
+        "arabicTitle": "الإسراء والمعراج",
+        "description": "رحلة النبي محمد صلى الله عليه وسلم الليلية"
+      },
+      "start_of_ramadan": {
+        "title": "بداية شهر رمضان",
+        "arabicTitle": "بداية شهر رمضان",
+        "description": "بداية الشهر المبارك شهر الصيام"
+      },
+      "eid_al_fitr": {
+        "title": "عيد الفطر",
+        "arabicTitle": "عيد الفطر",
+        "description": "عيد إنهاء الصيام"
+      },
+      "eid_al_adha": {
+        "title": "عيد الأضحى",
+        "arabicTitle": "عيد الأضحى",
+        "description": "عيد الضحية"
+      }
     }
   },
   "analytics": {
@@ -400,7 +432,31 @@
   "contact": {
     "title": "اتصل بنا",
     "subtitle": "تواصل مع فريقنا",
-    "description": "نحن هنا للمساعدة في أي أسئلة حول رسوخ",
+    "description": "نود أن نسمع منك. أرسل لنا رسالة وسنرد في أسرع وقت ممكن.",
+    "sendMessage": "أرسل لنا رسالة",
+    "name": "الاسم",
+    "namePlaceholder": "اسمك الكامل",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "البريد.الإلكتروني@مثال.com",
+    "subject": "الموضوع",
+    "subjectPlaceholder": "وصف مختصر لرسالتك",
+    "message": "الرسالة",
+    "messagePlaceholder": "يرجى تقديم أكبر قدر من التفاصيل...",
+    "category": "الفئة",
+    "categories": {
+      "general": "استفسار عام",
+      "technical": "دعم تقني",
+      "feature": "طلب ميزة",
+      "bug": "تقرير خطأ",
+      "feedback": "تعليقات"
+    },
+    "sending": "جاري الإرسال...",
+    "thankYou": "شكراً لك!",
+    "messageReceived": "تم استلام رسالتك. سنتواصل معك قريباً.",
+    "supportHours": "ساعات الدعم",
+    "phoneSupport": "الدعم الهاتفي",
+    "chatSupport": "دعم المحادثة",
+    "emailSupport": "دعم البريد الإلكتروني",
     "form": {
       "name": "الاسم الكامل",
       "email": "عنوان البريد الإلكتروني",
@@ -460,6 +516,8 @@
     "feature_responsive": "متوافق مع الهواتف",
     "contact": "التواصل",
     "location": "منصة عالمية",
+    "email": "info@rosokh.com",
+    "github": "جيت هب",
     "rights_reserved": "جميع الحقوق محفوظة.",
     "privacy": "سياسة الخصوصية",
     "terms": "شروط الخدمة",

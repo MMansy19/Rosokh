@@ -40,7 +40,7 @@ export function Footer({ locale, messages }: FooterProps) {
             </p>
             <div className="flex items-center space-x-1 rtl:space-x-reverse text-sm text-muted">
               <span>{messages?.footer?.made_with || "Made with"}</span>
-              <Heart className="w-4 h-4 text-red-500 animate-pulse" />
+              <Heart className="w-4 h-4 text-primary animate-pulse" />
               <span>{messages?.footer?.for_ummah || "for the Ummah"}</span>
             </div>
           </div>
@@ -95,7 +95,7 @@ export function Footer({ locale, messages }: FooterProps) {
                 className="flex items-center space-x-2 rtl:space-x-reverse text-muted hover:text-primary transition-colors duration-200 text-sm"
               >
                 <Mail className="w-4 h-4" />
-                <span>info@rosokh.com</span>
+                <span>{messages?.footer?.email || "info@rosokh.com"}</span>
               </a>
               <div className="flex items-center space-x-2 rtl:space-x-reverse text-muted text-sm">
                 <MapPin className="w-4 h-4" />
@@ -108,7 +108,7 @@ export function Footer({ locale, messages }: FooterProps) {
                 className="flex items-center space-x-2 rtl:space-x-reverse text-muted hover:text-primary transition-colors duration-200 text-sm"
               >
                 <Github className="w-4 h-4" />
-                <span>GitHub</span>
+                <span>{messages?.footer?.github || "GitHub"}</span>
               </a>
             </div>
           </div>

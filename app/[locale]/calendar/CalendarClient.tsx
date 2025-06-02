@@ -61,48 +61,48 @@ export default function CalendarClient({
     null,
   );
 
-  // Sample Islamic events
-  const sampleEvents: IslamicEvent[] = [
+  // Islamic events using translation keys
+  const getIslamicEvents = (): IslamicEvent[] => [
     {
       date: "2024-01-01",
-      title: "Islamic New Year",
-      arabicTitle: "رأس السنة الهجرية",
-      description: "The beginning of the Islamic calendar year",
+      title: messages?.calendar?.events?.islamic_new_year?.title || "Islamic New Year",
+      arabicTitle: messages?.calendar?.events?.islamic_new_year?.arabicTitle || "رأس السنة الهجرية",
+      description: messages?.calendar?.events?.islamic_new_year?.description || "The beginning of the Islamic calendar year",
       type: "holiday",
     },
     {
       date: "2024-01-10",
-      title: "Day of Ashura",
-      arabicTitle: "يوم عاشوراء",
-      description: "The 10th day of Muharram, a day of fasting",
+      title: messages?.calendar?.events?.day_of_ashura?.title || "Day of Ashura",
+      arabicTitle: messages?.calendar?.events?.day_of_ashura?.arabicTitle || "يوم عاشوراء",
+      description: messages?.calendar?.events?.day_of_ashura?.description || "The 10th day of Muharram, a day of fasting",
       type: "sunnah",
     },
     {
       date: "2024-03-01",
-      title: "Isra and Miraj",
-      arabicTitle: "الإسراء والمعراج",
-      description: "The night journey of Prophet Muhammad (PBUH)",
+      title: messages?.calendar?.events?.isra_and_miraj?.title || "Isra and Miraj",
+      arabicTitle: messages?.calendar?.events?.isra_and_miraj?.arabicTitle || "الإسراء والمعراج",
+      description: messages?.calendar?.events?.isra_and_miraj?.description || "The night journey of Prophet Muhammad (PBUH)",
       type: "historical",
     },
     {
       date: "2024-04-01",
-      title: "Start of Ramadan",
-      arabicTitle: "بداية شهر رمضان",
-      description: "The beginning of the holy month of fasting",
+      title: messages?.calendar?.events?.start_of_ramadan?.title || "Start of Ramadan",
+      arabicTitle: messages?.calendar?.events?.start_of_ramadan?.arabicTitle || "بداية شهر رمضان",
+      description: messages?.calendar?.events?.start_of_ramadan?.description || "The beginning of the holy month of fasting",
       type: "holiday",
     },
     {
       date: "2024-05-01",
-      title: "Eid al-Fitr",
-      arabicTitle: "عيد الفطر",
-      description: "The festival of breaking the fast",
+      title: messages?.calendar?.events?.eid_al_fitr?.title || "Eid al-Fitr",
+      arabicTitle: messages?.calendar?.events?.eid_al_fitr?.arabicTitle || "عيد الفطر",
+      description: messages?.calendar?.events?.eid_al_fitr?.description || "The festival of breaking the fast",
       type: "holiday",
     },
     {
       date: "2024-07-10",
-      title: "Eid al-Adha",
-      arabicTitle: "عيد الأضحى",
-      description: "The festival of sacrifice",
+      title: messages?.calendar?.events?.eid_al_adha?.title || "Eid al-Adha",
+      arabicTitle: messages?.calendar?.events?.eid_al_adha?.arabicTitle || "عيد الأضحى",
+      description: messages?.calendar?.events?.eid_al_adha?.description || "The festival of sacrifice",
       type: "holiday",
     },
   ];
@@ -128,7 +128,7 @@ export default function CalendarClient({
       setLocation({ lat: 21.4225, lon: 39.8262 });
     }
 
-    setIslamicEvents(sampleEvents);
+    setIslamicEvents(getIslamicEvents());
   }, []);
 
   useEffect(() => {
@@ -359,7 +359,7 @@ export default function CalendarClient({
 
             {/* Events for Selected Month */}
             <div className="mt-8 card group rounded-lg shadow-lg p-6">
-              <h3 className="text-xl font-bold text-islamic-800 dark:text-islamic-200 mb-4">
+              <h3 className="text-xl font-bold text-foreground mb-4">
                 {messages?.calendar?.eventsThisMonth || "Events This Month"}
               </h3>                <div className="space-y-4">
                 {islamicEvents.map((event, index) => (
@@ -370,24 +370,24 @@ export default function CalendarClient({
                     <div
                       className={`w-3 h-3 rounded-full mt-1 ${
                         event.type === "holiday"
-                          ? "bg-red-500"
+                          ? "bg-warning"
                           : event.type === "sunnah"
-                            ? "bg-green-500"
-                            : "bg-blue-500"
+                            ? "bg-success"
+                            : "bg-info"
                       }`}
                     ></div>
 
                     <div className="flex-1">
-                      <h4 className="font-semibold text-islamic-800 dark:text-islamic-200">
+                      <h4 className="font-semibold text-foreground">
                         {event.title}
                       </h4>
-                      <p className="text-islamic-600 dark:text-islamic-400 font-amiri">
+                      <p className="text-muted font-amiri">
                         {event.arabicTitle}
                       </p>
-                      <p className="text-sm text-islamic-500 dark:text-islamic-500 mt-1">
+                      <p className="text-sm text-muted mt-1">
                         {event.description}
                       </p>
-                      <p className="text-xs text-islamic-400 dark:text-islamic-600 mt-1">
+                      <p className="text-xs text-muted mt-1">
                         {new Date(event.date).toLocaleDateString(locale, {
                           month: "long",
                           day: "numeric",
@@ -404,16 +404,16 @@ export default function CalendarClient({
           <div className="space-y-6">
             {/* Today's Info */}
             <div className="card group rounded-lg shadow-lg p-6">
-              <h3 className="text-xl font-bold text-islamic-800 dark:text-islamic-200 mb-4">
+              <h3 className="text-xl font-bold text-foreground mb-4">
                 {messages?.calendar?.today || "Today"}
               </h3>
 
               <div className="space-y-3">
                 <div>
-                  <p className="text-sm text-islamic-600 dark:text-islamic-400">
+                  <p className="text-sm text-muted">
                     {messages?.calendar?.gregorianDate || "Gregorian Date"}
                   </p>
-                  <p className="font-semibold text-islamic-800 dark:text-islamic-200">
+                  <p className="font-semibold text-foreground">
                     {new Date().toLocaleDateString(locale, {
                       weekday: "long",
                       year: "numeric",
@@ -425,13 +425,13 @@ export default function CalendarClient({
 
                 {hijriDate && (
                   <div>
-                    <p className="text-sm text-islamic-600 dark:text-islamic-400">
+                    <p className="text-sm text-muted">
                       {messages?.calendar?.hijriDate || "Hijri Date"}
                     </p>
-                    <p className="font-semibold text-islamic-800 dark:text-islamic-200 font-amiri">
+                    <p className="font-semibold text-foreground font-amiri">
                       {hijriDate.day} {hijriDate.month.ar} {hijriDate.year}
                     </p>
-                    <p className="text-sm text-islamic-500 dark:text-islamic-500">
+                    <p className="text-sm text-muted">
                       {hijriDate.day} {hijriDate.month.en} {hijriDate.year}{" "}
                       {hijriDate.designation.abbreviated}
                     </p>
@@ -443,7 +443,7 @@ export default function CalendarClient({
             {/* Prayer Times */}
             {prayerTimes && (
               <div className="card group rounded-lg shadow-lg p-6">
-                <h3 className="text-xl font-bold text-islamic-800 dark:text-islamic-200 mb-4">
+                <h3 className="text-xl font-bold text-foreground mb-4">
                   {messages?.calendar?.prayerTimes || "Prayer Times"}
                 </h3>
 
@@ -468,7 +468,7 @@ export default function CalendarClient({
                             prayer.toLowerCase()
                           ] || prayer}
                         </span>
-                        <span className="font-semibold text-islamic-800 dark:text-islamic-200">
+                        <span className="font-semibold text-foreground">
                           {formatTime(time)}
                         </span>
                       </div>
@@ -476,8 +476,8 @@ export default function CalendarClient({
                   })}
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <p className="text-xs text-islamic-500 dark:text-islamic-500 text-center">
+                <div className="mt-4 pt-4 border-t border">
+                  <p className="text-xs text-muted text-center">
                     {messages?.calendar?.prayerTimesNote ||
                       "Prayer times are approximate"}
                   </p>
@@ -487,7 +487,7 @@ export default function CalendarClient({
 
             {/* Quick Actions */}
             <div className="card group rounded-lg shadow-lg p-6">
-              <h3 className="text-xl font-bold text-islamic-800 dark:text-islamic-200 mb-4">
+              <h3 className="text-xl font-bold text-foreground mb-4">
                 {messages?.calendar?.quickActions || "Quick Actions"}
               </h3>
 

@@ -100,7 +100,7 @@ export function FeaturesSection({ locale, messages }: FeaturesSectionProps) {
                   className={`card hover:scale-105 transition-all duration-300 h-full bg-gradient-to-br ${feature.color} border-0`}
                 >
                   <div className="flex flex-col items-center text-center space-y-4">
-                    <div className="p-4 bg-white/80 dark:bg-background/80 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                    <div className="p-4 bg-surface rounded-xl group-hover:scale-110 transition-transform duration-300">
                       <Icon className="w-10 h-10 text-primary" />
                     </div>
                     <h3 className="text-xl font-bold text-foreground">

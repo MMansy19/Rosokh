@@ -601,11 +601,26 @@ body {
 .progress-bar {
   background-color: var(--color-primary);
 }
-.bg-surfaceChild {
-  background-color: var(--color-surface-child);
+
+/* Enhanced Global Utility Classes */
+/* Background Colors */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-accent {
+  background-color: var(--color-accent);
+}
+.bg-background {
+  background-color: var(--color-background);
 }
 .bg-surface {
   background-color: var(--color-surface);
+}
+.bg-surfaceChild {
+  background-color: var(--color-surface-child);
 }
 .bg-button {
   background-color: var(--color-button);
@@ -622,17 +637,34 @@ body {
 .bg-disabledButton {
   background-color: var(--color-disabled-button);
 }
+.bg-error {
+  background-color: var(--color-error);
+}
+.bg-success {
+  background-color: var(--color-success);
+}
+.bg-warning {
+  background-color: var(--color-warning);
+}
+.bg-info {
+  background-color: var(--color-info);
+}
+
+/* Text Colors */
 .text-primary {
-  color: var(--color-text-primary);
+  color: var(--color-primary);
 }
 .text-secondary {
   color: var(--color-text-secondary);
 }
-.text-muted {
-  color: var(--color-text-muted);
+.text-accent {
+  color: var(--color-accent);
 }
 .text-foreground {
   color: var(--color-foreground);
+}
+.text-muted {
+  color: var(--color-muted);
 }
 .text-error {
   color: var(--color-error);
@@ -646,6 +678,8 @@ body {
 .text-info {
   color: var(--color-info);
 }
+
+/* Border Colors */
 .border {
   border-color: var(--color-border);
 }
@@ -660,4 +694,84 @@ body {
 }
 .border-error {
   border-color: var(--color-error);
+}
+.border-success {
+  border-color: var(--color-success);
+}
+.border-warning {
+  border-color: var(--color-warning);
+}
+.border-info {
+  border-color: var(--color-info);
+}
+
+/* Hover States */
+.hover\:bg-primary:hover {
+  background-color: var(--color-primary);
+}
+.hover\:bg-secondary:hover {
+  background-color: var(--color-secondary);
+}
+.hover\:bg-surface:hover {
+  background-color: var(--color-surface);
+}
+.hover\:bg-hoverButton:hover {
+  background-color: var(--color-hover-button);
+}
+.hover\:text-primary:hover {
+  color: var(--color-primary);
+}
+.hover\:text-foreground:hover {
+  color: var(--color-foreground);
+}
+
+/* Active States */
+.active\:bg-activeButton:active {
+  background-color: var(--color-active-button);
+}
+.active\:bg-primary:active {
+  background-color: var(--color-primary);
+}
+
+/* Focus States */
+.focus\:ring-primary:focus {
+  --tw-ring-color: var(--color-primary);
+}
+.focus\:border-primary:focus {
+  border-color: var(--color-primary);
+}
+
+/* Enhanced Button Classes */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: var(--color-hover-button);
+  color: var(--color-foreground);
+}
+.btn-primary:active {
+  background-color: var(--color-active-button);
+}
+
+.btn-surface {
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
+  transition: all 0.2s ease;
+}
+.btn-surface:hover {
+  background-color: var(--color-hover-button);
+}
+.btn-surface:active {
+  background-color: var(--color-active-button);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-foreground);
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+  background-color: var(--color-hover-button);
 }         

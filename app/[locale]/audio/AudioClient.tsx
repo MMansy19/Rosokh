@@ -235,7 +235,11 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                 onClick={() => playTrack(currentTrack)}
                 className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center hover:bg-buttonHover transition-colors duration-200"
               >
-                {isPlaying ? "⏸️" : "▶️"}
+                {isPlaying ? (
+                  <Pause className="w-6 h-6" />
+                ) : (
+                  <Play className="w-6 h-6" />
+                )}
               </button>
             </div>
 
@@ -289,17 +293,21 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
 
                 <div className="flex flex-col items-center">
                   <div className="w-12 h-12 bg-surface rounded-full flex items-center justify-center mb-2">
-                    {currentTrack?.id === track.id && isPlaying ? "⏸️" : "▶️"}
+                    {currentTrack?.id === track.id && isPlaying ? (
+                      <Pause className="w-4 h-4" />
+                    ) : (
+                      <Play className="w-4 h-4" />
+                    )}
                   </div>
                   <span
                     className={`text-xs px-2 py-1 rounded-full ${
                       track.category === "quran"
-                        ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                        ? "bg-success text-white"
                         : track.category === "dua"
-                          ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+                          ? "bg-info text-white"
                           : track.category === "lecture"
-                            ? "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-                            : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+                            ? "bg-primary text-white"
+                            : "bg-warning text-white"
                     }`}
                   >
                     {messages?.audio?.categories?.[track.category] ||

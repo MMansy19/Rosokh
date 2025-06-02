@@ -248,10 +248,10 @@ export default function KhatmaClient({ locale, messages }: KhatmaClientProps) {
                       <span
                         className={`text-xs px-2 py-1 rounded-full ${
                           session.status === "completed"
-                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                            ? "bg-success text-white"
                             : session.status === "active"
-                              ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-                              : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+                              ? "bg-info text-white"
+                              : "bg-warning text-white"
                         }`}
                       >
                         {messages?.khatma?.status?.[session.status] ||
@@ -523,7 +523,7 @@ function NewSessionForm({
                 setFormData((prev) => ({ ...prev, name: e.target.value }))
               }
               required
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 text-islamic-800 dark:text-islamic-200"
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               placeholder={
                 messages?.khatma?.sessionNamePlaceholder || "My Ramadan Khatma"
               }
@@ -545,12 +545,12 @@ function NewSessionForm({
                   }))
                 }
                 required
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 text-islamic-800 dark:text-islamic-200"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-islamic-700 dark:text-islamic-300 mb-1">
+              <label className="block text-sm font-medium text-muted mb-1">
                 {messages?.khatma?.targetDate || "Target Date"}
               </label>
               <input
@@ -563,7 +563,7 @@ function NewSessionForm({
                   }))
                 }
                 required
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 text-islamic-800 dark:text-islamic-200"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
           </div>
@@ -585,7 +585,7 @@ function NewSessionForm({
                 required
                 min="1"
                 max="604"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary text-foreground"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
 
@@ -604,7 +604,7 @@ function NewSessionForm({
                 }
                 required
                 min="1"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary text-foreground"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
           </div>
@@ -613,7 +613,7 @@ function NewSessionForm({
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200"
+              className="flex-1 px-4 py-2 border bg-surface hover:bg-hoverButton active:bg-activeButton text-foreground rounded-lg transition-colors duration-200"
             >
               {messages?.khatma?.cancel || "Cancel"}
             </button>
@@ -662,13 +662,13 @@ function AddReadingForm({
   return (
     <div className="fixed inset-0 bg-background bg-opacity-50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
       <div className="card group rounded-lg shadow-xl p-6 w-full max-w-md">
-        <h3 className="text-xl font-bold text-islamic-800 dark:text-islamic-200 mb-4">
+        <h3 className="text-xl font-bold text-foreground mb-4">
           {messages?.khatma?.addReadingSession || "Add Reading Session"}
         </h3>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-islamic-700 dark:text-islamic-300 mb-1">
+            <label className="block text-sm font-medium text-muted mb-1">
               {messages?.khatma?.date || "Date"}
             </label>
             <input
@@ -678,7 +678,7 @@ function AddReadingForm({
                 setFormData((prev) => ({ ...prev, date: e.target.value }))
               }
               required
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 text-islamic-800 dark:text-islamic-200"
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
             />
           </div>
 
@@ -699,7 +699,7 @@ function AddReadingForm({
                 required
                 min="1"
                 max="114"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary text-foreground"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
 
@@ -718,14 +718,14 @@ function AddReadingForm({
                 }
                 required
                 min="1"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary text-foreground"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-islamic-700 dark:text-islamic-300 mb-1">
+              <label className="block text-sm font-medium text-muted mb-1">
                 {messages?.khatma?.toSurah || "To Surah"}
               </label>
               <input
@@ -740,12 +740,12 @@ function AddReadingForm({
                 required
                 min="1"
                 max="114"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 text-islamic-800 dark:text-islamic-200"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-islamic-700 dark:text-islamic-300 mb-1">
+              <label className="block text-sm font-medium text-muted mb-1">
                 {messages?.khatma?.toAyah || "To Ayah"}
               </label>
               <input
@@ -759,14 +759,14 @@ function AddReadingForm({
                 }
                 required
                 min="1"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 text-islamic-800 dark:text-islamic-200"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-islamic-700 dark:text-islamic-300 mb-1">
+              <label className="block text-sm font-medium text-muted mb-1">
                 {messages?.khatma?.pagesRead || "Pages Read"}
               </label>
               <input
@@ -780,12 +780,12 @@ function AddReadingForm({
                 }
                 required
                 min="1"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 text-islamic-800 dark:text-islamic-200"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-islamic-700 dark:text-islamic-300 mb-1">
+              <label className="block text-sm font-medium text-muted mb-1">
                 {messages?.khatma?.duration || "Duration"} (
                 {messages?.khatma?.minutes || "minutes"})
               </label>
@@ -800,13 +800,13 @@ function AddReadingForm({
                 }
                 required
                 min="1"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 text-islamic-800 dark:text-islamic-200"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-islamic-700 dark:text-islamic-300 mb-1">
+            <label className="block text-sm font-medium text-muted mb-1">
               {messages?.khatma?.notes || "Notes"} (
               {messages?.khatma?.optional || "optional"})
             </label>
@@ -816,7 +816,7 @@ function AddReadingForm({
                 setFormData((prev) => ({ ...prev, notes: e.target.value }))
               }
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-islamic-500 text-islamic-800 dark:text-islamic-200 resize-none"
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary text-foreground resize-none"
               placeholder={
                 messages?.khatma?.notesPlaceholder ||
                 "Any reflections or thoughts..."
@@ -828,7 +828,7 @@ function AddReadingForm({
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200"
+              className="flex-1 px-4 py-2 border bg-surface hover:bg-hoverButton active:bg-activeButton text-foreground rounded-lg transition-colors duration-200"
             >
               {messages?.khatma?.cancel || 'Cancel'}
             </button>

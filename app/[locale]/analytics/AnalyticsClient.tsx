@@ -251,32 +251,32 @@ export default function AnalyticsClient({
                 </div>
               </div>
 
-              <div className="card group rounded-lg shadow-lg p-6 text-center">
+              <div className="bg-surface rounded-lg shadow-lg p-6 text-center border border-border">
                 <div className="text-3xl mb-2">📖</div>
-                <div className="text-2xl font-bold text-islamic-800">
+                <div className="text-2xl font-bold text-foreground">
                   {analyticsData.totalPagesRead}
                 </div>
-                <div className="text-islamic-600">
+                <div className="text-muted">
                   {messages?.analytics?.totalPagesRead || "Total Pages Read"}
                 </div>
               </div>
 
-              <div className="card group rounded-lg shadow-lg p-6 text-center">
+              <div className="bg-surface rounded-lg shadow-lg p-6 text-center border border-border">
                 <div className="text-3xl mb-2">🔥</div>
-                <div className="text-2xl font-bold text-islamic-800">
+                <div className="text-2xl font-bold text-foreground">
                   {analyticsData.currentStreak}
                 </div>
-                <div className="text-islamic-600">
+                <div className="text-muted">
                   {messages?.analytics?.currentStreak || "Current Streak"}
                 </div>
               </div>
 
-              <div className="card group rounded-lg shadow-lg p-6 text-center">
+              <div className="bg-surface rounded-lg shadow-lg p-6 text-center border border-border">
                 <div className="text-3xl mb-2">✅</div>
-                <div className="text-2xl font-bold text-islamic-800">
+                <div className="text-2xl font-bold text-foreground">
                   {analyticsData.completedKhatmas}
                 </div>
-                <div className="text-islamic-600">
+                <div className="text-muted">
                   {messages?.analytics?.completedKhatmas || "Completed Khatmas"}
                 </div>
               </div>
@@ -284,9 +284,9 @@ export default function AnalyticsClient({
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               {/* Reading Progress Chart */}
-              <div className="card group rounded-lg shadow-lg p-6">
+              <div className="bg-surface rounded-lg shadow-lg p-6 border border-border">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl font-bold text-islamic-800">
+                  <h3 className="text-xl font-bold text-foreground">
                     {messages?.analytics?.readingProgress || "Reading Progress"}
                   </h3>
                   <div className="flex gap-2">
@@ -295,7 +295,7 @@ export default function AnalyticsClient({
                       className={`text-muted px-3 py-1 rounded text-sm transition-colors duration-200 ${
                         selectedPeriod === "week"
                           ? "bg-primary text-white"
-                          : "hover:bg-buttonHover hover:text-foreground"
+                          : "hover:bg-hoverButton hover:text-foreground"
                       }`}
                     >
                       {messages?.analytics?.week || "Week"}
@@ -305,7 +305,7 @@ export default function AnalyticsClient({
                       className={`text-muted px-3 py-1 rounded text-sm transition-colors duration-200 ${
                         selectedPeriod === "month"
                           ? "bg-primary text-white"
-                          : "hover:bg-buttonHover hover:text-foreground"
+                          : "hover:bg-hoverButton hover:text-foreground"
                       }`}
                     >
                       {messages?.analytics?.month || "Month"}
@@ -324,14 +324,14 @@ export default function AnalyticsClient({
                         className="bg-gradient-to-t from-primary to-secondary rounded-t transition-all duration-300"
                         style={{ height: `${(value / maxValue) * 100}%` }}
                       ></div>
-                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-surface text-foreground text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-border shadow-lg">
                         {value} {messages?.analytics?.pages || "pages"}
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="flex justify-between text-xs text-islamic-600 mt-2">
+                <div className="flex justify-between text-xs text-muted mt-2">
                   <span>
                     {selectedPeriod === "week"
                       ? messages?.analytics?.["7DaysAgo"] || "7 days ago"
@@ -342,37 +342,37 @@ export default function AnalyticsClient({
               </div>
 
               {/* Additional Statistics */}
-              <div className="card group rounded-lg shadow-lg p-6">
-                <h3 className="text-xl font-bold text-islamic-800 mb-6">
+              <div className="bg-surface rounded-lg shadow-lg p-6 border border-border">
+                <h3 className="text-xl font-bold text-foreground mb-6">
                   {messages?.analytics?.additionalStats ||
                     "Additional Statistics"}
                 </h3>
 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-islamic-700">
+                    <span className="text-muted">
                       {messages?.analytics?.longestStreak || "Longest Streak"}
                     </span>
-                    <span className="font-bold text-islamic-800">
+                    <span className="font-bold text-foreground">
                       {analyticsData.longestStreak}{" "}
                       {messages?.analytics?.days || "days"}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <span className="text-islamic-700">
+                    <span className="text-muted">
                       {messages?.analytics?.averageSession || "Average Session"}
                     </span>
-                    <span className="font-bold text-islamic-800">
+                    <span className="font-bold text-foreground">
                       {formatDuration(analyticsData.averageSessionTime)}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <span className="text-islamic-700">
+                    <span className="text-muted">
                       {messages?.analytics?.favoriteTime || "Favorite Time"}
                     </span>
-                    <span className="font-bold text-islamic-800 capitalize">
+                    <span className="font-bold text-foreground capitalize">
                       {messages?.analytics?.[
                         analyticsData.favoriteReadingTime.toLowerCase()
                       ] || analyticsData.favoriteReadingTime}
@@ -383,8 +383,8 @@ export default function AnalyticsClient({
             </div>
 
             {/* Most Read Surahs */}
-            <div className="card group rounded-lg shadow-lg p-6">
-              <h3 className="text-xl font-bold text-islamic-800 mb-6">
+            <div className="bg-surface rounded-lg shadow-lg p-6 border border-border">
+              <h3 className="text-xl font-bold text-foreground mb-6">
                 {messages?.analytics?.mostReadSurahs || "Most Read Surahs"}
               </h3>
 
@@ -395,7 +395,7 @@ export default function AnalyticsClient({
                   .map(([surah, count]) => (
                     <div
                       key={surah}
-                      className="p-4 bg-surface rounded-lg"
+                      className="p-4 bg-surfaceChild rounded-lg border border-border"
                     >
                       <div className="flex justify-between items-center">
                         <div>
@@ -414,7 +414,7 @@ export default function AnalyticsClient({
               </div>
 
               {Object.keys(analyticsData.surahProgress).length === 0 && (
-                <div className="text-center py-8 text-islamic-600">
+                <div className="text-center py-8 text-muted">
                   {messages?.analytics?.noSurahData ||
                     "No surah data available yet"}
                 </div>
@@ -422,7 +422,7 @@ export default function AnalyticsClient({
             </div>
 
             {/* Motivational Section */}
-            <div className="mt-8 bg-gradient-to-br from-islamic-500 to-tosca-500 text-white rounded-lg shadow-lg p-8 text-center">
+            <div className="mt-8 p-8 text-center">
               <h3 className="text-2xl font-bold mb-4">
                 {messages?.analytics?.keepGoing || "Keep Going!"}
               </h3>
@@ -435,7 +435,7 @@ export default function AnalyticsClient({
               <p className="text-sm opacity-75">Quran 65:2</p>
 
               {analyticsData.currentStreak > 0 && (
-                <div className="mt-6 p-4 bg-white bg-opacity-20 rounded-lg">
+                <div className="mt-6 p-4 bg-surfaceChild rounded-lg border border-border">
                   <p className="text-lg">
                     {`You've been reading for ${analyticsData.currentStreak} days straight! Keep it up!`}
                   </p>
@@ -446,16 +446,16 @@ export default function AnalyticsClient({
         ) : (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">📊</div>
-            <h2 className="text-2xl font-bold text-islamic-800 mb-4">
+            <h2 className="text-2xl font-bold text-foreground mb-4">
               {messages?.analytics?.noDataYet || "No Data Yet"}
             </h2>
-            <p className="text-islamic-600 mb-6">
+            <p className="text-muted mb-6">
               {messages?.analytics?.startReading ||
                 "Start reading to see your analytics"}
             </p>
             <a
               href="/quran"
-              className="inline-block px-8 py-4 bg-primary text-white rounded-lg hover:bg-primaryHover transition-colors duration-200 text-lg"
+              className="inline-block px-8 py-4 bg-primary text-white rounded-lg hover:bg-hoverButton transition-colors duration-200 text-lg"
             >
               {messages?.analytics?.startReadingQuran || "Start Reading Quran"}
             </a>
