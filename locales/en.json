@@ -22,7 +22,16 @@
       "download": "Download",
       "share": "Share",
       "toggle_theme": "Toggle Theme",
+      "dark_mode": "Dark Mode",
+      "light_mode": "Light Mode",
+      "toggle_menu": "Toggle Menu",
       "language": "Change Language"
+    },
+    "brand": {
+      "name": "Rosokh",
+      "name_arabic": "رسوخ",
+      "platform": "Rosokh Platform",
+      "description": "Rosokh is a modern Islamic multimedia platform for spiritual growth and learning."
     },
     "general": {
       "loading": "Loading...",
@@ -34,7 +43,8 @@
       "save": "Save",
       "cancel": "Cancel"
     }
-  },  "home": {
+  },
+  "home": {
     "title": "Welcome to Rosokh",
     "subtitle": "Discover the Holy Quran through a comprehensive, free digital experience",
     "description": "Discover the beauty of Islamic knowledge through Quran reading, audio recitations, and spiritual growth tools.",
@@ -50,38 +60,163 @@
         "contact": "Get in touch with us for support"
       },
       "stats": {
-        "surahs": "Surahs",
-        "verses": "Verses", 
-        "languages": "Languages"
+        "title": "Platform Statistics",
+        "subtitle": "Discover the scope of our Islamic multimedia platform",
+        "items": {
+          "surahs": {
+            "title": "Surahs",
+            "description": "Complete chapters of the Holy Quran"
+          },
+          "verses": {
+            "title": "Verses",
+            "description": "Sacred verses to read and reflect upon"
+          },
+          "languages": {
+            "title": "Languages",
+            "description": "Multilingual support for global accessibility"
+          },
+          "users": {
+            "title": "Users",
+            "description": "Active members of our community"
+          },
+          "downloads": {
+            "title": "Downloads",
+            "description": "Total content downloads worldwide"
+          },
+          "uptime": {
+            "title": "Uptime",
+            "description": "Platform reliability and availability"
+          }
+        },
+        "quote": {
+          "arabic": "وَنَزَّلْنَا عَلَيْكَ الْكِتَابَ تِبْيَانًا لِّكُلِّ شَيْءٍ",
+          "translation": "And We have sent down to you the Book as clarification for all things",
+          "reference": "Quran 16:89"
+        },
+        "metrics": {
+          "response_time": "Response Time",
+          "accessibility": "Accessibility",
+          "security": "Security",
+          "support": "Support"
+        }
       }
     },
     "features": {
-      "quran_reading": {
-        "title": "Quran Reading",
-        "description": "Browse the Holy Quran with Arabic text and translations in multiple languages"
+      "title": "Comprehensive Islamic Platform",
+      "subtitle": "Discover all the tools you need for your Islamic journey in one beautiful platform",
+      "explore": "Explore",
+      "main": {
+        "quran_reader": {
+          "title": "Quran Reading",
+          "description": "Browse the Holy Quran with Arabic text and translations in multiple languages"
+        },
+        "audio_player": {
+          "title": "Audio Recitations",
+          "description": "Listen to beautiful recitations from renowned reciters with speed control"
+        },
+        "video_content": {
+          "title": "Video Library",
+          "description": "Watch Islamic lectures, documentaries, and educational content"
+        },
+        "khatma_tracker": {
+          "title": "Khatma Tracking",
+          "description": "Track your Quran reading progress with daily plans and statistics"
+        },
+        "islamic_calendar": {
+          "title": "Hijri Calendar",
+          "description": "Stay updated with accurate Hijri dates and prayer times"
+        },
+        "analytics": {
+          "title": "Analytics Dashboard",
+          "description": "Monitor your views and downloads with detailed analytics"
+        }
       },
-      "audio_recitations": {
-        "title": "Audio Recitations",
-        "description": "Listen to beautiful recitations from renowned reciters with speed control"
+      "additional": {
+        "title": "Why Choose Rosokh?",
+        "subtitle": "Discover the features that make Rosokh special",
+        "multilingual": {
+          "title": "Multilingual Support",
+          "description": "Available in Arabic, English, and Russian for global accessibility"
+        },
+        "mobile_first": {
+          "title": "Mobile Responsive",
+          "description": "Optimized for all devices with seamless mobile experience"
+        },
+        "fast_loading": {
+          "title": "Lightning Fast",
+          "description": "Ultra-fast loading with zero heavy dependencies"
+        },
+        "free_platform": {
+          "title": "100% Free",
+          "description": "Completely free platform with no hidden costs or subscriptions"
+        },
+        "community": {
+          "title": "Global Community",
+          "description": "Join millions of Muslims worldwide in their spiritual journey"
+        },
+        "offline_access": {
+          "title": "Offline Access",
+          "description": "Read Quran and access content even without internet connection"
+        }
       },
-      "memorization_games": {
-        "title": "Memorization Games",
-        "description": "Interactive games to enhance Quran memorization in a fun way"
-      },
-      "khatma_tracking": {
-        "title": "Khatma Tracking",
-        "description": "Track your Quran reading progress with daily plans and statistics"
-      },
-      "calendar": {
-        "title": "Hijri Calendar",
-        "description": "Stay updated with accurate Hijri dates and prayer times"
-      },
-      "analytics": {
-        "title": "Analytics Dashboard",
-        "description": "Monitor your views and downloads with detailed analytics"
+      "cta": {
+        "title": "Ready to Begin Your Journey?",
+        "description": "Start exploring the Quran and deepen your Islamic knowledge today",
+        "button": "Start Reading"
       }
     },
-    "cta": "Start Your Journey Now"
+    "cta": "Start Your Journey Now",
+    "testimonials": {
+      "title": "What Our Users Say",
+      "subtitle": "Real experiences from our global Islamic community",
+      "items": {
+        "ahmed": {
+          "name": "Ahmed Hassan",
+          "text": "Rosokh has transformed my daily Quran reading. The beautiful interface and multilingual support make it perfect for my family.",
+          "occupation": "Islamic Scholar"
+        },
+        "fatima": {
+          "name": "Fatima Wong",
+          "text": "As a student, I love the Khatma tracker. It helps me stay consistent with my reading goals.",
+          "occupation": "Student"
+        },
+        "mohammed": {
+          "name": "Mohammed Al-Rashid",
+          "text": "The audio quality is exceptional. Perfect for leading prayers and teaching.",
+          "occupation": "Imam"
+        },
+        "aisha": {
+          "name": "Aisha Patel",
+          "text": "I use Rosokh to teach my students. The games make learning Quran enjoyable.",
+          "occupation": "Teacher"
+        },
+        "omar": {
+          "name": "Omar Benali",
+          "text": "Clean, fast, and reliable. Everything I need for my spiritual journey.",
+          "occupation": "Engineer"
+        },
+        "khadija": {
+          "name": "Khadija Rahman",
+          "text": "The prayer times feature is incredibly accurate. I rely on it daily.",
+          "occupation": "Doctor"
+        }
+      },
+      "stats": {
+        "satisfaction": "Satisfaction Rate",
+        "active_users": "Active Users",
+        "countries": "Countries"
+      },
+      "cta": {
+        "title": "Join Our Community",
+        "description": "Be part of a global community dedicated to Islamic learning",
+        "join_button": "Join Now",
+        "learn_more": "Learn More"
+      },
+      "blessing": {
+        "arabic": "بَارَكَ اللَّهُ فِيكُمْ",
+        "translation": "May Allah bless you all"
+      }
+    }
   },
   "quran_reader": {
     "title": "Quran Reader",
@@ -95,7 +230,8 @@
     "verses_count": "{count} verses",
     "bismillah": "In the name of Allah, the Most Gracious, the Most Merciful",
     "loading": "Loading the Holy Quran..."
-  },  "audio": {
+  },
+  "audio": {
     "title": "Islamic Audio Library",
     "description": "Listen to Quran recitations, duas, lectures, and nasheeds",
     "by": "By",
@@ -140,13 +276,50 @@
   },
   "khatma_tracker": {
     "title": "Khatma Tracker",
+    "subtitle": "Track your Quran reading journey",
+    "description": "Track your Quran reading progress and complete your Khatma journey",
+    "startFirst": "Start Your First Khatma",
+    "startFirstDesc": "Begin your spiritual journey by setting up your first Quran reading session.",
+    "createSession": "Create New Session",
+    "target": "Target",
+    "started": "Started",
+    "addReading": "Add Reading",
+    "pagesRead": "Pages Read",
+    "pagesLeft": "Pages Left",
+    "dailyAverage": "Daily Average",
+    "completion": "Completion",
+    "sessionsOverview": "Sessions Overview",
+    "recentReadings": "Recent Readings",
+    "noSessions": "No Khatma sessions yet",
+    "createFirstSession": "Create your first session to start tracking your progress",
+    "sessionName": "Session Name",
+    "targetCompletionDate": "Target Completion Date",
+    "totalPages": "Total Pages",
+    "dailyTarget": "Daily Target",
+    "from": "From",
+    "to": "To",
+    "date": "Date",
+    "surah": "Surah",
+    "ayah": "Ayah",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "completed": "Completed",
+    "active": "Active",
+    "paused": "Paused",
+    "resume": "Resume",
+    "pause": "Pause",
+    "complete": "Complete",
+    "progress": "Progress",
+    "streak": "Streak",
+    "totalSessions": "Total Sessions",
+    "averageDaily": "Average Daily",
     "start_khatma": "Start New Khatma",
     "custom_plan": "Custom Plan",
     "days": "{count} days",
     "pages_per_day": "{count} pages/day",
-    "progress": "Complete: {percentage}%",
     "chapters_completed": "{count}/114 chapters completed",
-    "streak": "{count} day streak",
     "days_remaining": "{count} days remaining",
     "pages_daily": "{count} pages per day",
     "chapter_progress": "Chapter Progress",
@@ -157,46 +330,113 @@
   },
   "calendar": {
     "title": "Islamic Calendar",
-    "hijri_date": "Hijri Date",
-    "prayer_times": "Prayer Times",
-    "next_prayer": "Next Prayer",
-    "fajr": "Fajr",
-    "sunrise": "Sunrise",
-    "dhuhr": "Dhuhr",
-    "asr": "Asr",
-    "maghrib": "Maghrib",
-    "isha": "Isha",
-    "current_time": "Current Time",
-    "holiday": "Holiday: {name}",
-    "loading": "Loading Islamic data..."
+    "description": "Track Islamic dates, prayer times, and important events",
+    "loading": "Loading...",
+    "today": "Today",
+    "gregorianDate": "Gregorian Date",
+    "hijriDate": "Hijri Date",
+    "prayerTimes": "Prayer Times",
+    "prayerTimesNote": "Prayer times are approximate",
+    "eventsThisMonth": "Events This Month",
+    "quickActions": "Quick Actions",
+    "readQuran": "Read Quran",
+    "dhikr": "Dhikr Counter",
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "prayers": {
+      "fajr": "Fajr",
+      "sunrise": "Sunrise",
+      "dhuhr": "Dhuhr",
+      "asr": "Asr",
+      "maghrib": "Maghrib",
+      "isha": "Isha"
+    }
   },
   "analytics": {
     "title": "Analytics Dashboard",
-    "total_views": "Total Views",
-    "total_downloads": "Total Downloads",
-    "top_content": "Top Viewed Content",
-    "content_type": "Content Type",
-    "views": "Views",
-    "downloads": "Downloads",
-    "engagement": "Engagement",
-    "avg_time": "Avg Time",
-    "week": "Week",
-    "month": "Month",
-    "year": "Year",
-    "quran": "Quran",
-    "audio": "Audio",
-    "video": "Video",
-    "article": "Article"
+    "description": "Track your Quran reading progress and spiritual journey",
+    "totalReadingTime": "Total Reading Time",
+    "totalPagesRead": "Total Pages Read",
+    "currentStreak": "Current Streak",
+    "completedKhatmas": "Completed Khatmas",
+    "longestStreak": "Longest Streak",
+    "averageSessionTime": "Average Session Time",
+    "favoriteReadingTime": "Favorite Reading Time",
+    "readingProgress": "Reading Progress",
+    "weeklyProgress": "Weekly Progress",
+    "monthlyProgress": "Monthly Progress",
+    "dailyGoal": "Daily Goal",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "thisYear": "This Year",
+    "days": "days",
+    "minutes": "minutes",
+    "hours": "hours",
+    "pages": "pages",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening",
+    "night": "Night",
+    "noDataAvailable": "No data available yet. Start reading to see your progress!",
+    "surahProgress": "Surah Progress",
+    "readingHabits": "Reading Habits",
+    "progressChart": "Progress Chart",
+    "achievements": "Achievements"
   },
   "contact": {
     "title": "Contact Us",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "send": "Send",
-    "success": "Your message was sent successfully",
-    "error": "Failed to send message, please try again"
-  },  "footer": {
+    "subtitle": "Get in touch with our team",
+    "description": "We're here to help with any questions about Rosokh",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "subject": "Subject",
+      "message": "Your Message",
+      "category": "Category",
+      "categories": {
+        "general": "General Inquiry",
+        "technical": "Technical Support",
+        "feature": "Feature Request",
+        "bug": "Bug Report",
+        "partnership": "Partnership"
+      },
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again."
+    },
+    "methods": {
+      "email": "Email",
+      "emailDesc": "Send us an email",
+      "telegram": "Telegram",
+      "telegramDesc": "Join our community",
+      "twitter": "Twitter",
+      "twitterDesc": "Follow us for updates",
+      "whatsapp": "WhatsApp",
+      "whatsappDesc": "Quick support"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": "How do I track my Quran reading progress?",
+      "a1": "Use the Khatma feature to set reading goals and track your progress. You can log your daily reading sessions and view detailed analytics.",
+      "q2": "Can I use the app offline?",
+      "a2": "Yes, the Quran text is available offline. However, features like prayer times and audio require an internet connection.",
+      "q3": "How accurate are the prayer times?",
+      "a3": "Prayer times are calculated based on your location and are generally accurate within a few minutes. You can adjust them in settings if needed.",
+      "q4": "Is the app available in multiple languages?",
+      "a4": "Yes, Rosokh supports Arabic, English, and Russian languages. You can switch languages in the settings.",
+      "q5": "How do I report a bug or suggest a feature?",
+      "a5": "You can use this contact form to report bugs or suggest features. We appreciate all feedback from our community."
+    }
+  },
+  "footer": {
     "description": "A modern Islamic multimedia platform providing free access to Quran, audio recitations, and spiritual learning tools.",
     "made_with": "Made with",
     "for_ummah": "for the Ummah",
@@ -212,5 +452,10 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "about": "About Us"
+  },
+  "seo": {
+    "keywords": "Quran, Islamic, Audio, Recitation, Hijri Calendar, Prayer Times, Khatma, Islamic Learning, Quran Reader, Islamic App, Free Quran, Multilingual Quran",
+    "description": "Rosokh is a modern Islamic multimedia platform for Quran reading, audio recitations, and spiritual learning. Free, fast, and available in Arabic, English, and Russian.",
+    "title": "Rosokh - Islamic Multimedia Platform | Free Quran Reader & Audio"
   }
 }

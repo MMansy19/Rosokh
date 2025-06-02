@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Heart, Github, Mail, Phone, MapPin } from 'lucide-react';
+import Link from "next/link";
+import { Heart, Github, Mail, Phone, MapPin } from "lucide-react";
 
 interface FooterProps {
   locale: string;
@@ -12,7 +12,10 @@ export function Footer({ locale, messages }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-surface border-t border-border mt-auto">
+    <footer
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className="bg-surface border-t border-border mt-auto"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
@@ -22,11 +25,18 @@ export function Footer({ locale, messages }: FooterProps) {
                 <span className="text-white font-bold text-sm">ر</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-lg text-foreground">Rosokh</span>
-                <span className="text-xs text-muted -mt-1">رسوخ</span>
+                <span className="font-bold text-lg text-foreground">
+                  {messages?.common?.brand?.name || "Rosokh"}
+                </span>
+                <span className="text-xs text-muted -mt-1">
+                  {messages?.common?.brand?.name_arabic || "رسوخ"}
+                </span>
               </div>
-            </div>            <p className="text-muted text-sm leading-relaxed max-w-xs">
-              {messages?.footer?.description || "Rosokh is a modern Islamic multimedia platform for spiritual growth and learning."}
+            </div>{" "}
+            <p className="text-muted text-sm leading-relaxed max-w-xs">
+              {messages?.footer?.description ||
+                messages?.common?.brand?.description ||
+                "Rosokh is a modern Islamic multimedia platform for spiritual growth and learning."}
             </p>
             <div className="flex items-center space-x-1 rtl:space-x-reverse text-sm text-muted">
               <span>{messages?.footer?.made_with || "Made with"}</span>
@@ -34,15 +44,17 @@ export function Footer({ locale, messages }: FooterProps) {
               <span>{messages?.footer?.for_ummah || "for the Ummah"}</span>
             </div>
           </div>
-
-          {/* Quick Links */}          <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">{messages?.footer?.quick_links || "Quick Links"}</h3>
+          {/* Quick Links */}{" "}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">
+              {messages?.footer?.quick_links || "Quick Links"}
+            </h3>
             <ul className="space-y-2">
               {[
-                { key: 'quran', href: '/quran' },
-                { key: 'audio', href: '/audio' },
-                { key: 'calendar', href: '/calendar' },
-                { key: 'khatma', href: '/khatma' },
+                { key: "quran", href: "/quran" },
+                { key: "audio", href: "/audio" },
+                { key: "calendar", href: "/calendar" },
+                { key: "khatma", href: "/khatma" },
               ].map((link) => (
                 <li key={link.key}>
                   <Link
@@ -55,19 +67,28 @@ export function Footer({ locale, messages }: FooterProps) {
               ))}
             </ul>
           </div>
-
-          {/* Features */}          <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">{messages?.footer?.features || "Features"}</h3>
+          {/* Features */}{" "}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">
+              {messages?.footer?.features || "Features"}
+            </h3>
             <ul className="space-y-2 text-sm text-muted">
               <li>{messages?.footer?.feature_free || "100% Free"}</li>
-              <li>{messages?.footer?.feature_multilingual || "Multilingual Support"}</li>
+              <li>
+                {messages?.footer?.feature_multilingual ||
+                  "Multilingual Support"}
+              </li>
               <li>{messages?.footer?.feature_offline || "Offline Capable"}</li>
-              <li>{messages?.footer?.feature_responsive || "Responsive Design"}</li>
+              <li>
+                {messages?.footer?.feature_responsive || "Responsive Design"}
+              </li>
             </ul>
           </div>
-
-          {/* Contact */}          <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">{messages?.footer?.contact || "Contact"}</h3>
+          {/* Contact */}{" "}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">
+              {messages?.footer?.contact || "Contact"}
+            </h3>
             <div className="space-y-3">
               <a
                 href="mailto:info@rosokh.com"
@@ -95,8 +116,12 @@ export function Footer({ locale, messages }: FooterProps) {
 
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">            <div className="text-sm text-muted">
-              © {currentYear} Rosokh Platform. {messages?.footer?.rights_reserved || "All rights reserved."}
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            {" "}
+            <div className="text-sm text-muted">
+              © {currentYear}{" "}
+              {messages?.common?.brand?.platform || "Rosokh Platform"}.{" "}
+              {messages?.footer?.rights_reserved || "All rights reserved."}
             </div>
             <div className="flex items-center space-x-6 rtl:space-x-reverse text-sm">
               <Link

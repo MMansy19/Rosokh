@@ -1,5 +1,5 @@
-import { QuranClient } from './QuranClient';
-import { getMessages } from '@/utils/translations';
+import { QuranClient } from "./QuranClient";
+import { getMessages } from "@/utils/translations";
 
 interface QuranPageProps {
   params: Promise<{ locale: string }>;

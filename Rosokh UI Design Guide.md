@@ -1,5 +1,3 @@
-
-
 To create a responsive UI design guide for the **Rosokh** Islamic multimedia platform, I'll outline a comprehensive set of guidelines that align with the modern, green-tosca geometric aesthetic implied by the "Green Tosca Modern Geometric Web Hosting Service Presentation" reference. The design will prioritize mobile-first responsiveness, support both dark and light modes, and cater to the platform's trilingual (Arabic, English, Russian) and Islamic-focused features (Quran reader, audio player, memorization games, Khatma tracker, calendar, analytics, and contact form). The guide will include typography, color schemes, layout principles, component styles, and accessibility considerations, ensuring high performance and a user-friendly experience across devices.
 
 Below is the design guide, wrapped in an `<xaiArtifact>` tag as a JSON file for easy integration into your development workflow. The structure is designed to be actionable for developers using a framework like Next.js with Tailwind CSS, as implied by the blueprint's tech stack.
@@ -373,22 +371,26 @@ Below is the design guide, wrapped in an `<xaiArtifact>` tag as a JSON file for 
 ### Design Guide Overview
 
 #### 1. **Color Scheme**
+
 - **Light Mode**: Uses Tosca Green (#2E8B57) for primary elements, Soft White (#F5F6F5) for backgrounds, and Golden Sand (#DAA520) for accents, evoking Islamic tranquility and modernity.
 - **Dark Mode**: Adjusts to Tosca Green Dark (#3CB371), Dark Slate (#1C2526) for backgrounds, and Golden Sand Light (#E0B450) for accents, ensuring readability and comfort in low-light conditions.
 - **Purpose**: The green-tosca palette reflects Islamic aesthetics (green symbolizing paradise), while gold adds warmth and highlights interactive elements.
 
 #### 2. **Typography**
+
 - **Arabic**: Uses Amiri for Quran text and UI elements, with Noto Naskh Arabic as a fallback for robust Arabic rendering.
 - **English/Russian**: Uses Inter for clean, modern readability, with multiple weights for hierarchy.
 - **Sizes**: Fluid typography scales for mobile (smaller sizes) and desktop (larger sizes), with generous line heights for readability, especially for Quranic text.
 - **RTL/LTR**: Arabic text uses RTL with right-aligned layouts, while English and Russian use LTR.
 
 #### 3. **Layout**
+
 - **Mobile-First**: Single-column layouts for mobile, stacking components vertically. Tablet and desktop use multi-column grids (12-column system) for efficient space usage.
 - **Breakpoints**: Mobile (0-639px), Tablet (640-1023px), Desktop (1024px+).
 - **Max Width**: 1280px for desktop to maintain readability and avoid overly wide content.
 
 #### 4. **Components**
+
 - **Navigation**: Top bar on desktop, hamburger menu on mobile with slide-in animation. Supports RTL for Arabic.
 - **Buttons**: Primary buttons use Tosca Green with white text; secondary buttons are outlined with hover effects.
 - **Cards**: Used for features, Quran verses, and stats, with subtle shadows and rounded corners for a geometric look.
@@ -401,39 +403,44 @@ Below is the design guide, wrapped in an `<xaiArtifact>` tag as a JSON file for 
 - **Contact Form**: Simple, centered form with validation feedback.
 
 #### 5. **Theme Toggle**
+
 - **Location**: Top-right in navigation bar, using sun/moon icons.
 - **Behavior**: Toggles between light and dark modes, storing preference in local storage.
 
 #### 6. **Accessibility**
+
 - **Contrast**: Meets WCAG 2.1 AA standards for readability.
 - **Keyboard Navigation**: All interactive elements (buttons, links, form inputs) are keyboard-accessible.
 - **ARIA Labels**: Added for Quran reader, audio controls, and games to support screen readers.
 - **RTL/LTR Support**: Seamlessly switches layout direction based on language.
 
 #### 7. **Performance**
+
 - **Images**: Use WebP, lazy-load, and keep sizes under 100KB.
 - **Fonts**: Preload Amiri and Inter, use `font-display: swap` to avoid layout shifts.
 - **CSS/JS**: Leverage Tailwind CSS for minimal bundle size, defer non-critical JS.
 
 #### 8. **Sample Tailwind Config**
+
 - The provided `sample_tailwind_config` can be copied into `tailwind.config.js` to apply the color scheme and fonts consistently across the app.
 
 ### Implementation Notes
+
 - **Tech Stack**: Use Next.js with Tailwind CSS for styling, as implied by the blueprint’s `next-intl` and Vercel references. Integrate the previously provided `ar.json`, `en.json`, and `ru.json` files for translations.
 - **RTL Support**: Use Tailwind’s `dir="rtl"` for Arabic pages and adjust flexbox/grid directions (e.g., `flex-row-reverse`).
 - **Dark Mode**: Implement with Tailwind’s `dark:` prefix (e.g., `dark:bg-dark-slate`) and a theme toggle hook in Next.js.
 - **Example Component** (Quran Reader):
   ```jsx
-  import { useTranslations } from 'next-intl';
+  import { useTranslations } from "next-intl";
   function QuranReader() {
-    const t = useTranslations('quran_reader');
+    const t = useTranslations("quran_reader");
     return (
       <div className="bg-soft-white dark:bg-dark-slate p-4 rounded-lg">
-        <h1 className="text-2xl font-amiri">{t('title')}</h1>
+        <h1 className="text-2xl font-amiri">{t("title")}</h1>
         <select className="border border-text-secondary p-2 rounded">
-          <option>{t('select_chapter')}</option>
+          <option>{t("select_chapter")}</option>
         </select>
-        <div className="font-amiri text-lg leading-loose">{t('bismillah')}</div>
+        <div className="font-amiri text-lg leading-loose">{t("bismillah")}</div>
       </div>
     );
   }

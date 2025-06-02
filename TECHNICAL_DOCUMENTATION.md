@@ -1,4 +1,5 @@
 # 🕌 Islamic Multimedia Platform: Complete Technical Blueprint
+
 ## Building a High-Performance Islamic Content Platform with Zero Dependencies
 
 <div align="center">
@@ -9,7 +10,7 @@
 [![Deployment](https://img.shields.io/badge/Deployment-100%25%20Free-gold?style=for-the-badge)](#)
 [![Languages](https://img.shields.io/badge/Languages-Arabic%20%7C%20English%20%7C%20Russian-purple?style=for-the-badge)](#)
 
-*Ultra-fast Islamic platform with zero external animation libraries - Built for speed and Islamic values*
+_Ultra-fast Islamic platform with zero external animation libraries - Built for speed and Islamic values_
 
 </div>
 
@@ -20,6 +21,7 @@
 This blueprint demonstrates how to build a **lightning-fast** Islamic multimedia platform using **pure CSS animations** and **zero heavy dependencies**. Complete Islamic features with Hijri calendar, analytics dashboard, download capabilities, and advanced Khatma tracking.
 
 ### 🎯 Platform Features
+
 - **🎵 Audio Content**: Islamic audio content with download & speed control
 - **📅 Islamic Calendar**: Real-time Hijri date and prayer times
 - **📊 Analytics Dashboard**: View counts, download stats, engagement metrics
@@ -37,14 +39,14 @@ This blueprint demonstrates how to build a **lightning-fast** Islamic multimedia
 
 ### Core Technology Stack (100% Free)
 
-| Layer                    | Technology   | Version | Purpose                          | Cost | Why Chosen                                          |
-| ------------------------ | ------------ | ------- | -------------------------------- | ---- | --------------------------------------------------- |
-| **Frontend Framework**   | Next.js      | Latest  | React-based full-stack framework | FREE | Best performance, SEO, free hosting on Vercel       |
-| **Language**             | TypeScript   | Latest  | Type-safe JavaScript             | FREE | Reduces bugs, better development experience         |
-| **Styling**              | TailwindCSS  | Latest  | Utility-first CSS framework      | FREE | Rapid development, excellent RTL support            |
-| **Audio Storage**        | Google Drive | -       | Islamic audio content            | FREE | 15GB free storage per account                       |
-| **Deployment**           | Vercel       | -       | Global hosting platform          | FREE | Unlimited bandwidth, automatic SSL                  |
-| **Internationalization** | next-intl    | Latest  | Trilingual support               | FREE | Robust i18n with Arabic/RTL support                 |
+| Layer                    | Technology   | Version | Purpose                          | Cost | Why Chosen                                    |
+| ------------------------ | ------------ | ------- | -------------------------------- | ---- | --------------------------------------------- |
+| **Frontend Framework**   | Next.js      | Latest  | React-based full-stack framework | FREE | Best performance, SEO, free hosting on Vercel |
+| **Language**             | TypeScript   | Latest  | Type-safe JavaScript             | FREE | Reduces bugs, better development experience   |
+| **Styling**              | TailwindCSS  | Latest  | Utility-first CSS framework      | FREE | Rapid development, excellent RTL support      |
+| **Audio Storage**        | Google Drive | -       | Islamic audio content            | FREE | 15GB free storage per account                 |
+| **Deployment**           | Vercel       | -       | Global hosting platform          | FREE | Unlimited bandwidth, automatic SSL            |
+| **Internationalization** | next-intl    | Latest  | Trilingual support               | FREE | Robust i18n with Arabic/RTL support           |
 
 ### Specialized Free Libraries & APIs
 
@@ -54,27 +56,47 @@ This blueprint demonstrates how to build a **lightning-fast** Islamic multimedia
     "googleDrive": "Google Drive direct links",
     "purpose": "Audio content hosting and delivery",
     "cost": "FREE",
-    "features": ["15GB storage per account", "Download capabilities", "Speed controls", "Direct streaming"]
+    "features": [
+      "15GB storage per account",
+      "Download capabilities",
+      "Speed controls",
+      "Direct streaming"
+    ]
   },
   "calendar-integration": {
     "hijri": "Islamic-Calendar API (FREE)",
     "prayer": "Aladhan Prayer Times API (FREE)",
     "purpose": "Islamic calendar and prayer times",
     "cost": "FREE",
-    "features": ["Real-time Hijri dates", "Global prayer times", "Qibla direction", "Islamic events"]
+    "features": [
+      "Real-time Hijri dates",
+      "Global prayer times",
+      "Qibla direction",
+      "Islamic events"
+    ]
   },
   "analytics": {
     "tracking": "Browser localStorage + Google Analytics (FREE)",
     "engagement": "Custom view counters and metrics",
     "purpose": "Track content engagement without external dependencies",
     "cost": "FREE",
-    "features": ["View counts", "Download tracking", "Time spent", "Popular content"]
+    "features": [
+      "View counts",
+      "Download tracking",
+      "Time spent",
+      "Popular content"
+    ]
   },
   "email-service": {
     "provider": "EmailJS (FREE)",
     "purpose": "Frontend-only email sending",
     "cost": "FREE",
-    "features": ["Contact forms", "No backend required", "200 emails/month free", "Direct integration"]
+    "features": [
+      "Contact forms",
+      "No backend required",
+      "200 emails/month free",
+      "Direct integration"
+    ]
   },
   "fonts": {
     "arabic": "Amiri Quran (free Quranic font)",
@@ -105,20 +127,20 @@ export const FreeArchitecture = {
   prayerTimes: "Aladhan Prayer Times API (FREE)",
   analytics: "Browser localStorage + Google Analytics (FREE)",
   database: "Static JSON files + localStorage for user data (FREE)",
-  animations: "Pure CSS animations (NO heavy libraries)"
+  animations: "Pure CSS animations (NO heavy libraries)",
 };
 ```
 
-  ### 2. Embedding Audio
+### 2. Embedding Audio
 
 Google Drive doesn’t have a native audio player for embedding, but you can embed an audio file (e.g., MP3) using the same /preview endpoint, which may display a basic player in some browsers.
+
 <iframe src="https://drive.google.com/file/d/1MW0q6cVa-sZUA1qgauvyjgPt1bjAPCtE/preview" width="600" height="1000"></iframe>
 
 - Replace FILE_ID with the audio file’s ID.
 - The height can be smaller (e.g., 100) since audio players are compact.
 
-<iframe src="https://drive.google.com/file/d/1FmvVYhHYj1IXrydb9UICKLm2YkPrU7n0/preview" width="640" height="480" allow="autoplay" allowfullscreen></iframe>
----
+## <iframe src="https://drive.google.com/file/d/1FmvVYhHYj1IXrydb9UICKLm2YkPrU7n0/preview" width="640" height="480" allow="autoplay" allowfullscreen></iframe>
 
 ## 🕌 Quran API Integration (FREE Professional Service)
 
@@ -155,9 +177,9 @@ export interface Chapter {
   revelation_place: "makkah" | "madinah";
   revelation_order: number;
   bismillah_pre: boolean;
-  name_simple: string;        // "Al-Fatihah"
-  name_complex: string;       // "Al-Fātiḥah"
-  name_arabic: string;        // "الفاتحة"
+  name_simple: string; // "Al-Fatihah"
+  name_complex: string; // "Al-Fātiḥah"
+  name_arabic: string; // "الفاتحة"
   verses_count: number;
   pages: number[];
   translated_name: {
@@ -169,15 +191,15 @@ export interface Chapter {
 export interface Verse {
   id: number;
   verse_number: number;
-  verse_key: string;          // "1:1"
+  verse_key: string; // "1:1"
   hizb_number: number;
   rub_el_hizb_number: number;
   ruku_number: number;
   manzil_number: number;
   sajdah_number: number | null;
-  text_uthmani: string;       // Uthmani script
-  text_indopak: string;       // Indo-Pak script
-  text_imlaei: string;        // Modern Arabic script
+  text_uthmani: string; // Uthmani script
+  text_indopak: string; // Indo-Pak script
+  text_imlaei: string; // Modern Arabic script
   juz_number: number;
   page_number: number;
   translations?: Array<{
@@ -200,23 +222,27 @@ export interface Verse {
 // services/quran-audio.ts
 export class QuranAudioService {
   private baseUrl = "https://api.quran.com/api/v4";
-  
+
   // Get all available reciters (FREE)
   async getReciters(): Promise<Reciter[]> {
     const response = await fetch(`${this.baseUrl}/resources/recitations`);
     const data = await response.json();
     return data.recitations;
   }
-  
+
   // Get audio for specific verse with reciter
-  async getVerseAudio(chapterId: number, verseNumber: number, reciterId: number): Promise<string> {
-    const audioUrl = `https://verses.quran.com/${reciterId}/${chapterId}${verseNumber.toString().padStart(3, '0')}.mp3`;
+  async getVerseAudio(
+    chapterId: number,
+    verseNumber: number,
+    reciterId: number,
+  ): Promise<string> {
+    const audioUrl = `https://verses.quran.com/${reciterId}/${chapterId}${verseNumber.toString().padStart(3, "0")}.mp3`;
     return audioUrl;
   }
-  
+
   // Get full chapter audio
   async getChapterAudio(chapterId: number, reciterId: number): Promise<string> {
-    return `https://download.quranicaudio.com/quran/${reciterId}/${chapterId.toString().padStart(3, '0')}.mp3`;
+    return `https://download.quranicaudio.com/quran/${reciterId}/${chapterId.toString().padStart(3, "0")}.mp3`;
   }
 }
 
@@ -230,6 +256,7 @@ export interface Reciter {
   };
 }
 ```
+
 ### 📊 Analytics Dashboard Implementation
 
 ```typescript
@@ -270,13 +297,13 @@ export default function AnalyticsDashboard({ locale }: AnalyticsDashboardProps) 
     if (stored) {
       const data: ContentAnalytics[] = JSON.parse(stored);
       setAnalytics(data);
-      
+
       // Calculate totals
       const totalV = data.reduce((sum, item) => sum + item.views, 0);
       const totalD = data.reduce((sum, item) => sum + item.downloads, 0);
       setTotalViews(totalV);
       setTotalDownloads(totalD);
-      
+
       // Get top content
       const sorted = [...data].sort((a, b) => b.views - a.views).slice(0, 5);
       setTopContent(sorted);
@@ -287,9 +314,9 @@ export default function AnalyticsDashboard({ locale }: AnalyticsDashboardProps) 
   const trackView = (contentId: string, title: string, type: ContentAnalytics['type']) => {
     const stored = localStorage.getItem('contentAnalytics');
     const analytics: ContentAnalytics[] = stored ? JSON.parse(stored) : [];
-    
+
     const existingIndex = analytics.findIndex(item => item.contentId === contentId);
-    
+
     if (existingIndex >= 0) {
       analytics[existingIndex].views++;
       analytics[existingIndex].lastViewed = new Date();
@@ -305,7 +332,7 @@ export default function AnalyticsDashboard({ locale }: AnalyticsDashboardProps) 
         engagement: 0
       });
     }
-    
+
     localStorage.setItem('contentAnalytics', JSON.stringify(analytics));
   };
 
@@ -313,7 +340,7 @@ export default function AnalyticsDashboard({ locale }: AnalyticsDashboardProps) 
   const trackDownload = (contentId: string) => {
     const stored = localStorage.getItem('contentAnalytics');
     const analytics: ContentAnalytics[] = stored ? JSON.parse(stored) : [];
-    
+
     const existingIndex = analytics.findIndex(item => item.contentId === contentId);
     if (existingIndex >= 0) {
       analytics[existingIndex].downloads++;
@@ -385,8 +412,8 @@ export default function AnalyticsDashboard({ locale }: AnalyticsDashboardProps) 
                 key={range}
                 onClick={() => setTimeRange(range)}
                 className={`px-4 py-2 rounded-lg transition-colors ${
-                  timeRange === range 
-                    ? 'bg-emerald-600 text-white' 
+                  timeRange === range
+                    ? 'bg-emerald-600 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
               >
@@ -575,11 +602,11 @@ interface IslamicCalendarProps {
   longitude?: number;
 }
 
-export default function IslamicCalendar({ 
-  locale, 
+export default function IslamicCalendar({
+  locale,
   showPrayerTimes = true,
   latitude = 21.4225,  // Mecca default
-  longitude = 39.8262 
+  longitude = 39.8262
 }: IslamicCalendarProps) {
   const [hijriDate, setHijriDate] = useState<HijriDate | null>(null);
   const [prayerTimes, setPrayerTimes] = useState<PrayerTimes | null>(null);
@@ -618,10 +645,10 @@ export default function IslamicCalendar({
 
   const getNextPrayer = () => {
     if (!prayerTimes) return null;
-    
+
     const now = new Date();
     const currentTime = now.getHours() * 60 + now.getMinutes();
-    
+
     const prayers = [
       { name: 'Fajr', time: prayerTimes.timings.Fajr },
       { name: 'Sunrise', time: prayerTimes.timings.Sunrise },
@@ -634,12 +661,12 @@ export default function IslamicCalendar({
     for (const prayer of prayers) {
       const [hours, minutes] = prayer.time.split(':').map(Number);
       const prayerTime = hours * 60 + minutes;
-      
+
       if (prayerTime > currentTime) {
         return prayer;
       }
     }
-    
+
     // If no prayer found for today, return Fajr for tomorrow
     return prayers[0];
   };
@@ -718,7 +745,7 @@ export default function IslamicCalendar({
             <div className="mt-3 text-sm opacity-75">
               {locale === 'ar' ? hijriDate.hijri.weekday.ar : hijriDate.hijri.weekday.en}
             </div>
-            
+
             {hijriDate.hijri.holidays && hijriDate.hijri.holidays.length > 0 && (
               <div className="mt-4 p-3 bg-white bg-opacity-20 rounded-lg">
                 <div className="text-sm font-medium">🌙 {hijriDate.hijri.holidays[0]}</div>
@@ -732,7 +759,7 @@ export default function IslamicCalendar({
       {showPrayerTimes && prayerTimes && (
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">{texts[locale].prayerTimes}</h3>
-          
+
           {/* Next Prayer Highlight */}
           {nextPrayer && (
             <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-6">
@@ -754,7 +781,7 @@ export default function IslamicCalendar({
 
           {/* All Prayer Times */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {Object.entries(prayerTimes.timings).filter(([name]) => 
+            {Object.entries(prayerTimes.timings).filter(([name]) =>
               ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].includes(name)
             ).map(([name, time]) => (
               <div key={name} className="text-center p-3 bg-gray-50 rounded-lg">
@@ -804,19 +831,19 @@ export default function QuranReader({ locale, initialChapter = 1, showTranslatio
   const [verses, setVerses] = useState<Verse[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
-  
+
   // Load all chapters (one-time API call)
   useEffect(() => {
     loadChapters();
   }, []);
-  
+
   // Load verses when chapter changes
   useEffect(() => {
     if (currentChapter) {
       loadVerses(currentChapter);
     }
   }, [currentChapter, locale]);
-  
+
   const loadChapters = async () => {
     try {
       const response = await fetch('https://api.quran.com/api/v4/chapters?language=' + locale);
@@ -826,7 +853,7 @@ export default function QuranReader({ locale, initialChapter = 1, showTranslatio
       console.error('Error loading chapters:', error);
     }
   };
-  
+
   const loadVerses = async (chapterId: number) => {
     setLoading(true);
     try {
@@ -836,7 +863,7 @@ export default function QuranReader({ locale, initialChapter = 1, showTranslatio
         en: '&translations=131', // English - Sahih International
         ru: '&translations=75'   // Russian - Elmir Kuliev
       };
-      
+
       const translationParam = translationIds[locale];
       const response = await fetch(`https://api.quran.com/api/v4/verses/by_chapter/${chapterId}?language=${locale}${translationParam}&audio=7`); // Audio from Mishary Alafasy (ID: 7)
       const data = await response.json();
@@ -847,19 +874,19 @@ export default function QuranReader({ locale, initialChapter = 1, showTranslatio
       setLoading(false);
     }
   };
-  
+
   const playVerseAudio = async (verse: Verse) => {
     if (currentAudio) {
       currentAudio.pause();
     }
-    
+
     // Construct audio URL (free from Quran API)
     const audioUrl = `https://verses.quran.com/7/${currentChapter}${verse.verse_number.toString().padStart(3, '0')}.mp3`;
     const audio = new Audio(audioUrl);
-    
+
     audio.play();
     setCurrentAudio(audio);
-    
+
     // Auto-scroll to next verse when audio ends
     audio.onended = () => {
       const nextVerse = verses.find(v => v.verse_number === verse.verse_number + 1);
@@ -868,30 +895,30 @@ export default function QuranReader({ locale, initialChapter = 1, showTranslatio
       }
     };
   };
-  
+
   const currentChapterInfo = chapters.find(ch => ch.id === currentChapter);
-  
+
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">
-            {locale === 'ar' ? 'جاري تحميل القرآن الكريم...' : 
-             locale === 'en' ? 'Loading the Holy Quran...' : 
+            {locale === 'ar' ? 'جاري تحميل القرآن الكريم...' :
+             locale === 'en' ? 'Loading the Holy Quran...' :
              'Загрузка Священного Корана...'}
           </p>
         </div>
       </div>
     );
   }
-  
+
   return (
     <div className="max-w-4xl mx-auto p-6" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Chapter Navigation */}
       <div className="mb-8">
-        <select 
-          value={currentChapter} 
+        <select
+          value={currentChapter}
           onChange={(e) => setCurrentChapter(Number(e.target.value))}
           className="w-full p-3 border border-gray-300 rounded-lg text-lg font-medium"
         >
@@ -903,7 +930,7 @@ export default function QuranReader({ locale, initialChapter = 1, showTranslatio
           ))}
         </select>
       </div>
-      
+
       {/* Chapter Header */}
       {currentChapterInfo && (
         <div className="text-center mb-8 p-6 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl">
@@ -922,7 +949,7 @@ export default function QuranReader({ locale, initialChapter = 1, showTranslatio
           )}
         </div>
       )}
-      
+
       {/* Verses */}
       <div className="space-y-6">
         {verses.map((verse) => (
@@ -934,7 +961,7 @@ export default function QuranReader({ locale, initialChapter = 1, showTranslatio
                  locale === 'en' ? `Verse ${verse.verse_number}` :
                  `Аят ${verse.verse_number}`}
               </span>
-              
+
               {enableAudio && (
                 <button
                   onClick={() => playVerseAudio(verse)}
@@ -945,14 +972,14 @@ export default function QuranReader({ locale, initialChapter = 1, showTranslatio
                 </button>
               )}
             </div>
-            
+
             {/* Arabic Text */}
             <div className="text-right mb-4">
               <p className="text-2xl leading-loose font-arabic text-gray-800" style={{ fontFamily: 'Amiri Quran, serif' }}>
                 {verse.text_uthmani}
               </p>
             </div>
-            
+
             {/* Translation */}
             {showTranslation && verse.translations && verse.translations.length > 0 && (
               <div className="border-t pt-4">
@@ -994,17 +1021,17 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
   const [gameData, setGameData] = useState<any[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [showResult, setShowResult] = useState(false);
-  
+
   useEffect(() => {
     loadChapterVerses();
   }, [chapter]);
-  
+
   useEffect(() => {
     if (verses.length > 0) {
       generateGameData();
     }
   }, [verses, gameType]);
-  
+
   const loadChapterVerses = async () => {
     try {
       const response = await fetch(`https://api.quran.com/api/v4/verses/by_chapter/${chapter.id}?language=${locale}`);
@@ -1014,10 +1041,10 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
       console.error('Error loading verses:', error);
     }
   };
-  
+
   const generateGameData = () => {
     const questions: any[] = [];
-    
+
     switch (gameType) {
       case 'fill-blank':
         verses.forEach(verse => {
@@ -1027,17 +1054,17 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
             const randomIndex = Math.floor(Math.random() * words.length);
             const correctAnswer = words[randomIndex];
             words[randomIndex] = '____';
-            
+
             // Generate wrong answers
             const otherWords = verses
               .filter(v => v.id !== verse.id)
               .flatMap(v => v.text_uthmani.split(' '))
               .filter(word => word !== correctAnswer);
-            
+
             const wrongAnswers = otherWords
               .sort(() => 0.5 - Math.random())
               .slice(0, 3);
-            
+
             questions.push({
               question: words.join(' '),
               correctAnswer,
@@ -1047,14 +1074,14 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
           }
         });
         break;
-        
+
       case 'match-pairs':
         verses.forEach(verse => {
           const words = verse.text_uthmani.split(' ');
           if (words.length >= 6) {
             const firstHalf = words.slice(0, Math.floor(words.length / 2)).join(' ');
             const secondHalf = words.slice(Math.floor(words.length / 2)).join(' ');
-            
+
             questions.push({
               question: firstHalf,
               correctAnswer: secondHalf,
@@ -1063,11 +1090,11 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
           }
         });
         break;
-        
+
       case 'sequence-order':
         const selectedVerses = verses.slice(0, 5);
         const shuffledVerses = [...selectedVerses].sort(() => 0.5 - Math.random());
-        
+
         questions.push({
           question: 'Arrange these verses in the correct order:',
           verses: shuffledVerses,
@@ -1075,20 +1102,20 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
         });
         break;
     }
-    
+
     setGameData(questions);
     setCurrentQuestion(0);
     setScore(0);
   };
-  
+
   const handleAnswer = (answer: string) => {
     setSelectedAnswer(answer);
     setShowResult(true);
-    
+
     if (answer === gameData[currentQuestion].correctAnswer) {
       setScore(score + 1);
     }
-    
+
     setTimeout(() => {
       if (currentQuestion < gameData.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
@@ -1100,7 +1127,7 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
       }
     }, 2000);
   };
-  
+
   if (gameData.length === 0) {
     return (
       <div className="text-center p-8">
@@ -1113,9 +1140,9 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
       </div>
     );
   }
-  
+
   const currentQ = gameData[currentQuestion];
-  
+
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg">
       {/* Game Header */}
@@ -1138,7 +1165,7 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
           </span>
         </div>
       </div>
-      
+
       {/* Question */}
       <div className="mb-8">
         <div className="bg-emerald-50 p-6 rounded-lg mb-6">
@@ -1153,7 +1180,7 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
             </p>
           )}
         </div>
-        
+
         {/* Answer Options */}
         {gameType === 'fill-blank' && (
           <div className="grid grid-cols-2 gap-4">
@@ -1178,7 +1205,7 @@ export default function MemorizationGame({ locale, chapter, gameType }: Memoriza
           </div>
         )}
       </div>
-      
+
       {/* Progress Bar */}
       <div className="w-full bg-gray-200 rounded-full h-2">
         <div
@@ -1221,12 +1248,12 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
   const [khatmaProgress, setKhatmaProgress] = useState<KhatmaProgress | null>(null);
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [showNewKhatma, setShowNewKhatma] = useState(false);
-  
+
   useEffect(() => {
     loadKhatmaProgress();
     loadChapters();
   }, []);
-  
+
   const loadKhatmaProgress = () => {
     const saved = localStorage.getItem('khatma_progress');
     if (saved) {
@@ -1237,7 +1264,7 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
       setKhatmaProgress(progress);
     }
   };
-  
+
   const loadChapters = async () => {
     try {
       const response = await fetch('https://api.quran.com/api/v4/chapters?language=' + locale);
@@ -1247,12 +1274,12 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
       console.error('Error loading chapters:', error);
     }
   };
-  
+
   const startNewKhatma = (targetDays: number) => {
     const startDate = new Date();
     const targetDate = new Date();
     targetDate.setDate(startDate.getDate() + targetDays);
-    
+
     const newKhatma: KhatmaProgress = {
       id: Date.now().toString(),
       startDate,
@@ -1265,49 +1292,49 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
       streak: 0,
       lastReadDate: null
     };
-    
+
     setKhatmaProgress(newKhatma);
     localStorage.setItem('khatma_progress', JSON.stringify(newKhatma));
     setShowNewKhatma(false);
   };
-  
+
   const markChapterComplete = (chapterId: number) => {
     if (!khatmaProgress) return;
-    
+
     const today = new Date();
-    const isConsecutiveDay = khatmaProgress.lastReadDate && 
+    const isConsecutiveDay = khatmaProgress.lastReadDate &&
       Math.abs(today.getTime() - khatmaProgress.lastReadDate.getTime()) <= 24 * 60 * 60 * 1000;
-    
+
     const updatedProgress = {
       ...khatmaProgress,
       chaptersCompleted: [...khatmaProgress.chaptersCompleted, chapterId],
       lastReadDate: today,
       streak: isConsecutiveDay ? khatmaProgress.streak + 1 : 1
     };
-    
+
     setKhatmaProgress(updatedProgress);
     localStorage.setItem('khatma_progress', JSON.stringify(updatedProgress));
   };
-  
+
   const getProgressPercentage = () => {
     if (!khatmaProgress) return 0;
     return (khatmaProgress.chaptersCompleted.length / 114) * 100;
   };
-  
+
   const getDaysRemaining = () => {
     if (!khatmaProgress) return 0;
     const today = new Date();
     const diffTime = khatmaProgress.targetDate.getTime() - today.getTime();
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   };
-  
+
   const getCompletionStatus = () => {
     const percentage = getProgressPercentage();
     const daysRemaining = getDaysRemaining();
     const totalDays = Math.ceil((khatmaProgress!.targetDate.getTime() - khatmaProgress!.startDate.getTime()) / (1000 * 60 * 60 * 24));
     const daysPassed = totalDays - daysRemaining;
     const expectedProgress = (daysPassed / totalDays) * 100;
-    
+
     if (percentage >= expectedProgress) {
       return { status: 'on-track', color: 'text-green-600' };
     } else if (percentage >= expectedProgress - 10) {
@@ -1316,7 +1343,7 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
       return { status: 'behind', color: 'text-red-600' };
     }
   };
-  
+
   if (!khatmaProgress) {
     return (
       <div className="max-w-2xl mx-auto p-6">
@@ -1331,7 +1358,7 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
              locale === 'en' ? 'Start your journey to complete the Holy Quran' :
              'Начните свой путь к завершению Священного Корана'}
           </p>
-          
+
           <div className="grid grid-cols-3 gap-4 mb-6">
             {[30, 60, 90].map(days => (
               <button
@@ -1353,7 +1380,7 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
               </button>
             ))}
           </div>
-          
+
           <button
             onClick={() => setShowNewKhatma(true)}
             className="text-emerald-600 hover:text-emerald-800 underline"
@@ -1366,11 +1393,11 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
       </div>
     );
   }
-  
+
   const progressPercentage = getProgressPercentage();
   const daysRemaining = getDaysRemaining();
   const completionStatus = getCompletionStatus();
-  
+
   return (
     <div className="max-w-4xl mx-auto p-6" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Progress Overview */}
@@ -1412,7 +1439,7 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
                'Завершено'}
             </p>
           </div>
-          
+
           {/* Stats */}
           <div className="space-y-4">
             <div>
@@ -1436,7 +1463,7 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
               </div>
             </div>
           </div>
-          
+
           {/* Time Remaining */}
           <div className="space-y-4">
             <div>
@@ -1462,7 +1489,7 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
           </div>
         </div>
       </div>
-      
+
       {/* Chapter Progress */}
       <div className="bg-white rounded-xl shadow-lg p-6">
         <h3 className="text-xl font-bold text-gray-800 mb-6">
@@ -1470,7 +1497,7 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
            locale === 'en' ? 'Chapter Progress' :
            'Прогресс по сурам'}
         </h3>
-        
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {chapters.map(chapter => (
             <div
@@ -1504,33 +1531,35 @@ export default function KhatmaTracker({ locale }: KhatmaTrackerProps) {
 
 ### 1. 🌍 Trilingual Support (Arabic, English, Russian)
 
-####  Internationalization Configuration
+#### Internationalization Configuration
+
 ```typescript
 // middleware.ts - Extended for Russian support
-import createMiddleware from 'next-intl/middleware';
+import createMiddleware from "next-intl/middleware";
 
 export default createMiddleware({
-  locales: ['ar', 'en', 'ru'],
-  defaultLocale: 'ar',
-  localePrefix: 'always',
+  locales: ["ar", "en", "ru"],
+  defaultLocale: "ar",
+  localePrefix: "always",
   domains: [
     {
-      domain: 'quran.com',
-      defaultLocale: 'ar'
+      domain: "quran.com",
+      defaultLocale: "ar",
     },
     {
-      domain: 'quran.ru',
-      defaultLocale: 'ru'
-    }
-  ]
+      domain: "quran.ru",
+      defaultLocale: "ru",
+    },
+  ],
 });
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };
 ```
 
 #### Language Files Structure
+
 ```json
 // locales/ru.json - Complete Russian translations
 {
@@ -1608,6 +1637,7 @@ export const config = {
 ```
 
 #### RTL/LTR Layout Management
+
 ```typescript
 // components/layout/LocaleLayout.tsx
 interface LocaleLayoutProps {
@@ -1617,9 +1647,9 @@ interface LocaleLayoutProps {
 
 export default function LocaleLayout({ children, locale }: LocaleLayoutProps) {
   const isRTL = locale === 'ar';
-  
+
   return (
-    <div 
+    <div
       dir={isRTL ? 'rtl' : 'ltr'}
       className={`min-h-screen ${isRTL ? 'font-arabic' : locale === 'ru' ? 'font-russian' : 'font-english'}`}
     >
@@ -1627,19 +1657,19 @@ export default function LocaleLayout({ children, locale }: LocaleLayoutProps) {
         :root {
           --text-direction: ${isRTL ? 'rtl' : 'ltr'};
         }
-        
+
         .font-arabic {
           font-family: 'Amiri Quran', 'Cairo', sans-serif;
         }
-        
+
         .font-english {
           font-family: 'Roboto', sans-serif;
         }
-        
+
         .font-russian {
           font-family: 'Nunito Sans', 'Roboto', sans-serif;
         }
-        
+
         .quran-text {
           font-family: 'Amiri Quran', serif;
           line-height: 2.5;
@@ -1655,10 +1685,10 @@ export default function LocaleLayout({ children, locale }: LocaleLayoutProps) {
 ### 3. 🎵 Google Drive Audio Integration (FREE)
 
 #### Google Drive Audio Service
+
 ```typescript
 // services/google-drive-audio.ts
 export class GoogleDriveAudioService {
-  
   // Convert Google Drive share link to direct audio link
   static getDirectAudioUrl(shareUrl: string): string {
     // Convert: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
@@ -1670,25 +1700,25 @@ export class GoogleDriveAudioService {
     }
     return shareUrl;
   }
-  
+
   // Get audio metadata (requires Google Drive API - free tier)
   static async getAudioMetadata(fileId: string): Promise<AudioMetadata | null> {
     try {
       const response = await fetch(
-        `https://www.googleapis.com/drive/v3/files/${fileId}?key=${process.env.NEXT_PUBLIC_GOOGLE_DRIVE_API_KEY}&fields=id,name,size,mimeType,createdTime`
+        `https://www.googleapis.com/drive/v3/files/${fileId}?key=${process.env.NEXT_PUBLIC_GOOGLE_DRIVE_API_KEY}&fields=id,name,size,mimeType,createdTime`,
       );
       const data = await response.json();
-      
+
       return {
         id: data.id,
         name: data.name,
         size: parseInt(data.size),
         mimeType: data.mimeType,
         duration: null, // Would need additional processing
-        createdTime: data.createdTime
+        createdTime: data.createdTime,
       };
     } catch (error) {
-      console.error('Error fetching audio metadata:', error);
+      console.error("Error fetching audio metadata:", error);
       return null;
     }
   }
@@ -1705,6 +1735,7 @@ export interface AudioMetadata {
 ```
 
 #### Audio Player with Google Drive Support
+
 ```typescript
 // components/audio/AudioPlayer.tsx
 'use client';
@@ -1721,13 +1752,13 @@ interface AudioPlayerProps {
   showDownload?: boolean;
 }
 
-export default function AudioPlayer({ 
-  audioUrl, 
-  title, 
-  reciter, 
-  locale, 
-  autoplay = false, 
-  showDownload = true 
+export default function AudioPlayer({
+  audioUrl,
+  title,
+  reciter,
+  locale,
+  autoplay = false,
+  showDownload = true
 }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -1735,23 +1766,23 @@ export default function AudioPlayer({
   const [duration, setDuration] = useState(0);
   const [loading, setLoading] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
-  
+
   const directUrl = GoogleDriveAudioService.getDirectAudioUrl(audioUrl);
-  
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    
+
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
     const handleLoadStart = () => setLoading(true);
     const handleCanPlay = () => setLoading(false);
-    
+
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
     audio.addEventListener('loadstart', handleLoadStart);
     audio.addEventListener('canplay', handleCanPlay);
-    
+
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
@@ -1759,11 +1790,11 @@ export default function AudioPlayer({
       audio.removeEventListener('canplay', handleCanPlay);
     };
   }, []);
-  
+
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    
+
     if (isPlaying) {
       audio.pause();
     } else {
@@ -1771,30 +1802,30 @@ export default function AudioPlayer({
     }
     setIsPlaying(!isPlaying);
   };
-  
+
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
     if (!audio) return;
-    
+
     const newTime = (parseFloat(e.target.value) / 100) * duration;
     audio.currentTime = newTime;
     setCurrentTime(newTime);
   };
-  
+
   const handlePlaybackRateChange = (rate: number) => {
     const audio = audioRef.current;
     if (!audio) return;
-    
+
     audio.playbackRate = rate;
     setPlaybackRate(rate);
   };
-  
+
   const formatTime = (time: number): string => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
-  
+
   const downloadAudio = () => {
     const link = document.createElement('a');
     link.href = directUrl;
@@ -1803,7 +1834,7 @@ export default function AudioPlayer({
     link.click();
     document.body.removeChild(link);
   };
-  
+
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <audio
@@ -1815,7 +1846,7 @@ export default function AudioPlayer({
         onEnded={() => setIsPlaying(false)}
         preload="metadata"
       />
-      
+
       {/* Audio Info */}
       <div className="mb-6 text-center">
         <h3 className="text-lg font-bold text-gray-800 mb-1 line-clamp-2">
@@ -1829,7 +1860,7 @@ export default function AudioPlayer({
           </p>
         )}
       </div>
-      
+
       {/* Progress Bar */}
       <div className="mb-4">
         <input
@@ -1845,7 +1876,7 @@ export default function AudioPlayer({
           <span>{formatTime(duration)}</span>
         </div>
       </div>
-      
+
       {/* Controls */}
       <div className="flex items-center justify-center gap-4 mb-4">
         {/* Playback Speed */}
@@ -1864,7 +1895,7 @@ export default function AudioPlayer({
             </button>
           ))}
         </div>
-        
+
         {/* Play/Pause Button */}
         <button
           onClick={togglePlay}
@@ -1879,7 +1910,7 @@ export default function AudioPlayer({
             <span className="text-xl">▶</span>
           )}
         </button>
-        
+
         {/* Download Button */}
         {showDownload && (
           <button
@@ -1891,7 +1922,7 @@ export default function AudioPlayer({
           </button>
         )}
       </div>
-      
+
       {/* Audio Quality Info */}
       <div className="text-xs text-gray-500 text-center">
         {locale === 'ar' ? 'جودة عالية - مجاني من Google Drive' :
@@ -1904,6 +1935,7 @@ export default function AudioPlayer({
 ```
 
 #### Audio Content Management
+
 ```typescript
 // data/audio-content.ts
 export interface AudioContent {
@@ -1914,51 +1946,52 @@ export interface AudioContent {
     arabicName?: string;
     bio: string;
   };
-  type: 'full-quran' | 'surah' | 'juz' | 'duas';
+  type: "full-quran" | "surah" | "juz" | "duas";
   googleDriveUrl: string;
   duration?: number; // in seconds
-  language: 'ar' | 'en' | 'ru';
+  language: "ar" | "en" | "ru";
   tags: string[];
-  quality: 'high' | 'medium' | 'low';
+  quality: "high" | "medium" | "low";
   fileSize?: number; // in MB
 }
 
 // Free Google Drive audio content examples
 export const FreeAudioContent: AudioContent[] = [
   {
-    id: 'mishary-full-quran',
-    title: 'القرآن الكريم كاملاً',
+    id: "mishary-full-quran",
+    title: "القرآن الكريم كاملاً",
     reciter: {
-      name: 'Mishary Rashid Alafasy',
-      arabicName: 'مشاري راشد العفاسي',
-      bio: 'Famous Kuwaiti Quran reciter known for his beautiful voice'
+      name: "Mishary Rashid Alafasy",
+      arabicName: "مشاري راشد العفاسي",
+      bio: "Famous Kuwaiti Quran reciter known for his beautiful voice",
     },
-    type: 'full-quran',
-    googleDriveUrl: 'https://drive.google.com/file/d/EXAMPLE_FILE_ID/view',
+    type: "full-quran",
+    googleDriveUrl: "https://drive.google.com/file/d/EXAMPLE_FILE_ID/view",
     duration: 18000, // 5 hours
-    language: 'ar',
-    tags: ['quran', 'complete', 'mishary'],
-    quality: 'high',
-    fileSize: 500
+    language: "ar",
+    tags: ["quran", "complete", "mishary"],
+    quality: "high",
+    fileSize: 500,
   },
   {
-    id: 'al-fatihah-multiple-reciters',
-    title: 'سورة الفاتحة - قراء متعددون',
+    id: "al-fatihah-multiple-reciters",
+    title: "سورة الفاتحة - قراء متعددون",
     reciter: {
-      name: 'Various Reciters',
-      arabicName: 'قراء متعددون',
-      bio: 'Collection of Al-Fatiha recitations by different famous reciters'
+      name: "Various Reciters",
+      arabicName: "قراء متعددون",
+      bio: "Collection of Al-Fatiha recitations by different famous reciters",
     },
-    type: 'surah',
-    googleDriveUrl: 'https://drive.google.com/file/d/EXAMPLE_FILE_ID_2/view',
+    type: "surah",
+    googleDriveUrl: "https://drive.google.com/file/d/EXAMPLE_FILE_ID_2/view",
     duration: 300, // 5 minutes
-    language: 'ar',
-    tags: ['al-fatihah', 'various', 'short'],
-    quality: 'high',
-    fileSize: 12
-  }
+    language: "ar",
+    tags: ["al-fatihah", "various", "short"],
+    quality: "high",
+    fileSize: 12,
+  },
 ];
 ```
+
 ### 4. 🌙 Light/Dark Theme Implementation
 
 ```typescript
@@ -1979,7 +2012,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setMounted(true);
     const savedTheme = localStorage.getItem('theme') as Theme;
@@ -1989,22 +2022,22 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setTheme('dark');
     }
   }, []);
-  
+
   useEffect(() => {
     if (mounted) {
       localStorage.setItem('theme', theme);
       document.documentElement.className = theme;
     }
   }, [theme, mounted]);
-  
+
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
-  
+
   if (!mounted) {
     return <>{children}</>;
   }
-  
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
@@ -2022,6 +2055,7 @@ export const useTheme = () => {
 ```
 
 #### Islamic-themed Dark/Light Mode CSS
+
 ```css
 /* styles/themes.css */
 :root {
@@ -2055,7 +2089,7 @@ export const useTheme = () => {
   color: var(--text-primary);
   background: var(--bg-accent);
   border: 1px solid var(--border-color);
-  font-family: 'Amiri Quran', serif;
+  font-family: "Amiri Quran", serif;
 }
 
 .quran-verse {
@@ -2078,7 +2112,9 @@ export const useTheme = () => {
 ### 📅 Phase 1: Foundation Setup (Weeks 1-2)
 
 #### Week 1: Project Initialization
+
 - [ ] **Day 1-2**: Set up Next.js 15 project with TypeScript
+
 ```bash
 npx create-next-app@latest rosokh --typescript --tailwind --app
 cd rosokh
@@ -2086,6 +2122,7 @@ npm install next-intl lucide-react
 ```
 
 - [ ] **Day 3-4**: Configure trilingual support (Arabic, English, Russian)
+
   - Set up `next-intl` configuration
   - Create translation files for all three languages
   - Implement RTL/LTR layout switching
@@ -2098,7 +2135,9 @@ npm install next-intl lucide-react
   - Configure Arabic fonts (Amiri Quran, Cairo)
 
 #### Week 2: Core Architecture
+
 - [ ] **Day 8-10**: Quran API integration setup
+
   - Register for free Quran API access
   - Create API service layer
   - Implement type definitions
@@ -2113,7 +2152,9 @@ npm install next-intl lucide-react
 ### 📅 Phase 2: Quran Features (Weeks 3-4)
 
 #### Week 3: Quran Reader Implementation
+
 - [ ] **Day 15-17**: Quran text display
+
   - Create QuranReader component
   - Implement chapter/verse navigation
   - Add Arabic text with proper fonts
@@ -2126,7 +2167,9 @@ npm install next-intl lucide-react
   - Implement playback controls (speed, seek, repeat)
 
 #### Week 4: Interactive Features
+
 - [ ] **Day 22-24**: Memorization games
+
   - Create fill-in-the-blank game
   - Implement matching pairs game
   - Add sequence ordering game
@@ -2141,7 +2184,9 @@ npm install next-intl lucide-react
 ### 📅 Phase 3: Multimedia Integration (Weeks 5-6)
 
 #### Week 5: YouTube Integration
+
 - [ ] **Day 29-31**: YouTube API setup
+
   - Register for YouTube Data API (free)
   - Create video service layer
   - Implement video search and categorization
@@ -2154,7 +2199,9 @@ npm install next-intl lucide-react
   - Add video playlists and recommendations
 
 #### Week 6: Google Drive Audio
+
 - [ ] **Day 36-38**: Google Drive integration
+
   - Set up Google Drive API access
   - Create audio file management system
   - Implement direct download links
@@ -2169,7 +2216,9 @@ npm install next-intl lucide-react
 ### 📅 Phase 4: Optimization & Deployment (Weeks 7-8)
 
 #### Week 7: Performance & Testing
+
 - [ ] **Day 43-45**: Performance optimization
+
   - Implement lazy loading for images/videos
   - Optimize bundle size and loading times
   - Add service worker for offline functionality
@@ -2182,7 +2231,9 @@ npm install next-intl lucide-react
   - User experience improvements
 
 #### Week 8: Deployment & Launch
+
 - [ ] **Day 50-52**: Production deployment
+
   - Set up Vercel deployment
   - Configure environment variables
   - Set up custom domain (optional)
@@ -2199,6 +2250,7 @@ npm install next-intl lucide-react
 ## 🔧 Development Setup Guide
 
 ### Prerequisites
+
 ```bash
 # Required software (all FREE)
 - Node.js 18+ (https://nodejs.org)
@@ -2208,6 +2260,7 @@ npm install next-intl lucide-react
 ```
 
 ### Quick Start Commands
+
 ```bash
 # 1. Clone or create new project
 npx create-next-app@latest islamic-platform --typescript --tailwind --app
@@ -2229,12 +2282,14 @@ npm run dev
 ### Free API Keys Setup
 
 #### 1. Quran API (No registration required)
+
 ```typescript
 // No API key needed - completely free
-const QURAN_API_BASE = 'https://api.quran.com/api/v4';
+const QURAN_API_BASE = "https://api.quran.com/api/v4";
 ```
 
 #### 2. YouTube Data API (Free - 10,000 requests/day)
+
 ```bash
 # Get free API key from Google Cloud Console
 # 1. Go to: https://console.cloud.google.com
@@ -2245,6 +2300,7 @@ const QURAN_API_BASE = 'https://api.quran.com/api/v4';
 ```
 
 #### 3. Google Drive API (Free - 1 billion requests/day)
+
 ```bash
 # Optional - for advanced audio metadata
 # Follow same process as YouTube API
@@ -2256,6 +2312,7 @@ const QURAN_API_BASE = 'https://api.quran.com/api/v4';
 ## 🔄 Content Management Strategy
 
 ### Static Content Structure
+
 ```
 public/
 ├── audio/
@@ -2272,41 +2329,43 @@ public/
     └── video-playlists.json
 ```
 
-
 ## 🔒 Security & Best Practices
 
 ### API Security
+
 ```typescript
 // Rate limiting for API calls
 export const rateLimiter = {
   youtube: {
     maxRequestsPerDay: 10000,
-    requestsPerMinute: 100
+    requestsPerMinute: 100,
   },
   quran: {
     unlimited: true, // No rate limits
-    caching: '24 hours'
-  }
+    caching: "24 hours",
+  },
 };
 ```
 
 ### Content Security Policy
+
 ```typescript
 // next.config.js
 const nextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'Content-Security-Policy',
-            value: "default-src 'self'; media-src 'self' https://drive.google.com https://www.youtube.com; frame-src https://www.youtube.com;"
-          }
-        ]
-      }
+            key: "Content-Security-Policy",
+            value:
+              "default-src 'self'; media-src 'self' https://drive.google.com https://www.youtube.com; frame-src https://www.youtube.com;",
+          },
+        ],
+      },
     ];
-  }
+  },
 };
 ```
 
@@ -2315,6 +2374,7 @@ const nextConfig = {
 ## 🤝 Community & Support
 
 ### Contributing Guidelines
+
 - Follow Islamic content guidelines
 - Ensure accuracy of Quranic text and translations
 - Test multilingual functionality
@@ -2322,6 +2382,7 @@ const nextConfig = {
 - Document all API integrations
 
 ### Islamic Content Standards
+
 - Verify authenticity of all Quranic text
 - Use certified translations
 - Include proper Arabic diacritics
@@ -2332,17 +2393,20 @@ const nextConfig = {
 ## 📚 Resources & References
 
 ### Free Islamic APIs
+
 - **Quran API**: https://quran.com/api - Complete Quran data
 - **Prayer Times API**: https://aladhan.com/prayer-times-api
 - **Islamic Calendar API**: https://api.aladhan.com/calendar
 - **Hadith API**: https://alquran.cloud/api
 
 ### Typography Resources
+
 - **Amiri Quran Font**: https://fonts.google.com/specimen/Amiri+Quran
 - **Cairo Font**: https://fonts.google.com/specimen/Cairo
 - **Arabic Typography Guide**: https://arabictypography.com
 
 ### Islamic Design Resources
+
 - **Islamic Art Patterns**: https://archive.org/details/islamic-art
 - **Calligraphy Resources**: https://www.calligraphy-art.com
 - **Color Palettes**: Islamic green (#059669), Gold (#F59E0B)
@@ -2353,22 +2417,23 @@ const nextConfig = {
 
 ## 🕌 Building Technology for the Ummah
 
-*"And it is He who created the heavens and earth in truth. And the day He says, 'Be,' and it is, His word is the truth."* - **Quran 6:73**
+_"And it is He who created the heavens and earth in truth. And the day He says, 'Be,' and it is, His word is the truth."_ - **Quran 6:73**
 
 ### 🎯 Project Goals Achieved
+
 ✅ **100% Free Architecture** - No paid services required  
 ✅ **Trilingual Support** - Arabic, English, Russian  
 ✅ **Complete Quran Integration** - Text, audio, translations  
 ✅ **Interactive Learning** - Games, tracking, progress  
 ✅ **Multimedia Content** - YouTube videos, Google Drive audio  
 ✅ **Mobile-First Design** - Responsive, accessible, fast  
-✅ **Zero Maintenance** - Static deployment, automatic updates  
+✅ **Zero Maintenance** - Static deployment, automatic updates
 
 **May this platform serve the global Muslim community and facilitate learning of our beloved Quran**
 
 [![Live Demo](https://img.shields.io/badge/🌟_Inspired_by-Hurass_Al--Thughur-green?style=for-the-badge)](https://hurass-althughur.vercel.app)
 [![GitHub](https://img.shields.io/badge/📚_Source_Code-GitHub-black?style=for-the-badge)](https://github.com/MMansy19/hurass)
 
-*Built with ❤️ for the Muslim community worldwide*
+_Built with ❤️ for the Muslim community worldwide_
 
 </div>

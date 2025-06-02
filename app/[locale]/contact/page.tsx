@@ -1,15 +1,13 @@
-import { getMessages } from '@/utils/translations';
-import ContactClient from './ContactClient';
+import { getMessages } from "@/utils/translations";
+import ContactClient from "./ContactClient";
 
 export default async function ContactPage({
-  params
+  params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const messages = await getMessages(locale);
 
-  return (
-    <ContactClient locale={locale} messages={messages} />
-  );
+  return <ContactClient locale={locale} messages={messages} />;
 }
