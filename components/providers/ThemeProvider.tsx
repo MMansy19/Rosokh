@@ -14,14 +14,16 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
     setMounted(true);
     // Get theme from localStorage or system preference
     const savedTheme = localStorage.getItem('rosokh-theme') as Theme;
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const initialTheme = savedTheme || systemTheme;
-    setTheme(initialTheme);
+    
+    if (initialTheme !== theme) {
+      setTheme(initialTheme);
+    }
     applyTheme(initialTheme);
   }, []);
   const applyTheme = (newTheme: Theme) => {
@@ -36,19 +38,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
     // Light mode is the default, no attribute needed
   };
-
   const toggleTheme = () => {
+    if (!mounted) return;
+    
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('rosokh-theme', newTheme);
     applyTheme(newTheme);
   };
-
-  // Prevent hydration mismatch
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}

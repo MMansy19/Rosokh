@@ -43,8 +43,14 @@ const languages = [
 export function Header({ locale, messages }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const currentLang = languages.find(lang => lang.code === locale);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -125,16 +131,18 @@ export function Header({ locale, messages }: HeaderProps) {
                   ))}
                 </div>
               )}
-            </div>
-
-            {/* Theme Toggle */}
+            </div>            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
               aria-label={messages?.common?.actions?.toggle_theme || "Toggle theme"}
             >
-              {theme === 'light' ? (
-                <Moon className="w-5 h-5 text-muted" />
+              {mounted ? (
+                theme === 'light' ? (
+                  <Moon className="w-5 h-5 text-muted" />
+                ) : (
+                  <Sun className="w-5 h-5 text-muted" />
+                )
               ) : (
                 <Sun className="w-5 h-5 text-muted" />
               )}
