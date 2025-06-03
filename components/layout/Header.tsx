@@ -222,11 +222,11 @@ export function Header({ locale, messages }: HeaderProps) {
         <>
           {/* Backdrop */}
           <div 
-            className="md:hidden fixed inset-0 top-14 sm:top-16 z-30 bg-surface/95 backdrop-blur-sm"
+            className="md:hidden fixed inset-0 top-14 sm:top-16 z-30 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
           />
           {/* Mobile Menu Panel */}
-          <div className="md:hidden fixed inset-x-0 top-14 sm:top-16 z-40 bg-surface/95 backdrop-blur-sm border-t border-border shadow-lg max-h-[calc(100vh-3.5rem)] sm:max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <div className="md:hidden fixed inset-x-0 top-14 sm:top-16 z-40 bg-surface border-t border-border shadow-2xl min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] h-full overflow-y-auto">
             <div className="p-2 space-y-3">
               {/* Mobile Navigation */}
               <nav className="space-y-1">
@@ -240,7 +240,7 @@ export function Header({ locale, messages }: HeaderProps) {
                       key={item.key}
                       href={`/${locale}${item.href === "/" ? "" : item.href}`}
                       onClick={() => setIsMenuOpen(false)}
-                      className="flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-xl hover:bg-secondary transition-all duration-200 group active:scale-95"
+                      className="flex items-center space-x-3 rtl:space-x-reverse px-3 py-2.5 rounded-xl hover:bg-secondary transition-all duration-200 group active:scale-95"
                     >
                       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-200">
                         <Icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-200" />
