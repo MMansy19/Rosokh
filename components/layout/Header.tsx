@@ -11,11 +11,13 @@ import {
   BookOpen,
   Headphones,
   Video,
-  Gamepad2,
   Calendar,
   BarChart3,
   Mail,
   Home,
+  Languages,
+  Book,
+  Brain,
 } from "lucide-react";
 
 interface HeaderProps {
@@ -28,7 +30,7 @@ const navigation = [
   { key: "quran", href: "/quran", icon: BookOpen },
   { key: "audio", href: "/audio", icon: Headphones },
   { key: "video", href: "/videos", icon: Video },
-  { key: "khatma", href: "/khatma", icon: Gamepad2 },
+  { key: "khatma", href: "/khatma", icon: Book },
   { key: "calendar", href: "/calendar", icon: Calendar },
   { key: "analytics", href: "/analytics", icon: BarChart3 },
   { key: "contact", href: "/contact", icon: Mail },
@@ -148,7 +150,7 @@ export function Header({ locale, messages }: HeaderProps) {
                 className="flex items-center space-x-1.5 lg:space-x-2 rtl:space-x-reverse p-1.5 lg:p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
                 aria-label={messages?.common?.actions?.language || "Language"}
               >
-                <BookOpen className="w-4 h-4 lg:w-5 lg:h-5 text-muted" />
+                <Languages className="w-4 h-4 lg:w-5 lg:h-5 text-muted" />
                 <span className="text-sm font-medium text-muted">
                   {currentLang?.name}
                 </span>

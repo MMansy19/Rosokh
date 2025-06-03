@@ -13,8 +13,10 @@ import {
   BookmarkCheck,
   Settings,
   Download,
-  Share2
+  Share2,
+  Search
 } from "lucide-react";
+import QuranSearch from "@/components/quran/QuranSearch";
 
 interface Surah {
   number: number;
@@ -64,6 +66,7 @@ const reciters = [
 ];
 
 export function QuranClient({ locale, messages }: QuranClientProps) {
+  const [activeTab, setActiveTab] = useState<"read" | "search">("read");
   const [surahs, setSurahs] = useState<Surah[]>([]);
   const [selectedSurah, setSelectedSurah] = useState<number>(1);
   const [ayahs, setAyahs] = useState<Ayah[]>([]);
@@ -262,8 +265,41 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
           </p>
         </div>
 
-        {/* Audio Player Bar */}
-        {audioPlayer.currentAyah && (
+        {/* Tab Navigation */}
+        <div className="flex justify-center mb-8  mx-auto items-center">
+          <div className="flex flex-row md:gap-4 gap-2  bg-surface rounded-lg p-1 border border-border">
+            <button
+              onClick={() => setActiveTab("read")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
+                activeTab === "read"
+                  ? "bg-primary text-white shadow-md"
+                  : "text-muted hover:text-foreground hover:bg-secondary"
+              }`}
+            >
+              <BookOpen className="w-5 h-5" />
+              {messages?.quran?.read || "Read"}
+            </button>
+            <button
+              onClick={() => setActiveTab("search")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
+                activeTab === "search"
+                  ? "bg-primary text-white shadow-md"
+                  : "text-muted hover:text-foreground hover:bg-secondary"
+              }`}
+            >
+              <Search className="w-5 h-5" />
+              {messages?.quran?.search || "Search"}
+            </button>
+          </div>
+        </div>
+
+        {/* Tab Content */}
+        {activeTab === "search" ? (
+          <QuranSearch locale={locale} messages={messages} />
+        ) : (
+          <>
+            {/* Audio Player Bar */}
+            {audioPlayer.currentAyah && (
           <div className="sticky top-4 z-50 mb-6">
             <div className="bg-surface/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg">
               <div className="flex items-center justify-between">
@@ -618,7 +654,9 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
             </div>
           </div>
         )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
   );
 }

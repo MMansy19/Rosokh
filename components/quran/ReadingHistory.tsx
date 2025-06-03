@@ -361,7 +361,7 @@ export function ReadingHistory({ locale, messages }: ReadingHistoryProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen  p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

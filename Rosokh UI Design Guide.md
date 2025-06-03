@@ -253,7 +253,7 @@ Below is the design guide, wrapped in an `<xaiArtifact>` tag as a JSON file for 
         "feedback": "color_scheme.light_mode.success (correct), color_scheme.light_mode.error (incorrect) for light mode; same for dark mode"
       }
     },
-    "khatma_tracker": {
+    "khatma": {
       "layout": {
         "mobile": "Stacked cards for progress, streak, and plan",
         "desktop": "Grid with progress bar, stats, and chapter list"

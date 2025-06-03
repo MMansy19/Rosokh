@@ -41,7 +41,7 @@ const mainFeatures = [
     color: "from-success/20 to-success/5",
   },
   {
-    key: "khatma_tracker",
+    key: "khatma",
     icon: Gamepad2,
     href: "/khatma",
     color: "from-info/20 to-info/5",

@@ -120,7 +120,7 @@
           "title": "Video Library",
           "description": "Watch Islamic lectures, documentaries, and educational content"
         },
-        "khatma_tracker": {
+        "khatma": {
           "title": "Khatma Tracking",
           "description": "Track your Quran reading progress with daily plans and statistics"
         },
@@ -308,7 +308,7 @@
     "game_complete": "Game Completed! Score: {score}/{total}",
     "loading": "Preparing game..."
   },
-  "khatma_tracker": {
+  "khatma": {
     "title": "Khatma Tracker",
     "subtitle": "Track your Quran reading journey",
     "description": "Track your Quran reading progress and complete your Khatma journey",
@@ -544,6 +544,30 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "about": "About Us"
+  },
+  "search": {
+    "title": "Quran Search",
+    "subtitle": "Search through the Holy Quran by text, surah, or verse",
+    "placeholderText": "Search for verses, keywords, or concepts...",
+    "placeholderSurah": "Enter surah name or number...",
+    "placeholderVerse": "Enter verse reference (e.g., 2:255)...",
+    "searchText": "Search Text",
+    "searchSurah": "Search Surah",
+    "searchVerse": "Search Verse",
+    "translation": "Translation",
+    "recentSearches": "Recent Searches",
+    "clearAll": "Clear All",
+    "searching": "Searching...",
+    "resultsFound": "Found {count} results",
+    "noResults": "No results found",
+    "noResultsDesc": "Try different keywords or check your spelling",
+    "startSearching": "Start Searching",
+    "startSearchingDesc": "Enter your search term above to find verses, surahs, or specific concepts in the Quran",
+    "surah": "Surah",
+    "verse": "Verse",
+    "match": "match",
+    "playAudio": "Play Audio",
+    "bookmark": "Bookmark"
   },
   "seo": {
     "keywords": "Quran, Islamic, Audio, Recitation, Hijri Calendar, Prayer Times, Khatma, Islamic Learning, Quran Reader, Islamic App, Free Quran, Multilingual Quran",

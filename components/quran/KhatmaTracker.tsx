@@ -191,7 +191,7 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
 
   if (!khatmaProgress) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-900 dark:to-gray-800 p-6">
+      <div className="min-h-screen p-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-foreground mb-4">
@@ -252,7 +252,7 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
   const averagePages = getAveragePages();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
@@ -260,7 +260,7 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
             {messages?.khatma?.title || "Khatma Tracker"}
           </h1>
           <p className="text-lg text-muted">
-            {messages?.khatma?.progress_subtitle || "Your Quran reading journey"}
+            {messages?.khatma?.subtitle || "Your Quran reading journey"}
           </p>
         </div>
 
