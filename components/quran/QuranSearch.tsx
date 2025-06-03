@@ -19,13 +19,19 @@ interface QuranSearchProps {
   messages: any;
 }
 
-export default function QuranSearch({ locale, messages }: QuranSearchProps) {
-  const [searchTerm, setSearchTerm] = useState("");
+export default function QuranSearch({ locale, messages }: QuranSearchProps) {  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchType, setSearchType] = useState<"text" | "surah" | "verse">("text");
   const [selectedTranslation, setSelectedTranslation] = useState("en.sahih");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
+  const [searchFilters, setSearchFilters] = useState({
+    surahRange: { start: 1, end: 114 },
+    includeTranslation: true,
+    includeArabic: true,
+    exactMatch: false
+  });
 
   // Load recent searches from localStorage
   useEffect(() => {

@@ -8,7 +8,7 @@
       "home": "Home",
       "quran": "Quran",
       "audio": "Audio",
-      "video": "Videos",
+      "youtube": "YouTube",
       "games": "Games",
       "khatma": "Khatma",
       "calendar": "Calendar",
@@ -54,7 +54,7 @@
       "features": {
         "quran": "Browse the Holy Quran with Arabic text and translations",
         "audio": "Listen to beautiful recitations from renowned reciters",
-        "video": "Watch Islamic lectures and educational content",
+        "youtube": "Watch curated Islamic video content from trusted sources",
         "games": "Interactive games to enhance Quran memorization",
         "khatma": "Track your Quran reading progress",
         "calendar": "Stay updated with Hijri dates and prayer times",
@@ -116,9 +116,9 @@
           "title": "Audio Recitations",
           "description": "Listen to beautiful recitations from renowned reciters with speed control"
         },
-        "video_content": {
-          "title": "Video Library",
-          "description": "Watch Islamic lectures, documentaries, and educational content"
+        "youtube": {
+          "title": "YouTube Integration",
+          "description": "Watch curated Islamic content from trusted channels and scholars"
         },
         "khatma": {
           "title": "Khatma Tracking",
@@ -455,6 +455,55 @@
     "readingHabits": "Reading Habits",
     "progressChart": "Progress Chart",
     "achievements": "Achievements"
+  },
+  "youtube": {
+    "title": "YouTube Videos",
+    "subtitle": "Curated Islamic Content",
+    "description": "Discover educational and spiritual content from trusted Islamic channels",
+    "search": {
+      "placeholder": "Search for Islamic videos...",
+      "button": "Search",
+      "noResults": "No videos found. Try different keywords.",
+      "categories": "Categories",
+      "allCategories": "All Categories"
+    },
+    "categories": {
+      "quran": "Quran Recitation",
+      "lectures": "Islamic Lectures", 
+      "documentaries": "Documentaries",
+      "children": "Children's Content",
+      "nasheed": "Nasheed",
+      "history": "Islamic History",
+      "education": "Education",
+      "spirituality": "Spirituality"
+    },
+    "player": {
+      "play": "Play",
+      "pause": "Pause",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "fullscreen": "Fullscreen",
+      "exitFullscreen": "Exit Fullscreen",
+      "settings": "Settings",
+      "quality": "Quality",
+      "speed": "Playback Speed",
+      "autoplay": "Autoplay",
+      "subtitles": "Subtitles"
+    },
+    "actions": {
+      "like": "Like",
+      "bookmark": "Bookmark",
+      "share": "Share",
+      "watchLater": "Watch Later",
+      "viewCount": "views"
+    },
+    "filters": {
+      "duration": "Duration",
+      "uploadDate": "Upload Date",
+      "viewMode": "View Mode",
+      "grid": "Grid",
+      "list": "List"
+    }
   },
   "contact": {
     "title": "Contact Us",

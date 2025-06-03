@@ -29,7 +29,7 @@ const navigation = [
   { key: "home", href: "/", icon: Home },
   { key: "quran", href: "/quran", icon: BookOpen },
   { key: "audio", href: "/audio", icon: Headphones },
-  { key: "video", href: "/videos", icon: Video },
+  { key: "youtube", href: "/youtube", icon: Video },
   { key: "khatma", href: "/khatma", icon: Book },
   { key: "calendar", href: "/calendar", icon: Calendar },
   { key: "analytics", href: "/analytics", icon: BarChart3 },

@@ -24,11 +24,17 @@ interface KhatmaProgress {
   totalPages: number;
   chaptersCompleted: number[];
   versesCompleted: { [chapterId: number]: number[] };
+  pagesCompleted: number[];
   dailyGoal: number;
   streak: number;
+  longestStreak: number;
   lastReadDate: Date | null;
   totalMinutesRead: number;
+  sessionsCount: number;
   achievements: string[];
+  weeklyProgress: number[];
+  averageSpeed: number; // pages per hour
+  favoriteReadingTime: string;
 }
 
 interface Chapter {
@@ -68,7 +74,12 @@ const achievements = {
   'speed_reader': { name: 'Speed Reader', icon: '⚡', description: 'Read 20 pages in one day' },
   'consistent': { name: 'Consistency King', icon: '👑', description: 'Meet daily goal for 10 days' },
   'halfway': { name: 'Halfway Hero', icon: '🎯', description: 'Complete 50% of Quran' },
-  'completion': { name: 'Khatma Complete', icon: '🏆', description: 'Complete entire Quran' }
+  'completion': { name: 'Khatma Complete', icon: '🏆', description: 'Complete entire Quran' },
+  'dedicated': { name: 'Dedicated Reader', icon: '📚', description: 'Read for 100 hours total' },
+  'focused': { name: 'Focused Mind', icon: '🧠', description: 'Complete 5 chapters in one day' },
+  'reflection': { name: 'Deep Thinker', icon: '💭', description: 'Add reflection notes to 50 verses' },
+  'audio_lover': { name: 'Audio Enthusiast', icon: '🎧', description: 'Listen to 100 verses' },
+  'bookworm': { name: 'Verse Collector', icon: '🔖', description: 'Bookmark 100 verses' }
 };
 
 export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
@@ -101,9 +112,7 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
   const startNewKhatma = (targetDays: number) => {
     const startDate = new Date();
     const targetDate = new Date();
-    targetDate.setDate(startDate.getDate() + targetDays);
-
-    const newKhatma: KhatmaProgress = {
+    targetDate.setDate(startDate.getDate() + targetDays);    const newKhatma: KhatmaProgress = {
       id: Date.now().toString(),
       startDate,
       targetDate,
@@ -111,17 +120,22 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
       totalPages: 604, // Total pages in Mushaf
       chaptersCompleted: [],
       versesCompleted: {},
+      pagesCompleted: [],
       dailyGoal: Math.ceil(604 / targetDays),
       streak: 0,
+      longestStreak: 0,
       lastReadDate: null,
       totalMinutesRead: 0,
-      achievements: []
+      sessionsCount: 0,
+      achievements: [],
+      weeklyProgress: [0, 0, 0, 0, 0, 0, 0],
+      averageSpeed: 4, // pages per hour default
+      favoriteReadingTime: 'morning'
     };
 
     setKhatmaProgress(newKhatma);
     setShowNewKhatma(false);
   };
-
   const markPageRead = (pageNumber: number) => {
     if (!khatmaProgress) return;
 
@@ -145,6 +159,7 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
     }
 
     const newStreak = isConsecutiveDay || !khatmaProgress.lastReadDate ? khatmaProgress.streak + 1 : 1;
+    const newLongestStreak = Math.max(newStreak, khatmaProgress.longestStreak);
     
     if (newStreak >= 7 && !newAchievements.includes('week_streak')) {
       newAchievements.push('week_streak');
@@ -154,13 +169,37 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
       newAchievements.push('month_streak');
     }
 
+    // Update weekly progress (day of week: 0 = Sunday, 6 = Saturday)
+    const dayOfWeek = today.getDay();
+    const newWeeklyProgress = [...khatmaProgress.weeklyProgress];
+    newWeeklyProgress[dayOfWeek] += 1;
+
+    // Add to pages completed if not already there
+    const newPagesCompleted = [...khatmaProgress.pagesCompleted];
+    if (!newPagesCompleted.includes(pageNumber)) {
+      newPagesCompleted.push(pageNumber);
+    }
+
+    // Update reading time detection (simple heuristic based on time of day)
+    const hour = today.getHours();
+    let timeOfDay = 'evening';
+    if (hour >= 5 && hour < 12) timeOfDay = 'morning';
+    else if (hour >= 12 && hour < 17) timeOfDay = 'afternoon';
+    else if (hour >= 17 && hour < 21) timeOfDay = 'evening';
+    else timeOfDay = 'night';
+
     const updatedProgress = {
       ...khatmaProgress,
       currentPage: Math.max(pageNumber, khatmaProgress.currentPage),
       lastReadDate: today,
       streak: newStreak,
+      longestStreak: newLongestStreak,
       totalMinutesRead: khatmaProgress.totalMinutesRead + 15, // Assume 15 minutes per page
-      achievements: newAchievements
+      sessionsCount: khatmaProgress.sessionsCount + 1,
+      achievements: newAchievements,
+      pagesCompleted: newPagesCompleted,
+      weeklyProgress: newWeeklyProgress,
+      favoriteReadingTime: timeOfDay // Update based on current reading session
     };
 
     setKhatmaProgress(updatedProgress);
@@ -340,9 +379,7 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
               {averagePages} avg pages/day
             </div>
           </div>
-        </div>
-
-        {/* Actions Row */}
+        </div>        {/* Actions Row */}
         <div className="flex justify-center gap-4 mb-8">
           <button
             onClick={() => setShowAchievements(!showAchievements)}
@@ -361,6 +398,81 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
           >
             {messages?.khatma?.reset || "Reset Progress"}
           </button>
+        </div>
+
+        {/* Statistics Dashboard */}
+        <div className="bg-surface rounded-xl shadow-lg p-6 border border-border mb-8">
+          <h3 className="text-xl font-bold text-foreground mb-6">
+            {messages?.khatma?.statistics || "Reading Statistics"}
+          </h3>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary">
+                {khatmaProgress.streak}
+              </div>
+              <div className="text-sm text-muted">Current Streak</div>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-2xl font-bold text-accent">
+                {khatmaProgress.longestStreak}
+              </div>
+              <div className="text-sm text-muted">Longest Streak</div>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-2xl font-bold text-foreground">
+                {Math.round(khatmaProgress.totalMinutesRead / 60)}h
+              </div>
+              <div className="text-sm text-muted">Total Time</div>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-2xl font-bold text-secondary">
+                {khatmaProgress.sessionsCount}
+              </div>
+              <div className="text-sm text-muted">Sessions</div>
+            </div>
+          </div>
+
+          {/* Weekly Progress Chart */}
+          <div className="mb-6">
+            <h4 className="font-semibold mb-3">Weekly Reading Pattern</h4>
+            <div className="flex gap-2 justify-between">
+              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
+                <div key={day} className="flex-1 text-center">
+                  <div 
+                    className="bg-primary/20 rounded mb-1 mx-auto"
+                    style={{ 
+                      height: `${Math.max(20, (khatmaProgress.weeklyProgress[index] * 4))}px`,
+                      width: '20px'
+                    }}
+                  />
+                  <div className="text-xs text-muted">{day}</div>
+                  <div className="text-xs font-medium">{khatmaProgress.weeklyProgress[index]}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Additional Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-primary/5 rounded-lg p-4">
+              <div className="text-sm text-muted mb-1">Reading Speed</div>
+              <div className="text-lg font-semibold">{khatmaProgress.averageSpeed} pages/hour</div>
+            </div>
+            
+            <div className="bg-accent/5 rounded-lg p-4">
+              <div className="text-sm text-muted mb-1">Favorite Time</div>
+              <div className="text-lg font-semibold capitalize">{khatmaProgress.favoriteReadingTime}</div>
+            </div>
+            
+            <div className="bg-secondary/20 rounded-lg p-4">
+              <div className="text-sm text-muted mb-1">Pages Completed</div>
+              <div className="text-lg font-semibold">{khatmaProgress.pagesCompleted.length}</div>
+            </div>
+          </div>
         </div>
 
         {/* Achievements Modal */}

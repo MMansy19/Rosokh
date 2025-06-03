@@ -14,9 +14,11 @@ import {
   Settings,
   Download,
   Share2,
-  Search
+  Search,
+  Repeat
 } from "lucide-react";
 import QuranSearch from "@/components/quran/QuranSearch";
+import { VerseInteraction } from "@/components/quran/VerseInteraction";
 
 interface Surah {
   number: number;
@@ -60,6 +62,10 @@ interface AudioPlayerState {
 const reciters = [
   { id: '7', name: 'Abdul Rahman Al-Sudais', arabicName: 'عبد الرحمن السديس' },
   { id: '3', name: 'Abdul Basit Abdul Samad', arabicName: 'عبد الباسط عبد الصمد' },
+  { id: '1', name: 'Alafasy', arabicName: 'العفاسي' },
+  { id: '6', name: 'Abu Bakr Ash-Shaatree', arabicName: 'أبو بكر الشاطري' },
+  { id: '11', name: 'Maher Al Mueaqly', arabicName: 'ماهر المعيقلي' },
+  { id: '4', name: 'Saad Al Ghamdi', arabicName: 'سعد الغامدي' },
   { id: '1', name: 'Mishary Rashid Alafasy', arabicName: 'مشاري راشد العفاسي' },
   { id: '5', name: 'Sa\'ud Ash-Shuraym', arabicName: 'سعود الشريم' },
   { id: '6', name: 'Saad Al-Ghamdi', arabicName: 'سعد الغامدي' },
@@ -88,6 +94,9 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
     isMuted: false,
     reciter: '7' // Default to Abdul Rahman Al-Sudais
   });
+  const [audioQueue, setAudioQueue] = useState<number[]>([]);
+  const [repeatMode, setRepeatMode] = useState<'none' | 'verse' | 'surah'>('none');
+  const [autoPlay, setAutoPlay] = useState(false);
 
   // Load bookmarks from localStorage
   useEffect(() => {
@@ -192,9 +201,41 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
           currentAyah: ayahNumber,
           currentSurah: selectedSurah
         }));
+
+        // Set up auto-play for next verse if enabled
+        if (autoPlay) {
+          audioRef.current.onended = () => playNextAyah(ayahNumber);
+        }
       }
     } catch (error) {
       console.error('Error playing audio:', error);
+    }
+  };
+
+  const playNextAyah = (currentAyahNumber: number) => {
+    if (repeatMode === 'verse') {
+      playAyah(currentAyahNumber);
+      return;
+    }
+
+    const nextAyah = ayahs.find(ayah => ayah.numberInSurah === currentAyahNumber + 1);
+    if (nextAyah) {
+      setTimeout(() => playAyah(nextAyah.numberInSurah), 1000);
+    } else if (repeatMode === 'surah') {
+      setTimeout(() => playAyah(1), 1000);
+    }
+  };
+
+  const playPreviousAyah = () => {
+    if (audioPlayer.currentAyah && audioPlayer.currentAyah > 1) {
+      playAyah(audioPlayer.currentAyah - 1);
+    }
+  };
+
+  const playFullSurah = async () => {
+    if (ayahs.length > 0) {
+      setAutoPlay(true);
+      await playAyah(1);
     }
   };
 
@@ -302,8 +343,17 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
             {audioPlayer.currentAyah && (
           <div className="sticky top-4 z-50 mb-6">
             <div className="bg-surface/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center space-x-4">
+                  {/* Previous Button */}
+                  <button
+                    onClick={playPreviousAyah}
+                    disabled={audioPlayer.currentAyah === 1}
+                    className="p-2 bg-secondary text-foreground rounded-full hover:bg-accent hover:text-white transition-colors disabled:opacity-50"
+                  >
+                    <SkipBack className="w-4 h-4" />
+                  </button>
+
                   <button
                     onClick={() => audioPlayer.isPlaying ? pauseAudio() : playAyah(audioPlayer.currentAyah!)}
                     className="p-2 bg-primary text-white rounded-full hover:bg-primary/80 transition-colors"
@@ -315,13 +365,67 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
                     )}
                   </button>
                   
+                  {/* Next Button */}
+                  <button
+                    onClick={() => playNextAyah(audioPlayer.currentAyah!)}
+                    disabled={!ayahs.find(ayah => ayah.numberInSurah === audioPlayer.currentAyah! + 1)}
+                    className="p-2 bg-secondary text-foreground rounded-full hover:bg-accent hover:text-white transition-colors disabled:opacity-50"
+                  >
+                    <SkipForward className="w-4 h-4" />
+                  </button>
+
+                  {/* Repeat Mode Button */}
+                  <button
+                    onClick={() => {
+                      const modes: Array<'none' | 'verse' | 'surah'> = ['none', 'verse', 'surah'];
+                      const currentIndex = modes.indexOf(repeatMode);
+                      const nextMode = modes[(currentIndex + 1) % modes.length];
+                      setRepeatMode(nextMode);
+                    }}
+                    className={`p-2 rounded-full transition-colors ${
+                      repeatMode !== 'none' 
+                        ? 'bg-accent text-white' 
+                        : 'bg-secondary text-foreground hover:bg-accent hover:text-white'
+                    }`}
+                    title={`Repeat: ${repeatMode}`}
+                  >
+                    <Repeat className="w-4 h-4" />
+                  </button>
+                  
                   <div className="text-sm">
                     <div className="font-medium">{currentSurah?.englishName}</div>
-                    <div className="text-muted">Verse {audioPlayer.currentAyah}</div>
+                    <div className="text-muted">
+                      Verse {audioPlayer.currentAyah} 
+                      {repeatMode !== 'none' && (
+                        <span className="ml-1 text-accent">
+                          ({repeatMode === 'verse' ? '🔂' : '🔁'})
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-2">
+                  {/* Auto-play toggle */}
+                  <button
+                    onClick={() => setAutoPlay(!autoPlay)}
+                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                      autoPlay
+                        ? 'bg-accent text-white'
+                        : 'bg-secondary text-foreground hover:bg-accent hover:text-white'
+                    }`}
+                  >
+                    Auto
+                  </button>
+
+                  {/* Play Full Surah */}
+                  <button
+                    onClick={playFullSurah}
+                    className="px-2 py-1 text-xs bg-primary text-white rounded hover:bg-primary/80 transition-colors"
+                  >
+                    Play All
+                  </button>
+
                   {/* Speed Control */}
                   <select
                     value={audioPlayer.speed}
@@ -358,6 +462,11 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
                     )}
                   </button>
                 </div>
+              </div>
+              
+              {/* Progress Bar - if we can get current time */}
+              <div className="w-full bg-secondary rounded-full h-1">
+                <div className="bg-primary h-1 rounded-full w-1/3"></div>
               </div>
             </div>
           </div>
@@ -545,12 +654,25 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
                       return (
                         <div
                           key={ayah.number}
-                          className={`group p-4 rounded-lg transition-all duration-200 border ${
+                          className={`group p-4 rounded-lg transition-all duration-200 border relative ${
                             audioPlayer.currentAyah === ayah.numberInSurah 
                               ? 'bg-primary/5 border-primary/20' 
                               : 'border-transparent hover:bg-secondary hover:border-border'
                           }`}
                         >
+                          {/* Verse Interaction Component */}
+                          <VerseInteraction
+                            surahNumber={selectedSurah}
+                            ayahNumber={ayah.numberInSurah}
+                            ayahText={ayah.text}
+                            translation={translation?.text}
+                            onPlayAudio={playAyah}
+                            onBookmark={toggleBookmark}
+                            isBookmarked={isBookmarked}
+                            locale={locale}
+                            messages={messages}
+                          />
+
                           <div className="flex items-start gap-4">
                             <div className="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
                               {ayah.numberInSurah}
@@ -588,7 +710,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
                               )}
                             </div>
 
-                            {/* Action Buttons */}
+                            {/* Traditional Action Buttons (still available) */}
                             <div className="flex-shrink-0 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                               {/* Play Audio */}
                               <button
