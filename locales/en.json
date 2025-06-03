@@ -13,7 +13,8 @@
       "khatma": "Khatma",
       "calendar": "Calendar",
       "analytics": "Analytics",
-      "contact": "Contact Us"
+      "contact": "Contact Us",
+      "menu": "Menu"
     },
     "actions": {
       "read": "Read",
@@ -25,7 +26,8 @@
       "dark_mode": "Dark Mode",
       "light_mode": "Light Mode",
       "toggle_menu": "Toggle Menu",
-      "language": "Change Language"
+      "language": "Change Language",
+      "appearance": "Appearance"
     },
     "brand": {
       "name": "Rosokh",
@@ -252,7 +254,39 @@
     "lectures": "Islamic Lectures",
     "lecturesDesc": "Educational content by scholars",
     "nasheeds": "Nasheeds",
-    "nasheedsDesc": "Inspiring Islamic songs and chants"
+    "nasheedsDesc": "Inspiring Islamic songs and chants",
+    "sampleTracks": {
+      "surah_al_fatiha": {
+        "title": "Surah Al-Fatiha",
+        "arabicTitle": "سورة الفاتحة",
+        "reciter": "Abdul Rahman Al-Sudais"
+      },
+      "surah_al_baqarah": {
+        "title": "Surah Al-Baqarah",
+        "arabicTitle": "سورة البقرة",
+        "reciter": "Mishary Al-Afasy"
+      },
+      "morning_adhkar": {
+        "title": "Morning Adhkar",
+        "arabicTitle": "أذكار الصباح",
+        "reciter": "Saad Al-Ghamdi"
+      },
+      "evening_adhkar": {
+        "title": "Evening Adhkar",
+        "arabicTitle": "أذكار المساء",
+        "reciter": "Saad Al-Ghamdi"
+      },
+      "prophet_biography": {
+        "title": "The Life of Prophet Muhammad",
+        "arabicTitle": "سيرة النبي محمد",
+        "reciter": "Omar Suleiman"
+      },
+      "tala_al_badru": {
+        "title": "Tala al Badru Alayna",
+        "arabicTitle": "طلع البدر علينا",
+        "reciter": "Maher Zain"
+      }
+    }
   },
   "audio_player": {
     "by_reciter": "Reciter: {name}",

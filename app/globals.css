@@ -741,37 +741,123 @@ body {
   border-color: var(--color-primary);
 }
 
-/* Enhanced Button Classes */
-.btn-primary {
-  background-color: var(--color-primary);
-  color: white;
-  transition: all 0.2s ease;
-}
-.btn-primary:hover {
-  background-color: var(--color-hover-button);
-  color: var(--color-foreground);
-}
-.btn-primary:active {
-  background-color: var(--color-active-button);
-}
-
-.btn-surface {
-  background-color: var(--color-surface);
-  color: var(--color-foreground);
-  transition: all 0.2s ease;
-}
-.btn-surface:hover {
-  background-color: var(--color-hover-button);
-}
-.btn-surface:active {
-  background-color: var(--color-active-button);
+/* Mobile-Responsive Utilities */
+@media (max-width: 480px) {
+  .xs\:block {
+    display: block;
+  }
+  
+  .xs\:hidden {
+    display: none;
+  }
+  
+  .xs\:text-xs {
+    font-size: 0.75rem;
+  }
+  
+  .xs\:p-2 {
+    padding: 0.5rem;
+  }
+  
+  .xs\:px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
 }
 
-.btn-secondary {
-  background-color: var(--color-secondary);
-  color: var(--color-foreground);
-  transition: all 0.2s ease;
+/* Enhanced Mobile Menu Animations */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.btn-secondary:hover {
-  background-color: var(--color-hover-button);
-}         
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slideInFromTop {
+  animation: slideInFromTop 0.3s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* Mobile Touch Improvements */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:bg-secondary:hover {
+    background-color: initial;
+  }
+  
+  .group:active .group-hover\:scale-110 {
+    transform: scale(1.1);
+  }
+  
+  .active\:scale-95:active {
+    transform: scale(0.95);
+  }
+  
+  /* Larger touch targets for mobile */
+  button, .btn, a[role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Backdrop blur support */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+/* Safe area support for mobile devices with notches */
+@supports (padding: max(0px)) {
+  .safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-left {
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+  
+  .safe-right {
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Enhanced focus states for better accessibility */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+/* Mobile menu specific styles */
+.mobile-menu-item {
+  transition: all 0.2s ease-in-out;
+}
+
+.mobile-menu-item:active {
+  transform: scale(0.95);
+  background-color: var(--color-surface-child);
+}

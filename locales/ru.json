@@ -13,7 +13,8 @@
       "khatma": "Хатма",
       "calendar": "Календарь",
       "analytics": "Аналитика",
-      "contact": "Связаться с нами"
+      "contact": "Связаться с нами",
+      "menu": "Меню"
     },
     "actions": {
       "read": "Читать",
@@ -25,7 +26,8 @@
       "dark_mode": "Темная тема",
       "light_mode": "Светлая тема",
       "toggle_menu": "Переключить меню",
-      "language": "Сменить язык"
+      "language": "Сменить язык",
+      "appearance": "Внешний вид"
     },
     "brand": {
       "name": "Rosokh",

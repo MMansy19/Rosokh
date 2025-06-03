@@ -13,7 +13,8 @@
       "khatma": "الختمة",
       "calendar": "التقويم",
       "analytics": "التحليلات",
-      "contact": "اتصل بنا"
+      "contact": "اتصل بنا",
+      "menu": "القائمة"
     },
     "actions": {
       "read": "اقرأ",
@@ -25,7 +26,8 @@
       "dark_mode": "الوضع المظلم",
       "light_mode": "الوضع المضيء",
       "toggle_menu": "تبديل القائمة",
-      "language": "تغيير اللغة"
+      "language": "تغيير اللغة",
+      "appearance": "المظهر"
     },
     "brand": {
       "name": "Rosokh",
@@ -259,7 +261,39 @@
     "lectures": "المحاضرات الإسلامية",
     "lecturesDesc": "محتوى تعليمي من العلماء",
     "nasheeds": "الأناشيد",
-    "nasheedsDesc": "أناشيد إسلامية ملهمة"
+    "nasheedsDesc": "أناشيد إسلامية ملهمة",
+    "sampleTracks": {
+      "surah_al_fatiha": {
+        "title": "سورة الفاتحة",
+        "arabicTitle": "سورة الفاتحة",
+        "reciter": "عبد الرحمن السديس"
+      },
+      "surah_al_baqarah": {
+        "title": "سورة البقرة",
+        "arabicTitle": "سورة البقرة",
+        "reciter": "مشاري العفاسي"
+      },
+      "morning_adhkar": {
+        "title": "أذكار الصباح",
+        "arabicTitle": "أذكار الصباح",
+        "reciter": "سعد الغامدي"
+      },
+      "evening_adhkar": {
+        "title": "أذكار المساء",
+        "arabicTitle": "أذكار المساء",
+        "reciter": "سعد الغامدي"
+      },
+      "prophet_biography": {
+        "title": "سيرة النبي محمد",
+        "arabicTitle": "سيرة النبي محمد",
+        "reciter": "عمر سليمان"
+      },
+      "tala_al_badru": {
+        "title": "طلع البدر علينا",
+        "arabicTitle": "طلع البدر علينا",
+        "reciter": "ماهر زين"
+      }
+    }
   },
   "audio_player": {
     "by_reciter": "بصوت: {name}",
