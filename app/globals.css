@@ -97,15 +97,11 @@ body {
 /* Arabic Text Styling */
 .arabic-text {
   font-family: var(--font-arabic), "Amiri", "Noto Naskh Arabic", serif;
-  font-size: 1.25rem;
   line-height: 2;
-  text-align: right;
-  direction: rtl;
 }
 
 .quran-text {
   font-family: var(--font-arabic), "Amiri Quran", "Amiri", serif;
-  font-size: 1.5rem;
   line-height: 2.2;
   text-align: center;
   color: var(--color-text-primary);
@@ -292,7 +288,6 @@ body {
 
 .btn-primary:hover {
   background-color: var(--color-hover-button);
-  color: var(--color-foreground);
 }
 
 .btn-primary:active {
@@ -487,12 +482,10 @@ body {
 /* Responsive Typography */
 @media (max-width: 640px) {
   .quran-text {
-    font-size: 1.125rem;
     line-height: 2;
   }
 
   .arabic-text {
-    font-size: 1.125rem;
     line-height: 1.8;
   }
 }

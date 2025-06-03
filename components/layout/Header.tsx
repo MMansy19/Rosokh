@@ -110,16 +110,12 @@ export function Header({ locale, messages }: HeaderProps) {
             onClick={() => setIsMenuOpen(false)}
           >
             <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xs sm:text-sm">ر</span>
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-base sm:text-lg text-foreground">
                 {messages?.common?.brand?.name || "Rosokh"}
               </span>
-              <span className="text-xs text-muted -mt-1 hidden xs:block">
-                {messages?.common?.brand?.name_arabic || "رسوخ"}
-              </span>
-            </div>
+              </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -163,7 +159,7 @@ export function Header({ locale, messages }: HeaderProps) {
                     className="fixed inset-0 z-10 md:hidden" 
                     onClick={() => setIsLangMenuOpen(false)}
                   />
-                  <div className="absolute top-full mt-2 right-0 rtl:right-auto rtl:left-0 bg-surface border border-border rounded-lg shadow-lg min-w-[120px] animate-fadeIn z-20">
+                  <div className="absolute top-full mt-2 right-0 bg-black/50 backdrop-blur-md rtl:right-auto rtl:left-0 bg-surface border border-border rounded-lg shadow-lg min-w-[120px] animate-fadeIn z-20">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
@@ -226,11 +222,11 @@ export function Header({ locale, messages }: HeaderProps) {
         <>
           {/* Backdrop */}
           <div 
-            className="md:hidden fixed inset-0 top-14 sm:top-16 z-30 bg-black/50 backdrop-blur-md"
+            className="md:hidden fixed inset-0 top-14 sm:top-16 z-30 bg-surface/95 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
           />
           {/* Mobile Menu Panel */}
-          <div className="md:hidden fixed inset-x-0 top-14 sm:top-16 z-40 bg-background/98 backdrop-blur-md border-t border-border shadow-lg max-h-[calc(100vh-3.5rem)] sm:max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <div className="md:hidden fixed inset-x-0 top-14 sm:top-16 z-40 bg-surface/95 backdrop-blur-sm border-t border-border shadow-lg max-h-[calc(100vh-3.5rem)] sm:max-h-[calc(100vh-4rem)] overflow-y-auto">
             <div className="p-2 space-y-3">
               {/* Mobile Navigation */}
               <nav className="space-y-1">

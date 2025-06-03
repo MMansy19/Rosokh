@@ -31,7 +31,6 @@
     },
     "brand": {
       "name": "Rosokh",
-      "name_arabic": "رسوخ",
       "platform": "Rosokh Platform",
       "description": "Rosokh is a modern Islamic multimedia platform for spiritual growth and learning."
     },
@@ -617,6 +616,19 @@
     "match": "match",
     "playAudio": "Play Audio",
     "bookmark": "Bookmark"
+  },
+  "quran": {
+    "title": "Quran Reader",
+    "description": "Read and explore the Holy Quran with Arabic text, translations, and audio recitations",
+    "read": "Read",
+    "search": "Search",
+    "surahs": "Surahs",
+    "verses": "verses",  
+    "translation": "Translation",
+    "transliteration": "Transliteration",
+    "loading": "Loading...",
+    "bookmarks": "Bookmarks",
+    "transliterationNotAvailable": "Transliteration not available"
   },
   "seo": {
     "keywords": "Quran, Islamic, Audio, Recitation, Hijri Calendar, Prayer Times, Khatma, Islamic Learning, Quran Reader, Islamic App, Free Quran, Multilingual Quran",

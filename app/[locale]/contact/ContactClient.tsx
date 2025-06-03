@@ -214,25 +214,18 @@ export default function ContactClient({
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                 >
-                  <option value="general">
-                    {messages?.contact?.categories?.general ||
-                      "General Inquiry"}
-                  </option>
-                  <option value="technical">
-                    {messages?.contact?.categories?.technical ||
-                      "Technical Support"}
-                  </option>
-                  <option value="feature">
-                    {messages?.contact?.categories?.feature ||
-                      "Feature Request"}
-                  </option>
-                  <option value="bug">
-                    {messages?.contact?.categories?.bug || "Bug Report"}
-                  </option>
-                  <option value="feedback">
-                    {messages?.contact?.categories?.feedback || "Feedback"}
-                  </option>
-                </select>
+                    {[
+                      { value: "general", label: messages?.contact?.categories?.general || "General Inquiry" },
+                      { value: "technical", label: messages?.contact?.categories?.technical || "Technical Support" },
+                      { value: "feature", label: messages?.contact?.categories?.feature || "Feature Request" },
+                      { value: "bug", label: messages?.contact?.categories?.bug || "Bug Report" },
+                      { value: "feedback", label: messages?.contact?.categories?.feedback || "Feedback" },
+                    ].map((option) => (
+                      <option key={option.value} value={option.value} className="bg-background text-foreground">
+                        {option.label}
+                      </option>
+                    ))}
+                    </select>
               </div>
 
               <div>

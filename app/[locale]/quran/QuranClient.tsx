@@ -308,7 +308,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
 
         {/* Tab Navigation */}
         <div className="flex justify-center mb-8  mx-auto items-center">
-          <div className="flex flex-row md:gap-4 gap-2  bg-surface rounded-lg p-1 border border-border">
+          <div className="flex flex-row md:gap-4 gap-2 bg-surface rounded-lg p-1 border border-border">
             <button
               onClick={() => setActiveTab("read")}
               className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${

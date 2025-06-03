@@ -39,12 +39,9 @@ export function HeroSection({ locale, messages }: HeroSectionProps) {
           </div>
           {/* Main Heading */}
           <div className="space-y-4 animate-slideInLeft">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary mb-10 arabic-text">
               <span className="block">
                 {messages?.common?.brand?.name || "Rosokh"}
-              </span>
-              <span className="block text-primary arabic-text text-3xl md:text-4xl lg:text-5xl mt-2">
-                {messages?.common?.brand?.name_arabic || "رسوخ"}
               </span>
             </h1>{" "}
             <p className="text-xl md:text-2xl text-muted max-w-3xl mx-auto leading-relaxed">

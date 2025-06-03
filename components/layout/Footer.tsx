@@ -22,14 +22,10 @@ export function Footer({ locale, messages }: FooterProps) {
           <div className="space-y-4 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start space-x-2 rtl:space-x-reverse">
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">ر</span>
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-lg text-foreground">
                   {messages?.common?.brand?.name || "Rosokh"}
-                </span>
-                <span className="text-xs text-muted -mt-1">
-                  {messages?.common?.brand?.name_arabic || "رسوخ"}
                 </span>
               </div>
             </div>{" "}

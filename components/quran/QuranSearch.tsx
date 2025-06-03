@@ -157,11 +157,11 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-blue-900 dark:to-purple-900">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl font-bold text-foreground mb-4">
             {messages?.search?.title || "Quran Search"}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -171,9 +171,9 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
 
         {/* Search Section */}
         <div className="max-w-4xl mx-auto mb-8">
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-xl p-6 border border-white/20 shadow-lg">
+          <div className="bg-surface/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg">
             {/* Search Type Tabs */}
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex sm:flex-row flex-col gap-2 mb-4 justify-center w-full">
               {[
                 { key: "text", label: messages?.search?.searchText || "Search Text", icon: "🔍" },
                 { key: "surah", label: messages?.search?.searchSurah || "Search Surah", icon: "📖" },
@@ -182,11 +182,11 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
                 <button
                   key={key}
                   onClick={() => setSearchType(key as typeof searchType)}
-                  className={`px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 ${
-                    searchType === key
-                      ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
-                      : "bg-white/50 dark:bg-slate-700/50 hover:bg-white/70 dark:hover:bg-slate-700/70 text-foreground"
-                  }`}
+                  className={`px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 border border-border md:text-base text-sm font-medium
+                     ${searchType === key
+                    ? "bg-primary text-white shadow-md"
+                    : "text-muted hover:text-foreground hover:bg-secondary"
+                    }`}
                 >
                   <span>{icon}</span>
                   {label}
@@ -210,7 +210,8 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
                     ? messages?.search?.placeholderSurah || "Enter surah name or number..."
                     : messages?.search?.placeholderVerse || "Enter verse reference (e.g., 2:255)..."
                 }
-                className="w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-foreground placeholder-gray-500 dark:placeholder-gray-400"
+                className="w-full px-10 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+
               />
               {searchTerm && (
                 <button
@@ -227,17 +228,17 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
               <label className="block text-sm font-medium text-foreground mb-2">
                 {messages?.search?.translation || "Translation"}
               </label>
-              <select
+                <select
                 value={selectedTranslation}
                 onChange={(e) => setSelectedTranslation(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-foreground"
-              >
+                className="block w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-background text-foreground"
+                >
                 {getTranslationOptions().map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
+                  <option key={option.value} value={option.value} className="bg-background text-foreground">
+                  {option.label}
                   </option>
                 ))}
-              </select>
+                </select>
             </div>
 
             {/* Recent Searches */}
