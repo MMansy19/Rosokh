@@ -17,28 +17,26 @@ export function Footer({ locale, messages }: FooterProps) {
       className="bg-surface border-t border-border mt-auto"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand Section */}
-          <div className="space-y-4 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start space-x-2 rtl:space-x-reverse">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"></div>
-              <div className="flex flex-col">
+          <div className="space-y-4 text-center md:text-left rtl:md:text-right">
+            <div className="inline-flex items-center space-x-2">
+              <div className="w-8 h-8 bg-primary rounded-lg"></div>
                 <span className="font-bold text-lg text-foreground">
                   {messages?.common?.brand?.name || "Rosokh"}
                 </span>
-              </div>
             </div>{" "}
-            <p className="text-muted text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
+            <p className="inline-flex space-x-2 items-center text-muted text-sm leading-relaxed max-w-xs md:mx-0">
               {messages?.footer?.description ||
                 messages?.common?.brand?.description ||
                 "Rosokh is a modern Islamic multimedia platform for spiritual growth and learning."}
             </p>
-            <div className="flex items-center justify-center md:justify-start space-x-1 text-sm text-muted">
+            <div className="inline-flex space-x-2 items-center text-muted">
               <span>{messages?.footer?.made_with || "Made with"}</span>
               <Heart className="w-4 h-4 text-primary animate-pulse" />
               <span>{messages?.footer?.for_ummah || "for the Ummah"}</span>
             </div>
-            <div className="inline-flex">
+            <div className="inline-flex space-x-2 items-center text-muted">
               <div className="text-xs font-medium">
               {messages?.footer?.developed_by || "Developed by"}
               </div>
@@ -54,7 +52,7 @@ export function Footer({ locale, messages }: FooterProps) {
             </div>
           </div>
           {/* Quick Links */}{" "}
-          <div className="space-y-4 text-center md:text-left">
+          <div className="space-y-4 text-center md:text-left rtl:md:text-right">
             <h3 className="font-semibold text-foreground">
               {messages?.footer?.quick_links || "Quick Links"}
             </h3>
@@ -77,7 +75,7 @@ export function Footer({ locale, messages }: FooterProps) {
             </ul>
           </div>
           {/* Features */}{" "}
-          <div className="space-y-4 text-center md:text-left">
+          <div className="space-y-4 text-center md:text-left rtl:md:text-right">
             <h3 className="font-semibold text-foreground">
               {messages?.footer?.features || "Features"}
             </h3>
@@ -94,7 +92,7 @@ export function Footer({ locale, messages }: FooterProps) {
             </ul>
           </div>
           {/* Contact */}{" "}
-          <div className="space-y-4 text-center md:text-left">
+          <div className="space-y-4 text-center md:text-left rtl:md:text-right">
             <h3 className="font-semibold text-foreground">
               {messages?.footer?.contact || "Contact"}
             </h3>
