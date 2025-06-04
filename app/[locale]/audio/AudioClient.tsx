@@ -223,48 +223,287 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
     const isExpanded = expandedPreview === track.id;
 
     return (
-      <div className="mt-4">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-muted-foreground">
-            Google Drive Preview:
-          </span>
-          <div className="flex gap-2">
+      <div className="mt-6 bg-gradient-to-br from-background to-secondary/20 rounded-xl p-6 border border-border shadow-inner relative overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <svg className="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <pattern id="audioWaves" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 0 10 Q 5 5 10 10 T 20 10" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.3"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#audioWaves)" />
+          </svg>
+        </div>
+
+        {/* Header with enhanced styling */}
+        <div className="flex items-center justify-between mb-6 relative z-10">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <div className="absolute -inset-1 bg-green-500/20 rounded-full animate-ping"></div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-semibold text-foreground flex items-center gap-2">
+                <span className="text-lg">🎵</span>
+                Audio Player
+              </span>
+              <span className="text-xs text-muted-foreground">
+                Powered by Google Drive
+              </span>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            {/* Quality indicator with enhanced styling */}
+            <div className="flex items-center gap-1 px-3 py-1.5 bg-primary/10 rounded-full border border-primary/20 backdrop-blur-sm">
+              <div className={`w-2 h-2 rounded-full animate-pulse ${
+                track.quality === "high" ? "bg-green-500" : 
+                track.quality === "medium" ? "bg-yellow-500" : "bg-red-500"
+              }`}></div>
+              <span className="text-xs font-medium capitalize text-foreground">
+                {track.quality} Quality
+              </span>
+            </div>
+            
+            {/* Expand/Collapse button with enhanced styling */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setExpandedPreview(isExpanded ? null : track.id);
               }}
-              className="text-xs px-2 py-1 bg-primary text-white rounded hover:bg-primary/80 transition-colors"
+              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
             >
-              {isExpanded ? "Collapse" : "Expand"}
+              <span className="text-sm font-medium">
+                {isExpanded ? "Minimize" : "Expand Player"}
+              </span>
+              <div className={`transform transition-transform duration-200 group-hover:scale-110 ${isExpanded ? "rotate-180" : ""}`}>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a.997.997 0 01-1.414 0l-7-7A1.997 1.997 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+              </div>
             </button>
+            
+            {/* Download button with enhanced styling */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 window.open(downloadUrl, "_blank");
               }}
-              className="text-xs px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors flex items-center gap-1"
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
             >
-              <Download className="w-3 h-3" />
-              Download
+              <Download className="w-4 h-4 group-hover:animate-bounce" />
+              <span className="text-sm font-medium">Download</span>
             </button>
+          { /* Popup for viewing on Google Drive */}
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(track.url, "_blank");
+              }}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group">
+                <span className="text-sm font-medium">View on Google Drive</span>
+                <svg className="w-4 h-4 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8V4m0 16v-4m0-8h4m-8 0H4m16 0h-4m0 8h4m-8 0H4m16 0a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2h12z" />
+                </svg>
+              </button>
           </div>
         </div>
-        <iframe
-          src={previewUrl}
-          width="100%"
-          height={isExpanded ? "400" : "120"}
-          allow="autoplay"
-          className="border rounded-lg bg-gray-100 dark:bg-gray-800"
-          title={`${track.title} - ${track.reciter.name}`}
-          loading="lazy"
-        />
-        <div className="text-xs text-muted-foreground mt-2 flex items-center gap-2">
-          <span>🎵 Audio Preview via Google Drive</span>
-          <span>•</span>
-          <span>{track.size}</span>
-          <span>•</span>
-          <span>{track.quality} quality</span>
+
+        {/* Enhanced iframe container with better styling */}
+        <div className="relative mb-4">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-xl"></div>
+          <div className="relative bg-white dark:bg-gray-900 rounded-xl border-2 border-border/30 overflow-hidden shadow-xl">
+            {/* Player status bar */}
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 px-4 py-2 border-b border-border/20">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-xs text-muted-foreground ml-2">Google Drive Player</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <span>🔊</span>
+                  <span>Audio Ready</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Iframe with loading overlay */}
+            <div className="relative">
+              <iframe
+                src={previewUrl}
+                width="100%"
+                height={isExpanded ? "500" : "150"}
+                allow="autoplay; encrypted-media"
+                className="relative transition-all duration-300"
+                title={`${track.title} - ${track.reciter.name}`}
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-presentation"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Enhanced metadata section with better styling */}
+        <div className="space-y-4 relative z-10">
+          {/* Track info card with enhanced design */}
+          <div className="bg-gradient-to-r from-secondary/30 to-secondary/10 p-4 rounded-lg border border-border/30 backdrop-blur-sm">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center border border-primary/20">
+                  <span className="text-primary">🎼</span>
+                </div>
+                <div>
+                  <span className="text-sm font-semibold text-foreground block">
+                    {track.title}
+                  </span>
+                  {track.arabicTitle && (
+                    <span className="text-xs text-muted-foreground font-amiri block">
+                      {track.arabicTitle}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-sm font-medium text-foreground">
+                  {track.reciter.name}
+                </div>
+                {track.reciter.arabicName && (
+                  <div className="text-xs text-muted-foreground font-amiri">
+                    {track.reciter.arabicName}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Enhanced info cards grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {/* Duration estimate with enhanced styling */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-3 rounded-lg border border-blue-200/50 dark:border-blue-700/50">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-blue-500/10 rounded-full flex items-center justify-center">
+                  <span className="text-blue-600 dark:text-blue-400">⏱</span>
+                </div>
+                <div>
+                  <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">Duration</div>
+                  <div className="text-sm font-bold text-blue-700 dark:text-blue-300">{track.duration || "~45-60 min"}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* File size with enhanced styling */}
+            <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-3 rounded-lg border border-green-200/50 dark:border-green-700/50">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-green-500/10 rounded-full flex items-center justify-center">
+                  <span className="text-green-600 dark:text-green-400">📄</span>
+                </div>
+                <div>
+                  <div className="text-xs text-green-600 dark:text-green-400 font-medium">Size</div>
+                  <div className="text-sm font-bold text-green-700 dark:text-green-300">{track.size || "~50MB"}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Category with enhanced styling */}
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-3 rounded-lg border border-purple-200/50 dark:border-purple-700/50">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-purple-500/10 rounded-full flex items-center justify-center">
+                  <span className="text-purple-600 dark:text-purple-400">📚</span>
+                </div>
+                <div>
+                  <div className="text-xs text-purple-600 dark:text-purple-400 font-medium">Category</div>
+                  <div className="text-sm font-bold text-purple-700 dark:text-purple-300 capitalize">{track.category}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Format with enhanced styling */}
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 p-3 rounded-lg border border-orange-200/50 dark:border-orange-700/50">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-orange-500/10 rounded-full flex items-center justify-center">
+                  <span className="text-orange-600 dark:text-orange-400">🎵</span>
+                </div>
+                <div>
+                  <div className="text-xs text-orange-600 dark:text-orange-400 font-medium">Format</div>
+                  <div className="text-sm font-bold text-orange-700 dark:text-orange-300">MP3/Audio</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Enhanced player tips section */}
+          {isExpanded && (
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-blue-500/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-blue-500">💡</span>
+                </div>
+                <div className="flex-1">
+                  <div className="text-sm font-semibold text-blue-700 dark:text-blue-300 mb-2 flex items-center gap-2">
+                    <span>Player Tips & Controls</span>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                      <h4 className="text-xs font-medium text-blue-600 dark:text-blue-400 mb-1">Basic Controls:</h4>
+                      <ul className="text-xs text-blue-600 dark:text-blue-400 space-y-1">
+                        <li className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                          <span>Spacebar for play/pause</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                          <span>Click timeline to seek</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                          <span>Volume control available</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-medium text-blue-600 dark:text-blue-400 mb-1">Advanced Options:</h4>
+                      <ul className="text-xs text-blue-600 dark:text-blue-400 space-y-1">
+                        <li className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                          <span>Right-click for playback speed</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                          <span>Download for offline access</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                          <span>Full-screen mode available</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Audio status indicators */}
+          <div className="flex items-center justify-between py-2 px-3 bg-secondary/20 rounded-lg border border-border/20">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-xs text-muted-foreground">Streaming Ready</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1">
+                <span>🔊</span>
+                High Quality Audio
+              </span>
+              <span className="flex items-center gap-1">
+                <span>☁️</span>
+                Cloud Hosted
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -460,29 +699,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const isExpanded = expandedPreview === currentTrack.id;
-                        setExpandedPreview(isExpanded ? null : currentTrack.id);
-                      }}
-                      className="px-4 py-2 bg-secondary text-foreground rounded hover:bg-secondary/80 transition-colors"
-                    >
-                      {expandedPreview === currentTrack.id ? "Collapse" : "Expand"}
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const downloadUrl = getGoogleDriveDownloadUrl(currentTrack.id);
-                        window.open(downloadUrl, "_blank");
-                      }}
-                      className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors flex items-center gap-1"
-                    >
-                      <Download className="w-4 h-4" />
-                      Download
-                    </button>
-                  </div>
                 </div>
 
                 {/* Google Drive Preview - Always render for current track */}
