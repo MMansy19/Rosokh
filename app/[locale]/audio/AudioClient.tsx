@@ -94,7 +94,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
   // Audio player enhanced state
   const [iframeLoading, setIframeLoading] = useState<boolean>(false);
   const [audioReady, setAudioReady] = useState<boolean>(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
   const [estimatedDuration, setEstimatedDuration] = useState<string>("Loading...");
   const [audioError, setAudioError] = useState<string | null>(null);
 
@@ -394,41 +393,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
               </div>
             </div>
             
-            {/* Speed Control Bar */}
-            <div className="bg-gradient-to-r from-gray-800 to-gray-700 px-4 py-2 border-b border-gray-600">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs text-gray-300 font-medium">Playback Speed:</span>
-                  <div className="flex items-center gap-1">
-                    {[0.5, 0.75, 1, 1.25, 1.5, 2].map((speed) => (
-                      <button
-                        key={speed}
-                        onClick={() => setPlaybackSpeed(speed)}
-                        className={`px-2 py-1 text-xs rounded transition-all duration-200 ${
-                          playbackSpeed === speed
-                            ? 'bg-blue-600 text-white shadow-md'
-                            : 'bg-gray-600 text-gray-300 hover:bg-gray-500'
-                        }`}
-                      >
-                        {speed}x
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-3 text-xs text-gray-300">
-                  <div className="flex items-center gap-1">
-                    <span>🎵</span>
-                    <span>Quality: {track.quality}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span>☁️</span>
-                    <span>Streaming</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
             {/* Iframe with enhanced loading overlay */}
             <div className="relative bg-gradient-to-br from-gray-900 to-slate-900">
               {/* Enhanced loading overlay */}
@@ -458,17 +422,18 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
               )}
               
               <iframe
-                src={previewUrl}
+                src={`${previewUrl}?autoplay=1`}
                 width="100%"
                 height={isExpanded ? "500" : "180"}
-                allow="autoplay; encrypted-media"
-                className="relative transition-all duration-300 bg-gradient-to-br from-gray-900 to-slate-900"
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                className={`w-full h-full rounded-lg relative transition-all duration-300 bg-gradient-to-br from-gray-900 to-slate-900 ${iframeLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}
                 title={`${track.title} - ${track.reciter.name}`}
                 loading="lazy"
                 sandbox="allow-scripts allow-same-origin allow-presentation"
+                allowFullScreen
                 onLoad={() => {
                   setIframeLoading(false);
-                  setAudioReady(true);
+                  setTimeout(() => setAudioReady(true), 1000);
                   setAudioError(null);
                   // Estimate duration based on track type
                   const duration = track.category === 'quran' ? '45-75 min' : 
@@ -477,7 +442,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                   setEstimatedDuration(duration);
                   
                   // Hide ready indicator after 3 seconds
-                  setTimeout(() => setAudioReady(false), 3000);
+                  setTimeout(() => setAudioReady(false), 4000);
                 }}
                 onError={() => {
                   setIframeLoading(false);
@@ -485,6 +450,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                   setAudioReady(false);
                 }}
               />
+            
             </div>
             
             {/* Audio Controls Footer */}
@@ -629,23 +595,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                         </li>
                       </ul>
                     </div>
-                    <div>
-                      <h4 className="text-xs font-medium text-blue-600 dark:text-blue-400 mb-1">Advanced Options:</h4>
-                      <ul className="text-xs text-blue-600 dark:text-blue-400 space-y-1">
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
-                          <span>Right-click for playback speed</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
-                          <span>Download for offline access</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
-                          <span>Full-screen mode available</span>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -690,7 +639,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
     setAudioReady(false);
     setAudioError(null);
     setEstimatedDuration("Loading...");
-    setPlaybackSpeed(1); // Reset speed to normal
     
     // Scroll to current player section smoothly
     setTimeout(() => {
