@@ -1,56 +1,59 @@
-import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
-import fs from 'fs';
+import { NextRequest, NextResponse } from "next/server";
+import path from "path";
+import fs from "fs";
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const type = searchParams.get('type');
+    const type = searchParams.get("type");
 
-    if (!type || !['tracks', 'reciters', 'categories'].includes(type)) {
+    if (!type || !["tracks", "reciters", "categories"].includes(type)) {
       return NextResponse.json(
-        { error: 'Invalid type parameter. Must be tracks, reciters, or categories' },
-        { status: 400 }
+        {
+          error:
+            "Invalid type parameter. Must be tracks, reciters, or categories",
+        },
+        { status: 400 },
       );
     }
 
     let fileName: string;
     switch (type) {
-      case 'tracks':
-        fileName = 'audio-tracks.json';
+      case "tracks":
+        fileName = "audio-tracks.json";
         break;
-      case 'reciters':
-        fileName = 'reciters.json';
+      case "reciters":
+        fileName = "reciters.json";
         break;
-      case 'categories':
-        fileName = 'audio-categories.json';
+      case "categories":
+        fileName = "audio-categories.json";
         break;
       default:
-        return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
+        return NextResponse.json({ error: "Invalid type" }, { status: 400 });
     }
 
-    const filePath = path.join(process.cwd(), 'public', 'data', fileName);
-    
+    const filePath = path.join(process.cwd(), "public", "data", fileName);
+
     if (!fs.existsSync(filePath)) {
       return NextResponse.json(
         { error: `File ${fileName} not found` },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const fileContent = fs.readFileSync(filePath, "utf-8");
     const jsonData = JSON.parse(fileContent);
 
     return NextResponse.json(jsonData, {
       headers: {
-        'Cache-Control': 'public, max-age=3600', // Cache for 1 hour
+        "Cache-Control": "public, max-age=3600", // Cache for 1 hour
       },
     });
   } catch (error) {
-    console.error('Error serving audio data:', error);
+    console.error("Error serving audio data:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }

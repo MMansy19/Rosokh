@@ -65,44 +65,71 @@ export default function CalendarClient({
   const getIslamicEvents = (): IslamicEvent[] => [
     {
       date: "2024-01-01",
-      title: messages?.calendar?.events?.islamic_new_year?.title || "Islamic New Year",
-      arabicTitle: messages?.calendar?.events?.islamic_new_year?.arabicTitle || "رأس السنة الهجرية",
-      description: messages?.calendar?.events?.islamic_new_year?.description || "The beginning of the Islamic calendar year",
+      title:
+        messages?.calendar?.events?.islamic_new_year?.title ||
+        "Islamic New Year",
+      arabicTitle:
+        messages?.calendar?.events?.islamic_new_year?.arabicTitle ||
+        "رأس السنة الهجرية",
+      description:
+        messages?.calendar?.events?.islamic_new_year?.description ||
+        "The beginning of the Islamic calendar year",
       type: "holiday",
     },
     {
       date: "2024-01-10",
-      title: messages?.calendar?.events?.day_of_ashura?.title || "Day of Ashura",
-      arabicTitle: messages?.calendar?.events?.day_of_ashura?.arabicTitle || "يوم عاشوراء",
-      description: messages?.calendar?.events?.day_of_ashura?.description || "The 10th day of Muharram, a day of fasting",
+      title:
+        messages?.calendar?.events?.day_of_ashura?.title || "Day of Ashura",
+      arabicTitle:
+        messages?.calendar?.events?.day_of_ashura?.arabicTitle || "يوم عاشوراء",
+      description:
+        messages?.calendar?.events?.day_of_ashura?.description ||
+        "The 10th day of Muharram, a day of fasting",
       type: "sunnah",
     },
     {
       date: "2024-03-01",
-      title: messages?.calendar?.events?.isra_and_miraj?.title || "Isra and Miraj",
-      arabicTitle: messages?.calendar?.events?.isra_and_miraj?.arabicTitle || "الإسراء والمعراج",
-      description: messages?.calendar?.events?.isra_and_miraj?.description || "The night journey of Prophet Muhammad (PBUH)",
+      title:
+        messages?.calendar?.events?.isra_and_miraj?.title || "Isra and Miraj",
+      arabicTitle:
+        messages?.calendar?.events?.isra_and_miraj?.arabicTitle ||
+        "الإسراء والمعراج",
+      description:
+        messages?.calendar?.events?.isra_and_miraj?.description ||
+        "The night journey of Prophet Muhammad (PBUH)",
       type: "historical",
     },
     {
       date: "2024-04-01",
-      title: messages?.calendar?.events?.start_of_ramadan?.title || "Start of Ramadan",
-      arabicTitle: messages?.calendar?.events?.start_of_ramadan?.arabicTitle || "بداية شهر رمضان",
-      description: messages?.calendar?.events?.start_of_ramadan?.description || "The beginning of the holy month of fasting",
+      title:
+        messages?.calendar?.events?.start_of_ramadan?.title ||
+        "Start of Ramadan",
+      arabicTitle:
+        messages?.calendar?.events?.start_of_ramadan?.arabicTitle ||
+        "بداية شهر رمضان",
+      description:
+        messages?.calendar?.events?.start_of_ramadan?.description ||
+        "The beginning of the holy month of fasting",
       type: "holiday",
     },
     {
       date: "2024-05-01",
       title: messages?.calendar?.events?.eid_al_fitr?.title || "Eid al-Fitr",
-      arabicTitle: messages?.calendar?.events?.eid_al_fitr?.arabicTitle || "عيد الفطر",
-      description: messages?.calendar?.events?.eid_al_fitr?.description || "The festival of breaking the fast",
+      arabicTitle:
+        messages?.calendar?.events?.eid_al_fitr?.arabicTitle || "عيد الفطر",
+      description:
+        messages?.calendar?.events?.eid_al_fitr?.description ||
+        "The festival of breaking the fast",
       type: "holiday",
     },
     {
       date: "2024-07-10",
       title: messages?.calendar?.events?.eid_al_adha?.title || "Eid al-Adha",
-      arabicTitle: messages?.calendar?.events?.eid_al_adha?.arabicTitle || "عيد الأضحى",
-      description: messages?.calendar?.events?.eid_al_adha?.description || "The festival of sacrifice",
+      arabicTitle:
+        messages?.calendar?.events?.eid_al_adha?.arabicTitle || "عيد الأضحى",
+      description:
+        messages?.calendar?.events?.eid_al_adha?.description ||
+        "The festival of sacrifice",
       type: "holiday",
     },
   ];
@@ -361,7 +388,8 @@ export default function CalendarClient({
             <div className="mt-8 card group rounded-lg shadow-lg p-6">
               <h3 className="text-xl font-bold text-foreground mb-4">
                 {messages?.calendar?.eventsThisMonth || "Events This Month"}
-              </h3>                <div className="space-y-4">
+              </h3>{" "}
+              <div className="space-y-4">
                 {islamicEvents.map((event, index) => (
                   <div
                     key={index}

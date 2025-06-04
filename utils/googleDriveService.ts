@@ -46,11 +46,11 @@ export interface Reciter {
 
 class GoogleDriveService {
   private apiKey: string;
-  private baseUrl: string = 'api/audio-data';
+  private baseUrl: string = "api/audio-data";
 
   constructor() {
     // In production, store this in environment variables
-    this.apiKey = process.env.NEXT_PUBLIC_GOOGLE_DRIVE_API_KEY || '';
+    this.apiKey = process.env.NEXT_PUBLIC_GOOGLE_DRIVE_API_KEY || "";
   }
 
   /**
@@ -73,7 +73,7 @@ class GoogleDriveService {
   async getFileMetadata(fileId: string): Promise<GoogleDriveFile | null> {
     try {
       const response = await fetch(
-        `${this.baseUrl}/files/${fileId}?key=${this.apiKey}&fields=id,name,size,mimeType,webViewLink,thumbnailLink,createdTime,modifiedTime`
+        `${this.baseUrl}/files/${fileId}?key=${this.apiKey}&fields=id,name,size,mimeType,webViewLink,thumbnailLink,createdTime,modifiedTime`,
       );
 
       if (!response.ok) {
@@ -81,20 +81,20 @@ class GoogleDriveService {
       }
 
       const fileData = await response.json();
-      
+
       return {
         id: fileData.id,
         name: fileData.name,
-        size: this.formatFileSize(parseInt(fileData.size || '0')),
+        size: this.formatFileSize(parseInt(fileData.size || "0")),
         mimeType: fileData.mimeType,
         downloadUrl: this.getDirectDownloadUrl(fileData.id),
         webViewLink: fileData.webViewLink,
         thumbnailLink: fileData.thumbnailLink,
         createdTime: fileData.createdTime,
-        modifiedTime: fileData.modifiedTime
+        modifiedTime: fileData.modifiedTime,
       };
     } catch (error) {
-      console.error('Error fetching file metadata:', error);
+      console.error("Error fetching file metadata:", error);
       return null;
     }
   }
@@ -105,7 +105,7 @@ class GoogleDriveService {
   async getFolderContents(folderId: string): Promise<GoogleDriveFile[]> {
     try {
       const response = await fetch(
-        `${this.baseUrl}/files?key=${this.apiKey}&q='${folderId}'+in+parents&fields=files(id,name,size,mimeType,webViewLink,thumbnailLink,createdTime,modifiedTime)`
+        `${this.baseUrl}/files?key=${this.apiKey}&q='${folderId}'+in+parents&fields=files(id,name,size,mimeType,webViewLink,thumbnailLink,createdTime,modifiedTime)`,
       );
 
       if (!response.ok) {
@@ -113,20 +113,20 @@ class GoogleDriveService {
       }
 
       const data = await response.json();
-      
+
       return data.files.map((file: any) => ({
         id: file.id,
         name: file.name,
-        size: this.formatFileSize(parseInt(file.size || '0')),
+        size: this.formatFileSize(parseInt(file.size || "0")),
         mimeType: file.mimeType,
         downloadUrl: this.getDirectDownloadUrl(file.id),
         webViewLink: file.webViewLink,
         thumbnailLink: file.thumbnailLink,
         createdTime: file.createdTime,
-        modifiedTime: file.modifiedTime
+        modifiedTime: file.modifiedTime,
       }));
     } catch (error) {
-      console.error('Error fetching folder contents:', error);
+      console.error("Error fetching folder contents:", error);
       return [];
     }
   }
@@ -138,8 +138,8 @@ class GoogleDriveService {
     try {
       // Load local data
       const [tracksResponse, recitersResponse] = await Promise.all([
-        fetch('/data/audio-tracks.json'),
-        fetch('/data/reciters.json')
+        fetch("/data/audio-tracks.json"),
+        fetch("/data/reciters.json"),
       ]);
 
       const tracksData = await tracksResponse.json();
@@ -166,7 +166,7 @@ class GoogleDriveService {
                 size: "0 MB", // Will be updated when metadata is loaded
                 driveFileId: fileId,
                 downloadUrl: this.getDirectDownloadUrl(fileId),
-                streamUrl: this.getStreamingUrl(fileId)
+                streamUrl: this.getStreamingUrl(fileId),
               });
             }
           }
@@ -192,7 +192,7 @@ class GoogleDriveService {
                 size: "0 MB",
                 driveFileId: fileId,
                 downloadUrl: this.getDirectDownloadUrl(fileId),
-                streamUrl: this.getStreamingUrl(fileId)
+                streamUrl: this.getStreamingUrl(fileId),
               });
             }
           }
@@ -203,7 +203,9 @@ class GoogleDriveService {
       if (tracksData.duas) {
         for (const dua of tracksData.duas) {
           for (const reciterKey in dua.driveFiles) {
-            const reciter = recitersData.reciters.find((r: any) => r.id === reciterKey);
+            const reciter = recitersData.reciters.find(
+              (r: any) => r.id === reciterKey,
+            );
             if (reciter) {
               const fileId = dua.driveFiles[reciterKey];
               tracks.push({
@@ -218,7 +220,7 @@ class GoogleDriveService {
                 size: "0 MB",
                 driveFileId: fileId,
                 downloadUrl: this.getDirectDownloadUrl(fileId),
-                streamUrl: this.getStreamingUrl(fileId)
+                streamUrl: this.getStreamingUrl(fileId),
               });
             }
           }
@@ -241,7 +243,7 @@ class GoogleDriveService {
               size: "0 MB",
               driveFileId: fileId,
               downloadUrl: this.getDirectDownloadUrl(fileId),
-              streamUrl: this.getStreamingUrl(fileId)
+              streamUrl: this.getStreamingUrl(fileId),
             });
           }
         }
@@ -263,7 +265,7 @@ class GoogleDriveService {
               size: "0 MB",
               driveFileId: fileId,
               downloadUrl: this.getDirectDownloadUrl(fileId),
-              streamUrl: this.getStreamingUrl(fileId)
+              streamUrl: this.getStreamingUrl(fileId),
             });
           }
         }
@@ -271,7 +273,7 @@ class GoogleDriveService {
 
       return tracks;
     } catch (error) {
-      console.error('Error loading audio tracks:', error);
+      console.error("Error loading audio tracks:", error);
       return [];
     }
   }
@@ -281,11 +283,11 @@ class GoogleDriveService {
    */
   async loadReciters(): Promise<Reciter[]> {
     try {
-      const response = await fetch('/data/reciters.json');
+      const response = await fetch("/data/reciters.json");
       const data = await response.json();
       return data.reciters;
     } catch (error) {
-      console.error('Error loading reciters:', error);
+      console.error("Error loading reciters:", error);
       return [];
     }
   }
@@ -294,58 +296,58 @@ class GoogleDriveService {
    * Download audio file with progress tracking
    */
   async downloadAudioFile(
-    fileId: string, 
+    fileId: string,
     filename: string,
-    onProgress?: (progress: number) => void
+    onProgress?: (progress: number) => void,
   ): Promise<boolean> {
     try {
       const downloadUrl = this.getDirectDownloadUrl(fileId);
-      
+
       const response = await fetch(downloadUrl);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const contentLength = response.headers.get('content-length');
+      const contentLength = response.headers.get("content-length");
       const total = contentLength ? parseInt(contentLength, 10) : 0;
       let loaded = 0;
 
       const reader = response.body?.getReader();
       if (!reader) {
-        throw new Error('Unable to read response body');
+        throw new Error("Unable to read response body");
       }
 
       const chunks: Uint8Array[] = [];
 
       while (true) {
         const { done, value } = await reader.read();
-        
+
         if (done) break;
-        
+
         chunks.push(value);
         loaded += value.length;
-        
+
         if (onProgress && total > 0) {
           onProgress((loaded / total) * 100);
         }
       }
 
       // Create blob and download
-      const blob = new Blob(chunks, { type: 'audio/mpeg' });
+      const blob = new Blob(chunks, { type: "audio/mpeg" });
       const url = URL.createObjectURL(blob);
-      
-      const link = document.createElement('a');
+
+      const link = document.createElement("a");
       link.href = url;
       link.download = filename;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
+
       URL.revokeObjectURL(url);
-      
+
       return true;
     } catch (error) {
-      console.error('Error downloading file:', error);
+      console.error("Error downloading file:", error);
       return false;
     }
   }
@@ -358,20 +360,20 @@ class GoogleDriveService {
     const totalSeconds = verses * 10;
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   }
 
   /**
    * Format file size in human readable format
    */
   private formatFileSize(bytes: number): string {
-    if (bytes === 0) return '0 Bytes';
-    
+    if (bytes === 0) return "0 Bytes";
+
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   }
 
   /**
@@ -382,7 +384,7 @@ class GoogleDriveService {
       const metadata = await this.getFileMetadata(fileId);
       return metadata !== null;
     } catch (error) {
-      console.error('Error validating file access:', error);
+      console.error("Error validating file access:", error);
       return false;
     }
   }

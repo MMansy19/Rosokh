@@ -468,7 +468,7 @@
     },
     "categories": {
       "quran": "Quran Recitation",
-      "lectures": "Islamic Lectures", 
+      "lectures": "Islamic Lectures",
       "documentaries": "Documentaries",
       "children": "Children's Content",
       "nasheed": "Nasheed",
@@ -623,7 +623,7 @@
     "read": "Read",
     "search": "Search",
     "surahs": "Surahs",
-    "verses": "verses",  
+    "verses": "verses",
     "translation": "Translation",
     "transliteration": "Transliteration",
     "loading": "Loading...",

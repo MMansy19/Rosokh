@@ -132,35 +132,35 @@ body {
       transparent 2px
     ),
     /* Medium Primary Dots */
-    radial-gradient(
-      circle at 75% 75%,
-      var(--color-primary) 1.5px,
-      transparent 1.5px
-    ),
+      radial-gradient(
+        circle at 75% 75%,
+        var(--color-primary) 1.5px,
+        transparent 1.5px
+      ),
     /* Small Accent Dots */
-    radial-gradient(
-      circle at 50% 50%,
-      var(--color-accent) 1px,
-      transparent 1px
-    ),
+      radial-gradient(
+        circle at 50% 50%,
+        var(--color-accent) 1px,
+        transparent 1px
+      ),
     /* Tiny Primary Dots */
-    radial-gradient(
-      circle at 12.5% 87.5%,
-      var(--color-primary) 0.5px,
-      transparent 0.5px
-    ),
+      radial-gradient(
+        circle at 12.5% 87.5%,
+        var(--color-primary) 0.5px,
+        transparent 0.5px
+      ),
     /* Medium Accent Dots */
-    radial-gradient(
-      circle at 87.5% 12.5%,
-      var(--color-accent) 1.2px,
-      transparent 1.2px
-    ),
+      radial-gradient(
+        circle at 87.5% 12.5%,
+        var(--color-accent) 1.2px,
+        transparent 1.2px
+      ),
     /* Scattered Small Dots */
-    radial-gradient(
-      circle at 37.5% 62.5%,
-      var(--color-primary) 0.8px,
-      transparent 0.8px
-    );
+      radial-gradient(
+        circle at 37.5% 62.5%,
+        var(--color-primary) 0.8px,
+        transparent 0.8px
+      );
 
   background-size:
     120px 120px,
@@ -739,19 +739,19 @@ body {
   .xs\:block {
     display: block;
   }
-  
+
   .xs\:hidden {
     display: none;
   }
-  
+
   .xs\:text-xs {
     font-size: 0.75rem;
   }
-  
+
   .xs\:p-2 {
     padding: 0.5rem;
   }
-  
+
   .xs\:px-3 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
@@ -794,17 +794,19 @@ body {
   .hover\:bg-secondary:hover {
     background-color: initial;
   }
-  
+
   .group:active .group-hover\:scale-110 {
     transform: scale(1.1);
   }
-  
+
   .active\:scale-95:active {
     transform: scale(0.95);
   }
-  
+
   /* Larger touch targets for mobile */
-  button, .btn, a[role="button"] {
+  button,
+  .btn,
+  a[role="button"] {
     min-height: 44px;
     min-width: 44px;
   }
@@ -824,15 +826,15 @@ body {
   .safe-top {
     padding-top: max(1rem, env(safe-area-inset-top));
   }
-  
+
   .safe-bottom {
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
-  
+
   .safe-left {
     padding-left: max(1rem, env(safe-area-inset-left));
   }
-  
+
   .safe-right {
     padding-right: max(1rem, env(safe-area-inset-right));
   }

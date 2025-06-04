@@ -109,13 +109,12 @@ export function Header({ locale, messages }: HeaderProps) {
             className="flex items-center space-x-2 rtl:space-x-reverse shrink-0"
             onClick={() => setIsMenuOpen(false)}
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-            </div>
+            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center"></div>
             <div className="flex flex-col">
               <span className="font-bold text-base sm:text-lg text-foreground">
                 {messages?.common?.brand?.name || "Rosokh"}
               </span>
-              </div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -155,8 +154,8 @@ export function Header({ locale, messages }: HeaderProps) {
               {isLangMenuOpen && (
                 <>
                   {/* Backdrop for mobile */}
-                  <div 
-                    className="fixed inset-0 z-10 md:hidden" 
+                  <div
+                    className="fixed inset-0 z-10 md:hidden"
                     onClick={() => setIsLangMenuOpen(false)}
                   />
                   <div className="absolute top-full mt-2 right-0 bg-black/50 backdrop-blur-md rtl:right-auto rtl:left-0 bg-surface border border-border rounded-lg shadow-lg min-w-[120px] animate-fadeIn z-20">
@@ -180,7 +179,7 @@ export function Header({ locale, messages }: HeaderProps) {
                 </>
               )}
             </div>
-            
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
@@ -221,7 +220,7 @@ export function Header({ locale, messages }: HeaderProps) {
       {isMenuOpen && (
         <>
           {/* Backdrop */}
-          <div 
+          <div
             className="md:hidden fixed inset-0 top-14 sm:top-16 z-30 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
           />
@@ -302,7 +301,8 @@ export function Header({ locale, messages }: HeaderProps) {
                               <Moon className="w-5 h-5 text-primary" />
                             </div>
                             <span className="font-medium text-foreground">
-                              {messages?.common?.actions?.dark_mode || "Dark Mode"}
+                              {messages?.common?.actions?.dark_mode ||
+                                "Dark Mode"}
                             </span>
                           </>
                         ) : (
@@ -311,7 +311,8 @@ export function Header({ locale, messages }: HeaderProps) {
                               <Sun className="w-5 h-5 text-primary" />
                             </div>
                             <span className="font-medium text-foreground">
-                              {messages?.common?.actions?.light_mode || "Light Mode"}
+                              {messages?.common?.actions?.light_mode ||
+                                "Light Mode"}
                             </span>
                           </>
                         )
@@ -321,7 +322,8 @@ export function Header({ locale, messages }: HeaderProps) {
                             <Sun className="w-5 h-5 text-primary" />
                           </div>
                           <span className="font-medium text-foreground">
-                            {messages?.common?.actions?.light_mode || "Light Mode"}
+                            {messages?.common?.actions?.light_mode ||
+                              "Light Mode"}
                           </span>
                         </>
                       )}

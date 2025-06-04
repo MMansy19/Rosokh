@@ -39,7 +39,12 @@
       "name": "Daily Essentials",
       "arabicName": "الأساسيات اليومية",
       "description": "Essential daily recitations and duas",
-      "tracks": ["al-fatihah", "ayat-kursi", "morning-adhkar", "evening-adhkar"],
+      "tracks": [
+        "al-fatihah",
+        "ayat-kursi",
+        "morning-adhkar",
+        "evening-adhkar"
+      ],
       "duration": "25:30",
       "trackCount": 4
     },

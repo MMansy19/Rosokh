@@ -19,10 +19,13 @@ interface QuranSearchProps {
   messages: any;
 }
 
-export default function QuranSearch({ locale, messages }: QuranSearchProps) {  const [searchTerm, setSearchTerm] = useState("");
+export default function QuranSearch({ locale, messages }: QuranSearchProps) {
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchType, setSearchType] = useState<"text" | "surah" | "verse">("text");
+  const [searchType, setSearchType] = useState<"text" | "surah" | "verse">(
+    "text",
+  );
   const [selectedTranslation, setSelectedTranslation] = useState("en.sahih");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
@@ -30,7 +33,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
     surahRange: { start: 1, end: 114 },
     includeTranslation: true,
     includeArabic: true,
-    exactMatch: false
+    exactMatch: false,
   });
 
   // Load recent searches from localStorage
@@ -43,7 +46,10 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
 
   // Save recent searches to localStorage
   const saveRecentSearch = (term: string) => {
-    const updated = [term, ...recentSearches.filter(s => s !== term)].slice(0, 10);
+    const updated = [term, ...recentSearches.filter((s) => s !== term)].slice(
+      0,
+      10,
+    );
     setRecentSearches(updated);
     localStorage.setItem("quran_recent_searches", JSON.stringify(updated));
   };
@@ -81,7 +87,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
 
     try {
       // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       // Mock search results - in production, this would be an API call
       const mockResults: SearchResult[] = [
@@ -91,9 +97,11 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
           surahName: "Al-Baqarah",
           surahNameArabic: "البقرة",
           verseNumber: 255,
-          arabicText: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ",
-          translation: "Allah - there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep.",
-          relevanceScore: 95
+          arabicText:
+            "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ",
+          translation:
+            "Allah - there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep.",
+          relevanceScore: 95,
         },
         {
           id: "1:1",
@@ -102,8 +110,9 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
           surahNameArabic: "الفاتحة",
           verseNumber: 1,
           arabicText: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-          translation: "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
-          relevanceScore: 90
+          translation:
+            "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+          relevanceScore: 90,
         },
         {
           id: "3:18",
@@ -111,18 +120,21 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
           surahName: "Ali 'Imran",
           surahNameArabic: "آل عمران",
           verseNumber: 18,
-          arabicText: "شَهِدَ اللَّهُ أَنَّهُ لَا إِلَٰهَ إِلَّا هُوَ وَالْمَلَائِكَةُ وَأُولُو الْعِلْمِ",
-          translation: "Allah witnesses that there is no deity except Him, and [so do] the angels and those of knowledge",
-          relevanceScore: 85
-        }
+          arabicText:
+            "شَهِدَ اللَّهُ أَنَّهُ لَا إِلَٰهَ إِلَّا هُوَ وَالْمَلَائِكَةُ وَأُولُو الْعِلْمِ",
+          translation:
+            "Allah witnesses that there is no deity except Him, and [so do] the angels and those of knowledge",
+          relevanceScore: 85,
+        },
       ];
 
       // Filter results based on search term
-      const filtered = mockResults.filter(result => 
-        result.arabicText.includes(term) ||
-        result.translation.toLowerCase().includes(term.toLowerCase()) ||
-        result.surahName.toLowerCase().includes(term.toLowerCase()) ||
-        result.surahNameArabic.includes(term)
+      const filtered = mockResults.filter(
+        (result) =>
+          result.arabicText.includes(term) ||
+          result.translation.toLowerCase().includes(term.toLowerCase()) ||
+          result.surahName.toLowerCase().includes(term.toLowerCase()) ||
+          result.surahNameArabic.includes(term),
       );
 
       setSearchResults(filtered);
@@ -165,7 +177,8 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
             {messages?.search?.title || "Quran Search"}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {messages?.search?.subtitle || "Search through the Holy Quran by text, surah, or verse"}
+            {messages?.search?.subtitle ||
+              "Search through the Holy Quran by text, surah, or verse"}
           </p>
         </div>
 
@@ -175,18 +188,31 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
             {/* Search Type Tabs */}
             <div className="flex sm:flex-row flex-col gap-2 mb-4 justify-center w-full">
               {[
-                { key: "text", label: messages?.search?.searchText || "Search Text", icon: "🔍" },
-                { key: "surah", label: messages?.search?.searchSurah || "Search Surah", icon: "📖" },
-                { key: "verse", label: messages?.search?.searchVerse || "Search Verse", icon: "🎯" }
+                {
+                  key: "text",
+                  label: messages?.search?.searchText || "Search Text",
+                  icon: "🔍",
+                },
+                {
+                  key: "surah",
+                  label: messages?.search?.searchSurah || "Search Surah",
+                  icon: "📖",
+                },
+                {
+                  key: "verse",
+                  label: messages?.search?.searchVerse || "Search Verse",
+                  icon: "🎯",
+                },
               ].map(({ key, label, icon }) => (
                 <button
                   key={key}
                   onClick={() => setSearchType(key as typeof searchType)}
                   className={`px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 border border-border md:text-base text-sm font-medium
-                     ${searchType === key
-                    ? "bg-primary text-white shadow-md"
-                    : "text-muted hover:text-foreground hover:bg-secondary"
-                    }`}
+                     ${
+                       searchType === key
+                         ? "bg-primary text-white shadow-md"
+                         : "text-muted hover:text-foreground hover:bg-secondary"
+                     }`}
                 >
                   <span>{icon}</span>
                   {label}
@@ -204,14 +230,16 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder={
-                  searchType === "text" 
-                    ? messages?.search?.placeholderText || "Search for verses, keywords, or concepts..."
+                  searchType === "text"
+                    ? messages?.search?.placeholderText ||
+                      "Search for verses, keywords, or concepts..."
                     : searchType === "surah"
-                    ? messages?.search?.placeholderSurah || "Enter surah name or number..."
-                    : messages?.search?.placeholderVerse || "Enter verse reference (e.g., 2:255)..."
+                      ? messages?.search?.placeholderSurah ||
+                        "Enter surah name or number..."
+                      : messages?.search?.placeholderVerse ||
+                        "Enter verse reference (e.g., 2:255)..."
                 }
                 className="w-full px-10 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-
               />
               {searchTerm && (
                 <button
@@ -228,17 +256,21 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
               <label className="block text-sm font-medium text-foreground mb-2">
                 {messages?.search?.translation || "Translation"}
               </label>
-                <select
+              <select
                 value={selectedTranslation}
                 onChange={(e) => setSelectedTranslation(e.target.value)}
                 className="block w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-background text-foreground"
-                >
-                {getTranslationOptions().map(option => (
-                  <option key={option.value} value={option.value} className="bg-background text-foreground">
-                  {option.label}
+              >
+                {getTranslationOptions().map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                    className="bg-background text-foreground"
+                  >
+                    {option.label}
                   </option>
                 ))}
-                </select>
+              </select>
             </div>
 
             {/* Recent Searches */}
@@ -284,11 +316,14 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
             <div className="space-y-4">
               <div className="text-center mb-6">
                 <p className="text-lg text-foreground">
-                  {messages?.search?.resultsFound?.replace("{count}", searchResults.length.toString()) || 
-                   `Found ${searchResults.length} results for "${searchTerm}"`}
+                  {messages?.search?.resultsFound?.replace(
+                    "{count}",
+                    searchResults.length.toString(),
+                  ) ||
+                    `Found ${searchResults.length} results for "${searchTerm}"`}
                 </p>
               </div>
-              
+
               {searchResults.map((result) => (
                 <div
                   key={result.id}
@@ -297,13 +332,19 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-1">
-                        {result.surahName} ({result.surahNameArabic}) - {messages?.search?.verse || "Verse"} {result.verseNumber}
+                        {result.surahName} ({result.surahNameArabic}) -{" "}
+                        {messages?.search?.verse || "Verse"}{" "}
+                        {result.verseNumber}
                       </h3>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <BookOpen className="h-4 w-4" />
-                        <span>{messages?.search?.surah || "Surah"} {result.surahNumber}:{result.verseNumber}</span>
+                        <span>
+                          {messages?.search?.surah || "Surah"}{" "}
+                          {result.surahNumber}:{result.verseNumber}
+                        </span>
                         <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 rounded-full text-xs">
-                          {result.relevanceScore}% {messages?.search?.match || "match"}
+                          {result.relevanceScore}%{" "}
+                          {messages?.search?.match || "match"}
                         </span>
                       </div>
                     </div>
@@ -311,7 +352,10 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
 
                   {/* Arabic Text */}
                   <div className="mb-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg">
-                    <p className="text-xl leading-relaxed text-right font-arabic text-foreground" dir="rtl">
+                    <p
+                      className="text-xl leading-relaxed text-right font-arabic text-foreground"
+                      dir="rtl"
+                    >
                       {result.arabicText}
                     </p>
                   </div>
@@ -345,7 +389,8 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
                 {messages?.search?.noResults || "No results found"}
               </h3>
               <p className="text-muted-foreground">
-                {messages?.search?.noResultsDesc || `Try different keywords or check your spelling`}
+                {messages?.search?.noResultsDesc ||
+                  `Try different keywords or check your spelling`}
               </p>
             </div>
           ) : (
@@ -355,7 +400,8 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {  c
                 {messages?.search?.startSearching || "Start Searching"}
               </h3>
               <p className="text-muted-foreground max-w-md mx-auto">
-                {messages?.search?.startSearchingDesc || "Enter your search term above to find verses, surahs, or specific concepts in the Quran"}
+                {messages?.search?.startSearchingDesc ||
+                  "Enter your search term above to find verses, surahs, or specific concepts in the Quran"}
               </p>
             </div>
           )}

@@ -21,8 +21,7 @@ export function Footer({ locale, messages }: FooterProps) {
           {/* Brand Section */}
           <div className="space-y-4 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start space-x-2 rtl:space-x-reverse">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-              </div>
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center"></div>
               <div className="flex flex-col">
                 <span className="font-bold text-lg text-foreground">
                   {messages?.common?.brand?.name || "Rosokh"}
@@ -40,7 +39,6 @@ export function Footer({ locale, messages }: FooterProps) {
               <span>{messages?.footer?.for_ummah || "for the Ummah"}</span>
             </div>
           </div>
-          
           {/* Quick Links */}{" "}
           <div className="space-y-4 text-center md:text-left">
             <h3 className="font-semibold text-foreground">
@@ -64,7 +62,6 @@ export function Footer({ locale, messages }: FooterProps) {
               ))}
             </ul>
           </div>
-          
           {/* Features */}{" "}
           <div className="space-y-4 text-center md:text-left">
             <h3 className="font-semibold text-foreground">
@@ -82,7 +79,6 @@ export function Footer({ locale, messages }: FooterProps) {
               </li>
             </ul>
           </div>
-          
           {/* Contact */}{" "}
           <div className="space-y-4 text-center md:text-left">
             <h3 className="font-semibold text-foreground">

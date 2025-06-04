@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { 
-  Play, 
-  Pause, 
-  Volume2, 
-  VolumeX, 
-  Maximize, 
-  Minimize, 
-  SkipBack, 
+import { useState, useEffect, useRef } from "react";
+import {
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Maximize,
+  Minimize,
+  SkipBack,
   SkipForward,
   Settings,
   Download,
@@ -17,9 +17,9 @@ import {
   Bookmark,
   MoreHorizontal,
   ChevronDown,
-  ChevronUp
-} from 'lucide-react';
-import { VideoMetadata, formatDuration, formatViewCount } from './VideoService';
+  ChevronUp,
+} from "lucide-react";
+import { VideoMetadata, formatDuration, formatViewCount } from "./VideoService";
 
 interface VideoPlayerProps {
   video: VideoMetadata;
@@ -47,7 +47,7 @@ export function VideoPlayer({
   onVideoEnd,
   onVideoProgress,
   locale,
-  messages
+  messages,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(autoplay);
   const [currentTime, setCurrentTime] = useState(0);
@@ -60,10 +60,10 @@ export function VideoPlayer({
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [playbackSettings, setPlaybackSettings] = useState<PlaybackSettings>({
-    quality: '720p',
+    quality: "720p",
     speed: 1,
     autoplay: false,
-    subtitles: false
+    subtitles: false,
   });
 
   const playerRef = useRef<HTMLDivElement>(null);
@@ -83,17 +83,17 @@ export function VideoPlayer({
     // Set up progress tracking
     const interval = setInterval(() => {
       if (isPlaying) {
-        setCurrentTime(prev => {
+        setCurrentTime((prev) => {
           const newTime = prev + 1;
           onVideoProgress?.(newTime);
-          
+
           // Auto-pause at end
           if (newTime >= duration) {
             setIsPlaying(false);
             onVideoEnd?.();
             return duration;
           }
-          
+
           return newTime;
         });
       }
@@ -108,39 +108,39 @@ export function VideoPlayer({
       if (!playerRef.current?.contains(document.activeElement)) return;
 
       switch (event.code) {
-        case 'Space':
+        case "Space":
           event.preventDefault();
           togglePlayPause();
           break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
           event.preventDefault();
           skipBackward();
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           event.preventDefault();
           skipForward();
           break;
-        case 'ArrowUp':
+        case "ArrowUp":
           event.preventDefault();
           adjustVolume(0.1);
           break;
-        case 'ArrowDown':
+        case "ArrowDown":
           event.preventDefault();
           adjustVolume(-0.1);
           break;
-        case 'KeyM':
+        case "KeyM":
           event.preventDefault();
           toggleMute();
           break;
-        case 'KeyF':
+        case "KeyF":
           event.preventDefault();
           toggleFullscreen();
           break;
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   const togglePlayPause = () => {
@@ -177,12 +177,12 @@ export function VideoPlayer({
 
   const handleProgressClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (!progressRef.current) return;
-    
+
     const rect = progressRef.current.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const progressWidth = rect.width;
     const clickProgress = (clickX / progressWidth) * duration;
-    
+
     setCurrentTime(Math.max(0, Math.min(duration, clickProgress)));
   };
 
@@ -201,7 +201,7 @@ export function VideoPlayer({
       isLiked,
       isBookmarked,
       lastWatched: new Date().toISOString(),
-      watchTime: currentTime
+      watchTime: currentTime,
     };
     localStorage.setItem(`video_${video.id}`, JSON.stringify(data));
   };
@@ -210,7 +210,7 @@ export function VideoPlayer({
     const shareData = {
       title: video.title,
       text: video.description,
-      url: `https://youtube.com/watch?v=${video.id}`
+      url: `https://youtube.com/watch?v=${video.id}`,
     };
 
     try {
@@ -222,16 +222,16 @@ export function VideoPlayer({
         // You could show a toast notification here
       }
     } catch (error) {
-      console.error('Sharing failed:', error);
+      console.error("Sharing failed:", error);
     }
   };
 
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div 
+    <div
       ref={playerRef}
-      className={`relative bg-black rounded-lg overflow-hidden ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}
+      className={`relative bg-black rounded-lg overflow-hidden ${isFullscreen ? "fixed inset-0 z-50" : ""}`}
       tabIndex={0}
     >
       {/* Video Container */}
@@ -268,12 +268,12 @@ export function VideoPlayer({
       {showControls && (
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4">
           {/* Progress Bar */}
-          <div 
+          <div
             ref={progressRef}
             className="w-full h-1 bg-white/30 rounded cursor-pointer mb-3"
             onClick={handleProgressClick}
           >
-            <div 
+            <div
               className="h-full bg-red-600 rounded transition-all"
               style={{ width: `${progressPercentage}%` }}
             />
@@ -293,7 +293,11 @@ export function VideoPlayer({
                 onClick={togglePlayPause}
                 className="text-white hover:text-gray-300 transition-colors"
               >
-                {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
+                {isPlaying ? (
+                  <Pause className="w-6 h-6" />
+                ) : (
+                  <Play className="w-6 h-6" />
+                )}
               </button>
 
               <button
@@ -308,9 +312,13 @@ export function VideoPlayer({
                   onClick={toggleMute}
                   className="text-white hover:text-gray-300 transition-colors"
                 >
-                  {isMuted || volume === 0 ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                  {isMuted || volume === 0 ? (
+                    <VolumeX className="w-5 h-5" />
+                  ) : (
+                    <Volume2 className="w-5 h-5" />
+                  )}
                 </button>
-                
+
                 <input
                   type="range"
                   min="0"
@@ -343,7 +351,11 @@ export function VideoPlayer({
                 onClick={toggleFullscreen}
                 className="text-white hover:text-gray-300 transition-colors"
               >
-                {isFullscreen ? <Minimize className="w-5 h-5" /> : <Maximize className="w-5 h-5" />}
+                {isFullscreen ? (
+                  <Minimize className="w-5 h-5" />
+                ) : (
+                  <Maximize className="w-5 h-5" />
+                )}
               </button>
             </div>
           </div>
@@ -354,13 +366,18 @@ export function VideoPlayer({
       {showSettings && (
         <div className="absolute bottom-16 right-4 bg-black/90 text-white rounded-lg p-4 min-w-48">
           <h4 className="font-semibold mb-3">Settings</h4>
-          
+
           <div className="space-y-3">
             <div>
               <label className="block text-sm mb-1">Quality</label>
               <select
                 value={playbackSettings.quality}
-                onChange={(e) => setPlaybackSettings(prev => ({ ...prev, quality: e.target.value }))}
+                onChange={(e) =>
+                  setPlaybackSettings((prev) => ({
+                    ...prev,
+                    quality: e.target.value,
+                  }))
+                }
                 className="w-full bg-gray-700 rounded px-2 py-1 text-sm"
               >
                 <option value="1080p">1080p HD</option>
@@ -374,7 +391,12 @@ export function VideoPlayer({
               <label className="block text-sm mb-1">Speed</label>
               <select
                 value={playbackSettings.speed}
-                onChange={(e) => setPlaybackSettings(prev => ({ ...prev, speed: parseFloat(e.target.value) }))}
+                onChange={(e) =>
+                  setPlaybackSettings((prev) => ({
+                    ...prev,
+                    speed: parseFloat(e.target.value),
+                  }))
+                }
                 className="w-full bg-gray-700 rounded px-2 py-1 text-sm"
               >
                 <option value="0.25">0.25x</option>
@@ -392,7 +414,12 @@ export function VideoPlayer({
               <input
                 type="checkbox"
                 checked={playbackSettings.autoplay}
-                onChange={(e) => setPlaybackSettings(prev => ({ ...prev, autoplay: e.target.checked }))}
+                onChange={(e) =>
+                  setPlaybackSettings((prev) => ({
+                    ...prev,
+                    autoplay: e.target.checked,
+                  }))
+                }
                 className="rounded"
               />
             </div>
@@ -402,7 +429,12 @@ export function VideoPlayer({
               <input
                 type="checkbox"
                 checked={playbackSettings.subtitles}
-                onChange={(e) => setPlaybackSettings(prev => ({ ...prev, subtitles: e.target.checked }))}
+                onChange={(e) =>
+                  setPlaybackSettings((prev) => ({
+                    ...prev,
+                    subtitles: e.target.checked,
+                  }))
+                }
                 className="rounded"
               />
             </div>
@@ -422,12 +454,12 @@ interface VideoInfoProps {
   messages: any;
 }
 
-export function VideoInfo({ 
-  video, 
-  isExpanded = false, 
-  onToggleExpand, 
-  locale, 
-  messages 
+export function VideoInfo({
+  video,
+  isExpanded = false,
+  onToggleExpand,
+  locale,
+  messages,
 }: VideoInfoProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -443,14 +475,14 @@ export function VideoInfo({
 
   const toggleLike = () => {
     setIsLiked(!isLiked);
-    const data = JSON.parse(localStorage.getItem(`video_${video.id}`) || '{}');
+    const data = JSON.parse(localStorage.getItem(`video_${video.id}`) || "{}");
     data.isLiked = !isLiked;
     localStorage.setItem(`video_${video.id}`, JSON.stringify(data));
   };
 
   const toggleBookmark = () => {
     setIsBookmarked(!isBookmarked);
-    const data = JSON.parse(localStorage.getItem(`video_${video.id}`) || '{}');
+    const data = JSON.parse(localStorage.getItem(`video_${video.id}`) || "{}");
     data.isBookmarked = !isBookmarked;
     localStorage.setItem(`video_${video.id}`, JSON.stringify(data));
   };
@@ -459,7 +491,7 @@ export function VideoInfo({
     const shareData = {
       title: video.title,
       text: video.description,
-      url: `https://youtube.com/watch?v=${video.id}`
+      url: `https://youtube.com/watch?v=${video.id}`,
     };
 
     try {
@@ -469,7 +501,7 @@ export function VideoInfo({
         await navigator.clipboard.writeText(shareData.url);
       }
     } catch (error) {
-      console.error('Sharing failed:', error);
+      console.error("Sharing failed:", error);
     }
   };
 
@@ -496,21 +528,27 @@ export function VideoInfo({
           <button
             onClick={toggleLike}
             className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
-              isLiked ? 'bg-red-100 text-red-600' : 'bg-secondary text-foreground hover:bg-accent hover:text-white'
+              isLiked
+                ? "bg-red-100 text-red-600"
+                : "bg-secondary text-foreground hover:bg-accent hover:text-white"
             }`}
           >
-            <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
-            {isLiked ? 'Liked' : 'Like'}
+            <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
+            {isLiked ? "Liked" : "Like"}
           </button>
 
           <button
             onClick={toggleBookmark}
             className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
-              isBookmarked ? 'bg-blue-100 text-blue-600' : 'bg-secondary text-foreground hover:bg-accent hover:text-white'
+              isBookmarked
+                ? "bg-blue-100 text-blue-600"
+                : "bg-secondary text-foreground hover:bg-accent hover:text-white"
             }`}
           >
-            <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
-            {isBookmarked ? 'Saved' : 'Save'}
+            <Bookmark
+              className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`}
+            />
+            {isBookmarked ? "Saved" : "Save"}
           </button>
 
           <button
@@ -534,7 +572,9 @@ export function VideoInfo({
             {video.channelTitle.charAt(0).toUpperCase()}
           </div>
           <div>
-            <div className="font-semibold text-foreground">{video.channelTitle}</div>
+            <div className="font-semibold text-foreground">
+              {video.channelTitle}
+            </div>
             <div className="text-sm text-muted">Islamic Content Creator</div>
           </div>
         </div>
@@ -551,7 +591,11 @@ export function VideoInfo({
           className="flex items-center gap-2 mb-2 text-foreground hover:text-primary transition-colors"
         >
           <span className="font-medium">Description</span>
-          {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          {isExpanded ? (
+            <ChevronUp className="w-4 h-4" />
+          ) : (
+            <ChevronDown className="w-4 h-4" />
+          )}
         </button>
 
         {isExpanded ? (
@@ -559,7 +603,7 @@ export function VideoInfo({
             <p className="leading-relaxed whitespace-pre-wrap">
               {video.description}
             </p>
-            
+
             {video.tags.length > 0 && (
               <div className="pt-4 border-t border-border">
                 <div className="text-sm font-medium mb-2">Tags:</div>
@@ -577,9 +621,7 @@ export function VideoInfo({
             )}
           </div>
         ) : (
-          <p className="line-clamp-2 leading-relaxed">
-            {video.description}
-          </p>
+          <p className="line-clamp-2 leading-relaxed">{video.description}</p>
         )}
       </div>
     </div>

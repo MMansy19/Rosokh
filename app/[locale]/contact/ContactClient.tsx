@@ -160,153 +160,180 @@ export default function ContactClient({
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-8">
-          {/* Contact Form */}
-          <div className="card group rounded-lg shadow-lg p-8 border border-border">
-            <h2 className="text-2xl font-bold text-foreground mb-6">
-              {messages?.contact?.sendMessage || "Send us a Message"}
-            </h2>
+            {/* Contact Form */}
+            <div className="card group rounded-lg shadow-lg p-8 border border-border">
+              <h2 className="text-2xl font-bold text-foreground mb-6">
+                {messages?.contact?.sendMessage || "Send us a Message"}
+              </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {messages?.contact?.name || "Name"} *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder={
-                      messages?.contact?.namePlaceholder || "Your full name"
-                    }
-                  />
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {messages?.contact?.name || "Name"} *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder={
+                        messages?.contact?.namePlaceholder || "Your full name"
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {messages?.contact?.email || "Email"} *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder={
+                        messages?.contact?.emailPlaceholder ||
+                        "your.email@example.com"
+                      }
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    {messages?.contact?.email || "Email"} *
+                    {messages?.contact?.category || "Category"}
                   </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
+                  <select
+                    name="category"
+                    value={formData.category}
                     onChange={handleInputChange}
-                    required
                     className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder={
-                      messages?.contact?.emailPlaceholder ||
-                      "your.email@example.com"
-                    }
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  {messages?.contact?.category || "Category"}
-                </label>
-                <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                >
+                  >
                     {[
-                      { value: "general", label: messages?.contact?.categories?.general || "General Inquiry" },
-                      { value: "technical", label: messages?.contact?.categories?.technical || "Technical Support" },
-                      { value: "feature", label: messages?.contact?.categories?.feature || "Feature Request" },
-                      { value: "bug", label: messages?.contact?.categories?.bug || "Bug Report" },
-                      { value: "feedback", label: messages?.contact?.categories?.feedback || "Feedback" },
+                      {
+                        value: "general",
+                        label:
+                          messages?.contact?.categories?.general ||
+                          "General Inquiry",
+                      },
+                      {
+                        value: "technical",
+                        label:
+                          messages?.contact?.categories?.technical ||
+                          "Technical Support",
+                      },
+                      {
+                        value: "feature",
+                        label:
+                          messages?.contact?.categories?.feature ||
+                          "Feature Request",
+                      },
+                      {
+                        value: "bug",
+                        label:
+                          messages?.contact?.categories?.bug || "Bug Report",
+                      },
+                      {
+                        value: "feedback",
+                        label:
+                          messages?.contact?.categories?.feedback || "Feedback",
+                      },
                     ].map((option) => (
-                      <option key={option.value} value={option.value} className="bg-background text-foreground">
+                      <option
+                        key={option.value}
+                        value={option.value}
+                        className="bg-background text-foreground"
+                      >
                         {option.label}
                       </option>
                     ))}
-                    </select>
-              </div>
+                  </select>
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  {messages?.contact?.subject || "Subject"} *
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder={
-                    messages?.contact?.subjectPlaceholder ||
-                    "Brief description of your message"
-                  }
-                />
-              </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {messages?.contact?.subject || "Subject"} *
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder={
+                      messages?.contact?.subjectPlaceholder ||
+                      "Brief description of your message"
+                    }
+                  />
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  {messages?.contact?.message || "Message"} *
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
-                  placeholder={
-                    messages?.contact?.messagePlaceholder ||
-                    "Please provide as much detail as possible..."
-                  }
-                />
-              </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {messages?.contact?.message || "Message"} *
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={6}
+                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                    placeholder={
+                      messages?.contact?.messagePlaceholder ||
+                      "Please provide as much detail as possible..."
+                    }
+                  />
+                </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <div className="flex items-center justify-center">
-                    <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"></div>
-                    {messages?.contact?.sending || "Sending..."}
-                  </div>
-                ) : (
-                  messages?.contact?.sendMessage || "Send Message"
-                )}
-              </button>
-            </form>
-          </div>
-          {/* Support Hours */}
-          <div className="card group rounded-lg shadow-lg p-6">
-            <h3 className="text-xl font-bold mb-4">
-              {messages?.contact?.supportHours || "Support Hours"}
-            </h3>
-            <div className="space-y-2 text-sm opacity-90">
-              <p>
-                📞 {messages?.contact?.phoneSupport || "Phone Support"}: 9 AM
-                - 6 PM (UTC)
-              </p>
-              <p>
-                💬 {messages?.contact?.chatSupport || "Chat Support"}: 24/7
-              </p>
-              <p>
-                📧 {messages?.contact?.emailResponse || "Email Response"}:{" "}
-                {messages?.contact?.within24h || "Within 24 hours"}
-              </p>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center justify-center">
+                      <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"></div>
+                      {messages?.contact?.sending || "Sending..."}
+                    </div>
+                  ) : (
+                    messages?.contact?.sendMessage || "Send Message"
+                  )}
+                </button>
+              </form>
             </div>
+            {/* Support Hours */}
+            <div className="card group rounded-lg shadow-lg p-6">
+              <h3 className="text-xl font-bold mb-4">
+                {messages?.contact?.supportHours || "Support Hours"}
+              </h3>
+              <div className="space-y-2 text-sm opacity-90">
+                <p>
+                  📞 {messages?.contact?.phoneSupport || "Phone Support"}: 9 AM
+                  - 6 PM (UTC)
+                </p>
+                <p>
+                  💬 {messages?.contact?.chatSupport || "Chat Support"}: 24/7
+                </p>
+                <p>
+                  📧 {messages?.contact?.emailResponse || "Email Response"}:{" "}
+                  {messages?.contact?.within24h || "Within 24 hours"}
+                </p>
+              </div>
 
-            <div className="mt-4 pt-4 border-t border-white border-opacity-20">
-              <p className="text-sm opacity-75">
-                {messages?.contact?.quickResponse ||
-                  "For the quickest response, please use our contact form or reach out via Telegram."}
-              </p>
+              <div className="mt-4 pt-4 border-t border-white border-opacity-20">
+                <p className="text-sm opacity-75">
+                  {messages?.contact?.quickResponse ||
+                    "For the quickest response, please use our contact form or reach out via Telegram."}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
           {/* Contact Information & FAQ */}
           <div className="space-y-8">
@@ -328,16 +355,12 @@ export default function ContactClient({
                       <h4 className="font-semibold text-foreground mb-1">
                         {method.title}
                       </h4>
-                      <p className="text-sm text-muted">
-                        {method.description}
-                      </p>
+                      <p className="text-sm text-muted">{method.description}</p>
                       <p className="text-sm text-muted font-mono">
                         {method.value}
                       </p>
                     </div>
-                    <div className="text-muted">
-                      →
-                    </div>
+                    <div className="text-muted">→</div>
                   </a>
                 ))}
               </div>
@@ -353,16 +376,12 @@ export default function ContactClient({
                 {faqItems.map((item, index) => (
                   <details key={index} className="group">
                     <summary className="flex justify-between items-center cursor-pointer p-3 bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200">
-                      <span className="font-medium">
-                        {item.question}
-                      </span>
+                      <span className="font-medium">{item.question}</span>
                       <span className="text-muted group-open:rotate-180 transition-transform duration-200">
                         ↓
                       </span>
                     </summary>
-                    <div className="p-3 text-muted text-sm">
-                      {item.answer}
-                    </div>
+                    <div className="p-3 text-muted text-sm">{item.answer}</div>
                   </details>
                 ))}
               </div>
