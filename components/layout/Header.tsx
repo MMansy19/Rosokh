@@ -109,7 +109,7 @@ export function Header({ locale, messages }: HeaderProps) {
             className="flex items-center space-x-2 rtl:space-x-reverse shrink-0"
             onClick={() => setIsMenuOpen(false)}
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center"></div>
+            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center"></div>
             <div className="flex flex-col">
               <span className="font-bold text-base sm:text-lg text-foreground">
                 {messages?.common?.brand?.name || "Rosokh"}

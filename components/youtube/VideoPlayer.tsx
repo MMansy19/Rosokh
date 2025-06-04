@@ -22,7 +22,7 @@ import {
   Eye, // Add Eye icon for VideoInfo
   Clock, // Add Clock icon for VideoInfo
 } from "lucide-react";
-import { VideoMetadata, formatDuration, formatViewCount } from "./VideoService";
+import { VideoMetadata } from "@/hooks/useVideoData";
 
 interface VideoPlayerProps {
   video: VideoMetadata;
@@ -494,7 +494,7 @@ export function VideoInfo({
         <span>•</span>
         <div className="flex items-center gap-1">
           <Clock className="w-4 h-4" />
-          <span>{video.publishedAt.toLocaleDateString(locale)}</span>
+          <span>{new Date(video.publishedAt).toLocaleDateString(locale)}</span>
         </div>
         <span>•</span>
         <div className="flex items-center gap-1">
@@ -585,3 +585,25 @@ export function VideoInfo({
     </div>
   );
 }
+
+// Utility functions
+const formatDuration = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+  }
+
+  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+};
+
+const formatViewCount = (count: number): string => {
+  if (count >= 1000000) {
+    return `${(count / 1000000).toFixed(1)}M`;
+  } else if (count >= 1000) {
+    return `${(count / 1000).toFixed(1)}K`;
+  }
+  return count.toString();
+};

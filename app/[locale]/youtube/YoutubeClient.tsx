@@ -15,14 +15,9 @@ import {
   GraduationCap,
   Calendar,
 } from "lucide-react";
-import {
-  VideoService,
-  VideoMetadata,
-  VideoPlaylist,
-  VIDEO_CATEGORIES,
-  SearchFilters,
-} from "@/components/youtube/VideoService";
 import { VideoPlayer, VideoInfo } from "@/components/youtube/VideoPlayer";
+import YouTubeEmbed from "@/components/youtube/YouTubeEmbed";
+import { useVideoData, VideoMetadata, VideoCategory } from "@/hooks/useVideoData";
 
 // Add error handling for YoutubeClient
 interface ErrorBoundaryState {
@@ -79,103 +74,87 @@ interface YoutubeClientProps {
   messages: any;
 }
 
+// Helper functions
+const getCategoryIcon = (categoryId: string) => {
+  const iconMap: Record<string, React.ReactNode> = {
+    quran_recitation: <BookOpen className="w-4 h-4" />,
+    islamic_lectures: <GraduationCap className="w-4 h-4" />,
+    nasheed: <Music className="w-4 h-4" />,
+    hajj_umrah: <Calendar className="w-4 h-4" />,
+    ramadan: <Calendar className="w-4 h-4" />,
+    islamic_history: <BookOpen className="w-4 h-4" />,
+    prophet_stories: <BookOpen className="w-4 h-4" />,
+    islamic_knowledge: <GraduationCap className="w-4 h-4" />,
+  };
+
+  return iconMap[categoryId] || <Play className="w-4 h-4" />;
+};
+
+const formatDuration = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+  }
+
+  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+};
+
+const formatViewCount = (count: number): string => {
+  if (count >= 1000000) {
+    return `${(count / 1000000).toFixed(1)}M`;
+  } else if (count >= 1000) {
+    return `${(count / 1000).toFixed(1)}K`;
+  }
+  return count.toString();
+};
+
 export default function YoutubeClient({
   locale,
   messages,
 }: YoutubeClientProps) {
-  const [videoService] = useState(
-    () => new VideoService(process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || ""),
-  );
-  const [videos, setVideos] = useState<VideoMetadata[]>([]);
-  const [playlists, setPlaylists] = useState<VideoPlaylist[]>([]);
-  const [selectedVideo, setSelectedVideo] = useState<VideoMetadata | null>(
-    null,
-  );
+  const { videos, categories, loading, error, searchVideos, getVideosByCategory } = useVideoData();
+  const [filteredVideos, setFilteredVideos] = useState<VideoMetadata[]>([]);
+  const [selectedVideo, setSelectedVideo] = useState<VideoMetadata | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<
-    "videos" | "playlists" | "trending"
-  >("videos");
+  const [activeTab, setActiveTab] = useState<"videos" | "trending">("videos");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [showFilters, setShowFilters] = useState(false);
   const [showVideoDetails, setShowVideoDetails] = useState(false);
-  const [filters, setFilters] = useState<SearchFilters>({});
 
-  const loadFeaturedContent = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const [featuredVideos, featuredPlaylists] = await Promise.all([
-        videoService.searchVideos("islamic quran recitation", {}, 12),
-        videoService.getFeaturedPlaylists(locale),
-      ]);
+  const loadFeaturedContent = useCallback(() => {
+    setFilteredVideos(videos);
+  }, [videos]);
 
-      setVideos(featuredVideos);
-      setPlaylists(featuredPlaylists);
-    } catch (error) {
-      console.error("Failed to load featured content:", error);
-      // Show fallback content
-      setVideos([]);
-      setPlaylists([]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [locale]); // Remove videoService from dependencies as it's stable
-
-  // Load featured content on mount
+  // Load featured content when videos are loaded
   useEffect(() => {
-    loadFeaturedContent();
-  }, [loadFeaturedContent]);
-
-  const handleSearch = async (query: string) => {
-    if (!query.trim()) {
+    if (videos.length > 0) {
       loadFeaturedContent();
-      return;
     }
+  }, [videos, loadFeaturedContent]);
 
-    setIsLoading(true);
-    try {
-      const results = await videoService.searchVideos(query, filters, 20);
-      setVideos(results);
-    } catch (error) {
-      console.error("Search failed:", error);
-      setVideos([]);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleSearch = (query: string) => {
+    const results = searchVideos(query, selectedCategory);
+    setFilteredVideos(results);
   };
 
-  const handleCategoryFilter = async (categoryId: string) => {
+  const handleCategoryFilter = (categoryId: string) => {
     setSelectedCategory(categoryId);
-    setIsLoading(true);
-
-    try {
-      if (categoryId === "") {
-        loadFeaturedContent();
-      } else {
-        const categoryVideos = await videoService.getVideosByCategory(
-          categoryId,
-          20,
-        );
-        setVideos(categoryVideos);
-      }
-    } catch (error) {
-      console.error("Category filter failed:", error);
-    } finally {
-      setIsLoading(false);
+    if (categoryId === "") {
+      setFilteredVideos(videos);
+    } else {
+      const categoryVideos = getVideosByCategory(categoryId);
+      setFilteredVideos(categoryVideos);
     }
   };
 
-  const loadTrendingVideos = async () => {
-    setIsLoading(true);
-    try {
-      const trending = await videoService.getTrendingVideos();
-      setVideos(trending);
-    } catch (error) {
-      console.error("Failed to load trending videos:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  const loadTrendingVideos = () => {
+    // For now, show videos sorted by view count
+    const trending = [...videos].sort((a, b) => b.viewCount - a.viewCount);
+    setFilteredVideos(trending);
   };
 
   const handleVideoSelect = (video: VideoMetadata) => {
@@ -200,42 +179,6 @@ export default function YoutubeClient({
     localStorage.setItem("youtube_watch_history", JSON.stringify(newHistory));
   };
 
-  const getCategoryIcon = (categoryId: string) => {
-    const iconMap: Record<string, React.ReactNode> = {
-      quran_recitation: <BookOpen className="w-5 h-5" />,
-      islamic_lectures: <GraduationCap className="w-5 h-5" />,
-      nasheed: <Music className="w-5 h-5" />,
-      hajj_umrah: <Calendar className="w-5 h-5" />,
-      ramadan: <Calendar className="w-5 h-5" />,
-      islamic_history: <BookOpen className="w-5 h-5" />,
-      prophet_stories: <BookOpen className="w-5 h-5" />,
-      islamic_knowledge: <GraduationCap className="w-5 h-5" />,
-    };
-
-    return iconMap[categoryId] || <Play className="w-5 h-5" />;
-  };
-
-  const formatDuration = (seconds: number): string => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = seconds % 60;
-
-    if (hours > 0) {
-      return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
-    }
-
-    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-  };
-
-  const formatViewCount = (count: number): string => {
-    if (count >= 1000000) {
-      return `${(count / 1000000).toFixed(1)}M`;
-    } else if (count >= 1000) {
-      return `${(count / 1000).toFixed(1)}K`;
-    }
-    return count.toString();
-  };
-
   return (
     <YouTubeErrorBoundary messages={messages}>
       <div className="min-h-screen bg-background text-foreground">
@@ -258,13 +201,12 @@ export default function YoutubeClient({
                 </div>
 
                 {/* Video Player */}
-                <VideoPlayer
-                  video={selectedVideo}
+                <YouTubeEmbed
+                  videoId={selectedVideo.id}
+                  title={selectedVideo.title}
                   autoplay={true}
-                  showControls={true}
-                  showInfo={false}
-                  locale={locale}
-                  messages={messages}
+                  muted={false}
+                  className="mb-6"
                 />
 
                 {/* Video Info */}
@@ -311,12 +253,12 @@ export default function YoutubeClient({
                     "Search Islamic videos..."
                   }
                   className="w-full pl-12 pr-12 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
-                  disabled={isLoading}
+                  disabled={loading}
                 />
                 <button
                   onClick={() => handleSearch(searchTerm)}
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 text-primary hover:text-primary/80"
-                  disabled={isLoading}
+                  disabled={loading}
                 >
                   <Search className="h-5 w-5" />
                 </button>
@@ -335,7 +277,7 @@ export default function YoutubeClient({
                   All Categories
                 </button>
 
-                {VIDEO_CATEGORIES.map((category) => (
+                {categories.map((category) => (
                   <button
                     key={category.id}
                     onClick={() => handleCategoryFilter(category.id)}
@@ -358,7 +300,7 @@ export default function YoutubeClient({
               {/* Tabs and View Controls */}
               <div className="flex items-center justify-between">
                 <div className="flex gap-2">
-                  {["videos", "playlists", "trending"].map((tab) => (
+                  {["videos", "trending"].map((tab) => (
                     <button
                       key={tab}
                       onClick={() => {
@@ -404,85 +346,12 @@ export default function YoutubeClient({
                   </div>
                 </div>
               </div>
-
-              {/* Advanced Filters */}
-              {showFilters && (
-                <div className="mt-4 p-4 bg-secondary/20 rounded-lg">
-                  <h4 className="font-semibold mb-3">Advanced Filters</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">
-                        Duration
-                      </label>
-                      <select
-                        value={filters.duration || ""}
-                        onChange={(e) =>
-                          setFilters((prev) => ({
-                            ...prev,
-                            duration: e.target.value as any,
-                          }))
-                        }
-                        className="w-full px-3 py-2 border border-border rounded bg-background"
-                      >
-                        <option value="">Any Duration</option>
-                        <option value="short">Short (&lt; 4 min)</option>
-                        <option value="medium">Medium (4-20 min)</option>
-                        <option value="long">Long (&gt; 20 min)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium mb-2">
-                        Upload Date
-                      </label>
-                      <select
-                        value={filters.uploadDate || ""}
-                        onChange={(e) =>
-                          setFilters((prev) => ({
-                            ...prev,
-                            uploadDate: e.target.value as any,
-                          }))
-                        }
-                        className="w-full px-3 py-2 border border-border rounded bg-background"
-                      >
-                        <option value="">Any Time</option>
-                        <option value="hour">Last Hour</option>
-                        <option value="today">Today</option>
-                        <option value="week">This Week</option>
-                        <option value="month">This Month</option>
-                        <option value="year">This Year</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium mb-2">
-                        Language
-                      </label>
-                      <select
-                        value={filters.language || ""}
-                        onChange={(e) =>
-                          setFilters((prev) => ({
-                            ...prev,
-                            language: e.target.value,
-                          }))
-                        }
-                        className="w-full px-3 py-2 border border-border rounded bg-background"
-                      >
-                        <option value="">Any Language</option>
-                        <option value="ar">Arabic</option>
-                        <option value="en">English</option>
-                        <option value="ru">Russian</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
 
           {/* Content */}
           <div className="max-w-7xl mx-auto">
-            {isLoading ? (
+            {loading ? (
               <div className="text-center py-12">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
                 <p className="text-muted">Loading videos...</p>
@@ -491,7 +360,7 @@ export default function YoutubeClient({
               <div
                 className={`${viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" : "space-y-4"}`}
               >
-                {videos.map((video) => (
+                {filteredVideos.map((video) => (
                   <div
                     key={video.id}
                     className={`bg-surface rounded-xl shadow-lg border border-border overflow-hidden hover:shadow-xl transition-shadow cursor-pointer ${
@@ -538,7 +407,7 @@ export default function YoutubeClient({
                         <span>•</span>
                         <div className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          {video.publishedAt.toLocaleDateString(locale)}
+                          {new Date(video.publishedAt).toLocaleDateString(locale)}
                         </div>
                       </div>
 
@@ -550,56 +419,6 @@ export default function YoutubeClient({
                               ? video.category.nameRussian
                               : video.category.name}
                         </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : activeTab === "playlists" ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {playlists.map((playlist) => (
-                  <div
-                    key={playlist.id}
-                    className="bg-surface rounded-xl shadow-lg border border-border overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
-                  >
-                    <div className="relative aspect-video bg-gray-200">
-                      <img
-                        src={playlist.thumbnailUrl}
-                        alt={playlist.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <Play className="w-12 h-12 mx-auto mb-2" />
-                          <div className="text-sm">
-                            {playlist.videoCount} videos
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="p-4">
-                      <h3 className="font-semibold text-foreground mb-2 line-clamp-2">
-                        {playlist.title}
-                      </h3>
-
-                      <div className="text-sm text-muted mb-2">
-                        {playlist.creator}
-                      </div>
-
-                      <p className="text-xs text-muted line-clamp-2">
-                        {playlist.description}
-                      </p>
-
-                      <div className="mt-2 flex items-center justify-between">
-                        <span className="inline-block px-2 py-1 bg-accent/10 text-accent rounded-full text-xs">
-                          {playlist.category.name}
-                        </span>
-                        {playlist.isOfficial && (
-                          <span className="text-xs text-primary">
-                            ✓ Official
-                          </span>
-                        )}
                       </div>
                     </div>
                   </div>
@@ -618,7 +437,7 @@ export default function YoutubeClient({
             )}
 
             {/* Empty State */}
-            {!isLoading && videos.length === 0 && activeTab === "videos" && (
+            {!loading && filteredVideos.length === 0 && activeTab === "videos" && (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">📺</div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">

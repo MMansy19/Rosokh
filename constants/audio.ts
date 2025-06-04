@@ -29,7 +29,7 @@ export const QUALITY_COLORS = {
 } as const;
 
 export const API_ENDPOINTS = {
-  audioTracks: "/data/audio-tracks.json",
+  audioTracks: "/data/drive-audios.json",
   reciters: "/data/reciters.json",
 } as const;
 

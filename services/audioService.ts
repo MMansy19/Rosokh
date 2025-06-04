@@ -30,7 +30,7 @@ class AudioServiceImpl extends BaseService implements AudioService {
 
   async fetchTracks(): Promise<AudioTrack[]> {
     return await this.fetchWithErrorHandling<AudioTrack[]>("/audio-data", {
-      cacheKey: "audio-tracks",
+      cacheKey: "drive-audios",
     });
   }
 

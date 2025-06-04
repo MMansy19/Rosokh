@@ -1,4 +1,5 @@
 {
+  "author": "Mahmoud Mansy",
   "platform_description": {
     "title": "Rosokh: Islamic Multimedia Platform",
     "description": "Rosokh is an innovative Islamic platform delivering a comprehensive digital experience for Quran recitation, audio, video, and interactive games. Designed to be ultra-fast, completely free, and trilingual (Arabic, English, Russian), it features a Hijri calendar, Khatma tracking, and an analytics dashboard. Built with a modern, green-tosca geometric design and zero heavy dependencies, Rosokh ensures high performance and accessibility across all devices."
@@ -711,6 +712,7 @@
     "description": "A modern Islamic multimedia platform providing free access to Quran, audio recitations, and spiritual learning tools.",
     "made_with": "Made with",
     "for_ummah": "for the Ummah",
+    "developed_by": "Developed by",
     "quick_links": "Quick Links",
     "features": "Features",
     "feature_free": "100% Free Platform",

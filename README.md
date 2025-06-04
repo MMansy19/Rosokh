@@ -516,7 +516,7 @@ rosokh/
     ├── images/                    # Images and graphics
     └── data/                      # Static data files
         ├── audio-categories.json  # Audio categories
-        ├── audio-tracks.json      # Audio tracks metadata
+        ├── drive-audios.json      # Audio tracks metadata
         └── reciters.json          # Quran reciters data
 ```
 

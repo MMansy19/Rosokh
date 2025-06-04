@@ -7,11 +7,11 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const type = searchParams.get("type");
 
-    if (!type || !["tracks", "reciters", "categories"].includes(type)) {
+    if (!type || !["videos", "reciters", "categories"].includes(type)) {
       return NextResponse.json(
         {
           error:
-            "Invalid type parameter. Must be tracks, reciters, or categories",
+            "Invalid type parameter. Must be videos, reciters, or categories",
         },
         { status: 400 },
       );
@@ -19,15 +19,12 @@ export async function GET(request: NextRequest) {
 
     let fileName: string;
     switch (type) {
-      case "tracks":
-        fileName = "drive-audios.json";
+      case "videos":
+        fileName = "youtube-videos.json";
         break;
-      case "reciters":
-        fileName = "reciters.json";
-        break;
-      case "categories":
-        fileName = "audio-categories.json";
-        break;
+      // case "reciters":
+  
+      //   break;
       default:
         return NextResponse.json({ error: "Invalid type" }, { status: 400 });
     }

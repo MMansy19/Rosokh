@@ -138,7 +138,7 @@ class GoogleDriveService {
     try {
       // Load local data
       const [tracksResponse, recitersResponse] = await Promise.all([
-        fetch("/data/audio-tracks.json"),
+        fetch("/data/drive-audios.json"),
         fetch("/data/reciters.json"),
       ]);
 

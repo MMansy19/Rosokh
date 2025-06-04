@@ -1,0 +1,251 @@
+{
+  "videos": [
+    {
+      "id": "LlvUepMa31o",
+      "title": "Beautiful Quran Recitation - Surah Al-Fatiha",
+      "description": "Listen to the beautiful recitation of Surah Al-Fatiha with peaceful heart-touching voice. Perfect for daily prayers and spiritual reflection.",
+      "channelTitle": "Islamic Recitations",
+      "channelId": "UC123456789",
+      "publishedAt": "2024-01-15T10:30:00Z",
+      "duration": 180,
+      "viewCount": 250000,
+      "likeCount": 12500,
+      "thumbnailUrl": "https://img.youtube.com/vi/LlvUepMa31o/maxresdefault.jpg",
+      "category": {
+        "id": "quran_recitation",
+        "name": "Quran Recitation",
+        "nameArabic": "تلاوة القرآن",
+        "nameRussian": "Чтение Корана",
+        "icon": "📖"
+      },
+      "tags": ["quran", "recitation", "al-fatiha", "islamic", "prayer", "spiritual"],
+      "language": "ar",
+      "quality": "hd"
+    },
+    {
+      "id": "pZ7G9a8Kscs",
+      "title": "The Story of Prophet Muhammad (PBUH) - Complete Biography",
+      "description": "Learn about the complete life story of Prophet Muhammad (Peace Be Upon Him) from birth to his final message. Educational content for all Muslims.",
+      "channelTitle": "Islamic History Channel",
+      "channelId": "UC987654321",
+      "publishedAt": "2024-02-20T14:15:00Z",
+      "duration": 3600,
+      "viewCount": 500000,
+      "likeCount": 25000,
+      "thumbnailUrl": "https://img.youtube.com/vi/pZ7G9a8Kscs/maxresdefault.jpg",
+      "category": {
+        "id": "prophet_stories",
+        "name": "Prophet Stories",
+        "nameArabic": "قصص الأنبياء",
+        "nameRussian": "История пророков",
+        "icon": "🕌"
+      },
+      "tags": ["prophet", "muhammad", "biography", "islamic history", "seerah"],
+      "language": "en",
+      "quality": "hd"
+    },
+    {
+      "id": "B7bqAsxee4I",
+      "title": "Beautiful Islamic Nasheed - Ya Rahman",
+      "description": "Peaceful Islamic nasheed praising Allah's mercy and compassion. Perfect for reflection and spiritual connection.",
+      "channelTitle": "Islamic Nasheeds",
+      "channelId": "UC456789123",
+      "publishedAt": "2024-03-10T16:45:00Z",
+      "duration": 240,
+      "viewCount": 180000,
+      "likeCount": 9500,
+      "thumbnailUrl": "https://img.youtube.com/vi/B7bqAsxee4I/maxresdefault.jpg",
+      "category": {
+        "id": "nasheed",
+        "name": "Islamic Nasheed",
+        "nameArabic": "الأناشيد الإسلامية",
+        "nameRussian": "Исламские нашиды",
+        "icon": "🎵"
+      },
+      "tags": ["nasheed", "islamic music", "ya rahman", "spiritual", "peace"],
+      "language": "ar",
+      "quality": "hd"
+    },
+    {
+      "id": "vOw5WnWBjWE",
+      "title": "Hajj Journey - Complete Guide for Pilgrimage",
+      "description": "Complete step-by-step guide for performing Hajj pilgrimage. Learn all the rituals and preparations needed for this sacred journey.",
+      "channelTitle": "Hajj & Umrah Guide",
+      "channelId": "UC789123456",
+      "publishedAt": "2024-04-05T12:20:00Z",
+      "duration": 2400,
+      "viewCount": 320000,
+      "likeCount": 18000,
+      "thumbnailUrl": "https://img.youtube.com/vi/vOw5WnWBjWE/maxresdefault.jpg",
+      "category": {
+        "id": "hajj_umrah",
+        "name": "Hajj & Umrah",
+        "nameArabic": "الحج والعمرة",
+        "nameRussian": "Хадж и Умра",
+        "icon": "🕋"
+      },
+      "tags": ["hajj", "pilgrimage", "mecca", "islamic rituals", "guide"],
+      "language": "en",
+      "quality": "hd"
+    },
+    {
+      "id": "Dkk9gvTmCXY",
+      "title": "Ramadan Preparation - Spiritual and Physical Guide",
+      "description": "Prepare for the holy month of Ramadan with spiritual guidance and practical tips for fasting, prayer, and charity.",
+      "channelTitle": "Ramadan Guidance",
+      "channelId": "UC321654987",
+      "publishedAt": "2024-02-28T09:30:00Z",
+      "duration": 1800,
+      "viewCount": 400000,
+      "likeCount": 22000,
+      "thumbnailUrl": "https://img.youtube.com/vi/Dkk9gvTmCXY/maxresdefault.jpg",
+      "category": {
+        "id": "ramadan",
+        "name": "Ramadan",
+        "nameArabic": "رمضان",
+        "nameRussian": "Рамадан",
+        "icon": "🌙"
+      },
+      "tags": ["ramadan", "fasting", "spiritual preparation", "islamic calendar"],
+      "language": "en",
+      "quality": "hd"
+    },
+    {
+      "id": "z8uMWLuPkWI",
+      "title": "Islamic History - The Golden Age of Islam",
+      "description": "Explore the golden age of Islamic civilization, scientific achievements, and cultural contributions to humanity.",
+      "channelTitle": "Islamic Civilization",
+      "channelId": "UC654987321",
+      "publishedAt": "2024-01-25T11:15:00Z",
+      "duration": 3000,
+      "viewCount": 280000,
+      "likeCount": 15500,
+      "thumbnailUrl": "https://img.youtube.com/vi/z8uMWLuPkWI/maxresdefault.jpg",
+      "category": {
+        "id": "islamic_history",
+        "name": "Islamic History",
+        "nameArabic": "التاريخ الإسلامي",
+        "nameRussian": "Исламская история",
+        "icon": "📚"
+      },
+      "tags": ["islamic history", "golden age", "civilization", "science", "culture"],
+      "language": "en",
+      "quality": "hd"
+    },
+    {
+      "id": "KOGVRbq3MLw",
+      "title": "Learn Islamic Knowledge - Basics of Faith",
+      "description": "Understanding the fundamental concepts of Islamic faith including the Five Pillars and core beliefs every Muslim should know.",
+      "channelTitle": "Islamic Education",
+      "channelId": "UC147258369",
+      "publishedAt": "2024-03-15T13:45:00Z",
+      "duration": 2700,
+      "viewCount": 350000,
+      "likeCount": 19500,
+      "thumbnailUrl": "https://img.youtube.com/vi/KOGVRbq3MLw/maxresdefault.jpg",
+      "category": {
+        "id": "islamic_knowledge",
+        "name": "Islamic Knowledge",
+        "nameArabic": "المعرفة الإسلامية",
+        "nameRussian": "Исламские знания",
+        "icon": "🎓"
+      },
+      "tags": ["islamic education", "five pillars", "faith", "knowledge", "basics"],
+      "language": "en",
+      "quality": "hd"
+    },
+    {
+      "id": "nFAK8Vj62WM",
+      "title": "Friday Khutbah - Importance of Prayer in Islam",
+      "description": "Weekly Friday sermon discussing the significance and importance of daily prayers in a Muslim's life.",
+      "channelTitle": "Friday Sermons",
+      "channelId": "UC258369147",
+      "publishedAt": "2024-04-12T15:00:00Z",
+      "duration": 1500,
+      "viewCount": 120000,
+      "likeCount": 8500,
+      "thumbnailUrl": "https://img.youtube.com/vi/nFAK8Vj62WM/maxresdefault.jpg",
+      "category": {
+        "id": "islamic_lectures",
+        "name": "Islamic Lectures",
+        "nameArabic": "المحاضرات الإسلامية",
+        "nameRussian": "Исламские лекции",
+        "icon": "🎤"
+      },
+      "tags": ["khutbah", "friday sermon", "prayer", "salah", "islamic lecture"],
+      "language": "en",
+      "quality": "hd"
+    }
+  ],
+  "categories": [
+    {
+      "id": "quran_recitation",
+      "name": "Quran Recitation",
+      "nameArabic": "تلاوة القرآن",
+      "nameRussian": "Чтение Корана",
+      "icon": "📖",
+      "color": "#22c55e"
+    },
+    {
+      "id": "islamic_lectures",
+      "name": "Islamic Lectures",
+      "nameArabic": "المحاضرات الإسلامية",
+      "nameRussian": "Исламские лекции",
+      "icon": "🎤",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "nasheed",
+      "name": "Islamic Nasheed",
+      "nameArabic": "الأناشيد الإسلامية",
+      "nameRussian": "Исламские нашиды",
+      "icon": "🎵",
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "hajj_umrah",
+      "name": "Hajj & Umrah",
+      "nameArabic": "الحج والعمرة",
+      "nameRussian": "Хадж и Умра",
+      "icon": "🕋",
+      "color": "#f59e0b"
+    },
+    {
+      "id": "ramadan",
+      "name": "Ramadan",
+      "nameArabic": "رمضان",
+      "nameRussian": "Рамадан",
+      "icon": "🌙",
+      "color": "#6366f1"
+    },
+    {
+      "id": "islamic_history",
+      "name": "Islamic History",
+      "nameArabic": "التاريخ الإسلامي",
+      "nameRussian": "Исламская история",
+      "icon": "📚",
+      "color": "#10b981"
+    },
+    {
+      "id": "prophet_stories",
+      "name": "Prophet Stories",
+      "nameArabic": "قصص الأنبياء",
+      "nameRussian": "История пророков",
+      "icon": "🕌",
+      "color": "#ef4444"
+    },
+    {
+      "id": "islamic_knowledge",
+      "name": "Islamic Knowledge",
+      "nameArabic": "المعرفة الإسلامية",
+      "nameRussian": "Исламские знания",
+      "icon": "🎓",
+      "color": "#f97316"
+    }
+  ],
+  "metadata": {
+    "totalVideos": 8,
+    "lastUpdated": "2024-04-15T10:00:00Z",
+    "version": "1.0.0"
+  }
+}
