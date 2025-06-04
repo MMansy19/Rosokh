@@ -4,19 +4,10 @@ import { useState, useRef, useEffect } from "react";
 import {
   Play,
   Pause,
-  Volume2,
-  VolumeX,
-  SkipBack,
-  SkipForward,
-  Repeat,
-  Shuffle,
   Mic,
-  Clock,
   Heart,
-  Star,
   Search,
   Download,
-  Settings,
   List,
   Grid,
   Filter,
@@ -83,18 +74,10 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedReciter, setSelectedReciter] = useState<string>("all");
   const [selectedQuality, setSelectedQuality] = useState<string>("high");
-  const [volume, setVolume] = useState(0.8);
-  const [isMuted, setIsMuted] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1.0);
-  const [isHydrated, setIsHydrated] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
-  const [downloadProgress, setDownloadProgress] = useState<{
-    [key: string]: number;
-  }>({});
 
   // Data loading states
   const [audioTracks, setAudioTracks] = useState<AudioTrack[]>([]);
@@ -107,32 +90,34 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
   const [useGoogleDrivePreview, setUseGoogleDrivePreview] = useState(false);
   const [expandedPreview, setExpandedPreview] = useState<string | null>(null);
 
-  // Load data from JSON files
-  useEffect(() => {
-    const loadData = async () => {
-      setIsDataLoading(true);
-      setDataError(null);
 
-      try {
-        // Load audio tracks data
-        const audioResponse = await fetch("/data/audio-tracks.json");
-        if (!audioResponse.ok) throw new Error("Failed to load audio tracks");
-        const audioData: AudioData = await audioResponse.json();
-        setSurahs(audioData.surahs);
+    useEffect(() => {
+      const abortController = new AbortController();
 
-        // Load reciters data
-        const recitersResponse = await fetch("/data/reciters.json");
-        if (!recitersResponse.ok) throw new Error("Failed to load reciters");
-        const recitersData: ReciterData = await recitersResponse.json();
-        setReciters(recitersData.reciters);
+      const loadData = async () => {
+        setIsDataLoading(true);
+        setDataError(null);      try {
+        // Use absolute paths to avoid locale prefix issues
+        const [audioResponse, recitersResponse] = await Promise.all([
+          fetch('/data/audio-tracks.json', { signal: abortController.signal }),
+          fetch('/data/reciters.json', { signal: abortController.signal })
+        ]);
 
-        // Generate audio tracks from surahs and reciters data
-        const generatedTracks: AudioTrack[] = [];
+          if (!audioResponse.ok || !recitersResponse.ok) {
+            throw new Error("Failed to load data");
+          }
 
-        audioData.surahs.forEach((surah) => {
-          recitersData.reciters.forEach((reciter) => {
-            if (surah.driveFiles && surah.driveFiles[reciter.id]) {
-              generatedTracks.push({
+          const [audioData, recitersData] = await Promise.all([
+            audioResponse.json(),
+            recitersResponse.json()
+          ]);
+          console.log("Audio Data:", audioData);
+          console.log("Reciters Data:", recitersData);
+          // Generate tracks
+          const generatedTracks: AudioTrack[] = audioData.surahs.flatMap((surah: Surah) =>
+            recitersData.reciters
+              .filter((reciter: Reciter) => surah.driveFiles?.[reciter.id])
+              .map((reciter: Reciter): AudioTrack => ({
                 id: `${surah.id}-${reciter.id}`,
                 title: surah.name,
                 arabicTitle: surah.arabicName,
@@ -140,29 +125,35 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                 reciterArabic: reciter.arabicName,
                 duration: "Unknown",
                 url: `https://drive.google.com/file/d/${surah.driveFiles[reciter.id]}/view`,
-                category: "quran",
+                category: "quran" as const,
                 surah: surah.id,
-                quality: "high",
+                quality: "high" as const,
                 size: "Unknown",
                 isOfflineAvailable: false,
-              });
-            }
-          });
-        });
+              }))
+          );
 
-        setAudioTracks(generatedTracks);
-      } catch (error) {
-        console.error("Error loading audio data:", error);
-        setDataError(
-          error instanceof Error ? error.message : "Failed to load data",
-        );
-      } finally {
-        setIsDataLoading(false);
-      }
-    };
+          setSurahs(audioData.surahs);
+          setReciters(recitersData.reciters);
+          setAudioTracks(generatedTracks);
+        } catch (error) {
+          if (!abortController.signal.aborted) {
+            console.error("Error loading audio data:", error);
+            setDataError(error instanceof Error ? error.message : "Failed to load data");
+          }
+        } finally {
+          if (!abortController.signal.aborted) {
+            setIsDataLoading(false);
+          }
+        }
+      };
 
-    loadData();
-  }, []);
+      loadData();
+
+      return () => {
+        abortController.abort();
+      };
+    }, []);
 
   // Load favorites from localStorage
   useEffect(() => {
@@ -203,49 +194,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
     setFavorites(newFavorites);
   };
 
-  const downloadTrack = async (track: AudioTrack) => {
-    try {
-      setDownloadProgress((prev) => ({ ...prev, [track.id]: 0 }));
-
-      // Simulate download progress
-      for (let i = 0; i <= 100; i += 10) {
-        setTimeout(() => {
-          setDownloadProgress((prev) => ({ ...prev, [track.id]: i }));
-        }, i * 20);
-      }
-
-      // In a real implementation, you would fetch the actual file
-      const link = document.createElement("a");
-      link.href = track.url;
-      link.download = `${track.title} - ${track.reciter}.mp3`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      setTimeout(() => {
-        setDownloadProgress((prev) => {
-          const newProgress = { ...prev };
-          delete newProgress[track.id];
-          return newProgress;
-        });
-      }, 2000);
-    } catch (error) {
-      console.error("Download failed:", error);
-    }
-  };
-
-  // Generate deterministic waveform heights based on track ID
-  const generateWaveformHeights = (trackId: string) => {
-    const heights = [];
-    for (let i = 0; i < 20; i++) {
-      // Use a simple hash function to generate deterministic heights
-      const hash = trackId.charCodeAt(0) + i * 37;
-      const height = 20 + (hash % 60); // Heights between 20% and 80%
-      heights.push(height);
-    }
-    return heights;
-  };
-
   // Google Drive preview functions
   const getGoogleDrivePreviewUrl = (fileId: string) => {
     return `https://drive.google.com/file/d/${fileId}/preview`;
@@ -258,21 +206,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
   const togglePreviewMode = () => {
     setUseGoogleDrivePreview(!useGoogleDrivePreview);
     setExpandedPreview(null);
-  };
-
-  // Fetch Google Drive files (for future use when implementing dynamic loading)
-  const fetchGoogleDriveFiles = async () => {
-    try {
-      const response = await fetch("/api/drive?action=list-quran-audio");
-      const data = await response.json();
-
-      if (data.success) {
-        // Process the files and update the audio tracks
-        console.log("Google Drive files:", data.files);
-      }
-    } catch (error) {
-      console.error("Failed to fetch Google Drive files:", error);
-    }
   };
 
   const renderGoogleDrivePreview = (track: AudioTrack) => {
@@ -331,12 +264,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
   };
 
   useEffect(() => {
-    setIsHydrated(true);
-    // Optionally fetch Google Drive files on component mount
-    // fetchGoogleDriveFiles();
-  }, []);
-
-  useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -393,10 +320,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
     audio.currentTime = newTime;
     setCurrentTime(newTime);
   };
-
-  if (!isHydrated) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen text-foreground transition-colors duration-300">
