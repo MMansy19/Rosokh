@@ -21,7 +21,7 @@ export function Footer({ locale, messages }: FooterProps) {
           {/* Brand Section */}
           <div className="space-y-4 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start space-x-2 rtl:space-x-reverse">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center"></div>
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"></div>
               <div className="flex flex-col">
                 <span className="font-bold text-lg text-foreground">
                   {messages?.common?.brand?.name || "Rosokh"}
@@ -33,10 +33,24 @@ export function Footer({ locale, messages }: FooterProps) {
                 messages?.common?.brand?.description ||
                 "Rosokh is a modern Islamic multimedia platform for spiritual growth and learning."}
             </p>
-            <div className="flex items-center justify-center md:justify-start space-x-1 rtl:space-x-reverse text-sm text-muted">
+            <div className="flex items-center justify-center md:justify-start space-x-1 text-sm text-muted">
               <span>{messages?.footer?.made_with || "Made with"}</span>
               <Heart className="w-4 h-4 text-primary animate-pulse" />
               <span>{messages?.footer?.for_ummah || "for the Ummah"}</span>
+            </div>
+            <div className="inline-flex">
+              <div className="text-xs font-medium">
+              {messages?.footer?.developed_by || "Developed by"}
+              </div>
+              <a
+              href="https://mahmoud-mansy.vercel.app/en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center md:justify-start space-x-2 rtl:space-x-reverse text-muted hover:text-primary transition-colors duration-200 text-sm font-medium"
+              >
+              <div className="w-4 h-4 bg-primary rounded-full"></div>
+                <span>{messages?.author || "Mahmoud Mansy"}</span>
+              </a>
             </div>
           </div>
           {/* Quick Links */}{" "}
@@ -97,7 +111,7 @@ export function Footer({ locale, messages }: FooterProps) {
                 <span>{messages?.footer?.location || "Global"}</span>
               </div>
               <a
-                href="https://github.com/rosokh-platform"
+                href="https://github.com/MMansy19/Rosokh"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center md:justify-start space-x-2 rtl:space-x-reverse text-muted hover:text-primary transition-colors duration-200 text-sm"
