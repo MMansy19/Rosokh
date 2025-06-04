@@ -118,7 +118,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
             recitersData.reciters
               .filter((reciter: Reciter) => surah.driveFiles?.[reciter.id])
               .map((reciter: Reciter): AudioTrack => ({
-                id: `${surah.id}-${reciter.id}`,
+                id: surah.driveFiles[reciter.id],
                 title: surah.name,
                 arabicTitle: surah.arabicName,
                 reciter: reciter.name,
@@ -132,6 +132,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                 isOfflineAvailable: false,
               }))
           );
+          console.log("Generated Tracks:", generatedTracks);
 
           setSurahs(audioData.surahs);
           setReciters(recitersData.reciters);
