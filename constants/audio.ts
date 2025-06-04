@@ -3,39 +3,39 @@ export const AUDIO_CATEGORIES = [
   { value: "quran", label: "Quran" },
   { value: "dua", label: "Duas" },
   { value: "lecture", label: "Lectures" },
-  { value: "nasheed", label: "Nasheeds" }
+  { value: "nasheed", label: "Nasheeds" },
 ];
 
 export const AUDIO_QUALITIES = [
   { value: "all", label: "All Qualities" },
   { value: "high", label: "High Quality" },
   { value: "medium", label: "Medium Quality" },
-  { value: "low", label: "Low Quality" }
+  { value: "low", label: "Low Quality" },
 ];
 
 export const SPEED_OPTIONS = [0.5, 0.75, 1, 1.25, 1.5, 2] as const;
 
 export const DURATION_ESTIMATES = {
-  quran: '45-75 min',
-  dua: '5-15 min',
-  lecture: '30-90 min',
-  nasheed: '3-8 min'
+  quran: "45-75 min",
+  dua: "5-15 min",
+  lecture: "30-90 min",
+  nasheed: "3-8 min",
 } as const;
 
 export const QUALITY_COLORS = {
-  high: 'bg-green-500',
-  medium: 'bg-yellow-500',
-  low: 'bg-red-500'
+  high: "bg-green-500",
+  medium: "bg-yellow-500",
+  low: "bg-red-500",
 } as const;
 
 export const API_ENDPOINTS = {
-  audioTracks: '/data/audio-tracks.json',
-  reciters: '/data/reciters.json'
+  audioTracks: "/data/audio-tracks.json",
+  reciters: "/data/reciters.json",
 } as const;
 
 export const LOADING_STATES = {
-  IDLE: 'idle',
-  LOADING: 'loading',
-  SUCCESS: 'success',
-  ERROR: 'error'
+  IDLE: "idle",
+  LOADING: "loading",
+  SUCCESS: "success",
+  ERROR: "error",
 } as const;

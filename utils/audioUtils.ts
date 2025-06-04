@@ -1,5 +1,11 @@
-import { AudioTrack, Reciter, Surah, AudioData, ReciterData } from '@/types/audio';
-import { DURATION_ESTIMATES } from '../constants/audio';
+import {
+  AudioTrack,
+  Reciter,
+  Surah,
+  AudioData,
+  ReciterData,
+} from "@/types/audio";
+import { DURATION_ESTIMATES } from "../constants/audio";
 
 /**
  * Get Google Drive preview URL for a file
@@ -19,29 +25,31 @@ export const getGoogleDriveDownloadUrl = (fileId: string): string => {
  * Generate audio tracks from surahs and reciters data
  */
 export const generateAudioTracks = (
-  audioData: AudioData, 
-  recitersData: ReciterData
+  audioData: AudioData,
+  recitersData: ReciterData,
 ): AudioTrack[] => {
   return audioData.surahs.flatMap((surah: Surah) =>
     recitersData.reciters
       .filter((reciter: Reciter) => surah.driveFiles?.[reciter.id])
-      .map((reciter: Reciter): AudioTrack => ({
-        id: surah.driveFiles[reciter.id],
-        title: surah.name,
-        arabicTitle: surah.arabicName,
-        reciter: {
-          id: reciter.id,
-          name: reciter.name,
-          arabicName: reciter.arabicName,
-        },
-        duration: "Unknown",
-        url: `https://drive.google.com/file/d/${surah.driveFiles[reciter.id]}/view`,
-        category: "quran" as const,
-        surah: surah.id,
-        quality: "high" as const,
-        size: "Unknown",
-        isOfflineAvailable: false,
-      }))
+      .map(
+        (reciter: Reciter): AudioTrack => ({
+          id: surah.driveFiles[reciter.id],
+          title: surah.name,
+          arabicTitle: surah.arabicName,
+          reciter: {
+            id: reciter.id,
+            name: reciter.name,
+            arabicName: reciter.arabicName,
+          },
+          duration: "Unknown",
+          url: `https://drive.google.com/file/d/${surah.driveFiles[reciter.id]}/view`,
+          category: "quran" as const,
+          surah: surah.id,
+          quality: "high" as const,
+          size: "Unknown",
+          isOfflineAvailable: false,
+        }),
+      ),
   );
 };
 
@@ -56,24 +64,23 @@ export const filterTracks = (
     quality: string;
     showFavoritesOnly: boolean;
   },
-  favorites: string[]
+  favorites: string[],
 ): AudioTrack[] => {
   const { category, quality, showFavoritesOnly } = filters;
-  
+
   return tracks.filter((track) => {
-    const matchesCategory =
-      category === "all" || track.category === category;
-    const matchesQuality =
-      quality === "all" || track.quality === quality;
+    const matchesCategory = category === "all" || track.category === category;
+    const matchesQuality = quality === "all" || track.quality === quality;
     const matchesSearch =
       searchTerm === "" ||
       track.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       track.arabicTitle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       track.reciter.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFavorites =
-      !showFavoritesOnly || favorites.includes(track.id);
+    const matchesFavorites = !showFavoritesOnly || favorites.includes(track.id);
 
-    return matchesCategory && matchesQuality && matchesSearch && matchesFavorites;
+    return (
+      matchesCategory && matchesQuality && matchesSearch && matchesFavorites
+    );
   });
 };
 
@@ -81,21 +88,26 @@ export const filterTracks = (
  * Get estimated duration based on track category
  */
 export const getEstimatedDuration = (category: string): string => {
-  return DURATION_ESTIMATES[category as keyof typeof DURATION_ESTIMATES] || 'Unknown';
+  return (
+    DURATION_ESTIMATES[category as keyof typeof DURATION_ESTIMATES] || "Unknown"
+  );
 };
 
 /**
  * Show notification message
  */
-export const showNotification = (message: string, type: 'info' | 'success' | 'warning' | 'error' = 'info'): void => {
-  const notification = document.createElement('div');
+export const showNotification = (
+  message: string,
+  type: "info" | "success" | "warning" | "error" = "info",
+): void => {
+  const notification = document.createElement("div");
   const colors = {
-    info: 'bg-blue-600',
-    success: 'bg-green-600',
-    warning: 'bg-yellow-600',
-    error: 'bg-red-600'
+    info: "bg-blue-600",
+    success: "bg-green-600",
+    warning: "bg-yellow-600",
+    error: "bg-red-600",
   };
-  
+
   notification.className = `fixed top-4 right-4 ${colors[type]} text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm`;
   notification.innerHTML = `
     <div class="flex items-center gap-2">
@@ -112,14 +124,17 @@ export const showNotification = (message: string, type: 'info' | 'success' | 'wa
 /**
  * Scroll to element smoothly
  */
-export const scrollToElement = (selector: string, delay: number = 100): void => {
+export const scrollToElement = (
+  selector: string,
+  delay: number = 100,
+): void => {
   setTimeout(() => {
     const element = document.querySelector(selector);
     if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start',
-        inline: 'nearest'
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
       });
     }
   }, delay);

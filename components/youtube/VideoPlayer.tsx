@@ -472,20 +472,18 @@ interface VideoInfoProps {
   messages: any;
 }
 
-export function VideoInfo({ 
-  video, 
-  isExpanded = false, 
-  locale, 
-  messages 
+export function VideoInfo({
+  video,
+  isExpanded = false,
+  locale,
+  messages,
 }: VideoInfoProps) {
   const [showFullDescription, setShowFullDescription] = useState(isExpanded);
 
   return (
     <div className="bg-surface rounded-lg p-6 border border-border">
       {/* Video Title */}
-      <h2 className="text-xl font-bold text-foreground mb-4">
-        {video.title}
-      </h2>
+      <h2 className="text-xl font-bold text-foreground mb-4">{video.title}</h2>
 
       {/* Video Stats */}
       <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
@@ -541,9 +539,11 @@ export function VideoInfo({
           <h4 className="font-semibold text-foreground mb-2">
             {messages?.youtube?.description || "Description"}
           </h4>
-          <div className={`text-muted-foreground leading-relaxed ${
-            showFullDescription ? "" : "line-clamp-3"
-          }`}>
+          <div
+            className={`text-muted-foreground leading-relaxed ${
+              showFullDescription ? "" : "line-clamp-3"
+            }`}
+          >
             {video.description}
           </div>
           {video.description.length > 200 && (
@@ -551,10 +551,9 @@ export function VideoInfo({
               onClick={() => setShowFullDescription(!showFullDescription)}
               className="mt-2 text-primary hover:text-primary/80 text-sm font-medium"
             >
-              {showFullDescription 
-                ? (messages?.youtube?.showLess || "Show less")
-                : (messages?.youtube?.showMore || "Show more")
-              }
+              {showFullDescription
+                ? messages?.youtube?.showLess || "Show less"
+                : messages?.youtube?.showMore || "Show more"}
             </button>
           )}
         </div>

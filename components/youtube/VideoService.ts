@@ -152,10 +152,12 @@ export class VideoService {
   private baseUrl = "https://www.googleapis.com/youtube/v3";
 
   constructor(apiKey?: string) {
-    this.apiKey = apiKey || process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || '';
-    
+    this.apiKey = apiKey || process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || "";
+
     if (!this.apiKey) {
-      console.warn('YouTube API key not found. Video features will be limited.');
+      console.warn(
+        "YouTube API key not found. Video features will be limited.",
+      );
     }
   }
 
@@ -170,7 +172,7 @@ export class VideoService {
     try {
       // Check if API key is available
       if (!this.apiKey) {
-        console.warn('YouTube API key not configured. Returning mock data.');
+        console.warn("YouTube API key not configured. Returning mock data.");
         return this.getMockVideos(query, maxResults);
       }
 
@@ -201,7 +203,7 @@ export class VideoService {
       }
 
       const response = await fetch(`${this.baseUrl}/search?${params}`);
-      
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(
@@ -551,14 +553,18 @@ export class VideoService {
       {
         id: "mock_1",
         title: "Beautiful Quran Recitation - Surah Al-Baqarah",
-        description: "Peaceful recitation of Surah Al-Baqarah with English translation",
-        thumbnailUrl: "https://via.placeholder.com/320x180/10B981/FFFFFF?text=Quran+Recitation",
+        description:
+          "Peaceful recitation of Surah Al-Baqarah with English translation",
+        thumbnailUrl:
+          "https://via.placeholder.com/320x180/10B981/FFFFFF?text=Quran+Recitation",
         duration: 3600,
         viewCount: 2500000,
         publishedAt: new Date("2024-01-15"),
         channelId: "mock_channel_1",
         channelTitle: "Peaceful Recitations",
-        category: VIDEO_CATEGORIES.find(c => c.id === "quran_recitation") || VIDEO_CATEGORIES[0],
+        category:
+          VIDEO_CATEGORIES.find((c) => c.id === "quran_recitation") ||
+          VIDEO_CATEGORIES[0],
         tags: ["quran", "recitation", "baqarah", "arabic"],
         language: "ar",
         quality: [{ resolution: "720p", url: "#" }],
@@ -566,14 +572,18 @@ export class VideoService {
       {
         id: "mock_2",
         title: "Islamic Lecture - The Importance of Prayer",
-        description: "Educational lecture about the significance of daily prayers in Islam",
-        thumbnailUrl: "https://via.placeholder.com/320x180/059669/FFFFFF?text=Islamic+Lecture",
+        description:
+          "Educational lecture about the significance of daily prayers in Islam",
+        thumbnailUrl:
+          "https://via.placeholder.com/320x180/059669/FFFFFF?text=Islamic+Lecture",
         duration: 2400,
         viewCount: 1800000,
         publishedAt: new Date("2024-01-10"),
         channelId: "mock_channel_2",
         channelTitle: "Islamic Knowledge",
-        category: VIDEO_CATEGORIES.find(c => c.id === "lectures") || VIDEO_CATEGORIES[1],
+        category:
+          VIDEO_CATEGORIES.find((c) => c.id === "lectures") ||
+          VIDEO_CATEGORIES[1],
         tags: ["islam", "prayer", "salah", "education"],
         language: "en",
         quality: [{ resolution: "720p", url: "#" }],
@@ -581,14 +591,18 @@ export class VideoService {
       {
         id: "mock_3",
         title: "Story of Prophet Muhammad (PBUH) - Part 1",
-        description: "The life and teachings of Prophet Muhammad (Peace be upon him)",
-        thumbnailUrl: "https://via.placeholder.com/320x180/7C3AED/FFFFFF?text=Prophet+Stories",
+        description:
+          "The life and teachings of Prophet Muhammad (Peace be upon him)",
+        thumbnailUrl:
+          "https://via.placeholder.com/320x180/7C3AED/FFFFFF?text=Prophet+Stories",
         duration: 1800,
         viewCount: 3200000,
         publishedAt: new Date("2024-01-05"),
         channelId: "mock_channel_3",
         channelTitle: "Prophet Stories",
-        category: VIDEO_CATEGORIES.find(c => c.id === "prophet_stories") || VIDEO_CATEGORIES[2],
+        category:
+          VIDEO_CATEGORIES.find((c) => c.id === "prophet_stories") ||
+          VIDEO_CATEGORIES[2],
         tags: ["prophet", "muhammad", "seerah", "biography"],
         language: "en",
         quality: [{ resolution: "720p", url: "#" }],

@@ -116,39 +116,48 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
 
   // Track page view and reading session
   useEffect(() => {
-    analytics.trackPageView('/quran', 'Quran Reader');
-    analytics.trackEvent('quran_session_start', 'user', {
+    analytics.trackPageView("/quran", "Quran Reader");
+    analytics.trackEvent("quran_session_start", "user", {
       timestamp: new Date().toISOString(),
       locale,
       initialSurah: selectedSurah,
       settings: {
         showTranslation,
         showTransliteration,
-        fontSize
-      }
+        fontSize,
+      },
     });
 
     // Track reading session duration
     const sessionStart = Date.now();
     return () => {
       const sessionDuration = Date.now() - sessionStart;
-      analytics.trackEvent('quran_session_end', 'engagement', {
+      analytics.trackEvent("quran_session_end", "engagement", {
         duration: sessionDuration,
         surahsRead: [selectedSurah], // Could track multiple surahs if navigation is implemented
         versesViewed: ayahs.length,
-        bookmarksAdded: bookmarkedAyahs.size
+        bookmarksAdded: bookmarkedAyahs.size,
       });
     };
-  }, [analytics, locale, selectedSurah, showTranslation, showTransliteration, fontSize, ayahs.length, bookmarkedAyahs.size]);
+  }, [
+    analytics,
+    locale,
+    selectedSurah,
+    showTranslation,
+    showTransliteration,
+    fontSize,
+    ayahs.length,
+    bookmarkedAyahs.size,
+  ]);
 
   // Load bookmarks from localStorage
   useEffect(() => {
     const savedBookmarks = localStorage.getItem("quran_bookmarks");
     if (savedBookmarks) {
       setBookmarkedAyahs(new Set(JSON.parse(savedBookmarks)));
-      
-      analytics.trackEvent('bookmarks_loaded', 'user', {
-        count: JSON.parse(savedBookmarks).length
+
+      analytics.trackEvent("bookmarks_loaded", "user", {
+        count: JSON.parse(savedBookmarks).length,
       });
     }
   }, [analytics]);
@@ -165,33 +174,33 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
   useEffect(() => {
     const fetchSurahs = async () => {
       try {
-        analytics.trackEvent('surahs_fetch_start', 'content', {
-          timestamp: new Date().toISOString()
+        analytics.trackEvent("surahs_fetch_start", "content", {
+          timestamp: new Date().toISOString(),
         });
 
         const response = await fetch("https://api.alquran.cloud/v1/surah");
         const data = await response.json();
         setSurahs(data.data);
-        
-        analytics.trackEvent('surahs_loaded', 'content', {
+
+        analytics.trackEvent("surahs_loaded", "content", {
           surahsCount: data.data.length,
-          source: 'alquran_cloud_api'
+          source: "alquran_cloud_api",
         });
 
         notify.success(
-          messages?.quran?.surahsLoaded || 'Quran chapters loaded successfully'
+          messages?.quran?.surahsLoaded || "Quran chapters loaded successfully",
         );
       } catch (error) {
         console.error("Error fetching surahs:", error);
-        
-        analytics.trackEvent('surahs_fetch_error', 'error', {
-          error: error instanceof Error ? error.message : 'Unknown error',
-          api: 'alquran_cloud'
+
+        analytics.trackEvent("surahs_fetch_error", "error", {
+          error: error instanceof Error ? error.message : "Unknown error",
+          api: "alquran_cloud",
         });
 
         notify.error(
-          messages?.quran?.errors?.surahsLoad || 
-          'Failed to load Quran chapters. Please check your connection and try again.'
+          messages?.quran?.errors?.surahsLoad ||
+            "Failed to load Quran chapters. Please check your connection and try again.",
         );
       } finally {
         setLoading(false);
@@ -208,12 +217,14 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
 
       setLoading(true);
       try {
-        const surahName = surahs.find(s => s.number === selectedSurah)?.englishName || `Surah ${selectedSurah}`;
-        
-        analytics.trackEvent('surah_load_start', 'content', {
+        const surahName =
+          surahs.find((s) => s.number === selectedSurah)?.englishName ||
+          `Surah ${selectedSurah}`;
+
+        analytics.trackEvent("surah_load_start", "content", {
           surahNumber: selectedSurah,
           surahName,
-          locale
+          locale,
         });
 
         // Get Arabic text
@@ -256,30 +267,30 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
           setTranslations(translationsArray);
         }
 
-        analytics.trackEvent('surah_loaded', 'content', {
+        analytics.trackEvent("surah_loaded", "content", {
           surahNumber: selectedSurah,
           surahName,
           ayahsCount: arabicData.data.ayahs.length,
           translationEdition,
-          hasTranslation: !!translationData.data
+          hasTranslation: !!translationData.data,
         });
 
         notify.success(
-          messages?.quran?.surahLoaded?.replace('{name}', surahName) ||
-          `${surahName} loaded successfully`
+          messages?.quran?.surahLoaded?.replace("{name}", surahName) ||
+            `${surahName} loaded successfully`,
         );
       } catch (error) {
         console.error("Error fetching ayahs:", error);
-        
-        analytics.trackEvent('surah_load_error', 'error', {
+
+        analytics.trackEvent("surah_load_error", "error", {
           surahNumber: selectedSurah,
-          error: error instanceof Error ? error.message : 'Unknown error',
-          locale
+          error: error instanceof Error ? error.message : "Unknown error",
+          locale,
         });
 
         notify.error(
-          messages?.quran?.errors?.surahLoad || 
-          'Failed to load Quran verses. Please check your connection and try again.'
+          messages?.quran?.errors?.surahLoad ||
+            "Failed to load Quran verses. Please check your connection and try again.",
         );
       } finally {
         setLoading(false);
@@ -292,12 +303,12 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
   // Audio functions
   const playAyah = async (ayahNumber: number) => {
     try {
-      analytics.trackEvent('ayah_play', 'engagement', {
+      analytics.trackEvent("ayah_play", "engagement", {
         surahNumber: selectedSurah,
         ayahNumber,
         reciter: audioPlayer.reciter,
         speed: audioPlayer.speed,
-        volume: audioPlayer.volume
+        volume: audioPlayer.volume,
       });
 
       const paddedSurah = selectedSurah.toString().padStart(3, "0");
@@ -324,17 +335,17 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
       }
     } catch (error) {
       console.error("Error playing audio:", error);
-      
-      analytics.trackEvent('ayah_play_error', 'error', {
+
+      analytics.trackEvent("ayah_play_error", "error", {
         surahNumber: selectedSurah,
         ayahNumber,
-        error: error instanceof Error ? error.message : 'Unknown error',
-        reciter: audioPlayer.reciter
+        error: error instanceof Error ? error.message : "Unknown error",
+        reciter: audioPlayer.reciter,
       });
 
       notify.error(
-        messages?.quran?.errors?.audioPlay || 
-        'Failed to play audio. Please check your connection and try again.'
+        messages?.quran?.errors?.audioPlay ||
+          "Failed to play audio. Please check your connection and try again.",
       );
     }
   };
@@ -363,19 +374,22 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
 
   const playFullSurah = async () => {
     if (ayahs.length > 0) {
-      analytics.trackEvent('surah_full_play', 'engagement', {
+      analytics.trackEvent("surah_full_play", "engagement", {
         surahNumber: selectedSurah,
         surahName: currentSurah?.englishName,
         totalAyahs: ayahs.length,
-        reciter: audioPlayer.reciter
+        reciter: audioPlayer.reciter,
       });
 
       setAutoPlay(true);
       await playAyah(1);
-      
+
       notify.info(
-        messages?.quran?.playingFullSurah?.replace('{name}', currentSurah?.englishName || `Surah ${selectedSurah}`) ||
-        `Playing full ${currentSurah?.englishName || `Surah ${selectedSurah}`}`
+        messages?.quran?.playingFullSurah?.replace(
+          "{name}",
+          currentSurah?.englishName || `Surah ${selectedSurah}`,
+        ) ||
+          `Playing full ${currentSurah?.englishName || `Surah ${selectedSurah}`}`,
       );
     }
   };
@@ -384,12 +398,12 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
     if (audioRef.current) {
       audioRef.current.pause();
       setAudioPlayer((prev) => ({ ...prev, isPlaying: false }));
-      
-      analytics.trackEvent('ayah_pause', 'engagement', {
+
+      analytics.trackEvent("ayah_pause", "engagement", {
         surahNumber: selectedSurah,
         ayahNumber: audioPlayer.currentAyah,
         playbackPosition: audioRef.current.currentTime,
-        duration: audioRef.current.duration
+        duration: audioRef.current.duration,
       });
     }
   };
@@ -401,26 +415,22 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
 
     if (isBookmarked) {
       newBookmarks.delete(bookmarkId);
-      analytics.trackEvent('bookmark_removed', 'user', {
+      analytics.trackEvent("bookmark_removed", "user", {
         surahNumber,
         ayahNumber,
-        totalBookmarks: newBookmarks.size
+        totalBookmarks: newBookmarks.size,
       });
-      
-      notify.success(
-        messages?.quran?.bookmarkRemoved || 'Bookmark removed'
-      );
+
+      notify.success(messages?.quran?.bookmarkRemoved || "Bookmark removed");
     } else {
       newBookmarks.add(bookmarkId);
-      analytics.trackEvent('bookmark_added', 'user', {
+      analytics.trackEvent("bookmark_added", "user", {
         surahNumber,
         ayahNumber,
-        totalBookmarks: newBookmarks.size
+        totalBookmarks: newBookmarks.size,
       });
-      
-      notify.success(
-        messages?.quran?.bookmarkAdded || 'Verse bookmarked'
-      );
+
+      notify.success(messages?.quran?.bookmarkAdded || "Verse bookmarked");
     }
 
     setBookmarkedAyahs(newBookmarks);
@@ -429,52 +439,58 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
   const shareAyah = async (surah: number, ayah: number, text: string) => {
     const shareText = `${text}\n\n— Quran ${surah}:${ayah}`;
 
-    analytics.trackEvent('ayah_share', 'engagement', {
+    analytics.trackEvent("ayah_share", "engagement", {
       surahNumber: surah,
       ayahNumber: ayah,
-      shareMethod: 'share' in navigator ? 'native' : 'clipboard',
-      textLength: shareText.length
+      shareMethod: "share" in navigator ? "native" : "clipboard",
+      textLength: shareText.length,
     });
 
-    if ('share' in navigator) {
+    if ("share" in navigator) {
       try {
         await navigator.share({
           title: `Quran ${surah}:${ayah}`,
           text: shareText,
         });
-        
+
         notify.success(
-          messages?.quran?.shareSuccess || 'Verse shared successfully'
+          messages?.quran?.shareSuccess || "Verse shared successfully",
         );
       } catch (error) {
         console.log("Error sharing:", error);
-        analytics.trackEvent('ayah_share_error', 'error', {
+        analytics.trackEvent("ayah_share_error", "error", {
           surahNumber: surah,
           ayahNumber: ayah,
-          error: error instanceof Error ? error.message : 'Share cancelled'
+          error: error instanceof Error ? error.message : "Share cancelled",
         });
       }
     } else {
       // Fallback to clipboard
       try {
-        if ('clipboard' in navigator && (navigator as any).clipboard && (navigator as any).clipboard.writeText) {
+        if (
+          "clipboard" in navigator &&
+          (navigator as any).clipboard &&
+          (navigator as any).clipboard.writeText
+        ) {
           await (navigator as any).clipboard.writeText(shareText);
           notify.success(
-            messages?.quran?.copiedToClipboard || 'Verse copied to clipboard'
+            messages?.quran?.copiedToClipboard || "Verse copied to clipboard",
           );
         } else {
-          throw new Error('Clipboard API not available');
+          throw new Error("Clipboard API not available");
         }
       } catch (error) {
         console.log("Error copying to clipboard:", error);
-        analytics.trackEvent('ayah_share_error', 'error', {
+        analytics.trackEvent("ayah_share_error", "error", {
           surahNumber: surah,
           ayahNumber: ayah,
-          error: error instanceof Error ? error.message : 'Clipboard access failed'
+          error:
+            error instanceof Error ? error.message : "Clipboard access failed",
         });
-        
+
         notify.error(
-          messages?.quran?.errors?.copyFailed || 'Failed to copy verse to clipboard'
+          messages?.quran?.errors?.copyFailed ||
+            "Failed to copy verse to clipboard",
         );
       }
     }
@@ -516,10 +532,10 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
             <button
               onClick={() => {
                 setActiveTab("read");
-                analytics.trackEvent('tab_switch', 'user', {
+                analytics.trackEvent("tab_switch", "user", {
                   fromTab: activeTab,
-                  toTab: 'read',
-                  timestamp: new Date().toISOString()
+                  toTab: "read",
+                  timestamp: new Date().toISOString(),
                 });
               }}
               className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
@@ -534,10 +550,10 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
             <button
               onClick={() => {
                 setActiveTab("search");
-                analytics.trackEvent('tab_switch', 'user', {
+                analytics.trackEvent("tab_switch", "user", {
                   fromTab: activeTab,
-                  toTab: 'search',
-                  timestamp: new Date().toISOString()
+                  toTab: "search",
+                  timestamp: new Date().toISOString(),
                 });
               }}
               className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
@@ -729,13 +745,13 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
                         onClick={() => {
                           const previousSurah = selectedSurah;
                           setSelectedSurah(surah.number);
-                          analytics.trackEvent('surah_select', 'user', {
+                          analytics.trackEvent("surah_select", "user", {
                             fromSurah: previousSurah,
                             toSurah: surah.number,
                             surahName: surah.englishName,
                             arabicName: surah.arabicName,
                             totalAyahs: surah.numberOfAyahs,
-                            revelationType: surah.revelationType
+                            revelationType: surah.revelationType,
                           });
                         }}
                         className={`w-full text-left p-3 rounded-lg mb-2 transition-all duration-200 ${
@@ -774,10 +790,10 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
                           onClick={() => {
                             const newValue = !showTranslation;
                             setShowTranslation(newValue);
-                            analytics.trackEvent('translation_toggle', 'user', {
+                            analytics.trackEvent("translation_toggle", "user", {
                               enabled: newValue,
                               surahNumber: selectedSurah,
-                              locale
+                              locale,
                             });
                           }}
                           className={`px-4 py-2 rounded-lg transition-all duration-200 ${
@@ -793,11 +809,15 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
                           onClick={() => {
                             const newValue = !showTransliteration;
                             setShowTransliteration(newValue);
-                            analytics.trackEvent('transliteration_toggle', 'user', {
-                              enabled: newValue,
-                              surahNumber: selectedSurah,
-                              locale
-                            });
+                            analytics.trackEvent(
+                              "transliteration_toggle",
+                              "user",
+                              {
+                                enabled: newValue,
+                                surahNumber: selectedSurah,
+                                locale,
+                              },
+                            );
                           }}
                           className={`px-4 py-2 rounded-lg transition-all duration-200 ${
                             showTransliteration
@@ -822,10 +842,10 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
                             onChange={(e) => {
                               const newSize = parseInt(e.target.value);
                               setFontSize(newSize);
-                              analytics.trackEvent('font_size_change', 'user', {
+                              analytics.trackEvent("font_size_change", "user", {
                                 oldSize: fontSize,
                                 newSize,
-                                surahNumber: selectedSurah
+                                surahNumber: selectedSurah,
                               });
                             }}
                             className="w-20"

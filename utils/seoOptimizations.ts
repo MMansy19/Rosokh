@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { Metadata } from "next";
 
 interface SEOConfig {
   title?: string;
@@ -8,7 +8,7 @@ interface SEOConfig {
   canonical?: string;
   noIndex?: boolean;
   locale?: string;
-  type?: 'website' | 'article' | 'audio' | 'video';
+  type?: "website" | "article" | "audio" | "video";
   publishedTime?: string;
   modifiedTime?: string;
   section?: string;
@@ -18,10 +18,19 @@ interface SEOConfig {
 }
 
 export class SEOOptimizer {
-  private static readonly DEFAULT_TITLE = 'Rosokh - Islamic Audio Platform';
-  private static readonly DEFAULT_DESCRIPTION = 'Discover and listen to Islamic audio content including Quran recitations, lectures, and more.';
-  private static readonly DEFAULT_KEYWORDS = ['islamic', 'audio', 'quran', 'recitation', 'lectures', 'islamic content'];
-  private static readonly SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://rosokh.vercel.app';
+  private static readonly DEFAULT_TITLE = "Rosokh - Islamic Audio Platform";
+  private static readonly DEFAULT_DESCRIPTION =
+    "Discover and listen to Islamic audio content including Quran recitations, lectures, and more.";
+  private static readonly DEFAULT_KEYWORDS = [
+    "islamic",
+    "audio",
+    "quran",
+    "recitation",
+    "lectures",
+    "islamic content",
+  ];
+  private static readonly SITE_URL =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://rosokh.vercel.app";
 
   static generateMetadata(config: SEOConfig = {}): Metadata {
     const {
@@ -31,30 +40,32 @@ export class SEOOptimizer {
       ogImage,
       canonical,
       noIndex = false,
-      locale = 'en',
-      type = 'website',
+      locale = "en",
+      type = "website",
       publishedTime,
       modifiedTime,
       section,
       tags = [],
       author,
-      structuredData
+      structuredData,
     } = config;
 
-    const fullTitle = title 
+    const fullTitle = title
       ? `${title} | ${this.DEFAULT_TITLE}`
       : this.DEFAULT_TITLE;
 
     const fullKeywords = [...this.DEFAULT_KEYWORDS, ...keywords];
     const canonicalUrl = canonical ? `${this.SITE_URL}${canonical}` : undefined;
-    const imageUrl = ogImage ? `${this.SITE_URL}${ogImage}` : `${this.SITE_URL}/images/og-default.jpg`;
+    const imageUrl = ogImage
+      ? `${this.SITE_URL}${ogImage}`
+      : `${this.SITE_URL}/images/og-default.jpg`;
 
     const metadata: Metadata = {
       title: fullTitle,
       description,
-      keywords: fullKeywords.join(', '),
+      keywords: fullKeywords.join(", "),
       authors: author ? [{ name: author }] : undefined,
-      
+
       // Open Graph
       openGraph: {
         title: fullTitle,
@@ -79,94 +90,99 @@ export class SEOOptimizer {
 
       // Twitter
       twitter: {
-        card: 'summary_large_image',
+        card: "summary_large_image",
         title: fullTitle,
         description,
         images: [imageUrl],
-        creator: '@rosokh',
-        site: '@rosokh',
+        creator: "@rosokh",
+        site: "@rosokh",
       },
 
       // Additional metadata
       alternates: canonicalUrl ? { canonical: canonicalUrl } : undefined,
-      robots: noIndex ? 'noindex, nofollow' : 'index, follow',
-      
+      robots: noIndex ? "noindex, nofollow" : "index, follow",
+
       // Structured data will be handled separately
-      other: structuredData ? { 'structured-data': JSON.stringify(structuredData) } : undefined,
+      other: structuredData
+        ? { "structured-data": JSON.stringify(structuredData) }
+        : undefined,
     };
 
     return metadata;
   }
 
-  static generateStructuredData(type: 'website' | 'audioObject' | 'article' | 'breadcrumb', data: any) {
+  static generateStructuredData(
+    type: "website" | "audioObject" | "article" | "breadcrumb",
+    data: any,
+  ) {
     const baseContext = {
-      '@context': 'https://schema.org',
+      "@context": "https://schema.org",
     };
 
     switch (type) {
-      case 'website':
+      case "website":
         return {
           ...baseContext,
-          '@type': 'WebSite',
+          "@type": "WebSite",
           name: this.DEFAULT_TITLE,
           url: this.SITE_URL,
           description: this.DEFAULT_DESCRIPTION,
           potentialAction: {
-            '@type': 'SearchAction',
+            "@type": "SearchAction",
             target: {
-              '@type': 'EntryPoint',
+              "@type": "EntryPoint",
               urlTemplate: `${this.SITE_URL}/search?q={search_term_string}`,
             },
-            'query-input': 'required name=search_term_string',
+            "query-input": "required name=search_term_string",
           },
           ...data,
         };
 
-      case 'audioObject':
+      case "audioObject":
         return {
           ...baseContext,
-          '@type': 'AudioObject',
+          "@type": "AudioObject",
           name: data.title,
           description: data.description,
           contentUrl: data.url,
           duration: data.duration,
-          encodingFormat: data.format || 'audio/mpeg',
+          encodingFormat: data.format || "audio/mpeg",
           author: {
-            '@type': 'Person',
+            "@type": "Person",
             name: data.author || data.reciter,
           },
           publisher: {
-            '@type': 'Organization',
+            "@type": "Organization",
             name: this.DEFAULT_TITLE,
             url: this.SITE_URL,
           },
           datePublished: data.datePublished,
-          inLanguage: data.language || 'ar',
-          genre: data.genre || 'Religious',
-          keywords: data.keywords || ['islamic', 'audio', 'quran'],
+          inLanguage: data.language || "ar",
+          genre: data.genre || "Religious",
+          keywords: data.keywords || ["islamic", "audio", "quran"],
           ...data,
         };
 
-      case 'article':
+      case "article":
         return {
           ...baseContext,
-          '@type': 'Article',
+          "@type": "Article",
           headline: data.title,
           description: data.description,
           author: {
-            '@type': 'Person',
+            "@type": "Person",
             name: data.author,
           },
           publisher: {
-            '@type': 'Organization',
+            "@type": "Organization",
             name: this.DEFAULT_TITLE,
             url: this.SITE_URL,
           },
           datePublished: data.datePublished,
           dateModified: data.dateModified || data.datePublished,
           mainEntityOfPage: {
-            '@type': 'WebPage',
-            '@id': data.url,
+            "@type": "WebPage",
+            "@id": data.url,
           },
           image: data.image,
           articleSection: data.section,
@@ -174,12 +190,12 @@ export class SEOOptimizer {
           ...data,
         };
 
-      case 'breadcrumb':
+      case "breadcrumb":
         return {
           ...baseContext,
-          '@type': 'BreadcrumbList',
+          "@type": "BreadcrumbList",
           itemListElement: data.items.map((item: any, index: number) => ({
-            '@type': 'ListItem',
+            "@type": "ListItem",
             position: index + 1,
             name: item.name,
             item: item.url ? `${this.SITE_URL}${item.url}` : undefined,
@@ -191,93 +207,107 @@ export class SEOOptimizer {
     }
   }
 
-  static generateHrefLang(languages: { [key: string]: string }, currentLocale: string) {
+  static generateHrefLang(
+    languages: { [key: string]: string },
+    currentLocale: string,
+  ) {
     return Object.entries(languages).map(([locale, url]) => ({
       hreflang: locale,
       href: url,
     }));
   }
 
-  static generateSitemap(pages: Array<{
-    url: string;
-    lastModified?: Date;
-    changeFrequency?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
-    priority?: number;
-  }>) {
+  static generateSitemap(
+    pages: Array<{
+      url: string;
+      lastModified?: Date;
+      changeFrequency?:
+        | "always"
+        | "hourly"
+        | "daily"
+        | "weekly"
+        | "monthly"
+        | "yearly"
+        | "never";
+      priority?: number;
+    }>,
+  ) {
     const baseUrl = this.SITE_URL;
-    
+
     return {
-      sitemap: pages.map(page => ({
+      sitemap: pages.map((page) => ({
         url: `${baseUrl}${page.url}`,
         lastModified: page.lastModified || new Date(),
-        changeFrequency: page.changeFrequency || 'weekly',
+        changeFrequency: page.changeFrequency || "weekly",
         priority: page.priority || 0.5,
       })),
     };
   }
 
-  static generateRobotsTxt(options: {
-    disallowedPaths?: string[];
-    allowedPaths?: string[];
-    crawlDelay?: number;
-    sitemapUrl?: string;
-  } = {}) {
+  static generateRobotsTxt(
+    options: {
+      disallowedPaths?: string[];
+      allowedPaths?: string[];
+      crawlDelay?: number;
+      sitemapUrl?: string;
+    } = {},
+  ) {
     const {
-      disallowedPaths = ['/admin', '/api', '/_next'],
-      allowedPaths = ['/'],
+      disallowedPaths = ["/admin", "/api", "/_next"],
+      allowedPaths = ["/"],
       crawlDelay,
-      sitemapUrl = `${this.SITE_URL}/sitemap.xml`
+      sitemapUrl = `${this.SITE_URL}/sitemap.xml`,
     } = options;
 
-    let robots = 'User-agent: *\n';
-    
-    allowedPaths.forEach(path => {
+    let robots = "User-agent: *\n";
+
+    allowedPaths.forEach((path) => {
       robots += `Allow: ${path}\n`;
     });
-    
-    disallowedPaths.forEach(path => {
+
+    disallowedPaths.forEach((path) => {
       robots += `Disallow: ${path}\n`;
     });
-    
+
     if (crawlDelay) {
       robots += `Crawl-delay: ${crawlDelay}\n`;
     }
-    
+
     robots += `\nSitemap: ${sitemapUrl}`;
-    
+
     return robots;
   }
 
   static optimizeImageAlt(title: string, context?: string): string {
     const baseAlt = title.trim();
-    
+
     if (context) {
       return `${baseAlt} - ${context}`;
     }
-    
+
     return baseAlt;
   }
 
   static generateCanonicalUrl(path: string): string {
-    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
     return `${this.SITE_URL}${cleanPath}`;
   }
 
   static validateMetadata(metadata: SEOConfig): string[] {
     const issues: string[] = [];
-    
+
     if (!metadata.title || metadata.title.length > 60) {
-      issues.push('Title should be between 1-60 characters');
+      issues.push("Title should be between 1-60 characters");
     }
-    
+
     if (!metadata.description || metadata.description.length > 160) {
-      issues.push('Description should be between 1-160 characters');
+      issues.push("Description should be between 1-160 characters");
     }
-    
+
     if (metadata.keywords && metadata.keywords.length > 10) {
-      issues.push('Too many keywords (recommended max: 10)');
+      issues.push("Too many keywords (recommended max: 10)");
     }
-    
+
     return issues;
   }
 }
@@ -285,7 +315,7 @@ export class SEOOptimizer {
 // Performance monitoring for SEO
 export class SEOPerformanceMonitor {
   static measurePageLoadMetrics() {
-    if (typeof window === 'undefined') return null;
+    if (typeof window === "undefined") return null;
 
     return new Promise<{
       fcp: number;
@@ -296,8 +326,10 @@ export class SEOPerformanceMonitor {
       // First Contentful Paint
       new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        const fcp = entries.find(entry => entry.name === 'first-contentful-paint');
-        
+        const fcp = entries.find(
+          (entry) => entry.name === "first-contentful-paint",
+        );
+
         // This is a simplified version - in production, use web-vitals library
         resolve({
           fcp: fcp?.startTime || 0,
@@ -305,14 +337,14 @@ export class SEOPerformanceMonitor {
           cls: 0, // Would need actual CLS measurement
           fid: 0, // Would need actual FID measurement
         });
-      }).observe({ entryTypes: ['paint'] });
+      }).observe({ entryTypes: ["paint"] });
     });
   }
 
   static reportToAnalytics(metrics: any) {
     // In production, integrate with Google Analytics, Google Search Console, etc.
-    if (process.env.NODE_ENV === 'development') {
-      console.log('SEO Performance Metrics:', metrics);
+    if (process.env.NODE_ENV === "development") {
+      console.log("SEO Performance Metrics:", metrics);
     }
   }
 }

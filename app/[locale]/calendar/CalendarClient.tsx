@@ -71,11 +71,11 @@ export default function CalendarClient({
 
   // Track page view and enable prayer notifications
   useEffect(() => {
-    analytics.trackPageView('/calendar', 'Islamic Calendar');
-    analytics.trackEvent('calendar_visit', 'user', {
+    analytics.trackPageView("/calendar", "Islamic Calendar");
+    analytics.trackEvent("calendar_visit", "user", {
       timestamp: new Date().toISOString(),
       locale,
-      section: 'calendar'
+      section: "calendar",
     });
 
     // Request permission for prayer time notifications
@@ -88,24 +88,33 @@ export default function CalendarClient({
             Dhuhr: prayerTimes.Dhuhr,
             Asr: prayerTimes.Asr,
             Maghrib: prayerTimes.Maghrib,
-            Isha: prayerTimes.Isha
+            Isha: prayerTimes.Isha,
           };
           await notifications.schedulePrayerNotifications(prayerTimesRecord);
           notify.success(
-            messages?.calendar?.notifications?.enabled || 'Prayer time notifications enabled'
+            messages?.calendar?.notifications?.enabled ||
+              "Prayer time notifications enabled",
           );
         }
       } catch (error) {
-        console.error('Failed to setup prayer notifications:', error);
+        console.error("Failed to setup prayer notifications:", error);
         notify.info(
-          messages?.calendar?.notifications?.permissionNeeded || 
-          'Enable notifications to receive prayer time reminders'
+          messages?.calendar?.notifications?.permissionNeeded ||
+            "Enable notifications to receive prayer time reminders",
         );
       }
     };
 
     setupPrayerNotifications();
-  }, [analytics, locale, location, prayerTimes, messages, notify, notifications]);
+  }, [
+    analytics,
+    locale,
+    location,
+    prayerTimes,
+    messages,
+    notify,
+    notifications,
+  ]);
 
   // Islamic events using translation keys
   const getIslamicEvents = (): IslamicEvent[] => [
@@ -183,9 +192,9 @@ export default function CalendarClient({
   useEffect(() => {
     // Get user location for prayer times
     if (navigator.geolocation) {
-      analytics.trackEvent('location_request', 'user', {
-        method: 'geolocation_api',
-        purpose: 'prayer_times'
+      analytics.trackEvent("location_request", "user", {
+        method: "geolocation_api",
+        purpose: "prayer_times",
       });
 
       navigator.geolocation.getCurrentPosition(
@@ -195,46 +204,47 @@ export default function CalendarClient({
             lon: position.coords.longitude,
           };
           setLocation(coords);
-          
-          analytics.trackEvent('location_granted', 'user', {
+
+          analytics.trackEvent("location_granted", "user", {
             accuracy: position.coords.accuracy,
-            method: 'geolocation'
+            method: "geolocation",
           });
 
           notify.success(
-            messages?.calendar?.location?.detected || 'Location detected for accurate prayer times'
+            messages?.calendar?.location?.detected ||
+              "Location detected for accurate prayer times",
           );
         },
         (error) => {
           console.warn("Geolocation error:", error);
-          
-          analytics.trackEvent('location_error', 'error', {
+
+          analytics.trackEvent("location_error", "error", {
             errorCode: error.code,
             errorMessage: error.message,
-            fallback: 'mecca'
+            fallback: "mecca",
           });
 
           // Use default location (Mecca)
           setLocation({ lat: 21.4225, lon: 39.8262 });
-          
+
           notify.info(
-            messages?.calendar?.location?.fallback || 
-            'Using Mecca as default location. Enable location for accurate times.'
+            messages?.calendar?.location?.fallback ||
+              "Using Mecca as default location. Enable location for accurate times.",
           );
         },
       );
     } else {
       // Use default location (Mecca)
-      analytics.trackEvent('location_unavailable', 'error', {
-        reason: 'geolocation_not_supported',
-        fallback: 'mecca'
+      analytics.trackEvent("location_unavailable", "error", {
+        reason: "geolocation_not_supported",
+        fallback: "mecca",
       });
-      
+
       setLocation({ lat: 21.4225, lon: 39.8262 });
-      
+
       notify.warning(
-        messages?.calendar?.location?.unsupported || 
-        'Geolocation not supported. Using Mecca as default location.'
+        messages?.calendar?.location?.unsupported ||
+          "Geolocation not supported. Using Mecca as default location.",
       );
     }
 
@@ -252,10 +262,10 @@ export default function CalendarClient({
     try {
       // Format date for API
       const dateStr = selectedDate.toISOString().split("T")[0];
-      
-      analytics.trackEvent('hijri_date_request', 'content', {
+
+      analytics.trackEvent("hijri_date_request", "content", {
         gregorianDate: dateStr,
-        locale
+        locale,
       });
 
       // Mock Hijri date - in production, use actual API
@@ -281,23 +291,23 @@ export default function CalendarClient({
       };
 
       setHijriDate(mockHijriDate);
-      
-      analytics.trackEvent('hijri_date_loaded', 'content', {
+
+      analytics.trackEvent("hijri_date_loaded", "content", {
         hijriDate: mockHijriDate.date,
         hijriMonth: mockHijriDate.month.en,
-        hijriYear: mockHijriDate.year
+        hijriYear: mockHijriDate.year,
       });
     } catch (error) {
       console.error("Error fetching Hijri date:", error);
-      
-      analytics.trackEvent('hijri_date_error', 'error', {
-        error: error instanceof Error ? error.message : 'Unknown error',
-        gregorianDate: selectedDate.toISOString().split("T")[0]
+
+      analytics.trackEvent("hijri_date_error", "error", {
+        error: error instanceof Error ? error.message : "Unknown error",
+        gregorianDate: selectedDate.toISOString().split("T")[0],
       });
 
       notify.error(
-        messages?.calendar?.errors?.hijriDate || 
-        'Failed to load Hijri date. Please try again.'
+        messages?.calendar?.errors?.hijriDate ||
+          "Failed to load Hijri date. Please try again.",
       );
     }
   };
@@ -306,10 +316,10 @@ export default function CalendarClient({
     try {
       if (!location) return;
 
-      analytics.trackEvent('prayer_times_request', 'content', {
+      analytics.trackEvent("prayer_times_request", "content", {
         latitude: location.lat,
         longitude: location.lon,
-        date: selectedDate.toISOString().split("T")[0]
+        date: selectedDate.toISOString().split("T")[0],
       });
 
       // Mock prayer times - in production, use actual API
@@ -327,11 +337,11 @@ export default function CalendarClient({
 
       setPrayerTimes(mockPrayerTimes);
       setLoading(false);
-      
-      analytics.trackEvent('prayer_times_loaded', 'content', {
+
+      analytics.trackEvent("prayer_times_loaded", "content", {
         location: `${location.lat},${location.lon}`,
         prayerCount: Object.keys(mockPrayerTimes).length,
-        date: selectedDate.toISOString().split("T")[0]
+        date: selectedDate.toISOString().split("T")[0],
       });
 
       // Schedule prayer notifications if enabled
@@ -341,25 +351,28 @@ export default function CalendarClient({
           Dhuhr: mockPrayerTimes.Dhuhr,
           Asr: mockPrayerTimes.Asr,
           Maghrib: mockPrayerTimes.Maghrib,
-          Isha: mockPrayerTimes.Isha
+          Isha: mockPrayerTimes.Isha,
         };
         await notifications.schedulePrayerNotifications(prayerTimesRecord);
       } catch (notificationError) {
-        console.warn('Failed to schedule prayer notifications:', notificationError);
+        console.warn(
+          "Failed to schedule prayer notifications:",
+          notificationError,
+        );
         // Don't show error to user as notifications are optional
       }
     } catch (error) {
       console.error("Error fetching prayer times:", error);
       setLoading(false);
-      
-      analytics.trackEvent('prayer_times_error', 'error', {
-        error: error instanceof Error ? error.message : 'Unknown error',
-        location: location ? `${location.lat},${location.lon}` : 'no_location'
+
+      analytics.trackEvent("prayer_times_error", "error", {
+        error: error instanceof Error ? error.message : "Unknown error",
+        location: location ? `${location.lat},${location.lon}` : "no_location",
       });
 
       notify.error(
-        messages?.calendar?.errors?.prayerTimes || 
-        'Failed to load prayer times. Please try again.'
+        messages?.calendar?.errors?.prayerTimes ||
+          "Failed to load prayer times. Please try again.",
       );
     }
   };
@@ -440,11 +453,17 @@ export default function CalendarClient({
                       1,
                     );
                     setSelectedDate(newDate);
-                    
-                    analytics.trackEvent('calendar_navigation', 'engagement', {
-                      direction: 'previous',
-                      fromMonth: selectedDate.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
-                      toMonth: newDate.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
+
+                    analytics.trackEvent("calendar_navigation", "engagement", {
+                      direction: "previous",
+                      fromMonth: selectedDate.toLocaleDateString(locale, {
+                        month: "long",
+                        year: "numeric",
+                      }),
+                      toMonth: newDate.toLocaleDateString(locale, {
+                        month: "long",
+                        year: "numeric",
+                      }),
                     });
                   }}
                   className="p-2 text-muted hover:bg-buttonHover hover:text-foreground rounded-lg transition-colors duration-200"
@@ -474,11 +493,17 @@ export default function CalendarClient({
                       1,
                     );
                     setSelectedDate(newDate);
-                    
-                    analytics.trackEvent('calendar_navigation', 'engagement', {
-                      direction: 'next',
-                      fromMonth: selectedDate.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
-                      toMonth: newDate.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
+
+                    analytics.trackEvent("calendar_navigation", "engagement", {
+                      direction: "next",
+                      fromMonth: selectedDate.toLocaleDateString(locale, {
+                        month: "long",
+                        year: "numeric",
+                      }),
+                      toMonth: newDate.toLocaleDateString(locale, {
+                        month: "long",
+                        year: "numeric",
+                      }),
                     });
                   }}
                   className="p-2 text-muted hover:bg-buttonHover hover:text-foreground rounded-lg transition-colors duration-200"
@@ -516,17 +541,24 @@ export default function CalendarClient({
                     <div
                       key={index}
                       onClick={() => {
-                        analytics.trackEvent('calendar_date_click', 'engagement', {
-                          date: day.toISOString().split("T")[0],
-                          isToday,
-                          hasEvents,
-                          eventsCount: events.length
-                        });
+                        analytics.trackEvent(
+                          "calendar_date_click",
+                          "engagement",
+                          {
+                            date: day.toISOString().split("T")[0],
+                            isToday,
+                            hasEvents,
+                            eventsCount: events.length,
+                          },
+                        );
 
                         if (hasEvents) {
                           notify.info(
-                            messages?.calendar?.dateEvents?.replace('{count}', events.length.toString()) ||
-                            `${events.length} event${events.length > 1 ? 's' : ''} on this date`
+                            messages?.calendar?.dateEvents?.replace(
+                              "{count}",
+                              events.length.toString(),
+                            ) ||
+                              `${events.length} event${events.length > 1 ? "s" : ""} on this date`,
                           );
                         }
                       }}

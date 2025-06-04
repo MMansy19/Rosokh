@@ -1,6 +1,6 @@
-import { BaseService } from './BaseService';
-import { AudioTrack } from '@/types/audio';
-import { withErrorHandling } from '../utils/errorHandling';
+import { BaseService } from "./BaseService";
+import { AudioTrack } from "@/types/audio";
+import { withErrorHandling } from "../utils/errorHandling";
 
 export interface SearchFilters {
   category?: string;
@@ -34,11 +34,19 @@ export interface SearchHistory {
 }
 
 export interface SearchService {
-  search(query: string, filters?: SearchFilters, pagination?: { page: number; limit: number }): Promise<SearchResult>;
+  search(
+    query: string,
+    filters?: SearchFilters,
+    pagination?: { page: number; limit: number },
+  ): Promise<SearchResult>;
   getPopularSearches(): Promise<string[]>;
   getSearchSuggestions(query: string): Promise<string[]>;
   getSearchHistory(): Promise<SearchHistory[]>;
-  saveSearch(query: string, resultCount: number, filters?: SearchFilters): Promise<void>;
+  saveSearch(
+    query: string,
+    resultCount: number,
+    filters?: SearchFilters,
+  ): Promise<void>;
   clearSearchHistory(): Promise<void>;
   getAdvancedFilters(): Promise<{ [key: string]: string[] }>;
 }
@@ -49,14 +57,14 @@ class SearchServiceImpl extends BaseService implements SearchService {
 
   constructor() {
     super({
-      baseUrl: '/api/search',
+      baseUrl: "/api/search",
       timeout: 10000,
       retries: 2,
       cache: {
         ttl: 5 * 60 * 1000, // 5 minutes for search results
         maxSize: 200,
         staleWhileRevalidate: true,
-      }
+      },
     });
 
     this.initializeSearchIndex();
@@ -67,38 +75,38 @@ class SearchServiceImpl extends BaseService implements SearchService {
       // In a real implementation, this would build a search index
       // For now, we'll simulate with popular searches
       this.popularSearches = [
-        'quran recitation',
-        'surah al-fatiha',
-        'islamic lectures',
-        'nasheed',
-        'duas',
-        'tafsir',
-        'hadith',
-        'quranic studies'
+        "quran recitation",
+        "surah al-fatiha",
+        "islamic lectures",
+        "nasheed",
+        "duas",
+        "tafsir",
+        "hadith",
+        "quranic studies",
       ];
     } catch (error) {
-      console.warn('Failed to initialize search index:', error);
+      console.warn("Failed to initialize search index:", error);
     }
   }
 
   async search(
-    query: string, 
-    filters: SearchFilters = {}, 
-    pagination: { page: number; limit: number } = { page: 1, limit: 20 }
+    query: string,
+    filters: SearchFilters = {},
+    pagination: { page: number; limit: number } = { page: 1, limit: 20 },
   ): Promise<SearchResult> {
     const startTime = performance.now();
-    
+
     // Create cache key based on query, filters, and pagination
     const cacheKey = `search-${this.hashSearchParams(query, filters, pagination)}`;
 
-    const result = await this.fetchWithErrorHandling<SearchResult>('/tracks', {
-      method: 'POST',
+    const result = await this.fetchWithErrorHandling<SearchResult>("/tracks", {
+      method: "POST",
       body: JSON.stringify({
         query: query.trim(),
         filters,
-        pagination
+        pagination,
       }),
-      cacheKey
+      cacheKey,
     });
 
     // Record search analytics
@@ -114,8 +122,8 @@ class SearchServiceImpl extends BaseService implements SearchService {
   }
 
   async getPopularSearches(): Promise<string[]> {
-    return await this.fetchWithErrorHandling<string[]>('/popular', {
-      cacheKey: 'popular-searches'
+    return await this.fetchWithErrorHandling<string[]>("/popular", {
+      cacheKey: "popular-searches",
     });
   }
 
@@ -124,54 +132,64 @@ class SearchServiceImpl extends BaseService implements SearchService {
       return this.popularSearches.slice(0, 5);
     }
 
-    return await this.fetchWithErrorHandling<string[]>(`/suggestions?q=${encodeURIComponent(query)}`, {
-      cacheKey: `suggestions-${query.toLowerCase()}`,
-      retries: 1 // Fewer retries for suggestions
-    });
+    return await this.fetchWithErrorHandling<string[]>(
+      `/suggestions?q=${encodeURIComponent(query)}`,
+      {
+        cacheKey: `suggestions-${query.toLowerCase()}`,
+        retries: 1, // Fewer retries for suggestions
+      },
+    );
   }
 
   async getSearchHistory(): Promise<SearchHistory[]> {
-    return await withErrorHandling(
-      async () => {
-        return await this.fetchWithErrorHandling<SearchHistory[]>('/history', {
-          cacheKey: 'search-history'
+    return (
+      (await withErrorHandling(async () => {
+        return await this.fetchWithErrorHandling<SearchHistory[]>("/history", {
+          cacheKey: "search-history",
         });
-      }
-    ) || [];
+      })) || []
+    );
   }
 
-  async saveSearch(query: string, resultCount: number, filters?: SearchFilters): Promise<void> {
+  async saveSearch(
+    query: string,
+    resultCount: number,
+    filters?: SearchFilters,
+  ): Promise<void> {
     // Fire and forget - don't block UI
-    this.fetchWithErrorHandling('/history', {
-      method: 'POST',
+    this.fetchWithErrorHandling("/history", {
+      method: "POST",
       body: JSON.stringify({
         query: query.trim(),
         resultCount,
         filters,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       }),
-      skipCache: true
-    }).catch(error => {
-      console.warn('Failed to save search history:', error);
+      skipCache: true,
+    }).catch((error) => {
+      console.warn("Failed to save search history:", error);
     });
 
     // Invalidate search history cache
-    this.clearCache('search-history');
+    this.clearCache("search-history");
   }
 
   async clearSearchHistory(): Promise<void> {
-    await this.fetchWithErrorHandling('/history', {
-      method: 'DELETE',
-      skipCache: true
+    await this.fetchWithErrorHandling("/history", {
+      method: "DELETE",
+      skipCache: true,
     });
 
-    this.clearCache('search-history');
+    this.clearCache("search-history");
   }
 
   async getAdvancedFilters(): Promise<{ [key: string]: string[] }> {
-    return await this.fetchWithErrorHandling<{ [key: string]: string[] }>('/filters', {
-      cacheKey: 'advanced-filters'
-    });
+    return await this.fetchWithErrorHandling<{ [key: string]: string[] }>(
+      "/filters",
+      {
+        cacheKey: "advanced-filters",
+      },
+    );
   }
 
   // Client-side search optimization
@@ -181,39 +199,50 @@ class SearchServiceImpl extends BaseService implements SearchService {
   }> {
     const [results, suggestions] = await Promise.all([
       this.search(query),
-      this.getSearchSuggestions(query)
+      this.getSearchSuggestions(query),
     ]);
 
     return { results, suggestions };
   }
 
   // Fuzzy search for better user experience
-  async fuzzySearch(query: string, threshold: number = 0.7): Promise<SearchResult> {
+  async fuzzySearch(
+    query: string,
+    threshold: number = 0.7,
+  ): Promise<SearchResult> {
     // Implement fuzzy search logic
     const normalizedQuery = this.normalizeQuery(query);
-    
+
     return await this.search(normalizedQuery);
   }
 
   // Search analytics
-  private async recordSearchAnalytics(query: string, filters: SearchFilters, resultCount: number): Promise<void> {
+  private async recordSearchAnalytics(
+    query: string,
+    filters: SearchFilters,
+    resultCount: number,
+  ): Promise<void> {
     // Record search metrics for analytics
     const searchMetric = {
       query,
       filters,
       resultCount,
       timestamp: new Date().toISOString(),
-      userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'unknown'
+      userAgent:
+        typeof window !== "undefined" ? window.navigator.userAgent : "unknown",
     };
 
     // In production, send to analytics service
-    console.log('Search analytics:', searchMetric);
+    console.log("Search analytics:", searchMetric);
   }
 
   private updateSearchSuggestions(query: string): void {
     const normalizedQuery = query.toLowerCase().trim();
-    
-    if (normalizedQuery.length > 1 && !this.popularSearches.includes(normalizedQuery)) {
+
+    if (
+      normalizedQuery.length > 1 &&
+      !this.popularSearches.includes(normalizedQuery)
+    ) {
       // Add to local suggestions (in production, this would update server-side)
       this.popularSearches.unshift(normalizedQuery);
       this.popularSearches = this.popularSearches.slice(0, 20); // Keep top 20
@@ -224,32 +253,38 @@ class SearchServiceImpl extends BaseService implements SearchService {
     return query
       .toLowerCase()
       .trim()
-      .replace(/[^\w\s]/g, '') // Remove special characters
-      .replace(/\s+/g, ' '); // Normalize whitespace
+      .replace(/[^\w\s]/g, "") // Remove special characters
+      .replace(/\s+/g, " "); // Normalize whitespace
   }
 
-  private hashSearchParams(query: string, filters: SearchFilters, pagination: { page: number; limit: number }): string {
+  private hashSearchParams(
+    query: string,
+    filters: SearchFilters,
+    pagination: { page: number; limit: number },
+  ): string {
     const params = {
       query: this.normalizeQuery(query),
       filters,
-      pagination
+      pagination,
     };
-    
+
     // Simple hash function for cache key
     return btoa(JSON.stringify(params)).slice(0, 20);
   }
 
   // Real-time search with debouncing
-  createDebouncedSearch(delay: number = 300): (query: string) => Promise<SearchResult> {
+  createDebouncedSearch(
+    delay: number = 300,
+  ): (query: string) => Promise<SearchResult> {
     let timeoutId: NodeJS.Timeout;
-    let currentQuery: string = '';
+    let currentQuery: string = "";
 
     return (query: string): Promise<SearchResult> => {
       currentQuery = query;
-      
+
       return new Promise((resolve, reject) => {
         clearTimeout(timeoutId);
-        
+
         timeoutId = setTimeout(async () => {
           // Only search if this is still the current query
           if (query === currentQuery) {
@@ -269,13 +304,13 @@ class SearchServiceImpl extends BaseService implements SearchService {
   getSearchMetrics() {
     const baseMetrics = this.getPerformanceMetrics();
     const cacheStats = this.getCacheStats();
-    
+
     return {
       baseMetrics,
       cacheStats,
-      serviceName: 'SearchService',
+      serviceName: "SearchService",
       popularSearchesCount: this.popularSearches.length,
-      searchIndexSize: this.searchIndex.size
+      searchIndexSize: this.searchIndex.size,
     };
   }
 }

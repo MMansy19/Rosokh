@@ -1,8 +1,19 @@
-import React from 'react';
-import { Play, Pause, Heart, Download, Clock, User, BookOpen } from 'lucide-react';
-import { AudioTrack } from '@/types/audio';
-import { getGoogleDriveDownloadUrl, showNotification } from '@/utils/audioUtils';
-import { QUALITY_COLORS } from '@/constants/audio';
+import React from "react";
+import {
+  Play,
+  Pause,
+  Heart,
+  Download,
+  Clock,
+  User,
+  BookOpen,
+} from "lucide-react";
+import { AudioTrack } from "@/types/audio";
+import {
+  getGoogleDriveDownloadUrl,
+  showNotification,
+} from "@/utils/audioUtils";
+import { QUALITY_COLORS } from "@/constants/audio";
 
 interface TrackCardProps {
   track: AudioTrack;
@@ -11,7 +22,7 @@ interface TrackCardProps {
   onPlay: (track: AudioTrack) => void;
   onPause: () => void;
   onToggleFavorite: (trackId: string) => void;
-  viewMode: 'grid' | 'list';
+  viewMode: "grid" | "list";
 }
 
 export const TrackCard: React.FC<TrackCardProps> = ({
@@ -21,13 +32,13 @@ export const TrackCard: React.FC<TrackCardProps> = ({
   onPlay,
   onPause,
   onToggleFavorite,
-  viewMode
+  viewMode,
 }) => {
   const handleDownload = (e: React.MouseEvent) => {
     e.stopPropagation();
     const downloadUrl = getGoogleDriveDownloadUrl(track.id);
-    window.open(downloadUrl, '_blank');
-    showNotification(`Started downloading "${track.title}"`, 'success');
+    window.open(downloadUrl, "_blank");
+    showNotification(`Started downloading "${track.title}"`, "success");
   };
 
   const handleFavoriteToggle = (e: React.MouseEvent) => {
@@ -46,7 +57,7 @@ export const TrackCard: React.FC<TrackCardProps> = ({
 
   const qualityColor = QUALITY_COLORS[track.quality];
 
-  if (viewMode === 'list') {
+  if (viewMode === "list") {
     return (
       <div className="group flex items-center gap-4 p-4 bg-gradient-to-r from-card via-card/95 to-card/90 hover:from-card/90 hover:via-card hover:to-card/95 rounded-lg border border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg backdrop-blur-sm">
         {/* Play/Pause Button */}
@@ -92,7 +103,9 @@ export const TrackCard: React.FC<TrackCardProps> = ({
             </div>
 
             {/* Quality Badge */}
-            <div className={`px-2 py-1 rounded-full text-xs font-medium ${qualityColor} flex-shrink-0`}>
+            <div
+              className={`px-2 py-1 rounded-full text-xs font-medium ${qualityColor} flex-shrink-0`}
+            >
               {track.quality.toUpperCase()}
             </div>
           </div>
@@ -104,12 +117,12 @@ export const TrackCard: React.FC<TrackCardProps> = ({
             onClick={handleFavoriteToggle}
             className={`p-2 rounded-full transition-all duration-200 hover:scale-110 ${
               isFavorite
-                ? 'text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 dark:bg-red-950 dark:hover:bg-red-900'
-                : 'text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted'
+                ? "text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 dark:bg-red-950 dark:hover:bg-red-900"
+                : "text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted"
             }`}
-            title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+            title={isFavorite ? "Remove from favorites" : "Add to favorites"}
           >
-            <Heart className={`w-4 h-4 ${isFavorite ? 'fill-current' : ''}`} />
+            <Heart className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
           </button>
           <button
             onClick={handleDownload}
@@ -134,18 +147,20 @@ export const TrackCard: React.FC<TrackCardProps> = ({
       <div className="relative p-6">
         {/* Header with Quality Badge */}
         <div className="flex items-start justify-between mb-4">
-          <div className={`px-2 py-1 rounded-full text-xs font-medium ${qualityColor}`}>
+          <div
+            className={`px-2 py-1 rounded-full text-xs font-medium ${qualityColor}`}
+          >
             {track.quality.toUpperCase()}
           </div>
           <button
             onClick={handleFavoriteToggle}
             className={`p-1.5 rounded-full transition-all duration-200 hover:scale-110 ${
               isFavorite
-                ? 'text-red-500 hover:text-red-600'
-                : 'text-muted-foreground hover:text-foreground'
+                ? "text-red-500 hover:text-red-600"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Heart className={`w-4 h-4 ${isFavorite ? 'fill-current' : ''}`} />
+            <Heart className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
           </button>
         </div>
 

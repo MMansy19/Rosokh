@@ -22,10 +22,7 @@ import {
   VIDEO_CATEGORIES,
   SearchFilters,
 } from "@/components/youtube/VideoService";
-import {
-  VideoPlayer,
-  VideoInfo,
-} from "@/components/youtube/VideoPlayer";
+import { VideoPlayer, VideoInfo } from "@/components/youtube/VideoPlayer";
 
 // Add error handling for YoutubeClient
 interface ErrorBoundaryState {
@@ -47,7 +44,7 @@ class YouTubeErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('YouTube component error:', error, errorInfo);
+    console.error("YouTube component error:", error, errorInfo);
   }
 
   render() {
@@ -59,7 +56,7 @@ class YouTubeErrorBoundary extends React.Component<
               {this.props.messages?.youtube?.error || "YouTube Service Error"}
             </h2>
             <p className="text-muted-foreground mb-6">
-              {this.props.messages?.youtube?.errorDesc || 
+              {this.props.messages?.youtube?.errorDesc ||
                 "There was an issue loading the YouTube service. Please check your internet connection and API configuration."}
             </p>
             <button
@@ -520,7 +517,9 @@ export default function YoutubeClient({
                     </div>
 
                     {/* Content */}
-                    <div className={`${viewMode === "list" ? "flex-1" : "p-4"}`}>
+                    <div
+                      className={`${viewMode === "list" ? "flex-1" : "p-4"}`}
+                    >
                       <h3
                         className={`font-semibold text-foreground mb-2 ${viewMode === "list" ? "text-lg" : "text-base"} line-clamp-2`}
                       >
@@ -597,7 +596,9 @@ export default function YoutubeClient({
                           {playlist.category.name}
                         </span>
                         {playlist.isOfficial && (
-                          <span className="text-xs text-primary">✓ Official</span>
+                          <span className="text-xs text-primary">
+                            ✓ Official
+                          </span>
                         )}
                       </div>
                     </div>
@@ -610,7 +611,9 @@ export default function YoutubeClient({
                 <h3 className="text-xl font-semibold text-foreground mb-2">
                   Trending Islamic Videos
                 </h3>
-                <p className="text-muted">Popular Islamic content trending now</p>
+                <p className="text-muted">
+                  Popular Islamic content trending now
+                </p>
               </div>
             )}
 

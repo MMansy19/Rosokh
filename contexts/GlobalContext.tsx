@@ -1,11 +1,18 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext, useReducer, ReactNode, useCallback, useMemo } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  ReactNode,
+  useCallback,
+  useMemo,
+} from "react";
 
 // Enhanced Types
 export interface Notification {
   id: string;
-  type: 'success' | 'error' | 'warning' | 'info';
+  type: "success" | "error" | "warning" | "info";
   title: string;
   message?: string;
   duration?: number;
@@ -13,7 +20,7 @@ export interface Notification {
     label: string;
     onClick: () => void;
   };
-  priority?: 'low' | 'medium' | 'high';
+  priority?: "low" | "medium" | "high";
   timestamp?: number;
   component?: React.ComponentType;
   metadata?: Record<string, any>;
@@ -30,7 +37,7 @@ export interface LoadingState {
 
 export interface ErrorState {
   error: string | null;
-  errorType?: 'network' | 'server' | 'validation' | 'auth' | 'general';
+  errorType?: "network" | "server" | "validation" | "auth" | "general";
   errorCode?: string;
   retryCount?: number;
   maxRetries?: number;
@@ -52,7 +59,7 @@ export interface GlobalState {
     highContrast: boolean;
     reducedMotion: boolean;
     screenReader: boolean;
-    fontSize: 'small' | 'medium' | 'large';
+    fontSize: "small" | "medium" | "large";
   };
   connectivity: {
     isOnline: boolean;
@@ -63,27 +70,39 @@ export interface GlobalState {
 
 // Enhanced Actions
 type GlobalAction =
-  | { type: 'SET_LOADING'; payload: LoadingState }
-  | { type: 'UPDATE_LOADING_PROGRESS'; payload: { progress?: number; stage?: string } }
-  | { type: 'CLEAR_LOADING' }
-  | { type: 'ADD_NOTIFICATION'; payload: Notification }
-  | { type: 'REMOVE_NOTIFICATION'; payload: string }
-  | { type: 'UPDATE_NOTIFICATION'; payload: { id: string; updates: Partial<Notification> } }
-  | { type: 'CLEAR_ALL_NOTIFICATIONS' }
-  | { type: 'SET_ERROR'; payload: ErrorState }
-  | { type: 'CLEAR_ERROR' }
-  | { type: 'INCREMENT_RETRY'; payload: string }
-  | { type: 'SET_LOCALE_DATA'; payload: { locale: string; messages: any } }
-  | { type: 'UPDATE_ACCESSIBILITY'; payload: Partial<GlobalState['accessibility']> }
-  | { type: 'UPDATE_CONNECTIVITY'; payload: Partial<GlobalState['connectivity']> }
-  | { type: 'TOGGLE_OPTIMIZATION'; payload: boolean }
-  | { type: 'INCREMENT_RENDER_COUNT' };
+  | { type: "SET_LOADING"; payload: LoadingState }
+  | {
+      type: "UPDATE_LOADING_PROGRESS";
+      payload: { progress?: number; stage?: string };
+    }
+  | { type: "CLEAR_LOADING" }
+  | { type: "ADD_NOTIFICATION"; payload: Notification }
+  | { type: "REMOVE_NOTIFICATION"; payload: string }
+  | {
+      type: "UPDATE_NOTIFICATION";
+      payload: { id: string; updates: Partial<Notification> };
+    }
+  | { type: "CLEAR_ALL_NOTIFICATIONS" }
+  | { type: "SET_ERROR"; payload: ErrorState }
+  | { type: "CLEAR_ERROR" }
+  | { type: "INCREMENT_RETRY"; payload: string }
+  | { type: "SET_LOCALE_DATA"; payload: { locale: string; messages: any } }
+  | {
+      type: "UPDATE_ACCESSIBILITY";
+      payload: Partial<GlobalState["accessibility"]>;
+    }
+  | {
+      type: "UPDATE_CONNECTIVITY";
+      payload: Partial<GlobalState["connectivity"]>;
+    }
+  | { type: "TOGGLE_OPTIMIZATION"; payload: boolean }
+  | { type: "INCREMENT_RENDER_COUNT" };
 
 // Enhanced Initial state
 const initialState: GlobalState = {
   loading: {
     isLoading: false,
-    message: '',
+    message: "",
     progress: undefined,
     stage: undefined,
     cancellable: false,
@@ -96,20 +115,22 @@ const initialState: GlobalState = {
     retryCount: 0,
     maxRetries: 3,
   },
-  locale: 'en',
+  locale: "en",
   messages: {},
   performance: {
     lastUpdate: Date.now(),
     renderCount: 0,
     optimizationEnabled: true,
-  },  accessibility: {
+  },
+  accessibility: {
     highContrast: false,
     reducedMotion: false,
     screenReader: false,
-    fontSize: 'medium',
+    fontSize: "medium",
   },
   connectivity: {
-    isOnline: typeof window !== 'undefined' ? navigator?.onLine ?? true : true,
+    isOnline:
+      typeof window !== "undefined" ? (navigator?.onLine ?? true) : true,
   },
 };
 
@@ -118,13 +139,15 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
   // Performance optimization: Early return for no-op actions
   if (state.performance.optimizationEnabled) {
     switch (action.type) {
-      case 'SET_LOADING':
-        if (state.loading.isLoading === action.payload.isLoading && 
-            state.loading.message === action.payload.message) {
+      case "SET_LOADING":
+        if (
+          state.loading.isLoading === action.payload.isLoading &&
+          state.loading.message === action.payload.message
+        ) {
           return state;
         }
         break;
-      case 'UPDATE_CONNECTIVITY':
+      case "UPDATE_CONNECTIVITY":
         if (state.connectivity.isOnline === action.payload.isOnline) {
           return state;
         }
@@ -134,7 +157,7 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
 
   const newState = (() => {
     switch (action.type) {
-      case 'SET_LOADING':
+      case "SET_LOADING":
         return {
           ...state,
           loading: {
@@ -142,8 +165,8 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
             ...action.payload,
           },
         };
-      
-      case 'UPDATE_LOADING_PROGRESS':
+
+      case "UPDATE_LOADING_PROGRESS":
         return {
           ...state,
           loading: {
@@ -151,57 +174,63 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
             ...action.payload,
           },
         };
-      
-      case 'CLEAR_LOADING':
+
+      case "CLEAR_LOADING":
         return {
           ...state,
           loading: {
             isLoading: false,
-            message: '',
+            message: "",
             progress: undefined,
             stage: undefined,
             cancellable: false,
           },
         };
-      
-      case 'ADD_NOTIFICATION':
+
+      case "ADD_NOTIFICATION":
         const notification = {
           ...action.payload,
           timestamp: Date.now(),
-          priority: action.payload.priority || 'medium',
+          priority: action.payload.priority || "medium",
         };
         return {
           ...state,
           notifications: [...state.notifications, notification]
             .sort((a, b) => {
               const priorityOrder = { high: 3, medium: 2, low: 1 };
-              return (priorityOrder[b.priority!] - priorityOrder[a.priority!]) || 
-                     (b.timestamp! - a.timestamp!);
+              return (
+                priorityOrder[b.priority!] - priorityOrder[a.priority!] ||
+                b.timestamp! - a.timestamp!
+              );
             })
             .slice(0, 10), // Limit to 10 notifications for performance
         };
-      
-      case 'REMOVE_NOTIFICATION':
+
+      case "REMOVE_NOTIFICATION":
         return {
           ...state,
-          notifications: state.notifications.filter(n => n.id !== action.payload),
-        };
-      
-      case 'UPDATE_NOTIFICATION':
-        return {
-          ...state,
-          notifications: state.notifications.map(n =>
-            n.id === action.payload.id ? { ...n, ...action.payload.updates } : n
+          notifications: state.notifications.filter(
+            (n) => n.id !== action.payload,
           ),
         };
-      
-      case 'CLEAR_ALL_NOTIFICATIONS':
+
+      case "UPDATE_NOTIFICATION":
+        return {
+          ...state,
+          notifications: state.notifications.map((n) =>
+            n.id === action.payload.id
+              ? { ...n, ...action.payload.updates }
+              : n,
+          ),
+        };
+
+      case "CLEAR_ALL_NOTIFICATIONS":
         return {
           ...state,
           notifications: [],
         };
-      
-      case 'SET_ERROR':
+
+      case "SET_ERROR":
         return {
           ...state,
           error: {
@@ -209,8 +238,8 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
             ...action.payload,
           },
         };
-      
-      case 'CLEAR_ERROR':
+
+      case "CLEAR_ERROR":
         return {
           ...state,
           error: {
@@ -221,8 +250,8 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
             maxRetries: 3,
           },
         };
-      
-      case 'INCREMENT_RETRY':
+
+      case "INCREMENT_RETRY":
         return {
           ...state,
           error: {
@@ -230,15 +259,15 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
             retryCount: (state.error.retryCount || 0) + 1,
           },
         };
-      
-      case 'SET_LOCALE_DATA':
+
+      case "SET_LOCALE_DATA":
         return {
           ...state,
           locale: action.payload.locale,
           messages: action.payload.messages,
         };
-      
-      case 'UPDATE_ACCESSIBILITY':
+
+      case "UPDATE_ACCESSIBILITY":
         return {
           ...state,
           accessibility: {
@@ -246,8 +275,8 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
             ...action.payload,
           },
         };
-      
-      case 'UPDATE_CONNECTIVITY':
+
+      case "UPDATE_CONNECTIVITY":
         return {
           ...state,
           connectivity: {
@@ -255,8 +284,8 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
             ...action.payload,
           },
         };
-      
-      case 'TOGGLE_OPTIMIZATION':
+
+      case "TOGGLE_OPTIMIZATION":
         return {
           ...state,
           performance: {
@@ -264,8 +293,8 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
             optimizationEnabled: action.payload,
           },
         };
-      
-      case 'INCREMENT_RENDER_COUNT':
+
+      case "INCREMENT_RENDER_COUNT":
         return {
           ...state,
           performance: {
@@ -274,7 +303,7 @@ function globalReducer(state: GlobalState, action: GlobalAction): GlobalState {
             lastUpdate: Date.now(),
           },
         };
-      
+
       default:
         return state;
     }
@@ -304,22 +333,25 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
   // Connectivity monitoring - Client-side only
   React.useEffect(() => {
     // Check if we're in the browser environment
-    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+    if (typeof window === "undefined" || typeof navigator === "undefined") {
       return;
     }
 
     const updateOnlineStatus = () => {
       dispatch({
-        type: 'UPDATE_CONNECTIVITY',
+        type: "UPDATE_CONNECTIVITY",
         payload: { isOnline: navigator.onLine },
       });
     };
 
     const updateConnection = () => {
-      const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+      const connection =
+        (navigator as any).connection ||
+        (navigator as any).mozConnection ||
+        (navigator as any).webkitConnection;
       if (connection) {
         dispatch({
-          type: 'UPDATE_CONNECTIVITY',
+          type: "UPDATE_CONNECTIVITY",
           payload: {
             connectionType: connection.type,
             effectiveType: connection.effectiveType,
@@ -332,47 +364,47 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
     updateOnlineStatus();
     updateConnection();
 
-    window.addEventListener('online', updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
+    window.addEventListener("online", updateOnlineStatus);
+    window.addEventListener("offline", updateOnlineStatus);
 
     return () => {
-      window.removeEventListener('online', updateOnlineStatus);
-      window.removeEventListener('offline', updateOnlineStatus);
+      window.removeEventListener("online", updateOnlineStatus);
+      window.removeEventListener("offline", updateOnlineStatus);
     };
   }, []);
 
   // Accessibility monitoring - Client-side only
   React.useEffect(() => {
     // Check if we're in the browser environment
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
     const mediaQueries = {
-      reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)'),
-      highContrast: window.matchMedia('(prefers-contrast: high)'),
+      reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)"),
+      highContrast: window.matchMedia("(prefers-contrast: high)"),
     };
 
     const updateAccessibility = () => {
       dispatch({
-        type: 'UPDATE_ACCESSIBILITY',
+        type: "UPDATE_ACCESSIBILITY",
         payload: {
           reducedMotion: mediaQueries.reducedMotion.matches,
           highContrast: mediaQueries.highContrast.matches,
-          screenReader: 'speechSynthesis' in window,
+          screenReader: "speechSynthesis" in window,
         },
       });
     };
 
-    Object.values(mediaQueries).forEach(mq => {
-      mq.addEventListener('change', updateAccessibility);
+    Object.values(mediaQueries).forEach((mq) => {
+      mq.addEventListener("change", updateAccessibility);
     });
 
     updateAccessibility();
 
     return () => {
-      Object.values(mediaQueries).forEach(mq => {
-        mq.removeEventListener('change', updateAccessibility);
+      Object.values(mediaQueries).forEach((mq) => {
+        mq.removeEventListener("change", updateAccessibility);
       });
     };
   }, []);
@@ -388,7 +420,7 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
 export function useGlobal() {
   const context = useContext(GlobalContext);
   if (!context) {
-    throw new Error('useGlobal must be used within a GlobalProvider');
+    throw new Error("useGlobal must be used within a GlobalProvider");
   }
   return context;
 }
@@ -396,34 +428,44 @@ export function useGlobal() {
 // Enhanced Loading Hook with progress support
 export function useGlobalLoading() {
   const { state, dispatch } = useGlobal();
-  
-  const setLoading = useCallback((isLoading: boolean, message?: string, options?: {
-    progress?: number;
-    stage?: string;
-    cancellable?: boolean;
-    onCancel?: () => void;
-  }) => {
-    dispatch({
-      type: 'SET_LOADING',
-      payload: {
-        isLoading,
-        message: message || '',
-        ...options,
-      },
-    });
-  }, [dispatch]);
 
-  const updateProgress = useCallback((progress?: number, stage?: string) => {
-    dispatch({
-      type: 'UPDATE_LOADING_PROGRESS',
-      payload: { progress, stage },
-    });
-  }, [dispatch]);
+  const setLoading = useCallback(
+    (
+      isLoading: boolean,
+      message?: string,
+      options?: {
+        progress?: number;
+        stage?: string;
+        cancellable?: boolean;
+        onCancel?: () => void;
+      },
+    ) => {
+      dispatch({
+        type: "SET_LOADING",
+        payload: {
+          isLoading,
+          message: message || "",
+          ...options,
+        },
+      });
+    },
+    [dispatch],
+  );
+
+  const updateProgress = useCallback(
+    (progress?: number, stage?: string) => {
+      dispatch({
+        type: "UPDATE_LOADING_PROGRESS",
+        payload: { progress, stage },
+      });
+    },
+    [dispatch],
+  );
 
   const clearLoading = useCallback(() => {
-    dispatch({ type: 'CLEAR_LOADING' });
+    dispatch({ type: "CLEAR_LOADING" });
   }, [dispatch]);
-  
+
   return {
     ...state.loading,
     setLoading,
@@ -435,59 +477,98 @@ export function useGlobalLoading() {
 // Enhanced Notifications Hook with priority and metadata support
 export function useNotifications() {
   const { state, dispatch } = useGlobal();
-  
-  const addNotification = useCallback((notification: Omit<Notification, 'id' | 'timestamp'>) => {
-    const id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    const enhancedNotification: Notification = {
-      ...notification,
-      id,
-      priority: notification.priority || 'medium',
-      timestamp: Date.now(),
-    };
-    
-    dispatch({
-      type: 'ADD_NOTIFICATION',
-      payload: enhancedNotification,
-    });
-    
-    // Auto remove after duration (except for errors which stay until manually dismissed)
-    if (notification.duration !== 0 && notification.type !== 'error') {
-      const duration = notification.duration || 5000;
-      setTimeout(() => {
-        dispatch({ type: 'REMOVE_NOTIFICATION', payload: id });
-      }, duration);
-    }
-    
-    return id;
-  }, [dispatch]);
-  
-  const removeNotification = useCallback((id: string) => {
-    dispatch({ type: 'REMOVE_NOTIFICATION', payload: id });
-  }, [dispatch]);
 
-  const updateNotification = useCallback((id: string, updates: Partial<Notification>) => {
-    dispatch({
-      type: 'UPDATE_NOTIFICATION',
-      payload: { id, updates },
-    });
-  }, [dispatch]);
-  
+  const addNotification = useCallback(
+    (notification: Omit<Notification, "id" | "timestamp">) => {
+      const id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const enhancedNotification: Notification = {
+        ...notification,
+        id,
+        priority: notification.priority || "medium",
+        timestamp: Date.now(),
+      };
+
+      dispatch({
+        type: "ADD_NOTIFICATION",
+        payload: enhancedNotification,
+      });
+
+      // Auto remove after duration (except for errors which stay until manually dismissed)
+      if (notification.duration !== 0 && notification.type !== "error") {
+        const duration = notification.duration || 5000;
+        setTimeout(() => {
+          dispatch({ type: "REMOVE_NOTIFICATION", payload: id });
+        }, duration);
+      }
+
+      return id;
+    },
+    [dispatch],
+  );
+
+  const removeNotification = useCallback(
+    (id: string) => {
+      dispatch({ type: "REMOVE_NOTIFICATION", payload: id });
+    },
+    [dispatch],
+  );
+
+  const updateNotification = useCallback(
+    (id: string, updates: Partial<Notification>) => {
+      dispatch({
+        type: "UPDATE_NOTIFICATION",
+        payload: { id, updates },
+      });
+    },
+    [dispatch],
+  );
+
   const clearAll = useCallback(() => {
-    dispatch({ type: 'CLEAR_ALL_NOTIFICATIONS' });
+    dispatch({ type: "CLEAR_ALL_NOTIFICATIONS" });
   }, [dispatch]);
 
   // Helper methods for common notification types
-  const notify = useMemo(() => ({
-    success: (title: string, message?: string, options?: Partial<Notification>) => 
-      addNotification({ type: 'success', title, message, ...options }),
-    error: (title: string, message?: string, options?: Partial<Notification>) => 
-      addNotification({ type: 'error', title, message, duration: 0, priority: 'high', ...options }),
-    warning: (title: string, message?: string, options?: Partial<Notification>) => 
-      addNotification({ type: 'warning', title, message, priority: 'medium', ...options }),
-    info: (title: string, message?: string, options?: Partial<Notification>) => 
-      addNotification({ type: 'info', title, message, ...options }),
-  }), [addNotification]);
-  
+  const notify = useMemo(
+    () => ({
+      success: (
+        title: string,
+        message?: string,
+        options?: Partial<Notification>,
+      ) => addNotification({ type: "success", title, message, ...options }),
+      error: (
+        title: string,
+        message?: string,
+        options?: Partial<Notification>,
+      ) =>
+        addNotification({
+          type: "error",
+          title,
+          message,
+          duration: 0,
+          priority: "high",
+          ...options,
+        }),
+      warning: (
+        title: string,
+        message?: string,
+        options?: Partial<Notification>,
+      ) =>
+        addNotification({
+          type: "warning",
+          title,
+          message,
+          priority: "medium",
+          ...options,
+        }),
+      info: (
+        title: string,
+        message?: string,
+        options?: Partial<Notification>,
+      ) => addNotification({ type: "info", title, message, ...options }),
+    }),
+    [addNotification],
+  );
+
   return {
     notifications: state.notifications,
     addNotification,
@@ -501,40 +582,49 @@ export function useNotifications() {
 // Enhanced Error Hook with retry logic
 export function useGlobalError() {
   const { state, dispatch } = useGlobal();
-  
-  const setError = useCallback((
-    error: string | null, 
-    options?: {
-      type?: ErrorState['errorType'];
-      code?: string;
-      onRetry?: () => void;
-      maxRetries?: number;
-    }
-  ) => {
-    dispatch({
-      type: 'SET_ERROR',
-      payload: {
-        error,
-        errorType: options?.type,
-        errorCode: options?.code,
-        onRetry: options?.onRetry,
-        maxRetries: options?.maxRetries || 3,
-        retryCount: 0,
+
+  const setError = useCallback(
+    (
+      error: string | null,
+      options?: {
+        type?: ErrorState["errorType"];
+        code?: string;
+        onRetry?: () => void;
+        maxRetries?: number;
       },
-    });
-  }, [dispatch]);
+    ) => {
+      dispatch({
+        type: "SET_ERROR",
+        payload: {
+          error,
+          errorType: options?.type,
+          errorCode: options?.code,
+          onRetry: options?.onRetry,
+          maxRetries: options?.maxRetries || 3,
+          retryCount: 0,
+        },
+      });
+    },
+    [dispatch],
+  );
 
   const clearError = useCallback(() => {
-    dispatch({ type: 'CLEAR_ERROR' });
+    dispatch({ type: "CLEAR_ERROR" });
   }, [dispatch]);
 
-  const incrementRetry = useCallback((errorId?: string) => {
-    dispatch({ type: 'INCREMENT_RETRY', payload: errorId || '' });
-  }, [dispatch]);
+  const incrementRetry = useCallback(
+    (errorId?: string) => {
+      dispatch({ type: "INCREMENT_RETRY", payload: errorId || "" });
+    },
+    [dispatch],
+  );
   const canRetry = useMemo(() => {
-    return (state.error.retryCount || 0) < (state.error.maxRetries || 3) && !!state.error.onRetry;
+    return (
+      (state.error.retryCount || 0) < (state.error.maxRetries || 3) &&
+      !!state.error.onRetry
+    );
   }, [state.error.retryCount, state.error.maxRetries, state.error.onRetry]);
-  
+
   return {
     ...state.error,
     setError,
@@ -548,12 +638,15 @@ export function useGlobalError() {
 export function useAccessibility() {
   const { state, dispatch } = useGlobal();
 
-  const updateAccessibility = useCallback((updates: Partial<GlobalState['accessibility']>) => {
-    dispatch({
-      type: 'UPDATE_ACCESSIBILITY',
-      payload: updates,
-    });
-  }, [dispatch]);
+  const updateAccessibility = useCallback(
+    (updates: Partial<GlobalState["accessibility"]>) => {
+      dispatch({
+        type: "UPDATE_ACCESSIBILITY",
+        payload: updates,
+      });
+    },
+    [dispatch],
+  );
 
   return {
     ...state.accessibility,
@@ -571,12 +664,15 @@ export function useConnectivity() {
 export function usePerformance() {
   const { state, dispatch } = useGlobal();
 
-  const toggleOptimization = useCallback((enabled: boolean) => {
-    dispatch({
-      type: 'TOGGLE_OPTIMIZATION',
-      payload: enabled,
-    });
-  }, [dispatch]);
+  const toggleOptimization = useCallback(
+    (enabled: boolean) => {
+      dispatch({
+        type: "TOGGLE_OPTIMIZATION",
+        payload: enabled,
+      });
+    },
+    [dispatch],
+  );
 
   return {
     ...state.performance,

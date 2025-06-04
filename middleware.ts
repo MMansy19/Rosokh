@@ -14,9 +14,13 @@ function isMissingLocale(pathname: string): boolean {
     return false;
   }
   // Exclude static files, API routes, and special files
-  return !pathname.match(
-    /^\/(_next|favicon\.ico|api|public|images|pdfs|assets|pdf-worker|data|sw\.js|manifest\.json)\//,
-  ) && pathname !== '/sw.js' && pathname !== '/manifest.json';
+  return (
+    !pathname.match(
+      /^\/(_next|favicon\.ico|api|public|images|pdfs|assets|pdf-worker|data|sw\.js|manifest\.json)\//,
+    ) &&
+    pathname !== "/sw.js" &&
+    pathname !== "/manifest.json"
+  );
 }
 
 export function middleware(request: NextRequest) {

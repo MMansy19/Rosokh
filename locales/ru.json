@@ -360,11 +360,14 @@
     },
     "qualities": {
       "high": "Высокое качество",
-      "medium": "Среднее качество",
+      "medium": "Среднее качество", 
       "low": "Низкое качество"
     },
     "noTracks": "Треки не найдены",
     "tryDifferentCategory": "Попробуйте выбрать другую категорию",
+    "audioTracks": "Аудиотреки",
+    "tryAdjustingSearch": "Попробуйте изменить условия поиска или фильтры, чтобы найти прекрасный исламский аудиоконтент.",
+    "exploreCollection": "Изучите нашу коллекцию чтений Корана, дуа и лекций",
     "features": "Возможности аудиотеки",
     "powerfulFeatures": "Мощные возможности",
     "featuresDescription": "Испытайте лучшую исламскую аудиоплатформу с функциями, разработанными для современных мусульман",
@@ -600,5 +603,68 @@
     "loading": "Загрузка...",
     "bookmarks": "Закладки",
     "transliterationNotAvailable": "Транслитерация недоступна"
+  },
+  "notifications": {
+    "audio": {
+      "nowPlaying": "Сейчас играет: {title}",
+      "playbackError": "Ошибка воспроизведения: {error}",
+      "trackLoaded": "Трек загружен: {title}",
+      "addedToFavorites": "Добавлено в избранное: {title}",
+      "removedFromFavorites": "Удалено из избранного: {title}",
+      "downloadStarted": "Загрузка началась: {title}",
+      "downloadComplete": "Загрузка завершена: {title}",
+      "downloadFailed": "Ошибка загрузки: {title}",
+      "volumeChanged": "Громкость изменена: {volume}%",
+      "speedChanged": "Скорость изменена: {speed}x",
+      "repeatEnabled": "Повтор включен",
+      "repeatDisabled": "Повтор отключен",
+      "shuffleEnabled": "Перемешивание включено",
+      "shuffleDisabled": "Перемешивание отключено",
+      "queueUpdated": "Очередь обновлена",
+      "trackSkipped": "Трек пропущен",
+      "audioQualityChanged": "Качество аудио изменено: {quality}"
+    },
+    "general": {
+      "success": "Успешно выполнено",
+      "error": "Произошла ошибка",
+      "warning": "Предупреждение",
+      "info": "Информация",
+      "loading": "Загрузка...",
+      "saving": "Сохранение...",
+      "networkError": "Ошибка сети. Проверьте подключение к интернету",
+      "serverError": "Ошибка сервера. Попробуйте позже",
+      "timeout": "Тайм-аут запроса. Попробуйте снова",
+      "invalidInput": "Неверный ввод. Пожалуйста, проверьте данные",
+      "permissionDenied": "Доступ запрещен",
+      "fileNotFound": "Файл не найден",
+      "operationCancelled": "Операция отменена",
+      "sessionExpired": "Сессия истекла. Пожалуйста, обновите страницу"
+    },
+    "system": {
+      "appUpdated": "Приложение обновлено до версии {version}",
+      "newFeatureAvailable": "Доступна новая функция: {feature}",
+      "maintenanceMode": "Режим обслуживания активен. Некоторые функции могут быть недоступны",
+      "performanceImproved": "Производительность улучшена",
+      "bugFixed": "Исправлена ошибка: {description}",
+      "cacheCleared": "Кеш очищен",
+      "settingsSaved": "Настройки сохранены",
+      "themeChanged": "Тема изменена на {theme}",
+      "languageChanged": "Язык изменен на {language}",
+      "dataBackupComplete": "Резервное копирование данных завершено",
+      "dataRestored": "Данные восстановлены из резервной копии",
+      "storageOptimized": "Хранилище оптимизировано. Освобождено {space}"
+    },
+    "prayer": {
+      "nextPrayerAlert": "Следующая молитва: {prayer} в {time}",
+      "prayerTimeNow": "Время молитвы: {prayer}",
+      "prayerReminder": "Напоминание о молитве через {minutes} минут",
+      "adhanPlaying": "Играет Азан",
+      "qiblaFound": "Направление Киблы: {direction}°",
+      "prayerTimeUpdated": "Время молитвы обновлено",
+      "locationUpdated": "Местоположение обновлено для времени молитвы",
+      "qiblaDirection": "Направление Киблы:",
+      "prayerCompleted": "Молитва отмечена как выполненная",
+      "tasbihCompleted": "Сессия тасбих завершена"
+    }
   }
 }

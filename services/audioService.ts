@@ -1,6 +1,6 @@
-import { AudioTrack } from '@/types/audio';
-import { BaseService } from './BaseService';
-import { withErrorHandling } from '../utils/errorHandling';
+import { AudioTrack } from "@/types/audio";
+import { BaseService } from "./BaseService";
+import { withErrorHandling } from "../utils/errorHandling";
 
 export interface AudioService {
   fetchTracks(): Promise<AudioTrack[]>;
@@ -17,20 +17,20 @@ export interface AudioService {
 class AudioServiceImpl extends BaseService implements AudioService {
   constructor() {
     super({
-      baseUrl: '/api',
+      baseUrl: "/api",
       timeout: 10000,
       retries: 3,
       cache: {
         ttl: 5 * 60 * 1000, // 5 minutes
         maxSize: 100,
         staleWhileRevalidate: true,
-      }
+      },
     });
   }
 
   async fetchTracks(): Promise<AudioTrack[]> {
-    return await this.fetchWithErrorHandling<AudioTrack[]>('/audio-data', {
-      cacheKey: 'audio-tracks'
+    return await this.fetchWithErrorHandling<AudioTrack[]>("/audio-data", {
+      cacheKey: "audio-tracks",
     });
   }
 
@@ -43,35 +43,33 @@ class AudioServiceImpl extends BaseService implements AudioService {
       `/audio-data?search=${encodeURIComponent(query)}`,
       {
         cacheKey: `search-${query}`,
-        retries: 2 // fewer retries for search
-      }
+        retries: 2, // fewer retries for search
+      },
     );
   }
 
   async getTrackById(id: string): Promise<AudioTrack | null> {
-    return await withErrorHandling(
-      async () => {
-        return await this.fetchWithErrorHandling<AudioTrack>(
-          `/audio-data/${id}`,
-          {
-            cacheKey: `track-${id}`
-          }
-        );
-      }
-    );
+    return await withErrorHandling(async () => {
+      return await this.fetchWithErrorHandling<AudioTrack>(
+        `/audio-data/${id}`,
+        {
+          cacheKey: `track-${id}`,
+        },
+      );
+    });
   }
 
   async validateTrackUrl(url: string): Promise<boolean> {
-    return await withErrorHandling(
-      async () => {
+    return (
+      (await withErrorHandling(async () => {
         // Use HEAD request to validate URL without downloading content
-        const response = await fetch(url, { 
-          method: 'HEAD',
-          signal: AbortSignal.timeout(5000) // 5 second timeout
+        const response = await fetch(url, {
+          method: "HEAD",
+          signal: AbortSignal.timeout(5000), // 5 second timeout
         });
         return response.ok;
-      }
-    ) ?? false;
+      })) ?? false
+    );
   }
 
   // Cache management methods
@@ -94,28 +92,33 @@ class AudioServiceImpl extends BaseService implements AudioService {
   }
 
   async batchFetchTracks(ids: string[]): Promise<AudioTrack[]> {
-    const promises = ids.map(id => this.getTrackById(id));
+    const promises = ids.map((id) => this.getTrackById(id));
     const results = await Promise.allSettled(promises);
-    
+
     return results
-      .filter((result): result is PromiseFulfilledResult<AudioTrack | null> => 
-        result.status === 'fulfilled' && result.value !== null
+      .filter(
+        (result): result is PromiseFulfilledResult<AudioTrack | null> =>
+          result.status === "fulfilled" && result.value !== null,
       )
-      .map(result => result.value as AudioTrack);
+      .map((result) => result.value as AudioTrack);
   }
   // Performance monitoring specific to audio service
   getAudioServiceMetrics() {
     const baseMetrics = this.getPerformanceMetrics();
     const cacheStats = this.getCacheStats();
-    
+
     return {
       baseMetrics,
       cacheStats,
-      serviceName: 'AudioService',
+      serviceName: "AudioService",
       requestCount: Array.isArray(baseMetrics) ? baseMetrics.length : 0,
-      averageResponseTime: Array.isArray(baseMetrics) && baseMetrics.length > 0 
-        ? baseMetrics.reduce((sum: number, metric: any) => sum + (metric.average || 0), 0) / baseMetrics.length 
-        : 0
+      averageResponseTime:
+        Array.isArray(baseMetrics) && baseMetrics.length > 0
+          ? baseMetrics.reduce(
+              (sum: number, metric: any) => sum + (metric.average || 0),
+              0,
+            ) / baseMetrics.length
+          : 0,
     };
   }
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface UseFavoritesReturn {
   favorites: Set<string>;
@@ -37,6 +37,6 @@ export const useFavorites = (): UseFavoritesReturn => {
 
   return {
     favorites,
-    toggleFavorite
+    toggleFavorite,
   };
 };

@@ -1,5 +1,12 @@
 // Base Service Class with Error Handling and Performance Optimizations
-import { AppError, NetworkError, ServerError, NotFoundError, withRetry, withErrorHandling } from '../utils/errorHandling';
+import {
+  AppError,
+  NetworkError,
+  ServerError,
+  NotFoundError,
+  withRetry,
+  withErrorHandling,
+} from "../utils/errorHandling";
 
 export interface CacheConfig {
   ttl: number; // Time to live in milliseconds
@@ -29,12 +36,15 @@ export class BaseService {
     debug: (message: string, data?: any) => void;
     warn: (message: string, data?: any) => void;
   };
-  private cache = new Map<string, { data: any; timestamp: number; stale: boolean }>();
+  private cache = new Map<
+    string,
+    { data: any; timestamp: number; stale: boolean }
+  >();
   private requestCounter = 0;
   private performanceMetrics = new Map<string, number[]>();
   constructor(config: Partial<ServiceConfig> = {}) {
     this.config = {
-      baseUrl: '/api',
+      baseUrl: "/api",
       timeout: 10000,
       retries: 3,
       cache: {
@@ -47,10 +57,14 @@ export class BaseService {
 
     // Initialize logger
     this.logger = {
-      info: (message: string, data?: any) => console.log(`[INFO] ${message}`, data || ''),
-      error: (message: string, data?: any) => console.error(`[ERROR] ${message}`, data || ''),
-      debug: (message: string, data?: any) => console.debug(`[DEBUG] ${message}`, data || ''),
-      warn: (message: string, data?: any) => console.warn(`[WARN] ${message}`, data || ''),
+      info: (message: string, data?: any) =>
+        console.log(`[INFO] ${message}`, data || ""),
+      error: (message: string, data?: any) =>
+        console.error(`[ERROR] ${message}`, data || ""),
+      debug: (message: string, data?: any) =>
+        console.debug(`[DEBUG] ${message}`, data || ""),
+      warn: (message: string, data?: any) =>
+        console.warn(`[WARN] ${message}`, data || ""),
     };
 
     // Auto-cleanup cache periodically
@@ -66,7 +80,7 @@ export class BaseService {
   private cleanupCache() {
     const now = Date.now();
     const entries = Array.from(this.cache.entries());
-    
+
     // Remove expired entries
     for (const [key, { timestamp }] of entries) {
       if (now - timestamp > this.config.cache.ttl) {
@@ -79,7 +93,7 @@ export class BaseService {
       const sortedEntries = entries
         .sort(([, a], [, b]) => a.timestamp - b.timestamp)
         .slice(0, this.cache.size - this.config.cache.maxSize);
-      
+
       for (const [key] of sortedEntries) {
         this.cache.delete(key);
       }
@@ -88,9 +102,9 @@ export class BaseService {
 
   private getCacheKey(url: string, options: RequestOptions = {}): string {
     if (options.cacheKey) return options.cacheKey;
-    
-    const method = options.method || 'GET';
-    const body = options.body ? JSON.stringify(options.body) : '';
+
+    const method = options.method || "GET";
+    const body = options.body ? JSON.stringify(options.body) : "";
     return `${method}:${url}:${body}`;
   }
 
@@ -109,14 +123,21 @@ export class BaseService {
 
   protected async fetchWithErrorHandling<T>(
     url: string,
-    options: RequestOptions = {}
+    options: RequestOptions = {},
   ): Promise<T> {
     const startTime = Date.now();
-    const fullUrl = url.startsWith('http') ? url : `${this.config.baseUrl}${url}`;
+    const fullUrl = url.startsWith("http")
+      ? url
+      : `${this.config.baseUrl}${url}`;
     const cacheKey = this.getCacheKey(fullUrl, options);
-    
+
     // Check cache first (unless skipCache is true)
-    if (!options.skipCache && options.method !== 'POST' && options.method !== 'PUT' && options.method !== 'DELETE') {
+    if (
+      !options.skipCache &&
+      options.method !== "POST" &&
+      options.method !== "PUT" &&
+      options.method !== "DELETE"
+    ) {
       const cached = this.cache.get(cacheKey);
       if (cached && this.isCacheValid(cached)) {
         this.recordPerformanceMetric(url, Date.now() - startTime);
@@ -146,14 +167,14 @@ export class BaseService {
             ...options,
             signal: controller.signal,
             headers: {
-              'Content-Type': 'application/json',
-              'X-Request-ID': `${++this.requestCounter}-${Date.now()}`,
+              "Content-Type": "application/json",
+              "X-Request-ID": `${++this.requestCounter}-${Date.now()}`,
               ...options.headers,
             },
           };
 
           const response = await fetch(fullUrl, fetchOptions);
-          
+
           if (!response.ok) {
             await this.handleHttpError(response);
           }
@@ -164,13 +185,13 @@ export class BaseService {
         1000,
         (attempt, error) => {
           console.warn(`Retry attempt ${attempt} for ${url}:`, error.message);
-        }
+        },
       );
 
       const data = await response.json();
 
       // Cache successful responses
-      if (!options.skipCache && (options.method === 'GET' || !options.method)) {
+      if (!options.skipCache && (options.method === "GET" || !options.method)) {
         this.cache.set(cacheKey, {
           data,
           timestamp: Date.now(),
@@ -180,7 +201,6 @@ export class BaseService {
 
       this.recordPerformanceMetric(url, Date.now() - startTime);
       return data;
-
     } catch (error) {
       this.recordPerformanceMetric(url, Date.now() - startTime);
       throw error;
@@ -189,9 +209,16 @@ export class BaseService {
     }
   }
 
-  private async refreshInBackground(url: string, options: RequestOptions, cacheKey: string) {
+  private async refreshInBackground(
+    url: string,
+    options: RequestOptions,
+    cacheKey: string,
+  ) {
     try {
-      const fresh = await this.fetchWithErrorHandling(url, { ...options, skipCache: true });
+      const fresh = await this.fetchWithErrorHandling(url, {
+        ...options,
+        skipCache: true,
+      });
       this.cache.set(cacheKey, {
         data: fresh,
         timestamp: Date.now(),
@@ -204,26 +231,41 @@ export class BaseService {
   }
 
   private async handleHttpError(response: Response): Promise<never> {
-    const errorText = await response.text().catch(() => 'Unknown error');
-    
+    const errorText = await response.text().catch(() => "Unknown error");
+
     switch (response.status) {
       case 404:
         throw new NotFoundError(`Resource not found: ${response.url}`);
       case 401:
       case 403:
-        throw new NetworkError(`Authentication error (${response.status}): ${errorText}`, response.status);
+        throw new NetworkError(
+          `Authentication error (${response.status}): ${errorText}`,
+          response.status,
+        );
       case 429:
-        throw new NetworkError(`Rate limit exceeded (${response.status}): ${errorText}`, response.status);
+        throw new NetworkError(
+          `Rate limit exceeded (${response.status}): ${errorText}`,
+          response.status,
+        );
       case 500:
       case 502:
       case 503:
       case 504:
-        throw new ServerError(`Server error (${response.status}): ${errorText}`, response.status);
+        throw new ServerError(
+          `Server error (${response.status}): ${errorText}`,
+          response.status,
+        );
       default:
         if (response.status >= 400 && response.status < 500) {
-          throw new NetworkError(`Client error (${response.status}): ${errorText}`, response.status);
+          throw new NetworkError(
+            `Client error (${response.status}): ${errorText}`,
+            response.status,
+          );
         }
-        throw new ServerError(`HTTP error (${response.status}): ${errorText}`, response.status);
+        throw new ServerError(
+          `HTTP error (${response.status}): ${errorText}`,
+          response.status,
+        );
     }
   }
 
@@ -231,10 +273,10 @@ export class BaseService {
     if (!this.performanceMetrics.has(endpoint)) {
       this.performanceMetrics.set(endpoint, []);
     }
-    
+
     const metrics = this.performanceMetrics.get(endpoint)!;
     metrics.push(duration);
-    
+
     // Keep only last 100 measurements
     if (metrics.length > 100) {
       metrics.shift();
@@ -246,14 +288,16 @@ export class BaseService {
       return {
         endpoint,
         count: metrics.length,
-        average: metrics.length ? metrics.reduce((a, b) => a + b, 0) / metrics.length : 0,
+        average: metrics.length
+          ? metrics.reduce((a, b) => a + b, 0) / metrics.length
+          : 0,
         min: metrics.length ? Math.min(...metrics) : 0,
         max: metrics.length ? Math.max(...metrics) : 0,
       };
     }
 
     return Array.from(this.performanceMetrics.keys()).map((endpoint: string) =>
-      this.getPerformanceMetrics(endpoint)
+      this.getPerformanceMetrics(endpoint),
     );
   }
 

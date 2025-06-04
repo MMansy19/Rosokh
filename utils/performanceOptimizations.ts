@@ -16,39 +16,45 @@ export class PerformanceMonitor {
   private static metrics: PerformanceMetric[] = [];
   private static observers: Map<string, PerformanceObserver> = new Map();
 
-  static startMeasurement(name: string, context?: Record<string, any>): () => void {
+  static startMeasurement(
+    name: string,
+    context?: Record<string, any>,
+  ): () => void {
     const startTime = performance.now();
-    
+
     return () => {
       const endTime = performance.now();
       const duration = endTime - startTime;
-      
+
       this.recordMetric({
         name,
         value: duration,
         timestamp: Date.now(),
-        context
+        context,
       });
     };
   }
 
   static recordMetric(metric: PerformanceMetric): void {
     this.metrics.push(metric);
-    
+
     // Keep only last 1000 metrics to prevent memory leaks
     if (this.metrics.length > 1000) {
       this.metrics = this.metrics.slice(-1000);
     }
 
     // Report critical performance issues
-    if (metric.value > 5000) { // > 5 seconds
-      console.warn(`Performance issue detected: ${metric.name} took ${metric.value}ms`);
+    if (metric.value > 5000) {
+      // > 5 seconds
+      console.warn(
+        `Performance issue detected: ${metric.name} took ${metric.value}ms`,
+      );
     }
   }
 
   static getMetrics(name?: string): PerformanceMetric[] {
     if (name) {
-      return this.metrics.filter(m => m.name === name);
+      return this.metrics.filter((m) => m.name === name);
     }
     return [...this.metrics];
   }
@@ -56,75 +62,79 @@ export class PerformanceMonitor {
   static getAverageMetric(name: string): number {
     const metrics = this.getMetrics(name);
     if (metrics.length === 0) return 0;
-    
-    return metrics.reduce((sum, metric) => sum + metric.value, 0) / metrics.length;
+
+    return (
+      metrics.reduce((sum, metric) => sum + metric.value, 0) / metrics.length
+    );
   }
 
   static observeWebVitals(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     // First Contentful Paint
-    this.observeMetric('paint', (entries) => {
-      const fcp = entries.find(entry => entry.name === 'first-contentful-paint');
+    this.observeMetric("paint", (entries) => {
+      const fcp = entries.find(
+        (entry) => entry.name === "first-contentful-paint",
+      );
       if (fcp) {
         this.recordMetric({
-          name: 'FCP',
+          name: "FCP",
           value: fcp.startTime,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         });
       }
     });
 
     // Largest Contentful Paint
-    this.observeMetric('largest-contentful-paint', (entries) => {
+    this.observeMetric("largest-contentful-paint", (entries) => {
       const lcp = entries[entries.length - 1];
       if (lcp) {
         this.recordMetric({
-          name: 'LCP',
+          name: "LCP",
           value: lcp.startTime,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         });
       }
-    });    // First Input Delay
-    this.observeMetric('first-input', (entries) => {
+    }); // First Input Delay
+    this.observeMetric("first-input", (entries) => {
       const fid = entries[0] as PerformanceEventTiming;
-      if (fid && 'processingStart' in fid) {
+      if (fid && "processingStart" in fid) {
         this.recordMetric({
-          name: 'FID',
+          name: "FID",
           value: fid.processingStart - fid.startTime,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         });
       }
     });
 
     // Cumulative Layout Shift
-    this.observeMetric('layout-shift', (entries) => {
+    this.observeMetric("layout-shift", (entries) => {
       let cls = 0;
       for (const entry of entries) {
         if (!(entry as any).hadRecentInput) {
           cls += (entry as any).value;
         }
       }
-      
+
       this.recordMetric({
-        name: 'CLS',
+        name: "CLS",
         value: cls,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
     });
   }
 
   private static observeMetric(
-    type: string, 
-    callback: (entries: PerformanceEntry[]) => void
+    type: string,
+    callback: (entries: PerformanceEntry[]) => void,
   ): void {
-    if (typeof PerformanceObserver === 'undefined') return;
+    if (typeof PerformanceObserver === "undefined") return;
 
     try {
       const observer = new PerformanceObserver((list) => {
         callback(list.getEntries());
       });
-      
+
       observer.observe({ entryTypes: [type] });
       this.observers.set(type, observer);
     } catch (error) {
@@ -133,7 +143,7 @@ export class PerformanceMonitor {
   }
 
   static cleanup(): void {
-    this.observers.forEach(observer => observer.disconnect());
+    this.observers.forEach((observer) => observer.disconnect());
     this.observers.clear();
     this.metrics.length = 0;
   }
@@ -148,21 +158,21 @@ export class BundleAnalyzer {
       totalSize: 2.5 * 1024 * 1024, // 2.5MB
       gzippedSize: 0.8 * 1024 * 1024, // 800KB
       largestChunks: [
-        { name: 'main.js', size: 1.2 * 1024 * 1024 },
-        { name: 'vendor.js', size: 0.8 * 1024 * 1024 },
-        { name: 'audio-player.js', size: 0.3 * 1024 * 1024 }
+        { name: "main.js", size: 1.2 * 1024 * 1024 },
+        { name: "vendor.js", size: 0.8 * 1024 * 1024 },
+        { name: "audio-player.js", size: 0.3 * 1024 * 1024 },
       ],
-      unusedCode: 0.2 * 1024 * 1024 // 200KB
+      unusedCode: 0.2 * 1024 * 1024, // 200KB
     };
   }
 
   static formatSize(bytes: number): string {
-    const sizes = ['B', 'KB', 'MB', 'GB'];
-    if (bytes === 0) return '0 B';
-    
+    const sizes = ["B", "KB", "MB", "GB"];
+    if (bytes === 0) return "0 B";
+
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     const size = bytes / Math.pow(1024, i);
-    
+
     return `${size.toFixed(2)} ${sizes[i]}`;
   }
 }
@@ -173,10 +183,12 @@ export class CodeSplitter {
 
   static async loadChunk<T>(
     chunkName: string,
-    loader: () => Promise<T>
+    loader: () => Promise<T>,
   ): Promise<T> {
-    const endMeasurement = PerformanceMonitor.startMeasurement(`chunk-load-${chunkName}`);
-    
+    const endMeasurement = PerformanceMonitor.startMeasurement(
+      `chunk-load-${chunkName}`,
+    );
+
     try {
       if (this.loadedChunks.has(chunkName)) {
         // Return from cache if already loaded
@@ -185,7 +197,7 @@ export class CodeSplitter {
 
       const module = await loader();
       this.loadedChunks.add(chunkName);
-      
+
       return module;
     } finally {
       endMeasurement();
@@ -194,7 +206,7 @@ export class CodeSplitter {
 
   static preloadChunk(loader: () => Promise<any>): void {
     // Preload during idle time
-    if (typeof requestIdleCallback !== 'undefined') {
+    if (typeof requestIdleCallback !== "undefined") {
       requestIdleCallback(() => {
         loader().catch(() => {
           // Silent fail for preloading
@@ -213,13 +225,16 @@ export class CodeSplitter {
 
 // Memory management
 export class MemoryManager {
-  private static cache = new Map<string, { data: any; timestamp: number; size: number }>();
+  private static cache = new Map<
+    string,
+    { data: any; timestamp: number; size: number }
+  >();
   private static maxCacheSize = 50 * 1024 * 1024; // 50MB
   private static currentCacheSize = 0;
 
   static set(key: string, data: any, ttl: number = 5 * 60 * 1000): void {
     const size = this.estimateSize(data);
-    
+
     // Clean up if cache is getting too large
     if (this.currentCacheSize + size > this.maxCacheSize) {
       this.cleanup();
@@ -228,17 +243,17 @@ export class MemoryManager {
     this.cache.set(key, {
       data,
       timestamp: Date.now() + ttl,
-      size
+      size,
     });
-    
+
     this.currentCacheSize += size;
   }
 
   static get<T>(key: string): T | null {
     const entry = this.cache.get(key);
-    
+
     if (!entry) return null;
-    
+
     if (Date.now() > entry.timestamp) {
       // Expired
       this.delete(key);
@@ -269,16 +284,17 @@ export class MemoryManager {
 
     // If still over limit, remove oldest entries
     if (this.currentCacheSize > this.maxCacheSize * 0.8) {
-      const entries = Array.from(this.cache.entries())
-        .sort(([, a], [, b]) => a.timestamp - b.timestamp);
-      
+      const entries = Array.from(this.cache.entries()).sort(
+        ([, a], [, b]) => a.timestamp - b.timestamp,
+      );
+
       const removeCount = Math.floor(entries.length * 0.3);
       for (let i = 0; i < removeCount; i++) {
         toDelete.push(entries[i][0]);
       }
     }
 
-    toDelete.forEach(key => this.delete(key));
+    toDelete.forEach((key) => this.delete(key));
   }
 
   private static estimateSize(obj: any): number {
@@ -291,17 +307,17 @@ export class MemoryManager {
       cacheSize: this.currentCacheSize,
       maxCacheSize: this.maxCacheSize,
       entryCount: this.cache.size,
-      memoryUsage: this.getMemoryUsage()
+      memoryUsage: this.getMemoryUsage(),
     };
   }
 
   private static getMemoryUsage() {
-    if (typeof performance !== 'undefined' && (performance as any).memory) {
+    if (typeof performance !== "undefined" && (performance as any).memory) {
       const memory = (performance as any).memory;
       return {
         used: memory.usedJSHeapSize,
         total: memory.totalJSHeapSize,
-        limit: memory.jsHeapSizeLimit
+        limit: memory.jsHeapSizeLimit,
       };
     }
     return null;
@@ -316,59 +332,61 @@ export class ImageOptimizer {
       width?: number;
       height?: number;
       quality?: number;
-      format?: 'webp' | 'avif' | 'jpeg' | 'png';
+      format?: "webp" | "avif" | "jpeg" | "png";
       lazy?: boolean;
-    } = {}
+    } = {},
   ): {
     src: string;
     srcSet?: string;
     sizes?: string;
-    loading?: 'lazy' | 'eager';
+    loading?: "lazy" | "eager";
   } {
     const {
       width,
       height,
       quality = 75,
-      format = 'webp',
-      lazy = true
+      format = "webp",
+      lazy = true,
     } = options;
 
     // In a real implementation, this would integrate with Next.js Image or similar
     let optimizedSrc = src;
-    
+
     // Mock optimization parameters
     const params = new URLSearchParams();
-    if (width) params.append('w', width.toString());
-    if (height) params.append('h', height.toString());
-    if (quality) params.append('q', quality.toString());
-    if (format) params.append('f', format);
+    if (width) params.append("w", width.toString());
+    if (height) params.append("h", height.toString());
+    if (quality) params.append("q", quality.toString());
+    if (format) params.append("f", format);
 
     if (params.toString()) {
       optimizedSrc += `?${params.toString()}`;
     }
 
     // Generate responsive srcSet
-    const srcSet = width ? [
-      `${optimizedSrc}&w=${Math.round(width * 0.5)} ${Math.round(width * 0.5)}w`,
-      `${optimizedSrc}&w=${width} ${width}w`,
-      `${optimizedSrc}&w=${Math.round(width * 1.5)} ${Math.round(width * 1.5)}w`,
-      `${optimizedSrc}&w=${Math.round(width * 2)} ${Math.round(width * 2)}w`
-    ].join(', ') : undefined;
+    const srcSet = width
+      ? [
+          `${optimizedSrc}&w=${Math.round(width * 0.5)} ${Math.round(width * 0.5)}w`,
+          `${optimizedSrc}&w=${width} ${width}w`,
+          `${optimizedSrc}&w=${Math.round(width * 1.5)} ${Math.round(width * 1.5)}w`,
+          `${optimizedSrc}&w=${Math.round(width * 2)} ${Math.round(width * 2)}w`,
+        ].join(", ")
+      : undefined;
 
     return {
       src: optimizedSrc,
       srcSet,
       sizes: width ? `(max-width: ${width}px) 100vw, ${width}px` : undefined,
-      loading: lazy ? 'lazy' : 'eager'
+      loading: lazy ? "lazy" : "eager",
     };
   }
 
   static preloadCriticalImages(images: string[]): void {
-    images.forEach(src => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
+    images.forEach((src) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
       link.href = src;
-      link.as = 'image';
+      link.as = "image";
       document.head.appendChild(link);
     });
   }
@@ -389,23 +407,27 @@ export function usePerformanceMonitoring(componentName: string) {
         name: `component-lifecycle-${componentName}`,
         value: unmountTime - mountTime.current,
         timestamp: Date.now(),
-        context: { renderCount: renderCount.current }
+        context: { renderCount: renderCount.current },
       });
     };
   }, [componentName]);
 
   return {
     renderCount: renderCount.current,
-    recordMetric: (name: string, value: number, context?: Record<string, any>) => {
+    recordMetric: (
+      name: string,
+      value: number,
+      context?: Record<string, any>,
+    ) => {
       PerformanceMonitor.recordMetric({
         name: `${componentName}-${name}`,
         value,
         timestamp: Date.now(),
-        context
+        context,
       });
-    }
+    },
   };
 }
 
 // Import React for the hook
-import React from 'react';
+import React from "react";

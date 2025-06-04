@@ -45,7 +45,8 @@ export default function ContactClient({
 
       notify.success(
         messages?.contact?.thankYou || "Thank You!",
-        messages?.contact?.messageReceived || "Your message has been received. We'll get back to you soon."
+        messages?.contact?.messageReceived ||
+          "Your message has been received. We'll get back to you soon.",
       );
 
       setIsSubmitted(true);
@@ -64,7 +65,7 @@ export default function ContactClient({
     } catch (error) {
       notify.error(
         "Submission Failed",
-        "There was an error sending your message. Please try again."
+        "There was an error sending your message. Please try again.",
       );
     } finally {
       setIsSubmitting(false);

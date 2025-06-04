@@ -1,8 +1,8 @@
-import { BaseService } from './BaseService';
+import { BaseService } from "./BaseService";
 
 export interface AnalyticsEvent {
   event: string;
-  category: 'user' | 'content' | 'performance' | 'engagement' | 'error';
+  category: "user" | "content" | "performance" | "engagement" | "error";
   properties?: Record<string, any>;
   timestamp?: number;
   userId?: string;
@@ -45,7 +45,7 @@ export interface ConversionGoal {
   id: string;
   name: string;
   description: string;
-  type: 'page_view' | 'event' | 'duration' | 'custom';
+  type: "page_view" | "event" | "duration" | "custom";
   target: string | number;
   value?: number;
 }
@@ -107,13 +107,13 @@ export class AnalyticsService extends BaseService {
   private flushTimer: NodeJS.Timeout | null = null;
   constructor() {
     super({
-      baseUrl: '/api/analytics',
+      baseUrl: "/api/analytics",
       timeout: 15000,
-      retries: 2
+      retries: 2,
     });
-    
+
     // Only initialize in browser environment
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       this.initializeSession();
       this.setupPerformanceMonitoring();
       this.setupErrorTracking();
@@ -134,7 +134,7 @@ export class AnalyticsService extends BaseService {
    */
   private initializeSession(): void {
     const sessionId = this.generateSessionId();
-    
+
     this.currentSession = {
       id: sessionId,
       userId: this.getUserId(),
@@ -148,7 +148,7 @@ export class AnalyticsService extends BaseService {
     // Detect user location (approximate)
     this.detectUserLocation();
 
-    this.logger.info('Analytics session initialized', { sessionId });
+    this.logger.info("Analytics session initialized", { sessionId });
   }
 
   /**
@@ -164,12 +164,12 @@ export class AnalyticsService extends BaseService {
   private getUserId(): string {
     if (this.userId) return this.userId;
 
-    let userId = localStorage.getItem('analytics_user_id');
+    let userId = localStorage.getItem("analytics_user_id");
     if (!userId) {
       userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      localStorage.setItem('analytics_user_id', userId);
+      localStorage.setItem("analytics_user_id", userId);
     }
-    
+
     this.userId = userId;
     return userId;
   }
@@ -181,7 +181,7 @@ export class AnalyticsService extends BaseService {
     try {
       // Try to get timezone
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      
+
       if (this.currentSession) {
         this.currentSession.location = { timezone };
       }
@@ -189,7 +189,7 @@ export class AnalyticsService extends BaseService {
       // In a real implementation, you might use a geolocation service
       // For privacy reasons, we'll keep it minimal
     } catch (error) {
-      this.logger.error('Failed to detect user location', error);
+      this.logger.error("Failed to detect user location", error);
     }
   }
 
@@ -199,7 +199,7 @@ export class AnalyticsService extends BaseService {
   private setupPerformanceMonitoring(): void {
     try {
       // Web Vitals monitoring
-      if ('PerformanceObserver' in window) {
+      if ("PerformanceObserver" in window) {
         this.performanceObserver = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
             this.trackPerformanceMetric(entry);
@@ -208,22 +208,28 @@ export class AnalyticsService extends BaseService {
 
         // Observe different types of performance entries
         try {
-          this.performanceObserver.observe({ entryTypes: ['navigation', 'resource', 'paint', 'largest-contentful-paint'] });
+          this.performanceObserver.observe({
+            entryTypes: [
+              "navigation",
+              "resource",
+              "paint",
+              "largest-contentful-paint",
+            ],
+          });
         } catch (error) {
           // Fallback for browsers that don't support all entry types
-          this.performanceObserver.observe({ entryTypes: ['navigation'] });
+          this.performanceObserver.observe({ entryTypes: ["navigation"] });
         }
       }
 
       // Track page load performance
-      window.addEventListener('load', () => {
+      window.addEventListener("load", () => {
         setTimeout(() => {
           this.trackPageLoadPerformance();
         }, 0);
       });
-
     } catch (error) {
-      this.logger.error('Failed to setup performance monitoring', error);
+      this.logger.error("Failed to setup performance monitoring", error);
     }
   }
 
@@ -232,15 +238,15 @@ export class AnalyticsService extends BaseService {
    */
   private setupErrorTracking(): void {
     // Global error handler
-    window.addEventListener('error', (event) => {
+    window.addEventListener("error", (event) => {
       this.trackError({
-        errorType: 'javascript',
+        errorType: "javascript",
         errorMessage: event.message,
         stack: event.error?.stack,
         page: window.location.pathname,
         userAgent: navigator.userAgent,
         timestamp: Date.now(),
-        sessionId: this.currentSession?.id || 'unknown',
+        sessionId: this.currentSession?.id || "unknown",
         context: {
           filename: event.filename,
           lineno: event.lineno,
@@ -250,15 +256,15 @@ export class AnalyticsService extends BaseService {
     });
 
     // Unhandled promise rejection handler
-    window.addEventListener('unhandledrejection', (event) => {
+    window.addEventListener("unhandledrejection", (event) => {
       this.trackError({
-        errorType: 'promise_rejection',
-        errorMessage: event.reason?.message || 'Unhandled promise rejection',
+        errorType: "promise_rejection",
+        errorMessage: event.reason?.message || "Unhandled promise rejection",
         stack: event.reason?.stack,
         page: window.location.pathname,
         userAgent: navigator.userAgent,
         timestamp: Date.now(),
-        sessionId: this.currentSession?.id || 'unknown',
+        sessionId: this.currentSession?.id || "unknown",
       });
     });
   }
@@ -272,13 +278,13 @@ export class AnalyticsService extends BaseService {
     }, this.flushInterval);
 
     // Flush events before page unload
-    window.addEventListener('beforeunload', () => {
+    window.addEventListener("beforeunload", () => {
       this.flushEvents();
       this.endSession();
     });
 
     // Flush events when page becomes hidden
-    document.addEventListener('visibilitychange', () => {
+    document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         this.flushEvents();
       }
@@ -290,8 +296,8 @@ export class AnalyticsService extends BaseService {
    */
   public trackEvent(
     event: string,
-    category: AnalyticsEvent['category'] = 'user',
-    properties?: Record<string, any>
+    category: AnalyticsEvent["category"] = "user",
+    properties?: Record<string, any>,
   ): void {
     if (!this.isEnabled) return;
 
@@ -303,16 +309,16 @@ export class AnalyticsService extends BaseService {
       userId: this.userId,
       sessionId: this.currentSession?.id,
       page: window.location.pathname,
-      source: 'web',
+      source: "web",
     };
 
     this.eventQueue.push(analyticsEvent);
-    
+
     if (this.currentSession) {
       this.currentSession.events.push(analyticsEvent);
     }
 
-    this.logger.debug('Event tracked', analyticsEvent);
+    this.logger.debug("Event tracked", analyticsEvent);
 
     // Flush if queue is full
     if (this.eventQueue.length >= this.batchSize) {
@@ -329,7 +335,7 @@ export class AnalyticsService extends BaseService {
     // End previous page timing
     if (this.currentPageStartTime) {
       const duration = Date.now() - this.currentPageStartTime;
-      this.trackEvent('page_duration', 'engagement', {
+      this.trackEvent("page_duration", "engagement", {
         page: window.location.pathname,
         duration,
       });
@@ -343,30 +349,34 @@ export class AnalyticsService extends BaseService {
       title: title || document.title,
       timestamp: Date.now(),
       userId: this.userId,
-      sessionId: this.currentSession?.id || 'unknown',
+      sessionId: this.currentSession?.id || "unknown",
       referrer: document.referrer,
     };
 
     // Extract UTM parameters
     const urlParams = new URLSearchParams(window.location.search);
-    pageView.utmSource = urlParams.get('utm_source') || undefined;
-    pageView.utmMedium = urlParams.get('utm_medium') || undefined;
-    pageView.utmCampaign = urlParams.get('utm_campaign') || undefined;
+    pageView.utmSource = urlParams.get("utm_source") || undefined;
+    pageView.utmMedium = urlParams.get("utm_medium") || undefined;
+    pageView.utmCampaign = urlParams.get("utm_campaign") || undefined;
 
     if (this.currentSession) {
       this.currentSession.pageViews++;
     }
 
-    this.trackEvent('page_view', 'content', pageView);
-    
-    this.logger.info('Page view tracked', { page, title });
+    this.trackEvent("page_view", "content", pageView);
+
+    this.logger.info("Page view tracked", { page, title });
   }
 
   /**
    * Track user interaction
    */
-  public trackInteraction(element: string, action: string, context?: Record<string, any>): void {
-    this.trackEvent('user_interaction', 'engagement', {
+  public trackInteraction(
+    element: string,
+    action: string,
+    context?: Record<string, any>,
+  ): void {
+    this.trackEvent("user_interaction", "engagement", {
       element,
       action,
       ...context,
@@ -376,32 +386,44 @@ export class AnalyticsService extends BaseService {
   /**
    * Track Quran reading session
    */
-  public trackQuranReading(surah: number, ayah: number, duration: number): void {
-    this.trackEvent('quran_reading', 'engagement', {
+  public trackQuranReading(
+    surah: number,
+    ayah: number,
+    duration: number,
+  ): void {
+    this.trackEvent("quran_reading", "engagement", {
       surah,
       ayah,
       duration,
-      activity: 'reading',
+      activity: "reading",
     });
   }
 
   /**
    * Track audio playback
    */
-  public trackAudioPlayback(trackId: string, duration: number, completed: boolean): void {
-    this.trackEvent('audio_playback', 'content', {
+  public trackAudioPlayback(
+    trackId: string,
+    duration: number,
+    completed: boolean,
+  ): void {
+    this.trackEvent("audio_playback", "content", {
       trackId,
       duration,
       completed,
-      activity: 'audio',
+      activity: "audio",
     });
   }
 
   /**
    * Track search query
    */
-  public trackSearch(query: string, category: string, resultsCount: number): void {
-    this.trackEvent('search', 'engagement', {
+  public trackSearch(
+    query: string,
+    category: string,
+    resultsCount: number,
+  ): void {
+    this.trackEvent("search", "engagement", {
       query,
       category,
       resultsCount,
@@ -412,7 +434,7 @@ export class AnalyticsService extends BaseService {
    * Track conversion goal
    */
   public trackConversion(goalId: string, value?: number): void {
-    this.trackEvent('conversion', 'user', {
+    this.trackEvent("conversion", "user", {
       goalId,
       value,
     });
@@ -430,10 +452,12 @@ export class AnalyticsService extends BaseService {
     };
 
     // Add specific properties based on entry type
-    if (entry.entryType === 'navigation') {
+    if (entry.entryType === "navigation") {
       const navEntry = entry as PerformanceNavigationTiming;
       Object.assign(metric, {
-        domContentLoaded: navEntry.domContentLoadedEventEnd - navEntry.domContentLoadedEventStart,
+        domContentLoaded:
+          navEntry.domContentLoadedEventEnd -
+          navEntry.domContentLoadedEventStart,
         loadComplete: navEntry.loadEventEnd - navEntry.loadEventStart,
         dnsLookup: navEntry.domainLookupEnd - navEntry.domainLookupStart,
         tcpConnect: navEntry.connectEnd - navEntry.connectStart,
@@ -441,7 +465,7 @@ export class AnalyticsService extends BaseService {
       });
     }
 
-    this.trackEvent('performance_metric', 'performance', metric);
+    this.trackEvent("performance_metric", "performance", metric);
   }
 
   /**
@@ -449,8 +473,10 @@ export class AnalyticsService extends BaseService {
    */
   private trackPageLoadPerformance(): void {
     try {
-      const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-      
+      const perfData = performance.getEntriesByType(
+        "navigation",
+      )[0] as PerformanceNavigationTiming;
+
       if (perfData) {
         const metrics: PerformanceMetrics = {
           pageLoadTime: perfData.loadEventEnd - perfData.loadEventStart,
@@ -459,14 +485,16 @@ export class AnalyticsService extends BaseService {
           firstInputDelay: 0, // Would need FID API
           cumulativeLayoutShift: 0, // Would need CLS API
           timeToInteractive: 0, // Custom calculation
-          domContentLoaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
+          domContentLoaded:
+            perfData.domContentLoadedEventEnd -
+            perfData.domContentLoadedEventStart,
           resourceLoadTime: {},
         };
 
-        this.trackEvent('page_load_performance', 'performance', metrics);
+        this.trackEvent("page_load_performance", "performance", metrics);
       }
     } catch (error) {
-      this.logger.error('Failed to track page load performance', error);
+      this.logger.error("Failed to track page load performance", error);
     }
   }
 
@@ -476,10 +504,10 @@ export class AnalyticsService extends BaseService {
   public trackError(error: ErrorAnalytics): void {
     if (!this.isEnabled) return;
 
-    this.trackEvent('error', 'error', error);
-    
-    this.logger.error('Error tracked', error);
-  }  /**
+    this.trackEvent("error", "error", error);
+
+    this.logger.error("Error tracked", error);
+  } /**
    * Flush events to server
    */
   private async flushEvents(): Promise<void> {
@@ -491,20 +519,24 @@ export class AnalyticsService extends BaseService {
 
       // For now, just store events locally instead of sending to server
       // In production, you would implement the analytics API endpoint
-      this.logger.debug('Analytics events stored locally', { count: events.length });
-      
+      this.logger.debug("Analytics events stored locally", {
+        count: events.length,
+      });
+
       // Store in localStorage for debugging purposes
-      if (typeof window !== 'undefined') {
-        const storedEvents = JSON.parse(localStorage.getItem('analytics_events') || '[]');
+      if (typeof window !== "undefined") {
+        const storedEvents = JSON.parse(
+          localStorage.getItem("analytics_events") || "[]",
+        );
         storedEvents.push(...events);
         // Keep only last 100 events to prevent storage overflow
         if (storedEvents.length > 100) {
           storedEvents.splice(0, storedEvents.length - 100);
         }
-        localStorage.setItem('analytics_events', JSON.stringify(storedEvents));
+        localStorage.setItem("analytics_events", JSON.stringify(storedEvents));
       }
     } catch (error) {
-      this.logger.error('Failed to flush analytics events', error);
+      this.logger.error("Failed to flush analytics events", error);
       // Don't re-throw to prevent infinite loops
     }
   }
@@ -516,9 +548,10 @@ export class AnalyticsService extends BaseService {
     if (!this.currentSession) return;
 
     this.currentSession.endTime = Date.now();
-    this.currentSession.duration = this.currentSession.endTime - this.currentSession.startTime;
+    this.currentSession.duration =
+      this.currentSession.endTime - this.currentSession.startTime;
 
-    this.trackEvent('session_end', 'user', {
+    this.trackEvent("session_end", "user", {
       duration: this.currentSession.duration,
       pageViews: this.currentSession.pageViews,
       eventCount: this.currentSession.events.length,
@@ -530,18 +563,22 @@ export class AnalyticsService extends BaseService {
   /**
    * Get analytics metrics
    */
-  public async getMetrics(timeframe: 'hour' | 'day' | 'week' | 'month' = 'day'): Promise<AnalyticsMetrics> {
+  public async getMetrics(
+    timeframe: "hour" | "day" | "week" | "month" = "day",
+  ): Promise<AnalyticsMetrics> {
     try {
-      const response = await fetch(`/api/analytics/metrics?timeframe=${timeframe}`);
-      
+      const response = await fetch(
+        `/api/analytics/metrics?timeframe=${timeframe}`,
+      );
+
       if (!response.ok) {
-        throw new Error('Failed to fetch analytics metrics');
+        throw new Error("Failed to fetch analytics metrics");
       }
 
       return await response.json();
     } catch (error) {
-      this.logger.error('Failed to get analytics metrics', error);
-      
+      this.logger.error("Failed to get analytics metrics", error);
+
       // Return default metrics on error
       return {
         totalUsers: 0,
@@ -566,7 +603,7 @@ export class AnalyticsService extends BaseService {
    */
   public setEnabled(enabled: boolean): void {
     this.isEnabled = enabled;
-    
+
     if (!enabled) {
       this.flushEvents();
       if (this.flushTimer) {
@@ -577,7 +614,7 @@ export class AnalyticsService extends BaseService {
       this.setupBatchProcessing();
     }
 
-    this.logger.info('Analytics enabled status changed', { enabled });
+    this.logger.info("Analytics enabled status changed", { enabled });
   }
 
   /**
@@ -588,19 +625,19 @@ export class AnalyticsService extends BaseService {
     if (this.currentSession) {
       this.currentSession.userId = userId;
     }
-    localStorage.setItem('analytics_user_id', userId);
+    localStorage.setItem("analytics_user_id", userId);
   }
 
   /**
    * Clear user data (GDPR compliance)
    */
   public clearUserData(): void {
-    localStorage.removeItem('analytics_user_id');
+    localStorage.removeItem("analytics_user_id");
     this.userId = undefined;
     if (this.currentSession) {
       this.currentSession.userId = undefined;
     }
-    this.trackEvent('user_data_cleared', 'user');
+    this.trackEvent("user_data_cleared", "user");
     this.flushEvents();
   }
 
@@ -614,8 +651,13 @@ export class AnalyticsService extends BaseService {
   /**
    * Track custom timing
    */
-  public trackTiming(category: string, variable: string, time: number, label?: string): void {
-    this.trackEvent('timing', 'performance', {
+  public trackTiming(
+    category: string,
+    variable: string,
+    time: number,
+    label?: string,
+  ): void {
+    this.trackEvent("timing", "performance", {
       category,
       variable,
       time,
@@ -628,10 +670,10 @@ export class AnalyticsService extends BaseService {
    */
   public startTiming(label: string): () => void {
     const startTime = performance.now();
-    
+
     return () => {
       const duration = performance.now() - startTime;
-      this.trackTiming('custom', label, duration);
+      this.trackTiming("custom", label, duration);
     };
   }
 }

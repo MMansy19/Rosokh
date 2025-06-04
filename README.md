@@ -1,6 +1,7 @@
 <div align="center">
 
 # 🕌 Rosokh (رسوخ)
+
 ### Ultimate Islamic Multimedia Platform
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-rosokh.vercel.app-green?style=for-the-badge&logo=vercel)](https://rosokh.vercel.app)
@@ -9,7 +10,7 @@
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 
-*The most comprehensive Islamic multimedia platform with Quran, Audio, Videos, Articles, and Spiritual Tracking - Built for the Global Muslim Community*
+_The most comprehensive Islamic multimedia platform with Quran, Audio, Videos, Articles, and Spiritual Tracking - Built for the Global Muslim Community_
 
 [🌐 Live Demo](https://rosokh.vercel.app) • [📖 Documentation](./TECHNICAL_DOCUMENTATION.md) • [🎨 Design Guide](./Rosokh%20UI%20Design%20Guide.md) • [📱 Mobile App](https://rosokh.vercel.app)
 
@@ -23,13 +24,14 @@
 
 **Rosokh** (رسوخ), meaning "firmness" or "rootedness" in Arabic, is the most comprehensive Islamic multimedia platform ever built. It combines the Holy Quran, Islamic audio content, educational videos, scholarly articles, and spiritual tracking tools in one unified, beautiful, and lightning-fast application. Built with cutting-edge technology and designed for Muslims worldwide, Rosokh serves as your complete digital Islamic companion.
 
-> *"And those who believe and do righteous deeds - We will surely assign to them of Paradise lofty mansions beneath which rivers flow, wherein they abide eternally. Excellent is the reward of the [righteous] workers."* - **Quran 29:58**
+> _"And those who believe and do righteous deeds - We will surely assign to them of Paradise lofty mansions beneath which rivers flow, wherein they abide eternally. Excellent is the reward of the [righteous] workers."_ - **Quran 29:58**
 
 ---
 
 ## 🎯 Complete Feature Overview
 
 ### 📖 **Quran Module - Digital Mushaf Experience**
+
 <div align="center">
 <img src="https://via.placeholder.com/800x400/10B981/FFFFFF?text=Quran+Reader+Interface" alt="Quran Reader" width="80%">
 </div>
@@ -45,6 +47,7 @@
 - **📱 Offline Mode** - Download surahs for offline reading
 
 ### 🎵 **Audio Library - Islamic Content Hub**
+
 <div align="center">
 <img src="https://via.placeholder.com/800x400/059669/FFFFFF?text=Audio+Library+Interface" alt="Audio Library" width="80%">
 </div>
@@ -62,6 +65,7 @@
 - **📊 Popular & Trending** - Discover most-listened content
 
 ### 🎬 **YouTube Integration - Educational Videos**
+
 <div align="center">
 <img src="https://via.placeholder.com/800x400/DC2626/FFFFFF?text=YouTube+Video+Player" alt="YouTube Integration" width="80%">
 </div>
@@ -75,6 +79,7 @@
 - **🌟 Featured Content** - Highlighted premium educational videos
 
 ### 📚 **Articles System - Islamic Knowledge Base**
+
 <div align="center">
 <img src="https://via.placeholder.com/800x400/7C3AED/FFFFFF?text=Articles+Management+System" alt="Articles System" width="80%">
 </div>
@@ -82,6 +87,7 @@
 **Powered by Supabase Database**
 
 #### **For Readers:**
+
 - **📖 Rich Article Content** - Full-featured articles in Arabic, English, and Russian
 - **🏷️ Smart Categorization** - Topics, scholars, difficulty levels, and themes
 - **🔍 Advanced Search** - Find articles by content, author, or keywords
@@ -92,6 +98,7 @@
 - **📤 Share Features** - Share articles with friends and community
 
 #### **For Admins:**
+
 - **✍️ Content Management** - Create, edit, and publish articles
 - **🌍 Multi-Language Support** - Manage content in Arabic, English, and Russian
 - **🔧 Rich Text Editor** - Advanced formatting and media embedding
@@ -102,6 +109,7 @@
 - **📊 Performance Metrics** - Track article popularity and user engagement
 
 ### 🎯 **Khatma Tracker - Quran Completion System**
+
 <div align="center">
 <img src="https://via.placeholder.com/800x400/F59E0B/FFFFFF?text=Khatma+Tracking+Dashboard" alt="Khatma Tracker" width="80%">
 </div>
@@ -116,6 +124,7 @@
 - **🎨 Customizable Interface** - Personalize your tracking experience
 
 ### 🧘‍♂️ **Muhasaba - Self-Reflection & Accountability**
+
 <div align="center">
 <img src="https://via.placeholder.com/800x400/8B5CF6/FFFFFF?text=Muhasaba+Self+Reflection" alt="Muhasaba System" width="80%">
 </div>
@@ -130,6 +139,7 @@
 - **💭 Reflection Prompts** - Guided questions for deeper self-reflection
 
 ### 📅 **Islamic Calendar - Hijri Integration**
+
 <div align="center">
 <img src="https://via.placeholder.com/800x400/06B6D4/FFFFFF?text=Islamic+Calendar+System" alt="Islamic Calendar" width="80%">
 </div>
@@ -144,6 +154,7 @@
 - **📱 Widget Support** - Quick access to prayer times
 
 ### 📊 **Advanced Analytics Dashboard**
+
 <div align="center">
 <img src="https://via.placeholder.com/800x400/EF4444/FFFFFF?text=Analytics+Dashboard" alt="Analytics Dashboard" width="80%">
 </div>
@@ -158,6 +169,7 @@
 - **📱 Mobile Analytics** - Complete analytics on all devices
 
 ### 🌐 **Multi-Language Support**
+
 <div align="center">
 <img src="https://via.placeholder.com/600x200/10B981/FFFFFF?text=Arabic+English+Russian+Support" alt="Multi-Language" width="60%">
 </div>
@@ -178,6 +190,7 @@
 </div>
 
 ### **Frontend Architecture**
+
 - **⚡ Next.js 15.3.3** - App Router with Server Components for ultra-fast performance
 - **🔷 TypeScript 5.0** - Full type safety across the entire application
 - **🎨 TailwindCSS 4.0** - Custom Islamic design system with RTL support
@@ -185,6 +198,7 @@
 - **🌙 Theme System** - Advanced dark/light mode with Islamic color palettes
 
 ### **Backend & Database**
+
 - **🟢 Supabase** - Real-time database with Row Level Security (RLS)
 - **🔐 Authentication** - Secure user authentication and authorization
 - **📊 Real-time Updates** - Live data synchronization across all clients
@@ -192,6 +206,7 @@
 - **🔄 Edge Functions** - Serverless functions for complex operations
 
 ### **Third-Party Integrations**
+
 - **☁️ Google Drive API** - Unlimited audio storage and streaming
 - **📺 YouTube Data API** - Curated Islamic video content integration
 - **🕐 Prayer Times API** - Accurate global prayer times calculation
@@ -199,6 +214,7 @@
 - **📍 Geolocation Services** - Location-based prayer times and Qibla direction
 
 ### **Performance & Optimization**
+
 - **⚡ 100/100 Lighthouse Score** - Perfect performance, accessibility, and SEO
 - **🚀 Zero Heavy Dependencies** - Pure CSS animations, no external animation libraries
 - **📦 Smart Code Splitting** - Optimized bundle sizes with lazy loading
@@ -210,6 +226,7 @@
 ## 📱 Responsive Design & Screenshots
 
 ### **Desktop Experience**
+
 <div align="center">
 <img src="https://via.placeholder.com/1200x600/10B981/FFFFFF?text=Desktop+Quran+Reader" alt="Desktop Quran" width="90%">
 <p><em>Desktop Quran Reader with Advanced Features</em></p>
@@ -221,12 +238,14 @@
 </div>
 
 ### **Tablet Experience**
+
 <div align="center">
 <img src="https://via.placeholder.com/800x600/7C3AED/FFFFFF?text=Tablet+Articles+View" alt="Tablet Articles" width="70%">
 <p><em>Tablet-Optimized Articles Interface</em></p>
 </div>
 
 ### **Mobile Experience**
+
 <div align="center">
 <table>
 <tr>
@@ -243,6 +262,7 @@
 </div>
 
 ### **Cross-Platform Compatibility**
+
 - **📱 iOS & Android** - Perfect mobile experience on all devices
 - **💻 Windows, macOS, Linux** - Consistent desktop experience
 - **🌐 All Modern Browsers** - Chrome, Firefox, Safari, Edge support
@@ -254,6 +274,7 @@
 ## 🏃‍♂️ Quick Start Guide
 
 ### **System Requirements**
+
 - **Node.js** 18.0 or higher
 - **Package Manager:** npm, yarn, pnpm, or bun
 - **Git** for version control
@@ -262,12 +283,14 @@
 ### **Installation Process**
 
 1. **Clone the Repository**
+
    ```bash
    git clone https://github.com/MMansy19/rosokh.git
    cd rosokh
    ```
 
 2. **Install Dependencies**
+
    ```bash
    npm install
    # or
@@ -279,48 +302,52 @@
    ```
 
 3. **Environment Configuration**
+
    ```bash
    # Copy environment template
    cp .env.example .env.local
    ```
-   
+
    **Required Environment Variables:**
+
    ```env
    # Supabase Configuration
    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-   
+
    # Google Drive API
    GOOGLE_DRIVE_API_KEY=your_google_drive_api_key
    GOOGLE_DRIVE_FOLDER_ID=your_audio_folder_id
-   
+
    # YouTube Data API
    YOUTUBE_API_KEY=your_youtube_api_key
-   
+
    # Prayer Times API
    PRAYER_TIMES_API_KEY=your_prayer_times_api_key
-   
+
    # Analytics & Monitoring
    NEXT_PUBLIC_GA_ID=your_google_analytics_id
    ```
 
 4. **Database Setup (Supabase)**
+
    ```bash
    # Install Supabase CLI
    npm install -g @supabase/cli
-   
+
    # Initialize Supabase
    supabase init
-   
+
    # Start local development
    supabase start
-   
+
    # Run database migrations
    supabase db push
    ```
 
 5. **Run Development Server**
+
    ```bash
    npm run dev
    # or
@@ -336,6 +363,7 @@
    - **Production:** [https://rosokh.vercel.app](https://rosokh.vercel.app)
 
 ### **Build for Production**
+
 ```bash
 # Build the application
 npm run build
@@ -501,6 +529,7 @@ rosokh/
 </div>
 
 ### **Arabic (العربية) - اللغة الأساسية**
+
 - **📜 Complete RTL Support** - Perfect right-to-left text rendering
 - **🕌 Authentic Islamic Terminology** - Proper Arabic Islamic terms and phrases
 - **📖 Quranic Arabic Integration** - Seamless Quranic text display
@@ -508,6 +537,7 @@ rosokh/
 - **📱 Mobile RTL Optimization** - Perfect Arabic mobile experience
 
 ### **English - Global Language**
+
 - **🌍 International Accessibility** - Reach global Muslim communities
 - **📚 Scholarly Translations** - Accurate Islamic concept translations
 - **🔤 SEO Optimization** - English content for better discoverability
@@ -515,6 +545,7 @@ rosokh/
 - **🎯 User-Friendly Interface** - Intuitive English navigation
 
 ### **Russian (Русский) - Eastern European Community**
+
 - **🌍 Russian-Speaking Muslims** - Serving CIS and Eastern European Muslims
 - **📚 Comprehensive Translations** - Complete interface in Russian
 - **🕌 Islamic Context Preservation** - Maintaining Islamic meaning in Russian
@@ -522,6 +553,7 @@ rosokh/
 - **🎓 Educational Resources** - Learning materials in Russian
 
 ### **Language Features**
+
 - **🔄 Instant Language Switching** - Change languages without page reload
 - **💾 Language Preference Memory** - Remember user's language choice
 - **🌐 URL Localization** - Different URLs for different languages (rosokh.vercel.app/ar, /en, /ru)
@@ -537,6 +569,7 @@ rosokh/
 </div>
 
 ### **Islamic Aesthetic Philosophy**
+
 - **🟢 Green-Tosca Color Palette** - Colors inspired by Islamic tradition and nature
 - **🕌 Geometric Patterns** - Beautiful Islamic geometric designs throughout the UI
 - **🌙 Crescent & Star Motifs** - Subtle Islamic symbolic elements
@@ -544,6 +577,7 @@ rosokh/
 - **✨ Minimalist Elegance** - Clean, distraction-free interface for spiritual focus
 
 ### **Advanced Theme System**
+
 - **🌅 Light Mode** - Bright, welcoming interface for daytime use
 - **🌙 Dark Mode** - Comfortable night reading with reduced eye strain
 - **🕌 Ramadan Theme** - Special theme during the holy month
@@ -551,6 +585,7 @@ rosokh/
 - **👤 Personal Themes** - Save and switch between multiple theme preferences
 
 ### **Responsive Design Excellence**
+
 - **📱 Mobile-First Approach** - Designed primarily for mobile users
 - **💻 Desktop Optimization** - Enhanced experience on larger screens
 - **📊 Tablet-Perfect** - Optimized for iPad and Android tablets
@@ -558,6 +593,7 @@ rosokh/
 - **📺 Large Screen Support** - Perfect for smart TVs and projectors
 
 ### **Accessibility Features**
+
 - **♿ WCAG 2.1 AA Compliance** - Full accessibility standard compliance
 - **🔍 Screen Reader Support** - Perfect for visually impaired users
 - **⌨️ Keyboard Navigation** - Complete keyboard-only navigation
@@ -574,6 +610,7 @@ rosokh/
 </div>
 
 ### **Lightning-Fast Performance**
+
 - **⚡ 100/100 Lighthouse Scores** - Perfect scores across all metrics
 - **🚀 Sub-Second Load Times** - Blazing fast initial page loads
 - **📦 Optimized Bundle Sizes** - Minimal JavaScript and CSS bundles
@@ -581,6 +618,7 @@ rosokh/
 - **📱 60fps Animations** - Smooth, performant animations on all devices
 
 ### **Advanced Analytics Features**
+
 - **📊 Real-Time Dashboards** - Live user activity and engagement metrics
 - **📈 Spiritual Progress Tracking** - Monitor users' Islamic learning journey
 - **🎯 Goal Achievement Analytics** - Track completion of religious goals
@@ -588,6 +626,7 @@ rosokh/
 - **🌍 Global Usage Statistics** - Worldwide platform usage insights
 
 ### **User Behavior Insights**
+
 - **⏱️ Reading Time Analysis** - How long users spend with content
 - **📖 Most Popular Content** - Trending articles, audio, and videos
 - **🎵 Audio Listening Patterns** - User preferences and habits
@@ -599,6 +638,7 @@ rosokh/
 ## 🛡️ Security & Privacy
 
 ### **Data Protection**
+
 - **🔐 End-to-End Encryption** - All user data encrypted in transit and at rest
 - **🛡️ GDPR Compliance** - Full compliance with European data protection laws
 - **🌍 Privacy-First Design** - Minimal data collection, maximum user control
@@ -606,6 +646,7 @@ rosokh/
 - **👤 Anonymous Usage Options** - Use the platform without creating accounts
 
 ### **Authentication & Authorization**
+
 - **🔑 Secure Authentication** - Multiple authentication methods supported
 - **👥 Role-Based Access Control** - Different access levels for users and admins
 - **🔄 Session Management** - Secure session handling and automatic logout
@@ -625,6 +666,7 @@ rosokh/
 We welcome contributions from the global Muslim community! Here's how you can help:
 
 #### **🔧 Code Contributions**
+
 1. **Fork the Repository** - Create your own copy of the project
 2. **Create Feature Branch** - `git checkout -b feature/amazing-feature`
 3. **Follow Code Standards** - Use TypeScript, follow ESLint rules
@@ -632,18 +674,21 @@ We welcome contributions from the global Muslim community! Here's how you can he
 5. **Submit Pull Request** - Detailed description of your changes
 
 #### **📝 Content Contributions**
+
 - **📚 Article Writing** - Submit Islamic articles in Arabic, English, or Russian
 - **🎵 Audio Content** - Share Islamic lectures and nasheeds
 - **🌍 Translations** - Help translate the platform to new languages
 - **📖 Quran Translations** - Contribute additional Quran translations
 
 #### **🐛 Bug Reports & Feature Requests**
+
 - **🔍 Issue Reporting** - Report bugs with detailed reproduction steps
 - **💡 Feature Suggestions** - Propose new features for the platform
 - **📊 User Feedback** - Share your experience and suggestions
 - **🧪 Beta Testing** - Help test new features before release
 
 ### **Community Guidelines**
+
 - **🤲 Islamic Values** - All contributions must align with Islamic principles
 - **🌍 Respectful Communication** - Maintain respectful discourse
 - **📚 Educational Focus** - Prioritize beneficial Islamic knowledge
@@ -654,15 +699,18 @@ We welcome contributions from the global Muslim community! Here's how you can he
 ## 📄 License & Legal
 
 ### **Open Source License**
+
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 #### **What This Means:**
+
 - ✅ **Free to Use** - Use the platform and code freely
 - ✅ **Modify & Distribute** - Create your own versions and share them
 - ✅ **Commercial Use Allowed** - Use in commercial projects
 - ✅ **No Warranty** - Provided as-is without warranty
 
 ### **Third-Party Services**
+
 - **🟢 Supabase** - Database and authentication services
 - **☁️ Google Drive API** - Audio storage and streaming
 - **📺 YouTube Data API** - Video content integration
@@ -677,6 +725,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 </div>
 
 ### **Special Thanks To:**
+
 - **📖 Quran.com** - For providing free Quranic text and translations
 - **🎵 Islamic Content Creators** - Scholars and speakers who share their knowledge
 - **🌍 Global Muslim Community** - For inspiration, feedback, and support
@@ -684,6 +733,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - **🕌 Islamic Organizations** - For guidance on Islamic authenticity and accuracy
 
 ### **Technology Partners:**
+
 - **⚡ Next.js Team** - For the amazing React framework
 - **🎨 Tailwind CSS** - For the beautiful utility-first CSS framework
 - **🟢 Supabase** - For the powerful backend-as-a-service platform
@@ -691,6 +741,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - **🌍 Vercel** - For free, high-performance hosting
 
 ### **Islamic Scholarly Guidance:**
+
 - **📚 Al-Azhar University** - For Islamic content verification
 - **🕌 Local Islamic Centers** - For community feedback and guidance
 - **👨‍🏫 Islamic Scholars** - For ensuring religious accuracy and authenticity
@@ -704,7 +755,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 <img src="https://via.placeholder.com/150x150/10B981/FFFFFF?text=MM" alt="Mahmoud Mansy" width="150" style="border-radius: 50%">
 
 ### **Mahmoud Mansy**
-*Full-Stack Developer & Islamic Tech Enthusiast*
+
+_Full-Stack Developer & Islamic Tech Enthusiast_
 
 Passionate about creating technology that serves the Muslim Ummah and brings people closer to Allah. Dedicated to building high-quality, accessible Islamic applications that benefit Muslims worldwide.
 
@@ -713,7 +765,7 @@ Passionate about creating technology that serves the Muslim Ummah and brings peo
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Mahmoud%20Mansy-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/mahmoud-mansy)
 [![Email](https://img.shields.io/badge/Email-Contact%20Me-EA4335?style=for-the-badge&logo=gmail)](mailto:contact@mahmoud-mansy.vercel.app)
 
-> *"And whoever does righteous deeds, whether male or female, while being a believer - those will enter Paradise and will not be wronged, even as much as the speck on a date seed."* - **Quran 4:124**
+> _"And whoever does righteous deeds, whether male or female, while being a believer - those will enter Paradise and will not be wronged, even as much as the speck on a date seed."_ - **Quran 4:124**
 
 ---
 
@@ -721,11 +773,11 @@ Passionate about creating technology that serves the Muslim Ummah and brings peo
 
 In a world full of distractions, Rosokh provides a pure, focused, and beautiful space for Muslims to connect with their faith. Every feature is designed with Islamic values in mind, every interface element respects Islamic aesthetics, and every line of code is written with the intention of bringing people closer to Allah.
 
-**جزاكم الله خيراً** *(May Allah reward you with goodness)* for using and supporting this project.
+**جزاكم الله خيراً** _(May Allah reward you with goodness)_ for using and supporting this project.
 
 ---
 
-*Built with ❤️ and 🤲 for the Muslim Ummah*
+_Built with ❤️ and 🤲 for the Muslim Ummah_
 
 **بسم الله الرحمن الرحيم**
 

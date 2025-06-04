@@ -177,8 +177,8 @@ export function StatsSection({ locale, messages }: StatsSectionProps) {
                         stat.key}
                     </h3>
                     <p className="text-muted text-sm leading-relaxed">
-                      {messages?.home?.hero?.stats?.items?.[stat.key]?.description ||
-                        `${stat.key} description`}
+                      {messages?.home?.hero?.stats?.items?.[stat.key]
+                        ?.description || `${stat.key} description`}
                     </p>
                   </div>
                 </div>
@@ -224,7 +224,8 @@ export function StatsSection({ locale, messages }: StatsSectionProps) {
                 {metric.value}
               </div>{" "}
               <div className="text-sm text-muted">
-                {messages?.home?.hero?.stats?.metrics?.[metric.key] || metric.key}
+                {messages?.home?.hero?.stats?.metrics?.[metric.key] ||
+                  metric.key}
               </div>
             </div>
           ))}

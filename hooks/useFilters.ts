@@ -1,6 +1,6 @@
 "use client";
-import { useState } from 'react';
-import { FilterState, ViewMode } from '@/types/audio';
+import { useState } from "react";
+import { FilterState, ViewMode } from "@/types/audio";
 
 interface UseFiltersReturn {
   searchTerm: string;
@@ -20,7 +20,7 @@ export const useFilters = (): UseFiltersReturn => {
   const [filters, setFilters] = useState<FilterState>({
     category: "all",
     quality: "all",
-    showFavoritesOnly: false
+    showFavoritesOnly: false,
   });
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
 
@@ -28,7 +28,7 @@ export const useFilters = (): UseFiltersReturn => {
     setFilters({
       category: "all",
       quality: "all",
-      showFavoritesOnly: false
+      showFavoritesOnly: false,
     });
     setSearchTerm("");
   };
@@ -40,6 +40,6 @@ export const useFilters = (): UseFiltersReturn => {
     setSearchTerm,
     setFilters,
     setViewMode,
-    clearFilters
+    clearFilters,
   };
 };
