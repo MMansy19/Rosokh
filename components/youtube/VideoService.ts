@@ -151,8 +151,12 @@ export class VideoService {
   private apiKey: string;
   private baseUrl = "https://www.googleapis.com/youtube/v3";
 
-  constructor(apiKey: string) {
-    this.apiKey = apiKey;
+  constructor(apiKey?: string) {
+    this.apiKey = apiKey || process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || '';
+    
+    if (!this.apiKey) {
+      console.warn('YouTube API key not found. Video features will be limited.');
+    }
   }
 
   /**
@@ -164,6 +168,12 @@ export class VideoService {
     maxResults: number = 20,
   ): Promise<VideoMetadata[]> {
     try {
+      // Check if API key is available
+      if (!this.apiKey) {
+        console.warn('YouTube API key not configured. Returning mock data.');
+        return this.getMockVideos(query, maxResults);
+      }
+
       // Build search parameters
       const params = new URLSearchParams({
         part: "snippet,statistics,contentDetails",
@@ -191,13 +201,15 @@ export class VideoService {
       }
 
       const response = await fetch(`${this.baseUrl}/search?${params}`);
-      const data = await response.json();
-
+      
       if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
         throw new Error(
-          `YouTube API error: ${data.error?.message || "Unknown error"}`,
+          `YouTube API error: ${errorData.error?.message || `HTTP ${response.status}`}`,
         );
       }
+
+      const data = await response.json();
 
       // Transform YouTube API response to our VideoMetadata format
       return this.transformSearchResults(data.items || []);
@@ -531,6 +543,59 @@ export class VideoService {
         quality: [{ resolution: "720p", url: "#" }],
       },
     ];
+  }
+
+  private getMockVideos(query: string, maxResults: number): VideoMetadata[] {
+    // Return mock videos when API key is not available
+    const mockVideos: VideoMetadata[] = [
+      {
+        id: "mock_1",
+        title: "Beautiful Quran Recitation - Surah Al-Baqarah",
+        description: "Peaceful recitation of Surah Al-Baqarah with English translation",
+        thumbnailUrl: "https://via.placeholder.com/320x180/10B981/FFFFFF?text=Quran+Recitation",
+        duration: 3600,
+        viewCount: 2500000,
+        publishedAt: new Date("2024-01-15"),
+        channelId: "mock_channel_1",
+        channelTitle: "Peaceful Recitations",
+        category: VIDEO_CATEGORIES.find(c => c.id === "quran_recitation") || VIDEO_CATEGORIES[0],
+        tags: ["quran", "recitation", "baqarah", "arabic"],
+        language: "ar",
+        quality: [{ resolution: "720p", url: "#" }],
+      },
+      {
+        id: "mock_2",
+        title: "Islamic Lecture - The Importance of Prayer",
+        description: "Educational lecture about the significance of daily prayers in Islam",
+        thumbnailUrl: "https://via.placeholder.com/320x180/059669/FFFFFF?text=Islamic+Lecture",
+        duration: 2400,
+        viewCount: 1800000,
+        publishedAt: new Date("2024-01-10"),
+        channelId: "mock_channel_2",
+        channelTitle: "Islamic Knowledge",
+        category: VIDEO_CATEGORIES.find(c => c.id === "lectures") || VIDEO_CATEGORIES[1],
+        tags: ["islam", "prayer", "salah", "education"],
+        language: "en",
+        quality: [{ resolution: "720p", url: "#" }],
+      },
+      {
+        id: "mock_3",
+        title: "Story of Prophet Muhammad (PBUH) - Part 1",
+        description: "The life and teachings of Prophet Muhammad (Peace be upon him)",
+        thumbnailUrl: "https://via.placeholder.com/320x180/7C3AED/FFFFFF?text=Prophet+Stories",
+        duration: 1800,
+        viewCount: 3200000,
+        publishedAt: new Date("2024-01-05"),
+        channelId: "mock_channel_3",
+        channelTitle: "Prophet Stories",
+        category: VIDEO_CATEGORIES.find(c => c.id === "prophet_stories") || VIDEO_CATEGORIES[2],
+        tags: ["prophet", "muhammad", "seerah", "biography"],
+        language: "en",
+        quality: [{ resolution: "720p", url: "#" }],
+      },
+    ];
+
+    return mockVideos.slice(0, maxResults);
   }
 
   private getFallbackTrendingVideos(): VideoMetadata[] {

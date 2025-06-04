@@ -18,6 +18,9 @@ import {
   MoreHorizontal,
   ChevronDown,
   ChevronUp,
+  X, // Add X icon for close button
+  Eye, // Add Eye icon for VideoInfo
+  Clock, // Add Clock icon for VideoInfo
 } from "lucide-react";
 import { VideoMetadata, formatDuration, formatViewCount } from "./VideoService";
 
@@ -28,6 +31,7 @@ interface VideoPlayerProps {
   showInfo?: boolean;
   onVideoEnd?: () => void;
   onVideoProgress?: (progress: number) => void;
+  onClose?: () => void; // Add onClose prop
   locale: string;
   messages: any;
 }
@@ -46,6 +50,7 @@ export function VideoPlayer({
   showInfo = true,
   onVideoEnd,
   onVideoProgress,
+  onClose, // Add onClose to destructured props
   locale,
   messages,
 }: VideoPlayerProps) {
@@ -136,12 +141,16 @@ export function VideoPlayer({
           event.preventDefault();
           toggleFullscreen();
           break;
+        case "Escape": // Add Escape key to close
+          event.preventDefault();
+          if (onClose) onClose();
+          break;
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [onClose]);
 
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -234,6 +243,17 @@ export function VideoPlayer({
       className={`relative bg-black rounded-lg overflow-hidden ${isFullscreen ? "fixed inset-0 z-50" : ""}`}
       tabIndex={0}
     >
+      {/* Close Button - Only show if onClose is provided */}
+      {onClose && (
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors"
+          title="Close video player"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      )}
+
       {/* Video Container */}
       <div className="relative aspect-video bg-black">
         <iframe
@@ -346,7 +366,6 @@ export function VideoPlayer({
               >
                 <Settings className="w-5 h-5" />
               </button>
-
               <button
                 onClick={toggleFullscreen}
                 className="text-white hover:text-gray-300 transition-colors"
@@ -445,185 +464,125 @@ export function VideoPlayer({
   );
 }
 
-// Video Info Component
+// VideoInfo component
 interface VideoInfoProps {
   video: VideoMetadata;
   isExpanded?: boolean;
-  onToggleExpand?: () => void;
   locale: string;
   messages: any;
 }
 
-export function VideoInfo({
-  video,
-  isExpanded = false,
-  onToggleExpand,
-  locale,
-  messages,
+export function VideoInfo({ 
+  video, 
+  isExpanded = false, 
+  locale, 
+  messages 
 }: VideoInfoProps) {
-  const [isLiked, setIsLiked] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
-
-  useEffect(() => {
-    const savedData = localStorage.getItem(`video_${video.id}`);
-    if (savedData) {
-      const data = JSON.parse(savedData);
-      setIsLiked(data.isLiked || false);
-      setIsBookmarked(data.isBookmarked || false);
-    }
-  }, [video.id]);
-
-  const toggleLike = () => {
-    setIsLiked(!isLiked);
-    const data = JSON.parse(localStorage.getItem(`video_${video.id}`) || "{}");
-    data.isLiked = !isLiked;
-    localStorage.setItem(`video_${video.id}`, JSON.stringify(data));
-  };
-
-  const toggleBookmark = () => {
-    setIsBookmarked(!isBookmarked);
-    const data = JSON.parse(localStorage.getItem(`video_${video.id}`) || "{}");
-    data.isBookmarked = !isBookmarked;
-    localStorage.setItem(`video_${video.id}`, JSON.stringify(data));
-  };
-
-  const handleShare = async () => {
-    const shareData = {
-      title: video.title,
-      text: video.description,
-      url: `https://youtube.com/watch?v=${video.id}`,
-    };
-
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        await navigator.clipboard.writeText(shareData.url);
-      }
-    } catch (error) {
-      console.error("Sharing failed:", error);
-    }
-  };
+  const [showFullDescription, setShowFullDescription] = useState(isExpanded);
 
   return (
     <div className="bg-surface rounded-lg p-6 border border-border">
       {/* Video Title */}
-      <h2 className="text-xl font-bold text-foreground mb-2 line-clamp-2">
+      <h2 className="text-xl font-bold text-foreground mb-4">
         {video.title}
       </h2>
 
-      {/* Video Meta */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-4 text-sm text-muted">
+      {/* Video Stats */}
+      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+        <div className="flex items-center gap-1">
+          <Eye className="w-4 h-4" />
           <span>{formatViewCount(video.viewCount)} views</span>
-          <span>•</span>
-          <span>{video.publishedAt.toLocaleDateString(locale)}</span>
-          <span>•</span>
-          <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
-            {video.category.name}
-          </span>
         </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={toggleLike}
-            className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
-              isLiked
-                ? "bg-red-100 text-red-600"
-                : "bg-secondary text-foreground hover:bg-accent hover:text-white"
-            }`}
-          >
-            <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
-            {isLiked ? "Liked" : "Like"}
-          </button>
-
-          <button
-            onClick={toggleBookmark}
-            className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
-              isBookmarked
-                ? "bg-blue-100 text-blue-600"
-                : "bg-secondary text-foreground hover:bg-accent hover:text-white"
-            }`}
-          >
-            <Bookmark
-              className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`}
-            />
-            {isBookmarked ? "Saved" : "Save"}
-          </button>
-
-          <button
-            onClick={handleShare}
-            className="flex items-center gap-1 px-3 py-1 bg-secondary text-foreground rounded-full text-sm hover:bg-accent hover:text-white transition-colors"
-          >
-            <Share2 className="w-4 h-4" />
-            Share
-          </button>
-
-          <button className="p-2 text-muted hover:text-foreground transition-colors">
-            <MoreHorizontal className="w-4 h-4" />
-          </button>
+        <span>•</span>
+        <div className="flex items-center gap-1">
+          <Clock className="w-4 h-4" />
+          <span>{video.publishedAt.toLocaleDateString(locale)}</span>
+        </div>
+        <span>•</span>
+        <div className="flex items-center gap-1">
+          <span>{formatDuration(video.duration)}</span>
         </div>
       </div>
 
       {/* Channel Info */}
-      <div className="flex items-center justify-between mb-4 pb-4 border-b border-border">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
+      <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border">
+        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+          <span className="text-primary font-bold">
             {video.channelTitle.charAt(0).toUpperCase()}
-          </div>
-          <div>
-            <div className="font-semibold text-foreground">
-              {video.channelTitle}
-            </div>
-            <div className="text-sm text-muted">Islamic Content Creator</div>
-          </div>
+          </span>
         </div>
+        <div>
+          <h3 className="font-semibold text-foreground">
+            {video.channelTitle}
+          </h3>
+          <p className="text-sm text-muted-foreground">
+            Islamic Content Creator
+          </p>
+        </div>
+      </div>
 
-        <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors">
-          Subscribe
-        </button>
+      {/* Category */}
+      <div className="mb-4">
+        <span className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+          <span>{video.category.icon}</span>
+          <span>
+            {locale === "ar" && video.category.nameArabic
+              ? video.category.nameArabic
+              : locale === "ru" && video.category.nameRussian
+                ? video.category.nameRussian
+                : video.category.name}
+          </span>
+        </span>
       </div>
 
       {/* Description */}
-      <div className="text-muted">
-        <button
-          onClick={onToggleExpand}
-          className="flex items-center gap-2 mb-2 text-foreground hover:text-primary transition-colors"
-        >
-          <span className="font-medium">Description</span>
-          {isExpanded ? (
-            <ChevronUp className="w-4 h-4" />
-          ) : (
-            <ChevronDown className="w-4 h-4" />
+      {video.description && (
+        <div>
+          <h4 className="font-semibold text-foreground mb-2">
+            {messages?.youtube?.description || "Description"}
+          </h4>
+          <div className={`text-muted-foreground leading-relaxed ${
+            showFullDescription ? "" : "line-clamp-3"
+          }`}>
+            {video.description}
+          </div>
+          {video.description.length > 200 && (
+            <button
+              onClick={() => setShowFullDescription(!showFullDescription)}
+              className="mt-2 text-primary hover:text-primary/80 text-sm font-medium"
+            >
+              {showFullDescription 
+                ? (messages?.youtube?.showLess || "Show less")
+                : (messages?.youtube?.showMore || "Show more")
+              }
+            </button>
           )}
-        </button>
+        </div>
+      )}
 
-        {isExpanded ? (
-          <div className="space-y-2">
-            <p className="leading-relaxed whitespace-pre-wrap">
-              {video.description}
-            </p>
-
-            {video.tags.length > 0 && (
-              <div className="pt-4 border-t border-border">
-                <div className="text-sm font-medium mb-2">Tags:</div>
-                <div className="flex flex-wrap gap-2">
-                  {video.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-accent/10 text-accent rounded text-xs"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+      {/* Tags */}
+      {video.tags && video.tags.length > 0 && (
+        <div className="mt-4 pt-4 border-t border-border">
+          <h4 className="font-semibold text-foreground mb-2">
+            {messages?.youtube?.tags || "Tags"}
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {video.tags.slice(0, 8).map((tag, index) => (
+              <span
+                key={index}
+                className="px-2 py-1 bg-muted text-muted-foreground rounded text-xs"
+              >
+                #{tag}
+              </span>
+            ))}
+            {video.tags.length > 8 && (
+              <span className="px-2 py-1 text-muted-foreground text-xs">
+                +{video.tags.length - 8} more
+              </span>
             )}
           </div>
-        ) : (
-          <p className="line-clamp-2 leading-relaxed">{video.description}</p>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
