@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Play,
   Pause,
@@ -69,11 +69,10 @@ interface AudioClientProps {
 }
 
 export default function AudioClient({ locale, messages }: AudioClientProps) {
-  const audioRef = useRef<HTMLAudioElement>(null);
+  // Removed audioRef since we only use Google Drive preview
   const [currentTrack, setCurrentTrack] = useState<AudioTrack | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
+  // Removed currentTime and duration since we only use Google Drive preview
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedReciter, setSelectedReciter] = useState<string>("all");
   const [selectedQuality, setSelectedQuality] = useState<string>("high");
@@ -89,8 +88,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
   const [isDataLoading, setIsDataLoading] = useState(true);
   const [dataError, setDataError] = useState<string | null>(null);
 
-  // Google Drive preview mode state
-  const [useGoogleDrivePreview, setUseGoogleDrivePreview] = useState(false);
+  // Google Drive preview mode state - always enabled
   const [expandedPreview, setExpandedPreview] = useState<string | null>(null);
 
 
@@ -210,12 +208,14 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
     return `https://drive.google.com/uc?export=download&id=${fileId}`;
   };
 
-  const togglePreviewMode = () => {
-    setUseGoogleDrivePreview(!useGoogleDrivePreview);
-    setExpandedPreview(null);
-  };
+  // Removed togglePreviewMode function since we always use Google Drive preview
 
   const renderGoogleDrivePreview = (track: AudioTrack) => {
+    // Only render preview for the current track to enhance performance
+    if (!currentTrack || currentTrack.id !== track.id) {
+      return null;
+    }
+
     // Use the track ID as Google Drive file ID (already set with real IDs from the JSON data)
     const fileId = track.id;
     const previewUrl = getGoogleDrivePreviewUrl(fileId);
@@ -256,7 +256,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
           height={isExpanded ? "400" : "120"}
           allow="autoplay"
           className="border rounded-lg bg-gray-100 dark:bg-gray-800"
-          title={`${track.title} - ${track.reciter}`}
+          title={`${track.title} - ${track.reciter.name}`}
           loading="lazy"
         />
         <div className="text-xs text-muted-foreground mt-2 flex items-center gap-2">
@@ -270,63 +270,29 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
     );
   };
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
-    const handleEnded = () => {
-      setIsPlaying(false);
-      setCurrentTime(0);
-    };
-
-    audio.addEventListener("timeupdate", updateTime);
-    audio.addEventListener("loadedmetadata", updateDuration);
-    audio.addEventListener("ended", handleEnded);
-
-    return () => {
-      audio.removeEventListener("timeupdate", updateTime);
-      audio.removeEventListener("loadedmetadata", updateDuration);
-      audio.removeEventListener("ended", handleEnded);
-    };
-  }, [currentTrack]);
+  // Removed native audio player useEffect since we only use Google Drive preview
 
   const playTrack = (track: AudioTrack) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (currentTrack?.id === track.id) {
-      if (isPlaying) {
-        audio.pause();
-        setIsPlaying(false);
-      } else {
-        audio.play();
-        setIsPlaying(true);
+    // Reset expanded preview when switching tracks for better performance
+    setExpandedPreview(null);
+    setCurrentTrack(track);
+    // No longer using native audio player - only Google Drive preview
+    setIsPlaying(true);
+    
+    // Scroll to current player section smoothly
+    setTimeout(() => {
+      const currentPlayerElement = document.querySelector('[data-current-player]');
+      if (currentPlayerElement) {
+        currentPlayerElement.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start',
+          inline: 'nearest'
+        });
       }
-    } else {
-      setCurrentTrack(track);
-      audio.src = track.url;
-      audio.load();
-      audio.play();
-      setIsPlaying(true);
-    }
+    }, 100);
   };
 
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-  };
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const newTime = parseFloat(e.target.value);
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
+  // Removed formatTime and handleSeek functions since we only use Google Drive preview
 
   return (
     <div className="min-h-screen text-foreground transition-colors duration-300">
@@ -471,35 +437,14 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
               </div>
             </div>
 
-            {/* Player Mode Toggle */}
-            <div className="flex justify-center mb-8">
-              <div className="bg-background rounded-lg p-2 shadow-lg border border-border">
-                <button
-                  onClick={togglePreviewMode}
-                  className={`px-6 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2 ${
-                    useGoogleDrivePreview
-                      ? "bg-emerald-600 text-white"
-                      : "text-foreground hover:bg-secondary"
-                  }`}
-                >
-                  {useGoogleDrivePreview ? (
-                    <>
-                      <Grid className="w-4 h-4" />
-                      Google Drive Preview Mode
-                    </>
-                  ) : (
-                    <>
-                      <Play className="w-4 h-4" />
-                      Traditional Audio Player
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
+         
 
             {/* Current Player */}
             {currentTrack && (
-              <div className="bg-background rounded-lg shadow-lg p-6 mb-8 border border-border">
+              <div 
+                data-current-player
+                className="bg-background rounded-lg shadow-lg p-6 mb-8 border border-border"
+              >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-foreground">
@@ -511,38 +456,37 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                       </p>
                     )}
                     <p className="text-sm text-muted-foreground">
-                      {messages?.audio?.by || "By"} {currentTrack.reciter}
+                      {messages?.audio?.by || "By"} {currentTrack.reciter.name}
                     </p>
                   </div>
 
-                  <button
-                    onClick={() => playTrack(currentTrack)}
-                    className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary/90 transition-colors duration-200"
-                  >
-                    {isPlaying ? (
-                      <Pause className="w-6 h-6" />
-                    ) : (
-                      <Play className="w-6 h-6" />
-                    )}
-                  </button>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="mb-4">
-                  <input
-                    type="range"
-                    min="0"
-                    max={duration || 0}
-                    value={currentTime}
-                    onChange={handleSeek}
-                    className="w-full h-2 bg-background rounded-lg appearance-none cursor-pointer"
-                  />
-                  <div className="flex justify-between text-sm text-muted-foreground mt-1">
-                    <span>{formatTime(currentTime)}</span>
-                    <span>{formatTime(duration)}</span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const isExpanded = expandedPreview === currentTrack.id;
+                        setExpandedPreview(isExpanded ? null : currentTrack.id);
+                      }}
+                      className="px-4 py-2 bg-secondary text-foreground rounded hover:bg-secondary/80 transition-colors"
+                    >
+                      {expandedPreview === currentTrack.id ? "Collapse" : "Expand"}
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const downloadUrl = getGoogleDriveDownloadUrl(currentTrack.id);
+                        window.open(downloadUrl, "_blank");
+                      }}
+                      className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors flex items-center gap-1"
+                    >
+                      <Download className="w-4 h-4" />
+                      Download
+                    </button>
                   </div>
                 </div>
-                <audio ref={audioRef} />
+
+                {/* Google Drive Preview - Always render for current track */}
+                {renderGoogleDrivePreview(currentTrack)}
               </div>
             )}
 
@@ -703,8 +647,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                               className={`w-4 h-4 ${favorites.has(track.id) ? "fill-current" : ""}`}
                             />
                           </button>
-
-                          {useGoogleDrivePreview && (
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -719,7 +661,19 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                             >
                               <Download className="w-4 h-4" />
                             </button>
-                          )}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                playTrack(track);
+                              }}
+                              className="p-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors"
+                            >
+                              {currentTrack?.id === track.id && isPlaying ? (
+                                <Pause className="w-4 h-4" />
+                              ) : (
+                                <Play className="w-4 h-4" />
+                              )}
+                            </button>
                         </div>
                       </div>
 
@@ -753,8 +707,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                           </span>
                         )}
                       </div>
-
-                      {useGoogleDrivePreview && renderGoogleDrivePreview(track)}
                     </>
                   ) : (
                     <>
