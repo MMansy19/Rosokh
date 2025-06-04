@@ -17,8 +17,11 @@ interface AudioTrack {
   id: string;
   title: string;
   arabicTitle?: string;
-  reciter: string;
-  reciterArabic?: string;
+  reciter: {
+    id: string;
+    name: string;
+    arabicName?: string;
+  }
   duration: string;
   url: string;
   category: "quran" | "dua" | "lecture" | "nasheed";
@@ -121,8 +124,11 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                 id: surah.driveFiles[reciter.id],
                 title: surah.name,
                 arabicTitle: surah.arabicName,
-                reciter: reciter.name,
-                reciterArabic: reciter.arabicName,
+                reciter: {
+                  id: reciter.id,
+                  name: reciter.name,
+                  arabicName: reciter.arabicName,
+                },
                 duration: "Unknown",
                 url: `https://drive.google.com/file/d/${surah.driveFiles[reciter.id]}/view`,
                 category: "quran" as const,
@@ -175,12 +181,12 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
       selectedCategory === "all" || track.category === selectedCategory;
     const matchesReciter =
       selectedReciter === "all" ||
-      track.reciter.toLowerCase().includes(selectedReciter.toLowerCase());
+      track.reciter.id.toLowerCase().includes(selectedReciter.toLowerCase());
     const matchesSearch =
       searchTerm === "" ||
       track.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       track.arabicTitle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      track.reciter.toLowerCase().includes(searchTerm.toLowerCase());
+      track.reciter.id.toLowerCase().includes(searchTerm.toLowerCase());
 
     return matchesCategory && matchesReciter && matchesSearch;
   });
@@ -672,11 +678,11 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                             </p>
                           )}
                           <p className="text-sm text-muted-foreground">
-                            {messages?.audio?.by || "By"} {track.reciter}
+                            {messages?.audio?.by || "By"} {track.reciter.name}
                           </p>
-                          {track.reciterArabic && (
+                          {track.reciter.arabicName && (
                             <p className="text-xs text-muted-foreground font-amiri">
-                              {track.reciterArabic}
+                              {track.reciter.arabicName}
                             </p>
                           )}
                         </div>
@@ -769,7 +775,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                           </span>
                         </div>
                         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                          <span>{track.reciter}</span>
+                          <span>{track.reciter.name}</span>
                           <span>•</span>
                           <span>{track.duration}</span>
                           <span>•</span>
