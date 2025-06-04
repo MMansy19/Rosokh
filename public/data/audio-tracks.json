@@ -1,0 +1,128 @@
+{
+  "surahs": [
+    {
+      "id": 1,
+      "name": "Al-Fatiha",
+      "arabicName": "الفاتحة",
+      "transliteration": "Al-Faatiha",
+      "meaning": "The Opening",
+      "verses": 7,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "sudais": "1ZeKjgb3i9_HKEu5y5sHsVliCt4EGeedg"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Al-Baqarah",
+      "arabicName": "البقرة",
+      "transliteration": "Al-Baqara",
+      "meaning": "The Cow",
+      "verses": 286,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "sudais": "2BxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
+        "alafasy": "2CxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
+        "basit": "2DxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
+        "ghamdi": "2ExUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Ali 'Imran",
+      "arabicName": "آل عمران",
+      "transliteration": "Aal-i-Imraan",
+      "meaning": "Family of Imran",
+      "verses": 200,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "sudais": "3BxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
+        "alafasy": "3CxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
+        "basit": "3DxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
+        "ghamdi": "3ExUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ"
+      }
+    }
+  ],
+  "specialRecitations": [
+    {
+      "id": "ayat-kursi",
+      "name": "Ayat Al-Kursi",
+      "arabicName": "آية الكرسي",
+      "surahId": 2,
+      "verses": "2:255",
+      "category": "quran",
+      "driveFiles": {
+        "sudais": "ayat_kursi_sudais_drive_id",
+        "alafasy": "ayat_kursi_alafasy_drive_id",
+        "basit": "ayat_kursi_basit_drive_id",
+        "ghamdi": "ayat_kursi_ghamdi_drive_id"
+      }
+    },
+    {
+      "id": "al-kahf",
+      "name": "Surah Al-Kahf",
+      "arabicName": "سورة الكهف",
+      "surahId": 18,
+      "verses": "18:1-110",
+      "category": "quran",
+      "specialDay": "Friday",
+      "driveFiles": {
+        "sudais": "al_kahf_sudais_drive_id",
+        "alafasy": "al_kahf_alafasy_drive_id",
+        "basit": "al_kahf_basit_drive_id",
+        "ghamdi": "al_kahf_ghamdi_drive_id"
+      }
+    }
+  ],
+  "duas": [
+    {
+      "id": "morning-adhkar",
+      "name": "Morning Adhkar",
+      "arabicName": "أذكار الصباح",
+      "category": "dua",
+      "duration": "15:30",
+      "driveFiles": {
+        "ghamdi": "morning_adhkar_ghamdi_drive_id",
+        "sudais": "morning_adhkar_sudais_drive_id"
+      }
+    },
+    {
+      "id": "evening-adhkar",
+      "name": "Evening Adhkar",
+      "arabicName": "أذكار المساء",
+      "category": "dua",
+      "duration": "12:45",
+      "driveFiles": {
+        "ghamdi": "evening_adhkar_ghamdi_drive_id",
+        "sudais": "evening_adhkar_sudais_drive_id"
+      }
+    }
+  ],
+  "lectures": [
+    {
+      "id": "prophet-biography",
+      "name": "The Life of Prophet Muhammad",
+      "arabicName": "سيرة النبي محمد",
+      "category": "lecture",
+      "speaker": "Omar Suleiman",
+      "duration": "45:20",
+      "driveFiles": {
+        "english": "prophet_biography_en_drive_id",
+        "arabic": "prophet_biography_ar_drive_id"
+      }
+    }
+  ],
+  "nasheeds": [
+    {
+      "id": "tala-al-badru",
+      "name": "Tala al Badru Alayna",
+      "arabicName": "طلع البدر علينا",
+      "category": "nasheed",
+      "artist": "Maher Zain",
+      "duration": "4:15",
+      "driveFiles": {
+        "default": "tala_al_badru_drive_id"
+      }
+    }
+  ]
+}

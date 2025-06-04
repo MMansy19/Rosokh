@@ -1,0 +1,65 @@
+{
+  "categories": {
+    "quran": {
+      "id": "quran",
+      "name": "Quran Recitations",
+      "arabicName": "تلاوات القرآن",
+      "description": "Complete Quran recitations by renowned reciters",
+      "icon": "📖",
+      "color": "green"
+    },
+    "dua": {
+      "id": "dua",
+      "name": "Duas & Adhkar",
+      "arabicName": "الأدعية والأذكار",
+      "description": "Daily supplications and remembrance",
+      "icon": "🤲",
+      "color": "blue"
+    },
+    "lecture": {
+      "id": "lecture",
+      "name": "Islamic Lectures",
+      "arabicName": "المحاضرات الإسلامية",
+      "description": "Educational content by Islamic scholars",
+      "icon": "🎓",
+      "color": "purple"
+    },
+    "nasheed": {
+      "id": "nasheed",
+      "name": "Nasheeds",
+      "arabicName": "الأناشيد",
+      "description": "Inspiring Islamic songs and chants",
+      "icon": "🎵",
+      "color": "orange"
+    }
+  },
+  "playlists": [
+    {
+      "id": "daily_essentials",
+      "name": "Daily Essentials",
+      "arabicName": "الأساسيات اليومية",
+      "description": "Essential daily recitations and duas",
+      "tracks": ["al-fatihah", "ayat-kursi", "morning-adhkar", "evening-adhkar"],
+      "duration": "25:30",
+      "trackCount": 4
+    },
+    {
+      "id": "complete_quran_sudais",
+      "name": "Complete Quran - Al-Sudais",
+      "arabicName": "القرآن الكامل - السديس",
+      "description": "Complete Quran recitation by Abdul Rahman Al-Sudais",
+      "tracks": [],
+      "duration": "18:30:00",
+      "trackCount": 114
+    },
+    {
+      "id": "friday_collection",
+      "name": "Friday Collection",
+      "arabicName": "مجموعة الجمعة",
+      "description": "Special recitations for Friday",
+      "tracks": ["al-kahf", "friday-dua", "jumah-khutbah"],
+      "duration": "1:45:20",
+      "trackCount": 3
+    }
+  ]
+}

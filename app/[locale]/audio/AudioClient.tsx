@@ -162,9 +162,12 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [showSettings, setShowSettings] = useState(false);  const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [downloadProgress, setDownloadProgress] = useState<{[key: string]: number}>({});
+
+  // Google Drive preview mode state
+  const [useGoogleDrivePreview, setUseGoogleDrivePreview] = useState(false);
+  const [expandedPreview, setExpandedPreview] = useState<string | null>(null);
 
   // Load favorites from localStorage
   useEffect(() => {
@@ -178,11 +181,10 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
   useEffect(() => {
     localStorage.setItem('audio_favorites', JSON.stringify([...favorites]));
   }, [favorites]);
-
   // Sample audio tracks - in production, these would come from Google Drive API
   const audioTracks: AudioTrack[] = [
     {
-      id: "1",
+      id: "1ZeKjgb3i9_HKEu5y5sHsVliCt4EGeedg",
       title: "Surah Al-Fatiha",
       arabicTitle: "سورة الفاتحة",
       reciter: "Abdul Rahman Al-Sudais",
@@ -193,10 +195,10 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
       size: "2.5 MB",
     },
     {
-      id: "2",
+      id: "2BxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
       title: "Surah Al-Baqarah",
       arabicTitle: "سورة البقرة",
-      reciter: "Mishary Al-Afasy",
+      reciter: "Abdul Rahman Al-Sudais",
       duration: "2:30:45",
       url: "https://server8.mp3quran.net/afs/002.mp3",
       category: "quran",
@@ -204,7 +206,40 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
       size: "150 MB",
     },
     {
-      id: "3",
+      id: "2CxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
+      title: "Surah Al-Baqarah",
+      arabicTitle: "سورة البقرة",
+      reciter: "Mishary Al-Afasy",
+      duration: "2:28:15",
+      url: "https://server8.mp3quran.net/afs/002.mp3",
+      category: "quran",
+      quality: "high",
+      size: "148 MB",
+    },
+    {
+      id: "3BxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
+      title: "Surah Ali 'Imran",
+      arabicTitle: "سورة آل عمران",
+      reciter: "Abdul Rahman Al-Sudais",
+      duration: "1:45:20",
+      url: "#",
+      category: "quran",
+      quality: "high",
+      size: "105 MB",
+    },
+    {
+      id: "3CxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
+      title: "Surah Ali 'Imran",
+      arabicTitle: "سورة آل عمران",
+      reciter: "Mishary Al-Afasy",
+      duration: "1:42:35",
+      url: "#",
+      category: "quran",
+      quality: "high",
+      size: "102 MB",
+    },
+    {
+      id: "morning-adhkar-001",
       title: "Morning Adhkar",
       arabicTitle: "أذكار الصباح",
       reciter: "Saad Al-Ghamdi",
@@ -215,7 +250,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
       size: "15 MB",
     },
     {
-      id: "4",
+      id: "evening-adhkar-001",
       title: "Evening Adhkar",
       arabicTitle: "أذكار المساء",
       reciter: "Saad Al-Ghamdi",
@@ -226,7 +261,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
       size: "12 MB",
     },
     {
-      id: "5",
+      id: "prophet-biography-001",
       title: "The Life of Prophet Muhammad",
       arabicTitle: "سيرة النبي محمد",
       reciter: "Omar Suleiman",
@@ -237,7 +272,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
       size: "45 MB",
     },
     {
-      id: "6",
+      id: "tala-al-badru-001",
       title: "Tala al Badru Alayna",
       arabicTitle: "طلع البدر علينا",
       reciter: "Maher Zain",
@@ -301,7 +336,6 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
       console.error('Download failed:', error);
     }
   };
-
   // Generate deterministic waveform heights based on track ID
   const generateWaveformHeights = (trackId: string) => {
     const heights = [];
@@ -313,9 +347,90 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
     }
     return heights;
   };
+  // Google Drive preview functions
+  const getGoogleDrivePreviewUrl = (fileId: string) => {
+    return `https://drive.google.com/file/d/${fileId}/preview`;
+  };
 
+  const getGoogleDriveDownloadUrl = (fileId: string) => {
+    return `https://drive.google.com/uc?export=download&id=${fileId}`;
+  };
+
+  const togglePreviewMode = () => {
+    setUseGoogleDrivePreview(!useGoogleDrivePreview);
+    setExpandedPreview(null);
+  };
+
+  // Fetch Google Drive files (for future use when implementing dynamic loading)
+  const fetchGoogleDriveFiles = async () => {
+    try {
+      const response = await fetch('/api/drive?action=list-quran-audio');
+      const data = await response.json();
+      
+      if (data.success) {
+        // Process the files and update the audio tracks
+        console.log('Google Drive files:', data.files);
+      }
+    } catch (error) {
+      console.error('Failed to fetch Google Drive files:', error);
+    }
+  };
+  const renderGoogleDrivePreview = (track: AudioTrack) => {
+    // Use the track ID as Google Drive file ID (already set with real IDs from the JSON data)
+    const fileId = track.id;
+    const previewUrl = getGoogleDrivePreviewUrl(fileId);
+    const downloadUrl = getGoogleDriveDownloadUrl(fileId);
+    const isExpanded = expandedPreview === track.id;
+    
+    return (
+      <div className="mt-4">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm text-muted">Google Drive Preview:</span>
+          <div className="flex gap-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpandedPreview(isExpanded ? null : track.id);
+              }}
+              className="text-xs px-2 py-1 bg-primary text-white rounded hover:bg-primary/80 transition-colors"
+            >
+              {isExpanded ? 'Collapse' : 'Expand'}
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(downloadUrl, '_blank');
+              }}
+              className="text-xs px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors flex items-center gap-1"
+            >
+              <Download className="w-3 h-3" />
+              Download
+            </button>
+          </div>
+        </div>
+        <iframe 
+          src={previewUrl}
+          width="100%" 
+          height={isExpanded ? "400" : "120"}
+          allow="autoplay"
+          className="border rounded-lg bg-gray-100 dark:bg-gray-800"
+          title={`${track.title} - ${track.reciter}`}
+          loading="lazy"
+        />
+        <div className="text-xs text-muted mt-2 flex items-center gap-2">
+          <span>🎵 Audio Preview via Google Drive</span>
+          <span>•</span>
+          <span>{track.size}</span>
+          <span>•</span>
+          <span>{track.quality} quality</span>
+        </div>
+      </div>
+    );
+  };
   useEffect(() => {
     setIsHydrated(true);
+    // Optionally fetch Google Drive files on component mount
+    // fetchGoogleDriveFiles();
   }, []);
 
   useEffect(() => {
@@ -390,8 +505,7 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
           </p>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex justify-center mb-8">
+        {/* Category Filter */}        <div className="flex justify-center mb-8">
           <div className="flex flex-wrap gap-2 bg-surface rounded-lg p-2 shadow-lg border border-border">
             {["all", "quran", "dua", "lecture", "nasheed"].map((category) => (
               <button
@@ -407,6 +521,32 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                   category.charAt(0).toUpperCase() + category.slice(1)}
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* Player Mode Toggle */}
+        <div className="flex justify-center mb-8">
+          <div className="bg-surface rounded-lg p-2 shadow-lg border border-border">
+            <button
+              onClick={togglePreviewMode}
+              className={`px-6 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2 ${
+                useGoogleDrivePreview
+                  ? "bg-emerald-600 text-white"
+                  : "text-foreground hover:bg-secondary"
+              }`}
+            >
+              {useGoogleDrivePreview ? (
+                <>
+                  <Grid className="w-4 h-4" />
+                  Google Drive Preview Mode
+                </>
+              ) : (
+                <>
+                  <Play className="w-4 h-4" />
+                  Traditional Audio Player
+                </>
+              )}
+            </button>
           </div>
         </div>
 
@@ -510,33 +650,37 @@ export default function AudioClient({ locale, messages }: AudioClientProps) {
                     {messages?.audio?.categories?.[track.category] ||
                       track.category}
                   </span>
+                </div>              </div>
+
+              {/* Conditional rendering: Google Drive Preview or Waveform */}
+              {useGoogleDrivePreview ? (
+                renderGoogleDrivePreview(track)
+              ) : (
+                <div className="flex items-center gap-1 h-8 opacity-30">
+                  {isHydrated
+                    ? generateWaveformHeights(track.id).map((height, i) => (
+                        <div
+                          key={i}
+                          className="bg-primary rounded-full"
+                          style={{
+                            width: "2px",
+                            height: `${height}%`,
+                          }}
+                        />
+                      ))
+                    : // Static placeholder for SSR
+                      Array.from({ length: 20 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="bg-primary rounded-full"
+                          style={{
+                            width: "2px",
+                            height: "50%",
+                          }}
+                        />
+                      ))}
                 </div>
-              </div>{" "}
-              {/* Waveform placeholder */}
-              <div className="flex items-center gap-1 h-8 opacity-30">
-                {isHydrated
-                  ? generateWaveformHeights(track.id).map((height, i) => (
-                      <div
-                        key={i}
-                        className="bg-primary rounded-full"
-                        style={{
-                          width: "2px",
-                          height: `${height}%`,
-                        }}
-                      />
-                    ))
-                  : // Static placeholder for SSR
-                    Array.from({ length: 20 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="bg-primary rounded-full"
-                        style={{
-                          width: "2px",
-                          height: "50%",
-                        }}
-                      />
-                    ))}
-              </div>
+              )}
             </div>
           ))}
         </div>

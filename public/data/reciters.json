@@ -1,0 +1,76 @@
+{
+  "reciters": [
+    {
+      "id": "sudais",
+      "name": "Abdul Rahman Al-Sudais",
+      "arabicName": "عبد الرحمن السديس",
+      "biography": "Imam of the Grand Mosque in Mecca, known for his beautiful and emotional recitation",
+      "country": "Saudi Arabia",
+      "totalRecitations": 114,
+      "style": "Classical",
+      "image": "https://example.com/reciters/sudais.jpg",
+      "driveFolder": "1sudais_folder_id",
+      "featured": true
+    },
+    {
+      "id": "alafasy",
+      "name": "Mishary Rashid Alafasy",
+      "arabicName": "مشاري راشد العفاسي",
+      "biography": "Famous Kuwaiti reciter known for his melodic style",
+      "country": "Kuwait",
+      "totalRecitations": 114,
+      "style": "Melodic",
+      "image": "https://example.com/reciters/alafasy.jpg",
+      "driveFolder": "1alafasy_folder_id",
+      "featured": true
+    },
+    {
+      "id": "basit",
+      "name": "Abdul Basit Abdul Samad",
+      "arabicName": "عبد الباسط عبد الصمد",
+      "biography": "Egyptian master reciter, considered one of the greatest reciters of all time",
+      "country": "Egypt",
+      "totalRecitations": 114,
+      "style": "Traditional",
+      "image": "https://example.com/reciters/basit.jpg",
+      "driveFolder": "1basit_folder_id",
+      "featured": true
+    },
+    {
+      "id": "ghamdi",
+      "name": "Saad Al-Ghamdi",
+      "arabicName": "سعد الغامدي",
+      "biography": "Saudi reciter and Imam known for his emotional recitation",
+      "country": "Saudi Arabia",
+      "totalRecitations": 114,
+      "style": "Emotional",
+      "image": "https://example.com/reciters/ghamdi.jpg",
+      "driveFolder": "1ghamdi_folder_id",
+      "featured": true
+    },
+    {
+      "id": "husary",
+      "name": "Mahmoud Khalil Al-Husary",
+      "arabicName": "محمود خليل الحصري",
+      "biography": "Egyptian reciter, known for his precise pronunciation and teaching style",
+      "country": "Egypt",
+      "totalRecitations": 114,
+      "style": "Educational",
+      "image": "https://example.com/reciters/husary.jpg",
+      "driveFolder": "1husary_folder_id",
+      "featured": false
+    },
+    {
+      "id": "minshawi",
+      "name": "Mohamed Siddiq Al-Minshawi",
+      "arabicName": "محمد صديق المنشاوي",
+      "biography": "Egyptian reciter known for his beautiful voice and emotional delivery",
+      "country": "Egypt",
+      "totalRecitations": 114,
+      "style": "Emotional",
+      "image": "https://example.com/reciters/minshawi.jpg",
+      "driveFolder": "1minshawi_folder_id",
+      "featured": false
+    }
+  ]
+}
