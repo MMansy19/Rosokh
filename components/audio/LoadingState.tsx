@@ -1,15 +1,21 @@
 import React from 'react';
 import { Loader2, Music, Sparkles, Heart, BookOpen } from 'lucide-react';
+import { getTranslation } from '../../utils/translations';
 
 interface LoadingStateProps {
   message?: string;
   showSkeleton?: boolean;
+  locale: string;
+  messages: any;
 }
 
 export const LoadingState: React.FC<LoadingStateProps> = ({ 
-  message = "Loading audio tracks...", 
-  showSkeleton = false 
+  message, 
+  showSkeleton = false,
+  locale,
+  messages
 }) => {
+  const loadingMessage = message || getTranslation(messages, 'audio.loading.audioTracks', 'Loading audio tracks...');
   if (showSkeleton) {
     return (
       <div className="space-y-6">
@@ -86,13 +92,12 @@ export const LoadingState: React.FC<LoadingStateProps> = ({
         </div>
       </div>
 
-      {/* Loading Message */}
-      <div className="text-center">
+      {/* Loading Message */}      <div className="text-center">
         <h3 className="text-lg font-semibold text-foreground mb-2">
-          {message}
+          {loadingMessage}
         </h3>
         <p className="text-muted-foreground mb-6 max-w-md leading-relaxed">
-          We're preparing your Islamic audio collection with beautiful recitations and spiritual content.
+          {getTranslation(messages, 'audio.loading.message', 'We\'re preparing your Islamic audio collection with beautiful recitations and spiritual content.')}
         </p>
 
         {/* Loading Progress Dots */}

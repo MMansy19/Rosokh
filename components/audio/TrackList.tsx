@@ -93,28 +93,6 @@ export const TrackList: React.FC<TrackListProps> = ({
           />
         ))}
       </div>
-
-      {/* Footer Info */}
-      {tracks.length > 0 && (
-        <div className="text-center pt-8 border-t border-border/50">
-          <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground/60">
-            <div className="flex items-center gap-2">
-              <span>🎧</span>
-              <span>High-quality audio</span>
-            </div>
-            <div className="w-1 h-1 bg-muted-foreground/30 rounded-full"></div>
-            <div className="flex items-center gap-2">
-              <span>📱</span>
-              <span>Mobile optimized</span>
-            </div>
-            <div className="w-1 h-1 bg-muted-foreground/30 rounded-full"></div>
-            <div className="flex items-center gap-2">
-              <span>⚡</span>
-              <span>Fast streaming</span>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

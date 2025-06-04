@@ -1,16 +1,21 @@
 import React from 'react';
 import { AlertTriangle, RefreshCw, Wifi, Server, FileX } from 'lucide-react';
+import { getTranslation } from '../../utils/translations';
 
 interface ErrorStateProps {
   error: string;
   onRetry?: () => void;
   type?: 'network' | 'server' | 'notFound' | 'general';
+  locale: string;
+  messages: any;
 }
 
 export const ErrorState: React.FC<ErrorStateProps> = ({ 
   error, 
   onRetry, 
-  type = 'general' 
+  type = 'general',
+  locale,
+  messages
 }) => {
   const getErrorIcon = () => {
     switch (type) {
@@ -24,30 +29,28 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         return <AlertTriangle className="w-12 h-12 text-red-500" />;
     }
   };
-
   const getErrorTitle = () => {
     switch (type) {
       case 'network':
-        return 'Connection Error';
+        return getTranslation(messages, 'audio.error.connectionError', 'Connection Error');
       case 'server':
-        return 'Server Error';
+        return getTranslation(messages, 'audio.error.serverError', 'Server Error');
       case 'notFound':
-        return 'Content Not Found';
+        return getTranslation(messages, 'audio.error.notFound', 'Content Not Found');
       default:
-        return 'Something Went Wrong';
+        return getTranslation(messages, 'audio.error.somethingWentWrong', 'Something Went Wrong');
     }
   };
-
   const getErrorDescription = () => {
     switch (type) {
       case 'network':
-        return 'Please check your internet connection and try again.';
+        return getTranslation(messages, 'audio.error.networkMessage', 'Please check your internet connection and try again.');
       case 'server':
-        return 'Our servers are experiencing issues. Please try again in a moment.';
+        return getTranslation(messages, 'audio.error.serverMessage', 'Our servers are experiencing issues. Please try again in a moment.');
       case 'notFound':
-        return 'The audio content you\'re looking for could not be found.';
+        return getTranslation(messages, 'audio.error.notFoundMessage', 'The audio content you\'re looking for could not be found.');
       default:
-        return 'An unexpected error occurred while loading the audio content.';
+        return getTranslation(messages, 'audio.error.generalMessage', 'An unexpected error occurred while loading the audio content.');
     }
   };
 
@@ -78,10 +81,9 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
           {getErrorDescription()}
         </p>
         
-        {/* Technical Error Details */}
-        <details className="mb-6 text-left">
+        {/* Technical Error Details */}        <details className="mb-6 text-left">
           <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground transition-colors mb-2">
-            Technical details
+            {getTranslation(messages, 'audio.error.technicalDetails', 'Technical details')}
           </summary>
           <div className="bg-muted/30 rounded-lg p-3 text-xs text-muted-foreground font-mono break-all">
             {error}
@@ -89,14 +91,13 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         </details>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          {onRetry && (
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">          {onRetry && (
             <button
               onClick={onRetry}
               className="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-200 hover:scale-105 hover:shadow-lg"
             >
               <RefreshCw className="w-4 h-4" />
-              <span>Try Again</span>
+              <span>{getTranslation(messages, 'audio.error.tryAgain', 'Try Again')}</span>
             </button>
           )}
           
@@ -105,34 +106,33 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
             className="flex items-center justify-center gap-2 px-6 py-3 bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground rounded-lg font-medium transition-all duration-200"
           >
             <RefreshCw className="w-4 h-4" />
-            <span>Refresh Page</span>
+            <span>{getTranslation(messages, 'audio.error.refreshPage', 'Refresh Page')}</span>
           </button>
         </div>
       </div>
 
       {/* Helpful Tips */}
       <div className="mt-12 max-w-2xl">
-        <div className="bg-muted/30 rounded-xl p-6 border border-border/50">
-          <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
+        <div className="bg-muted/30 rounded-xl p-6 border border-border/50">          <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
             <span>💡</span>
-            <span>Troubleshooting Tips</span>
+            <span>{getTranslation(messages, 'audio.error.troubleshootingTips', 'Troubleshooting Tips')}</span>
           </h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">•</span>
-              <span>Check your internet connection</span>
+              <span>{getTranslation(messages, 'audio.error.checkConnection', 'Check your internet connection')}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">•</span>
-              <span>Try refreshing the page</span>
+              <span>{getTranslation(messages, 'audio.error.refreshThePage', 'Try refreshing the page')}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">•</span>
-              <span>Clear your browser cache and cookies</span>
+              <span>{getTranslation(messages, 'audio.error.clearCache', 'Clear your browser cache and cookies')}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">•</span>
-              <span>Disable ad blockers or browser extensions</span>
+              <span>{getTranslation(messages, 'audio.error.disableAdBlockers', 'Disable ad blockers or browser extensions')}</span>
             </li>
           </ul>
         </div>
