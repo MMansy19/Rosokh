@@ -1,5 +1,5 @@
 import { BaseService } from './BaseService';
-import { withErrorHandling } from '../utils/errorHandling';
+import { withErrorHandling } from '@/utils/errorHandling';
 
 export interface User {
   id: string;

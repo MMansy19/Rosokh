@@ -1,8 +1,8 @@
 import React from 'react';
 import { Search, Filter, Grid, List, X, Sparkles, BookOpen, Heart, Mic } from 'lucide-react';
-import { FilterState, ViewMode } from '../../types/audio';
-import { AUDIO_CATEGORIES, AUDIO_QUALITIES } from '../../constants/audio';
-import { getTranslation } from '../../utils/translations';
+import { FilterState, ViewMode } from '@/types/audio';
+import { AUDIO_CATEGORIES, AUDIO_QUALITIES } from '@/constants/audio';
+import { getTranslation } from '@/utils/translations';
 
 interface SearchFiltersProps {
   searchTerm: string;

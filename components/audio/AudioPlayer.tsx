@@ -1,5 +1,5 @@
 import React from 'react';
-import { AudioTrack } from '../../types/audio';
+import { AudioTrack } from '@/types/audio';
 import { 
   PlayerHeader, 
   SpeedControlInfo, 

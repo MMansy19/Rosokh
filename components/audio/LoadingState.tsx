@@ -1,6 +1,6 @@
 import React from 'react';
 import { Loader2, Music, Sparkles, Heart, BookOpen } from 'lucide-react';
-import { getTranslation } from '../../utils/translations';
+import { getTranslation } from '@/utils/translations';
 
 interface LoadingStateProps {
   message?: string;

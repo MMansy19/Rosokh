@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { AudioTrack, Reciter, Surah, AudioData, ReciterData } from '../types/audio';
-import { generateAudioTracks } from '../utils/audioUtils';
-import { API_ENDPOINTS } from '../constants/audio';
+import { AudioTrack, Reciter, Surah, AudioData, ReciterData } from '@/types/audio';
+import { generateAudioTracks } from '@/utils/audioUtils';
+import { API_ENDPOINTS } from '@/constants/audio';
 
 interface UseAudioDataReturn {
   data: {

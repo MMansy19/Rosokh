@@ -1,5 +1,5 @@
 // Base Service Class with Error Handling and Performance Optimizations
-import { AppError, NetworkError, ServerError, NotFoundError, withRetry, withErrorHandling } from '../utils/errorHandling';
+import { AppError, NetworkError, ServerError, NotFoundError, withRetry, withErrorHandling } from '@/utils/errorHandling';
 
 export interface CacheConfig {
   ttl: number; // Time to live in milliseconds

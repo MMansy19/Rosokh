@@ -1,6 +1,6 @@
-import { AudioTrack } from '../types/audio';
+import { AudioTrack } from '@/types/audio';
 import { BaseService } from './BaseService';
-import { withErrorHandling } from '../utils/errorHandling';
+import { withErrorHandling } from '@/utils/errorHandling';
 
 export interface AudioService {
   fetchTracks(): Promise<AudioTrack[]>;

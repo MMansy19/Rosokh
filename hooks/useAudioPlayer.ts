@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
-import { AudioPlayerState } from '../types/audio';
-import { getEstimatedDuration } from '../utils/audioUtils';
+import { AudioPlayerState } from '@/types/audio';
+import { getEstimatedDuration } from '@/utils/audioUtils';
 
 interface UseAudioPlayerReturn extends AudioPlayerState {
   setIframeLoading: (loading: boolean) => void;

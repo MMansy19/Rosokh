@@ -1,8 +1,8 @@
 import React from 'react';
 import { Play, Pause, Heart, Download, Clock, User, BookOpen } from 'lucide-react';
-import { AudioTrack } from '../../types/audio';
-import { getGoogleDriveDownloadUrl, showNotification } from '../../utils/audioUtils';
-import { QUALITY_COLORS } from '../../constants/audio';
+import { AudioTrack } from '@/types/audio';
+import { getGoogleDriveDownloadUrl, showNotification } from '@/utils/audioUtils';
+import { QUALITY_COLORS } from '@/constants/audio';
 
 interface TrackCardProps {
   track: AudioTrack;

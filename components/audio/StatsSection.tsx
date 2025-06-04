@@ -1,6 +1,6 @@
 import React from 'react';
-import { AudioTrack } from '../../types/audio';
-import { useGlobalError } from '../../contexts/GlobalContext';
+import { AudioTrack } from '@/types/audio';
+import { useGlobalError } from '@/contexts/GlobalContext';
 import { 
   StatsHeader, 
   MainStatsGrid, 

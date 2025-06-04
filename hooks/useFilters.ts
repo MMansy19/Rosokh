@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { FilterState, ViewMode } from '../types/audio';
+import { FilterState, ViewMode } from '@/types/audio';
 
 interface UseFiltersReturn {
   searchTerm: string;

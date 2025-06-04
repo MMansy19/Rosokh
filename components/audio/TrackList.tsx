@@ -1,6 +1,6 @@
 import React from 'react';
 import { Music, Sparkles } from 'lucide-react';
-import { AudioTrack } from '../../types/audio';
+import { AudioTrack } from '@/types/audio';
 import { TrackCard } from './TrackCard';
 
 interface TrackListProps {

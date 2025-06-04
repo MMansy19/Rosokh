@@ -1,6 +1,6 @@
 import React from 'react';
 import { AlertTriangle, RefreshCw, Wifi, Server, FileX } from 'lucide-react';
-import { getTranslation } from '../../utils/translations';
+import { getTranslation } from '@/utils/translations';
 
 interface ErrorStateProps {
   error: string;

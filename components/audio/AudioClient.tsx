@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useMemo, useEffect } from 'react';
-import { AudioTrack } from '../../types/audio';
-import { useAudioData } from '../../hooks/useAudioData';
-import { useFavorites } from '../../hooks/useFavorites';
-import { useFilters } from '../../hooks/useFilters';
-import { useNotifications } from '../../contexts/GlobalContext';
+import { AudioTrack } from '@/types/audio';
+import { useAudioData } from '@/hooks/useAudioData';
+import { useFavorites } from '@/hooks/useFavorites';
+import { useFilters } from '@/hooks/useFilters';
+import { useNotifications } from '@/contexts/GlobalContext';
 import { SearchFilters } from './SearchFilters';
 import { TrackList } from './TrackList';
 import { AudioPlayer } from './AudioPlayer';
@@ -12,10 +12,10 @@ import { LoadingState } from './LoadingState';
 import { ErrorState } from './ErrorState';
 import { StatsSection } from './StatsSection';
 import { FeaturesSection } from './FeaturesSection';
-import { filterTracks } from '../../utils/audioUtils';
-import { getTranslation } from '../../utils/translations';
-import { AnalyticsService } from '../../services/AnalyticsService';
-import { NotificationService } from '../../services/NotificationService';
+import { filterTracks } from '@/utils/audioUtils';
+import { getTranslation } from '@/utils/translations';
+import { AnalyticsService } from '@/services/AnalyticsService';
+import { NotificationService } from '@/services/NotificationService';
 
 interface AudioClientProps {
   locale: string;
