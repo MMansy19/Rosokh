@@ -15,6 +15,7 @@ export interface AudioTrack {
   quality: "high" | "medium" | "low";
   size: string;
   isOfflineAvailable?: boolean;
+  
 }
 
 export interface Reciter {
