@@ -4,125 +4,1265 @@
       "id": 1,
       "name": "Al-Fatiha",
       "arabicName": "الفاتحة",
-      "transliteration": "Al-Faatiha",
+      "transliteration": "Al-Fatiha",
       "meaning": "The Opening",
       "verses": 7,
       "revelationType": "Meccan",
-      "driveFiles": {
-        "sudais": "1ZeKjgb3i9_HKEu5y5sHsVliCt4EGeedg"
-      }
+      "driveFiles": {}
     },
     {
       "id": 2,
       "name": "Al-Baqarah",
       "arabicName": "البقرة",
-      "transliteration": "Al-Baqara",
+      "transliteration": "Al-Baqarah",
       "meaning": "The Cow",
       "verses": 286,
       "revelationType": "Medinan",
       "driveFiles": {
-        "sudais": "2BxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
-        "alafasy": "2CxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
-        "basit": "2DxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
-        "ghamdi": "2ExUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ"
+        "osama-hamed": "118I1mJOqaQGXV3Oyd29EFrTBwGuBnmHG"
       }
     },
     {
       "id": 3,
-      "name": "Ali 'Imran",
+      "name": "Aal-E-Imran",
       "arabicName": "آل عمران",
-      "transliteration": "Aal-i-Imraan",
-      "meaning": "Family of Imran",
+      "transliteration": "Aal-E-Imran",
+      "meaning": "The Family of Imran",
       "verses": 200,
       "revelationType": "Medinan",
       "driveFiles": {
-        "sudais": "3BxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
-        "alafasy": "3CxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
-        "basit": "3DxUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ",
-        "ghamdi": "3ExUF8T9KLMxl2YBXKaQHBt8Y7VQhKLaZ"
-      }
-    }
-  ],
-  "specialRecitations": [
-    {
-      "id": "ayat-kursi",
-      "name": "Ayat Al-Kursi",
-      "arabicName": "آية الكرسي",
-      "surahId": 2,
-      "verses": "2:255",
-      "category": "quran",
-      "driveFiles": {
-        "sudais": "ayat_kursi_sudais_drive_id",
-        "alafasy": "ayat_kursi_alafasy_drive_id",
-        "basit": "ayat_kursi_basit_drive_id",
-        "ghamdi": "ayat_kursi_ghamdi_drive_id"
+        "osama-hamed": "1Eank4cGc_AVdoJt-pyvrMfd4ir7FZDwJ"
       }
     },
     {
-      "id": "al-kahf",
-      "name": "Surah Al-Kahf",
-      "arabicName": "سورة الكهف",
-      "surahId": 18,
-      "verses": "18:1-110",
-      "category": "quran",
-      "specialDay": "Friday",
+      "id": 4,
+      "name": "An-Nisa",
+      "arabicName": "النساء",
+      "transliteration": "An-Nisa",
+      "meaning": "The Women",
+      "verses": 176,
+      "revelationType": "Medinan",
       "driveFiles": {
-        "sudais": "al_kahf_sudais_drive_id",
-        "alafasy": "al_kahf_alafasy_drive_id",
-        "basit": "al_kahf_basit_drive_id",
-        "ghamdi": "al_kahf_ghamdi_drive_id"
-      }
-    }
-  ],
-  "duas": [
-    {
-      "id": "morning-adhkar",
-      "name": "Morning Adhkar",
-      "arabicName": "أذكار الصباح",
-      "category": "dua",
-      "duration": "15:30",
-      "driveFiles": {
-        "ghamdi": "morning_adhkar_ghamdi_drive_id",
-        "sudais": "morning_adhkar_sudais_drive_id"
+        "osama-hamed": "1wBTd3KXcOrrTPaPDrCupPjcVmaqdrhLq"
       }
     },
     {
-      "id": "evening-adhkar",
-      "name": "Evening Adhkar",
-      "arabicName": "أذكار المساء",
-      "category": "dua",
-      "duration": "12:45",
+      "id": 5,
+      "name": "Al-Maida",
+      "arabicName": "المائدة",
+      "transliteration": "Al-Maida",
+      "meaning": "The Table Spread",
+      "verses": 120,
+      "revelationType": "Medinan",
       "driveFiles": {
-        "ghamdi": "evening_adhkar_ghamdi_drive_id",
-        "sudais": "evening_adhkar_sudais_drive_id"
+        "osama-hamed": "1Ry07NU2IBdPQi9-9-odSrQKSL7QYPFui"
       }
-    }
-  ],
-  "lectures": [
+    },
     {
-      "id": "prophet-biography",
-      "name": "The Life of Prophet Muhammad",
-      "arabicName": "سيرة النبي محمد",
-      "category": "lecture",
-      "speaker": "Omar Suleiman",
-      "duration": "45:20",
+      "id": 6,
+      "name": "Al-An'am",
+      "arabicName": "الأنعام",
+      "transliteration": "Al-An'am",
+      "meaning": "The Cattle",
+      "verses": 165,
+      "revelationType": "Meccan",
       "driveFiles": {
-        "english": "prophet_biography_en_drive_id",
-        "arabic": "prophet_biography_ar_drive_id"
+        "osama-hamed": "1pOeX9-prAPIncHSwdyJuP3KxKzxtG6Ps"
       }
-    }
-  ],
-  "nasheeds": [
+    },
     {
-      "id": "tala-al-badru",
-      "name": "Tala al Badru Alayna",
-      "arabicName": "طلع البدر علينا",
-      "category": "nasheed",
-      "artist": "Maher Zain",
-      "duration": "4:15",
+      "id": 7,
+      "name": "Al-A'raf",
+      "arabicName": "الأعراف",
+      "transliteration": "Al-A'raf",
+      "meaning": "The Heights",
+      "verses": 206,
+      "revelationType": "Meccan",
       "driveFiles": {
-        "default": "tala_al_badru_drive_id"
+        "osama-hamed": "1KOT16OHoAD7t7uT_-zKeWKXrewvpgob6"
       }
+    },
+    {
+      "id": 8,
+      "name": "Al-Anfal",
+      "arabicName": "الأنفال",
+      "transliteration": "Al-Anfal",
+      "meaning": "The Spoils of War",
+      "verses": 75,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "osama-hamed": "1M90-ldW70Vk4lSp237dnesbtBfYqalBR"
+      }
+    },
+    {
+      "id": 9,
+      "name": "At-Tawba",
+      "arabicName": "التوبة",
+      "transliteration": "At-Tawba",
+      "meaning": "The Repentance",
+      "verses": 129,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "osama-hamed": "1pOau6NI6O2XRzyJeAqMXEXvBH7GtuThH"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Yunus",
+      "arabicName": "يونس",
+      "transliteration": "Yunus",
+      "meaning": "Jonah",
+      "verses": 109,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1ZeKjgb3i9_HKEu5y5sHsVliCt4EGeedg",
+        "osama-hamed": "1xwnNMuPqQgZxTlz5bR5RetMrqI7QlcTP"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Hud",
+      "arabicName": "هود",
+      "transliteration": "Hud",
+      "meaning": "Hud",
+      "verses": 123,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1vKK14aXZ2GLrMMSkMRUewXl6ig1uMUYf",
+        "osama-hamed": "1UtZABpOkl3fJJ3Pdi5HADBlR4Xl_MmL8"
+      }
+    },
+    {
+      "id": 12,
+      "name": "Yusuf",
+      "arabicName": "يوسف",
+      "transliteration": "Yusuf",
+      "meaning": "Joseph",
+      "verses": 111,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1XKUnoLUZn5rJH5VrO6WW2tstf1zL8p3m",
+        "osama-hamed": "1Cm4T-4_jcBiUOWa9lumO3CHn5AvajSUL"
+      }
+    },
+    {
+      "id": 13,
+      "name": "Ar-Ra'd",
+      "arabicName": "الرعد",
+      "transliteration": "Ar-Ra'd",
+      "meaning": "The Thunder",
+      "verses": 43,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "ahmad_fathy": "14XcBytRNeNE7Shd4Cs4zlgl3-fJvs2-M",
+        "osama-hamed": "1VyYswLlv0oRAucwByLi46WBTJYvYkUpN"
+      }
+    },
+    {
+      "id": 14,
+      "name": "Ibrahim",
+      "arabicName": "ابراهيم",
+      "transliteration": "Ibrahim",
+      "meaning": "Abraham",
+      "verses": 52,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1mu4xmlv1dz7xOHH-w5BhTYapAUTKh1br",
+        "osama-hamed": "1h3qvy9oSnGkOMey6u7YEmytmtR8Q_DKd"
+      }
+    },
+    {
+      "id": 15,
+      "name": "Al-Hijr",
+      "arabicName": "الحجر",
+      "transliteration": "Al-Hijr",
+      "meaning": "The Rocky Tract",
+      "verses": 99,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "12dlRgc4Ro69WncklDVn7nUJPb1FUGe2W",
+        "osama-hamed": "12gVZMOnmYIhNnyMAU0f_0NNSZ8b_SCts"
+      }
+    },
+    {
+      "id": 16,
+      "name": "An-Nahl",
+      "arabicName": "النحل",
+      "transliteration": "An-Nahl",
+      "meaning": "The Bee",
+      "verses": 128,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1itaK0cYJo1LZGd38Cv5FXav_1efgCdIE",
+        "osama-hamed": "1YSvIjsxdb8s43wsNmOmYqvZZ9TG-KmUO"
+      }
+    },
+    {
+      "id": 17,
+      "name": "Al-Isra",
+      "arabicName": "الإسراء",
+      "transliteration": "Al-Isra",
+      "meaning": "The Night Journey",
+      "verses": 111,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1VR6gmPOgGT85H4wbbJ2pjOn2davCyDhC",
+        "osama-hamed": "1DbPGaVPnsYwEZqwACItE2TrdeK-wIIWp"
+      }
+    },
+    {
+      "id": 18,
+      "name": "Al-Kahf",
+      "arabicName": "الكهف",
+      "transliteration": "Al-Kahf",
+      "meaning": "The Cave",
+      "verses": 110,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1kYSQkOOlINzoCF8jIqMkLysPfQb11237",
+        "osama-hamed": "1AivVYzs3Ps5O9bkhnjofs2iwGagWpYOY"
+      }
+    },
+    {
+      "id": 19,
+      "name": "Maryam",
+      "arabicName": "مريم",
+      "transliteration": "Maryam",
+      "meaning": "Mary",
+      "verses": 98,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1tE9oocDREImQwX5wolXkFv13tSFB7W0o",
+        "osama-hamed": "1uii4eyF2rftUjAg9CSkmhPeU_lmJOC__"
+      }
+    },
+    {
+      "id": 20,
+      "name": "Ta-Ha",
+      "arabicName": "طه",
+      "transliteration": "Ta-Ha",
+      "meaning": "Ta-Ha",
+      "verses": 135,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1NE2Du5Arwub59GiTMkB5wclvhc_eCLMm",
+        "osama-hamed": "1YDPGereNeItAP4Z5j1rCV7GMEiN1qMX9"
+      }
+    },
+    {
+      "id": 21,
+      "name": "Al-Anbiya",
+      "arabicName": "الأنبياء",
+      "transliteration": "Al-Anbiya",
+      "meaning": "The Prophets",
+      "verses": 112,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "12NHzOo6XuJnEa9hIkm1qaP5LjbYgX0JT",
+        "osama-hamed": "1cMtCjiTuOwwXXsOIvfT1fbj_n7PoVE9U"
+      }
+    },
+    {
+      "id": 22,
+      "name": "Al-Hajj",
+      "arabicName": "الحج",
+      "transliteration": "Al-Hajj",
+      "meaning": "The Pilgrimage",
+      "verses": 78,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "ahmad_fathy": "10wKNJv66uv0SEc-3jDdoijjlRg7tO4Ep",
+        "osama-hamed": "1mlYxAk1ZkvXzMkSTTKr5EeU7LY2N-xEf"
+      }
+    },
+    {
+      "id": 23,
+      "name": "Al-Mu'minun",
+      "arabicName": "المؤمنون",
+      "transliteration": "Al-Mu'minun",
+      "meaning": "The Believers",
+      "verses": 118,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1C6az5GLRqsjRLrhqmBC_jVVoPXGtNERz",
+        "osama-hamed": "1KT8u_detqQKuJAmqW9XpjMyWbCIHVdyo"
+      }
+    },
+    {
+      "id": 24,
+      "name": "An-Nur",
+      "arabicName": "النور",
+      "transliteration": "An-Nur",
+      "meaning": "The Light",
+      "verses": 64,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "ahmad_fathy": "1sao6QS3Ipez0Gc5lNT0K1PsjV81mYReC",
+        "osama-hamed": "1jxt6PGFteJdQek2z266whwH2q-iiCMZD"
+      }
+    },
+    {
+      "id": 25,
+      "name": "Al-Furqan",
+      "arabicName": "الفرقان",
+      "transliteration": "Al-Furqan",
+      "meaning": "The Criterion",
+      "verses": 77,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1wG6r8g8TrL-4sdxVe72DTf79mjrAFVIc",
+        "osama-hamed": "1aRVHOmqhrRgADFSxz9fvoKkjUrxeApnT"
+      }
+    },
+    {
+      "id": 26,
+      "name": "Ash-Shu'ara",
+      "arabicName": "الشعراء",
+      "transliteration": "Ash-Shu'ara",
+      "meaning": "The Poets",
+      "verses": 227,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1QvglUiKJU2HIQjPVAg7b-Pgw361gRNBU",
+        "osama-hamed": "1TyskPQ-VhjR37E2fD7S4KfnmwryA1HuW"
+      }
+    },
+    {
+      "id": 27,
+      "name": "An-Naml",
+      "arabicName": "النمل",
+      "transliteration": "An-Naml",
+      "meaning": "The Ant",
+      "verses": 93,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1Q5tVPO_7Q7V6SWcUdUiNBaAUmCg5lcz6",
+        "osama-hamed": "1ZpVV9eC7r9y7AYWcf508YWb1xqwSzJG1"
+      }
+    },
+    {
+      "id": 28,
+      "name": "Al-Qasas",
+      "arabicName": "القصص",
+      "transliteration": "Al-Qasas",
+      "meaning": "The Stories",
+      "verses": 88,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1w6i4WbKy2rrU7gMvyxFkWDTkHRdZQSR2",
+        "osama-hamed": "1F0yrQM4Xl8-c97p69qVaCh9jItqKZbR2"
+      }
+    },
+    {
+      "id": 29,
+      "name": "Al-Ankabut",
+      "arabicName": "العنكبوت",
+      "transliteration": "Al-Ankabut",
+      "meaning": "The Spider",
+      "verses": 69,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1X6byBAjmApINd3SBCnXKgkSHmg7kqLXA",
+        "osama-hamed": "1KVd9QPfmFlUSYnMQGeocH3k0VgJyHUz3"
+      }
+    },
+    {
+      "id": 30,
+      "name": "Ar-Rum",
+      "arabicName": "الروم",
+      "transliteration": "Ar-Rum",
+      "meaning": "The Romans",
+      "verses": 60,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1H6FXH44jfdhQ6EVSJb2S5uuNk9ngcf3i",
+        "osama-hamed": "1HWrLvT1e59_Zut_uL42rlOXa97vG1mBr"
+      }
+    },
+    {
+      "id": 31,
+      "name": "Luqman",
+      "arabicName": "لقمان",
+      "transliteration": "Luqman",
+      "meaning": "Luqman",
+      "verses": 34,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1K0MQPtoA-7VuvW8zN7c5XqQ7OewT-YRF",
+        "osama-hamed": "1eQp0e30YT1-rWroIWcONWLQCCXLDJPhw"
+      }
+    },
+    {
+      "id": 32,
+      "name": "As-Sajda",
+      "arabicName": "السجدة",
+      "transliteration": "As-Sajda",
+      "meaning": "The Prostration",
+      "verses": 30,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1i1v3nMsmWCcGxPOT-PdpzclkkHS1G7-5",
+        "osama-hamed": "1TH3-cfy2DE3mmgeTGDf3lSdl2asecE_M"
+      }
+    },
+    {
+      "id": 33,
+      "name": "Al-Ahzab",
+      "arabicName": "الأحزاب",
+      "transliteration": "Al-Ahzab",
+      "meaning": "The Combined Forces",
+      "verses": 73,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "ahmad_fathy": "1NscnCPNneq3s4-PsCjW575fJzQGeRnKp",
+        "osama-hamed": "1tYWLgm_JNi-vxdA9qyv4AwWO7sKc1r7Q"
+      }
+    },
+    {
+      "id": 34,
+      "name": "Saba",
+      "arabicName": "سبأ",
+      "transliteration": "Saba",
+      "meaning": "Sheba",
+      "verses": 54,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1OkikzG1KlRRqcYEnQ_yoS98h0y-P0lIq",
+        "osama-hamed": "1dIoIAjjmvdv-8fNBIGRNalCCe2LTMiRA"
+      }
+    },
+    {
+      "id": 35,
+      "name": "Fatir",
+      "arabicName": "فاطر",
+      "transliteration": "Fatir",
+      "meaning": "The Originator",
+      "verses": 45,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1Im0r2jaS8B4wGJxRE0Bi8edKVlE0hcp4",
+        "osama-hamed": "1wX7EgG--qVy56hocfp34KtZmyLa_Dpnk"
+      }
+    },
+    {
+      "id": 36,
+      "name": "Ya-Sin",
+      "arabicName": "يس",
+      "transliteration": "Ya-Sin",
+      "meaning": "Ya-Sin",
+      "verses": 83,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1niBBtAcR1kg4JBlnfQE3rYpsnAWUjS6l",
+        "osama-hamed": "108IYa_Nr1XuFkpsfov45U2OMsSmp4Cbr"
+      }
+    },
+    {
+      "id": 37,
+      "name": "As-Saffat",
+      "arabicName": "الصافات",
+      "transliteration": "As-Saffat",
+      "meaning": "Those Arranged in Ranks",
+      "verses": 182,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1Qw_2wLSRdTQnxseVdPjQlVy8aGodwcYK",
+        "osama-hamed": "1YmIV-zS2usL-ZEdw4hwhzSgSjUfKAsRM"
+      }
+    },
+    {
+      "id": 38,
+      "name": "Sad",
+      "arabicName": "ص",
+      "transliteration": "Sad",
+      "meaning": "Sad",
+      "verses": 88,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1BjzX-JwjYvCoMEgiZ_GERr1uug6CWUj7",
+        "osama-hamed": "1okbMbb9ExDwPqCSjkTNhlnMY6PjWu2yy"
+      }
+    },
+    {
+      "id": 39,
+      "name": "Az-Zumar",
+      "arabicName": "الزمر",
+      "transliteration": "Az-Zumar",
+      "meaning": "The Groups",
+      "verses": 75,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1lJxKNTs79kkSLdiGWcRilqL67CAVdUrw",
+        "osama-hamed": "10YrM-0L4FcfSb6psis6FUiCJMqiGdYNz"
+      }
+    },
+    {
+      "id": 40,
+      "name": "Ghafir",
+      "arabicName": "غافر",
+      "transliteration": "Ghafir",
+      "meaning": "The Forgiver",
+      "verses": 85,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1JB-UV20TXCRXYp-edMtv2J6bBFjsYsFQ"
+      }
+    },
+    {
+      "id": 41,
+      "name": "Fussilat",
+      "arabicName": "فصلت",
+      "transliteration": "Fussilat",
+      "meaning": "Explained in Detail",
+      "verses": 54,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1OKTa0_ZBemSXLVtGcAxojVLF-0OhieuQ"
+      }
+    },
+    {
+      "id": 42,
+      "name": "Ash-Shura",
+      "arabicName": "الشورى",
+      "transliteration": "Ash-Shura",
+      "meaning": "The Consultation",
+      "verses": 53,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1tDOUXNadUm8v7XjtrNxRx6e_02fCbCp-"
+      }
+    },
+    {
+      "id": 43,
+      "name": "Az-Zukhruf",
+      "arabicName": "الزخرف",
+      "transliteration": "Az-Zukhruf",
+      "meaning": "The Ornaments of Gold",
+      "verses": 89,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "11mQ4Y-Xbrukpc9LdGXyBdaXAJcVMmNJA"
+      }
+    },
+    {
+      "id": 44,
+      "name": "Ad-Dukhan",
+      "arabicName": "الدخان",
+      "transliteration": "Ad-Dukhan",
+      "meaning": "The Smoke",
+      "verses": 59,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1DnPinIjnEVruYzQ3Lz5pzgLA_-AQpayE"
+      }
+    },
+    {
+      "id": 45,
+      "name": "Al-Jathiya",
+      "arabicName": "الجاثية",
+      "transliteration": "Al-Jathiya",
+      "meaning": "The Kneeling",
+      "verses": 37,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1ODFWakf2ti02PYxtdC86q7XfCw0p6FU9"
+      }
+    },
+    {
+      "id": 46,
+      "name": "Al-Ahqaf",
+      "arabicName": "الأحقاف",
+      "transliteration": "Al-Ahqaf",
+      "meaning": "The Wind-Curved Sandhills",
+      "verses": 35,
+      "revelationType": "Meccan",
+      "driveFiles": {
+        "ahmad_fathy": "1tCm9QB7fWuJBDLUte07yKaZubhhn4O6e"
+      }
+    },
+    {
+      "id": 47,
+      "name": "Muhammad",
+      "arabicName": "محمد",
+      "transliteration": "Muhammad",
+      "meaning": "Muhammad",
+      "verses": 38,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "ahmad_fathy": "1xVoKgXl6H3rMDiAmLnI2uehbmzq0Dr2Y"
+      }
+    },
+    {
+      "id": 48,
+      "name": "Al-Fath",
+      "arabicName": "الفتح",
+      "transliteration": "Al-Fath",
+      "meaning": "The Victory",
+      "verses": 29,
+      "revelationType": "Medinan",
+      "driveFiles": {
+        "ahmad_fathy": "1HClz-U1-l_vv0l7QmIXl83o_u7_m9IjO"
+      }
+    },
+    {
+      "id": 49,
+      "name": "Al-Hujurat",
+      "arabicName": "الحجرات",
+      "transliteration": "Al-Hujurat",
+      "meaning": "The Rooms",
+      "verses": 18,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 50,
+      "name": "Qaf",
+      "arabicName": "ق",
+      "transliteration": "Qaf",
+      "meaning": "Qaf",
+      "verses": 45,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 51,
+      "name": "Adh-Dhariyat",
+      "arabicName": "الذاريات",
+      "transliteration": "Adh-Dhariyat",
+      "meaning": "The Winnowing Winds",
+      "verses": 60,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 52,
+      "name": "At-Tur",
+      "arabicName": "الطور",
+      "transliteration": "At-Tur",
+      "meaning": "The Mount",
+      "verses": 49,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 53,
+      "name": "An-Najm",
+      "arabicName": "النجم",
+      "transliteration": "An-Najm",
+      "meaning": "The Star",
+      "verses": 62,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 54,
+      "name": "Al-Qamar",
+      "arabicName": "القمر",
+      "transliteration": "Al-Qamar",
+      "meaning": "The Moon",
+      "verses": 55,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 55,
+      "name": "Ar-Rahman",
+      "arabicName": "الرحمن",
+      "transliteration": "Ar-Rahman",
+      "meaning": "The Beneficent",
+      "verses": 78,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 56,
+      "name": "Al-Waqi'a",
+      "arabicName": "الواقعة",
+      "transliteration": "Al-Waqi'a",
+      "meaning": "The Inevitable",
+      "verses": 96,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 57,
+      "name": "Al-Hadid",
+      "arabicName": "الحديد",
+      "transliteration": "Al-Hadid",
+      "meaning": "The Iron",
+      "verses": 29,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 58,
+      "name": "Al-Mujadila",
+      "arabicName": "المجادلة",
+      "transliteration": "Al-Mujadila",
+      "meaning": "The Pleading Woman",
+      "verses": 22,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 59,
+      "name": "Al-Hashr",
+      "arabicName": "الحشر",
+      "transliteration": "Al-Hashr",
+      "meaning": "The Exile",
+      "verses": 24,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 60,
+      "name": "Al-Mumtahina",
+      "arabicName": "الممتحنة",
+      "transliteration": "Al-Mumtahina",
+      "meaning": "The Examined One",
+      "verses": 13,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 61,
+      "name": "As-Saff",
+      "arabicName": "الصف",
+      "transliteration": "As-Saff",
+      "meaning": "The Ranks",
+      "verses": 14,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 62,
+      "name": "Al-Jumu'ah",
+      "arabicName": "الجمعة",
+      "transliteration": "Al-Jumu'ah",
+      "meaning": "Friday",
+      "verses": 11,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 63,
+      "name": "Al-Munafiqun",
+      "arabicName": "المنافقون",
+      "transliteration": "Al-Munafiqun",
+      "meaning": "The Hypocrites",
+      "verses": 11,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 64,
+      "name": "At-Taghabun",
+      "arabicName": "التغابن",
+      "transliteration": "At-Taghabun",
+      "meaning": "Mutual Disillusion",
+      "verses": 18,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 65,
+      "name": "At-Talaq",
+      "arabicName": "الطلاق",
+      "transliteration": "At-Talaq",
+      "meaning": "Divorce",
+      "verses": 12,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 66,
+      "name": "At-Tahrim",
+      "arabicName": "التحريم",
+      "transliteration": "At-Tahrim",
+      "meaning": "The Prohibition",
+      "verses": 12,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 67,
+      "name": "Al-Mulk",
+      "arabicName": "الملك",
+      "transliteration": "Al-Mulk",
+      "meaning": "The Sovereignty",
+      "verses": 30,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 68,
+      "name": "Al-Qalam",
+      "arabicName": "القلم",
+      "transliteration": "Al-Qalam",
+      "meaning": "The Pen",
+      "verses": 52,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 69,
+      "name": "Al-Haaqqa",
+      "arabicName": "الحاقة",
+      "transliteration": "Al-Haaqqa",
+      "meaning": "The Reality",
+      "verses": 52,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 70,
+      "name": "Al-Ma'arij",
+      "arabicName": "المعارج",
+      "transliteration": "Al-Ma'arij",
+      "meaning": "The Ascending Stairways",
+      "verses": 44,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 71,
+      "name": "Nuh",
+      "arabicName": "نوح",
+      "transliteration": "Nuh",
+      "meaning": "Noah",
+      "verses": 28,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 72,
+      "name": "Al-Jinn",
+      "arabicName": "الجن",
+      "transliteration": "Al-Jinn",
+      "meaning": "The Jinn",
+      "verses": 28,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 73,
+      "name": "Al-Muzzammil",
+      "arabicName": "المزمل",
+      "transliteration": "Al-Muzzammil",
+      "meaning": "The Enshrouded One",
+      "verses": 20,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 74,
+      "name": "Al-Muddaththir",
+      "arabicName": "المدثر",
+      "transliteration": "Al-Muddaththir",
+      "meaning": "The Cloaked One",
+      "verses": 56,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 75,
+      "name": "Al-Qiyama",
+      "arabicName": "القيامة",
+      "transliteration": "Al-Qiyama",
+      "meaning": "The Resurrection",
+      "verses": 40,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 76,
+      "name": "Al-Insan",
+      "arabicName": "الإنسان",
+      "transliteration": "Al-Insan",
+      "meaning": "Man",
+      "verses": 31,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 77,
+      "name": "Al-Mursalat",
+      "arabicName": "المرسلات",
+      "transliteration": "Al-Mursalat",
+      "meaning": "The Emissaries",
+      "verses": 50,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 78,
+      "name": "An-Naba",
+      "arabicName": "النبأ",
+      "transliteration": "An-Naba",
+      "meaning": "The Tidings",
+      "verses": 40,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 79,
+      "name": "An-Nazi'at",
+      "arabicName": "النازعات",
+      "transliteration": "An-Nazi'at",
+      "meaning": "Those who drag forth",
+      "verses": 46,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 80,
+      "name": "Abasa",
+      "arabicName": "عبس",
+      "transliteration": "Abasa",
+      "meaning": "He Frowned",
+      "verses": 42,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 81,
+      "name": "At-Takwir",
+      "arabicName": "التكوير",
+      "transliteration": "At-Takwir",
+      "meaning": "The Overthrowing",
+      "verses": 29,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 82,
+      "name": "Al-Infitar",
+      "arabicName": "الإنفطار",
+      "transliteration": "Al-Infitar",
+      "meaning": "The Cleaving",
+      "verses": 19,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 83,
+      "name": "Al-Mutaffifin",
+      "arabicName": "المطففين",
+      "transliteration": "Al-Mutaffifin",
+      "meaning": "The Defrauding",
+      "verses": 36,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 84,
+      "name": "Al-Inshiqaq",
+      "arabicName": "الإنشقاق",
+      "transliteration": "Al-Inshiqaq",
+      "meaning": "The Sundering",
+      "verses": 25,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 85,
+      "name": "Al-Buruj",
+      "arabicName": "البروج",
+      "transliteration": "Al-Buruj",
+      "meaning": "The Mansions of the Stars",
+      "verses": 22,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 86,
+      "name": "At-Tariq",
+      "arabicName": "الطارق",
+      "transliteration": "At-Tariq",
+      "meaning": "The Morning Star",
+      "verses": 17,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 87,
+      "name": "Al-A'la",
+      "arabicName": "الأعلى",
+      "transliteration": "Al-A'la",
+      "meaning": "The Most High",
+      "verses": 19,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 88,
+      "name": "Al-Ghashiya",
+      "arabicName": "الغاشية",
+      "transliteration": "Al-Ghashiya",
+      "meaning": "The Overwhelming",
+      "verses": 26,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 89,
+      "name": "Al-Fajr",
+      "arabicName": "الفجر",
+      "transliteration": "Al-Fajr",
+      "meaning": "The Dawn",
+      "verses": 30,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 90,
+      "name": "Al-Balad",
+      "arabicName": "البلد",
+      "transliteration": "Al-Balad",
+      "meaning": "The City",
+      "verses": 20,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 91,
+      "name": "Ash-Shams",
+      "arabicName": "الشمس",
+      "transliteration": "Ash-Shams",
+      "meaning": "The Sun",
+      "verses": 15,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 92,
+      "name": "Al-Lail",
+      "arabicName": "الليل",
+      "transliteration": "Al-Lail",
+      "meaning": "The Night",
+      "verses": 21,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 93,
+      "name": "Ad-Duhaa",
+      "arabicName": "الضحى",
+      "transliteration": "Ad-Duhaa",
+      "meaning": "The Morning Hours",
+      "verses": 11,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 94,
+      "name": "Ash-Sharh",
+      "arabicName": "الشرح",
+      "transliteration": "Ash-Sharh",
+      "meaning": "The Relief",
+      "verses": 8,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 95,
+      "name": "At-Tin",
+      "arabicName": "التين",
+      "transliteration": "At-Tin",
+      "meaning": "The Fig",
+      "verses": 8,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 96,
+      "name": "Al-'Alaq",
+      "arabicName": "العلق",
+      "transliteration": "Al-'Alaq",
+      "meaning": "The Clot",
+      "verses": 19,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 97,
+      "name": "Al-Qadr",
+      "arabicName": "القدر",
+      "transliteration": "Al-Qadr",
+      "meaning": "The Power",
+      "verses": 5,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 98,
+      "name": "Al-Bayyina",
+      "arabicName": "البينة",
+      "transliteration": "Al-Bayyina",
+      "meaning": "The Clear Proof",
+      "verses": 8,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 99,
+      "name": "Az-Zalzala",
+      "arabicName": "الزلزلة",
+      "transliteration": "Az-Zalzala",
+      "meaning": "The Earthquake",
+      "verses": 8,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 100,
+      "name": "Al-'Adiyat",
+      "arabicName": "العاديات",
+      "transliteration": "Al-'Adiyat",
+      "meaning": "The Courser",
+      "verses": 11,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 101,
+      "name": "Al-Qari'a",
+      "arabicName": "القارعة",
+      "transliteration": "Al-Qari'a",
+      "meaning": "The Calamity",
+      "verses": 11,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 102,
+      "name": "At-Takathur",
+      "arabicName": "التكاثر",
+      "transliteration": "At-Takathur",
+      "meaning": "The Rivalry in World Increase",
+      "verses": 8,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 103,
+      "name": "Al-'Asr",
+      "arabicName": "العصر",
+      "transliteration": "Al-'Asr",
+      "meaning": "The Declining Day",
+      "verses": 3,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 104,
+      "name": "Al-Humaza",
+      "arabicName": "الهمزة",
+      "transliteration": "Al-Humaza",
+      "meaning": "The Traducer",
+      "verses": 9,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 105,
+      "name": "Al-Fil",
+      "arabicName": "الفيل",
+      "transliteration": "Al-Fil",
+      "meaning": "The Elephant",
+      "verses": 5,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 106,
+      "name": "Quraish",
+      "arabicName": "قريش",
+      "transliteration": "Quraish",
+      "meaning": "Quraish",
+      "verses": 4,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 107,
+      "name": "Al-Ma'un",
+      "arabicName": "الماعون",
+      "transliteration": "Al-Ma'un",
+      "meaning": "The Small Kindnesses",
+      "verses": 7,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 108,
+      "name": "Al-Kawthar",
+      "arabicName": "الكوثر",
+      "transliteration": "Al-Kawthar",
+      "meaning": "The Abundance",
+      "verses": 3,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 109,
+      "name": "Al-Kafirun",
+      "arabicName": "الكافرون",
+      "transliteration": "Al-Kafirun",
+      "meaning": "The Disbelievers",
+      "verses": 6,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 110,
+      "name": "An-Nasr",
+      "arabicName": "النصر",
+      "transliteration": "An-Nasr",
+      "meaning": "The Divine Support",
+      "verses": 3,
+      "revelationType": "Medinan",
+      "driveFiles": {}
+    },
+    {
+      "id": 111,
+      "name": "Al-Masad",
+      "arabicName": "المسد",
+      "transliteration": "Al-Masad",
+      "meaning": "The Palm Fiber",
+      "verses": 5,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 112,
+      "name": "Al-Ikhlas",
+      "arabicName": "الإخلاص",
+      "transliteration": "Al-Ikhlas",
+      "meaning": "The Sincerity",
+      "verses": 4,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 113,
+      "name": "Al-Falaq",
+      "arabicName": "الفلق",
+      "transliteration": "Al-Falaq",
+      "meaning": "The Daybreak",
+      "verses": 5,
+      "revelationType": "Meccan",
+      "driveFiles": {}
+    },
+    {
+      "id": 114,
+      "name": "An-Nas",
+      "arabicName": "الناس",
+      "transliteration": "An-Nas",
+      "meaning": "Mankind",
+      "verses": 6,
+      "revelationType": "Meccan",
+      "driveFiles": {}
     }
   ]
 }
