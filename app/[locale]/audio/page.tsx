@@ -1,5 +1,5 @@
 import { getMessages } from "@/utils/translations";
-import AudioClient from "./AudioClient";
+import { AudioClient } from "@/components/audio";
 
 export default async function AudioPage({
   params,
@@ -9,5 +9,5 @@ export default async function AudioPage({
   const { locale } = await params;
   const messages = await getMessages(locale);
 
-  return <AudioClient locale={locale} messages={messages} />;
+  return <AudioClient />;
 }
