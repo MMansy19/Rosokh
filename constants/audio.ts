@@ -1,5 +1,3 @@
-import { AudioCategory, AudioQuality } from '../types/audio';
-
 export const AUDIO_CATEGORIES = [
   { value: "all", label: "All Categories" },
   { value: "quran", label: "Quran" },

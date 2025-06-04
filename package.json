@@ -1,5 +1,24 @@
 {
   "name": "rosokh",
+  "description": "A Next.js application with Tailwind CSS and Google APIs integration",
+  "author": "Mahmoud Mansy",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "tailwindcss",
+    "googleapis",
+    "react",
+    "typescript",
+    "turbopack",
+    "web development",
+    "typescript",
+    "lucide-react",
+    "supabase"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MMansy19/rosokh.git"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
