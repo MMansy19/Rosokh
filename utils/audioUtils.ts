@@ -1,5 +1,5 @@
 import { AudioTrack, Reciter, Surah, AudioData, ReciterData } from '@/types/audio';
-import { DURATION_ESTIMATES } from '@/constants/audio';
+import { DURATION_ESTIMATES } from '../constants/audio';
 
 /**
  * Get Google Drive preview URL for a file

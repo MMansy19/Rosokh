@@ -1,6 +1,6 @@
 import { BaseService } from './BaseService';
 import { AudioTrack } from '@/types/audio';
-import { withErrorHandling } from '@/utils/errorHandling';
+import { withErrorHandling } from '../utils/errorHandling';
 
 export interface SearchFilters {
   category?: string;

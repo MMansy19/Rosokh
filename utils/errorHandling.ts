@@ -1,4 +1,4 @@
-import { Notification } from '@/contexts/GlobalContext';
+import { Notification } from '../contexts/GlobalContext';
 
 export type ErrorType = 'network' | 'server' | 'validation' | 'auth' | 'notFound' | 'general';
 
