@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { GlobalProvider } from "@/contexts/GlobalContext";
 import { NotificationContainer } from "@/components/common/NotificationContainer";
 
-
 interface ClientLayoutProps {
   children: React.ReactNode;
   locale: string;
@@ -30,7 +29,7 @@ export function ClientLayout({
             <div className="animate-fadeIn">{children}</div>
           </main>
           <Footer locale={locale} messages={messages} />
-          
+
           {/* Global Notification Container */}
           <NotificationContainer />
         </div>

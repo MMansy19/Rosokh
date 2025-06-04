@@ -641,6 +641,10 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "Get in touch with our team",
+    "otherWays": "Other Ways to Reach Us",
+    "quickResponse": "For a quick response, please use the contact form below.",
+    "emailResponse": "Email Response",
+    "within24h": "within 24 hours.",
     "description": "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
     "sendMessage": "Send us a Message",
     "name": "Name",
@@ -659,6 +663,7 @@
       "bug": "Bug Report",
       "feedback": "Feedback"
     },
+
     "sending": "Sending...",
     "thankYou": "Thank You!",
     "messageReceived": "Your message has been received. We'll get back to you soon.",
@@ -694,6 +699,7 @@
       "whatsapp": "WhatsApp",
       "whatsappDesc": "Quick support"
     },
+
     "faq": {
       "title": "Frequently Asked Questions",
       "q1": "How do I track my Quran reading progress?",

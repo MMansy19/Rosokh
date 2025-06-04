@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 
 /**
  * Props interface for the YouTube embed component
@@ -32,7 +32,7 @@ interface YouTubeEmbedProps {
 
 /**
  * A reusable, accessible, and SEO-optimized YouTube embed component
- * 
+ *
  * Features:
  * - Responsive 16:9 aspect ratio using padding-bottom technique
  * - Full accessibility support with proper ARIA attributes
@@ -45,11 +45,11 @@ interface YouTubeEmbedProps {
  */
 const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
   videoId,
-  title = 'Embedded YouTube video',
+  title = "Embedded YouTube video",
   autoplay = false,
   muted = true,
   loop = false,
-  className = '',
+  className = "",
   startTime,
   endTime,
   showRelated = false,
@@ -57,10 +57,10 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
   privacyMode = true,
 }) => {
   // Validate videoId
-  if (!videoId || typeof videoId !== 'string') {
-    console.warn('YouTubeEmbed: Invalid or missing videoId');
+  if (!videoId || typeof videoId !== "string") {
+    console.warn("YouTubeEmbed: Invalid or missing videoId");
     return (
-      <div 
+      <div
         className={`relative w-full pb-[56.25%] bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center ${className}`}
         role="alert"
         aria-label="Video unavailable"
@@ -75,40 +75,43 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
   // Build YouTube URL with parameters
   const buildEmbedUrl = (): string => {
     // Use privacy-enhanced mode by default (youtube-nocookie.com)
-    const baseUrl = privacyMode 
-      ? 'https://www.youtube-nocookie.com/embed/' 
-      : 'https://www.youtube.com/embed/';
-    
+    const baseUrl = privacyMode
+      ? "https://www.youtube-nocookie.com/embed/"
+      : "https://www.youtube.com/embed/";
+
     const params = new URLSearchParams();
-    
+
     // Core playback parameters
-    params.set('autoplay', autoplay ? '1' : '0');
-    params.set('mute', muted ? '1' : '0');
-    params.set('controls', showControls ? '1' : '0');
-    params.set('rel', showRelated ? '1' : '0');
-    
+    params.set("autoplay", autoplay ? "1" : "0");
+    params.set("mute", muted ? "1" : "0");
+    params.set("controls", showControls ? "1" : "0");
+    params.set("rel", showRelated ? "1" : "0");
+
     // Loop functionality requires playlist parameter
     if (loop) {
-      params.set('loop', '1');
-      params.set('playlist', videoId);
+      params.set("loop", "1");
+      params.set("playlist", videoId);
     }
-    
+
     // Time parameters
     if (startTime && startTime > 0) {
-      params.set('start', startTime.toString());
+      params.set("start", startTime.toString());
     }
     if (endTime && endTime > 0) {
-      params.set('end', endTime.toString());
+      params.set("end", endTime.toString());
     }
-    
+
     // Additional parameters for better embedding experience
-    params.set('modestbranding', '1'); // Minimal YouTube branding
-    params.set('fs', '1'); // Allow fullscreen
-    params.set('hl', 'en'); // Interface language
-    params.set('cc_load_policy', '0'); // Don't force captions
-    params.set('iv_load_policy', '3'); // Hide video annotations
-    params.set('origin', typeof window !== 'undefined' ? window.location.origin : '');
-    
+    params.set("modestbranding", "1"); // Minimal YouTube branding
+    params.set("fs", "1"); // Allow fullscreen
+    params.set("hl", "en"); // Interface language
+    params.set("cc_load_policy", "0"); // Don't force captions
+    params.set("iv_load_policy", "3"); // Hide video annotations
+    params.set(
+      "origin",
+      typeof window !== "undefined" ? window.location.origin : "",
+    );
+
     return `${baseUrl}${videoId}?${params.toString()}`;
   };
 
@@ -116,10 +119,10 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    "name": title,
-    "embedUrl": buildEmbedUrl(),
-    "thumbnailUrl": `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
-    "uploadDate": new Date().toISOString(), // This should ideally come from video metadata
+    name: title,
+    embedUrl: buildEmbedUrl(),
+    thumbnailUrl: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+    uploadDate: new Date().toISOString(), // This should ideally come from video metadata
   };
 
   return (
@@ -128,12 +131,12 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData)
+          __html: JSON.stringify(structuredData),
         }}
       />
-      
+
       {/* Responsive container with 16:9 aspect ratio */}
-      <div 
+      <div
         className={`
           relative w-full pb-[56.25%] 
           overflow-hidden rounded-lg shadow-md 
@@ -178,20 +181,16 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
           role="application"
           aria-describedby={`youtube-${videoId}-description`}
         />
-        
+
         {/* Hidden description for screen readers */}
-        <div 
-          id={`youtube-${videoId}-description`}
-          className="sr-only"
-        >
-          YouTube video player. {title}. 
-          {autoplay && "Video will autoplay. "}
+        <div id={`youtube-${videoId}-description`} className="sr-only">
+          YouTube video player. {title}.{autoplay && "Video will autoplay. "}
           {muted && "Video starts muted. "}
           Use standard media controls to play, pause, and adjust volume.
         </div>
-        
+
         {/* Loading placeholder - shows while iframe loads */}
-        <div 
+        <div
           className="
             absolute inset-0 bg-gray-200 dark:bg-gray-800 
             flex items-center justify-center
@@ -203,13 +202,13 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
         >
           <div className="flex flex-col items-center space-y-3">
             <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center">
-              <svg 
-                className="w-6 h-6 text-white" 
-                fill="currentColor" 
+              <svg
+                className="w-6 h-6 text-white"
+                fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
-                <path d="M8 5v14l11-7z"/>
+                <path d="M8 5v14l11-7z" />
               </svg>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">

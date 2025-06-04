@@ -1,7 +1,10 @@
 import React from "react";
 import { Music, Sparkles, Heart, BookOpen } from "lucide-react";
 import { getTranslation } from "@/utils/translations";
-import { EnhancedLoadingState, SkeletonLoader } from "@/components/common/EnhancedLoadingState";
+import {
+  EnhancedLoadingState,
+  SkeletonLoader,
+} from "@/components/common/EnhancedLoadingState";
 
 interface LoadingStateProps {
   message?: string;
@@ -91,7 +94,7 @@ export const LoadingState: React.FC<LoadingStateProps> = ({
         onCancel={onCancel}
         className="py-16"
       />
-      
+
       {/* Audio-specific decorative elements */}
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 flex items-center justify-center space-x-4 mb-4">
         <div className="relative">

@@ -17,7 +17,11 @@ import {
 } from "lucide-react";
 import { VideoPlayer, VideoInfo } from "@/components/youtube/VideoPlayer";
 import YouTubeEmbed from "@/components/youtube/YouTubeEmbed";
-import { useVideoData, VideoMetadata, VideoCategory } from "@/hooks/useVideoData";
+import {
+  useVideoData,
+  VideoMetadata,
+  VideoCategory,
+} from "@/hooks/useVideoData";
 
 // Add error handling for YoutubeClient
 interface ErrorBoundaryState {
@@ -115,9 +119,18 @@ export default function YoutubeClient({
   locale,
   messages,
 }: YoutubeClientProps) {
-  const { videos, categories, loading, error, searchVideos, getVideosByCategory } = useVideoData();
+  const {
+    videos,
+    categories,
+    loading,
+    error,
+    searchVideos,
+    getVideosByCategory,
+  } = useVideoData();
   const [filteredVideos, setFilteredVideos] = useState<VideoMetadata[]>([]);
-  const [selectedVideo, setSelectedVideo] = useState<VideoMetadata | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<VideoMetadata | null>(
+    null,
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState<"videos" | "trending">("videos");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -407,7 +420,9 @@ export default function YoutubeClient({
                         <span>•</span>
                         <div className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          {new Date(video.publishedAt).toLocaleDateString(locale)}
+                          {new Date(video.publishedAt).toLocaleDateString(
+                            locale,
+                          )}
                         </div>
                       </div>
 
@@ -437,18 +452,20 @@ export default function YoutubeClient({
             )}
 
             {/* Empty State */}
-            {!loading && filteredVideos.length === 0 && activeTab === "videos" && (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">📺</div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">
-                  {messages?.youtube?.noVideos || "No videos found"}
-                </h3>
-                <p className="text-muted">
-                  {messages?.youtube?.noVideosDesc ||
-                    "Try adjusting your search terms or filters"}
-                </p>
-              </div>
-            )}
+            {!loading &&
+              filteredVideos.length === 0 &&
+              activeTab === "videos" && (
+                <div className="text-center py-12">
+                  <div className="text-6xl mb-4">📺</div>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                    {messages?.youtube?.noVideos || "No videos found"}
+                  </h3>
+                  <p className="text-muted">
+                    {messages?.youtube?.noVideosDesc ||
+                      "Try adjusting your search terms or filters"}
+                  </p>
+                </div>
+              )}
           </div>
         </div>
       </div>

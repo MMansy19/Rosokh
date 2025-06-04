@@ -21,36 +21,77 @@ export function Footer({ locale, messages }: FooterProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-1 space-y-4 text-center sm:text-left rtl:sm:text-right">
-            <div className="flex items-center justify-center sm:justify-start rtl:sm:justify-end space-x-2 rtl:space-x-reverse">
-              <div className="w-8 h-8 bg-primary rounded-lg flex-shrink-0"></div>
-              <span className="font-bold text-lg text-foreground">
-                {messages?.common?.brand?.name || "Rosokh"}
-              </span>
-            </div>
+            {isRtl ? (
+              <>
+                {" "}
+                <div className="flex items-center justify-center sm:justify-start rtl:sm:justify-end space-x-2 rtl:space-x-reverse">
+                  <span className="font-bold text-lg text-foreground">
+                    {messages?.common?.brand?.name || "Rosokh"}
+                  </span>
+                  <div className="w-8 h-8 bg-primary rounded-lg flex-shrink-0"></div>
+                </div>
+              </>
+            ) : (
+              <>
+                {" "}
+                <div className="flex items-center justify-center sm:justify-start rtl:sm:justify-end space-x-2 rtl:space-x-reverse">
+                  <div className="w-8 h-8 bg-primary rounded-lg flex-shrink-0"></div>
+                  <span className="font-bold text-lg text-foreground">
+                    {messages?.common?.brand?.name || "Rosokh"}
+                  </span>
+                </div>
+              </>
+            )}
             <p className="text-muted text-sm leading-relaxed max-w-xs mx-auto sm:mx-0 rtl:sm:mr-0">
               {messages?.footer?.description ||
                 messages?.common?.brand?.description ||
                 "Rosokh is a modern Islamic multimedia platform for spiritual growth and learning."}
             </p>
-            <div className="flex flex-row rtl:flex-row-reverse items-center justify-center sm:justify-start rtl:sm:justify-end space-x-2 rtl:space-x-reverse text-muted text-sm whitespace-nowrap">
-              <span>{messages?.footer?.made_with || "Made with"}</span>
-              <Heart className="w-4 h-4 text-primary animate-pulse flex-shrink-0"/>
-              <span>{messages?.footer?.for_ummah || "for the Ummah"}</span>
-            </div>
-            <div className="flex flex-row rtl:flex-row-reverse gap-2 rtl:gap-x-reverse items-center justify-center sm:justify-start rtl:sm:justify-end">
-              <div className="text-xs font-medium text-muted whitespace-nowrap">
-                {messages?.footer?.developed_by || "Developed by"}
-              </div>
-              <a
-                href="https://mahmoud-mansy.vercel.app/en"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 rtl:space-x-reverse text-muted hover:text-primary transition-colors duration-200 text-sm font-medium whitespace-nowrap"
-              >
-                <div className="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>
-                <span>{messages?.author || "Mahmoud Mansy"}</span>
-              </a>
-            </div>
+            {isRtl ? (
+              <>
+                <div className="flex flex-row rtl:flex-row-reverse items-center justify-center sm:justify-start rtl:sm:justify-end space-x-2 rtl:space-x-reverse text-muted text-sm whitespace-nowrap">
+                  <span>{messages?.footer?.for_ummah || "for the Ummah"}</span>
+                  <Heart className="w-4 h-4 text-primary animate-pulse flex-shrink-0" />
+                  <span>{messages?.footer?.made_with || "Made with"}</span>
+                </div>
+                <div className="flex flex-row rtl:flex-row-reverse gap-2 rtl:gap-x-reverse items-center justify-center sm:justify-start rtl:sm:justify-end">
+                  <a
+                    href="https://mahmoud-mansy.vercel.app/en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 rtl:space-x-reverse text-muted hover:text-primary transition-colors duration-200 text-sm font-medium whitespace-nowrap"
+                  >
+                    <span>{messages?.author || "Mahmoud Mansy"}</span>
+                    <div className="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>
+                  </a>
+                  <div className="text-xs font-medium text-muted whitespace-nowrap">
+                    {messages?.footer?.developed_by || "Developed by"}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-row rtl:flex-row-reverse items-center justify-center sm:justify-start rtl:sm:justify-end space-x-2 rtl:space-x-reverse text-muted text-sm whitespace-nowrap">
+                  <span>{messages?.footer?.made_with || "Made with"}</span>
+                  <Heart className="w-4 h-4 text-primary animate-pulse flex-shrink-0" />
+                  <span>{messages?.footer?.for_ummah || "for the Ummah"}</span>
+                </div>
+                <div className="flex flex-row rtl:flex-row-reverse gap-2 rtl:gap-x-reverse items-center justify-center sm:justify-start rtl:sm:justify-end">
+                  <div className="text-xs font-medium text-muted whitespace-nowrap">
+                    {messages?.footer?.developed_by || "Developed by"}
+                  </div>
+                  <a
+                    href="https://mahmoud-mansy.vercel.app/en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 rtl:space-x-reverse text-muted hover:text-primary transition-colors duration-200 text-sm font-medium whitespace-nowrap"
+                  >
+                    <div className="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>
+                    <span>{messages?.author || "Mahmoud Mansy"}</span>
+                  </a>
+                </div>
+              </>
+            )}
           </div>
           {/* Quick Links */}
           <div className="space-y-4 text-center sm:text-left rtl:sm:text-right">

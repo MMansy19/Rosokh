@@ -18,7 +18,14 @@
         "nameRussian": "Чтение Корана",
         "icon": "📖"
       },
-      "tags": ["quran", "recitation", "al-fatiha", "islamic", "prayer", "spiritual"],
+      "tags": [
+        "quran",
+        "recitation",
+        "al-fatiha",
+        "islamic",
+        "prayer",
+        "spiritual"
+      ],
       "language": "ar",
       "quality": "hd"
     },
@@ -106,7 +113,12 @@
         "nameRussian": "Рамадан",
         "icon": "🌙"
       },
-      "tags": ["ramadan", "fasting", "spiritual preparation", "islamic calendar"],
+      "tags": [
+        "ramadan",
+        "fasting",
+        "spiritual preparation",
+        "islamic calendar"
+      ],
       "language": "en",
       "quality": "hd"
     },
@@ -128,7 +140,13 @@
         "nameRussian": "Исламская история",
         "icon": "📚"
       },
-      "tags": ["islamic history", "golden age", "civilization", "science", "culture"],
+      "tags": [
+        "islamic history",
+        "golden age",
+        "civilization",
+        "science",
+        "culture"
+      ],
       "language": "en",
       "quality": "hd"
     },
@@ -150,7 +168,13 @@
         "nameRussian": "Исламские знания",
         "icon": "🎓"
       },
-      "tags": ["islamic education", "five pillars", "faith", "knowledge", "basics"],
+      "tags": [
+        "islamic education",
+        "five pillars",
+        "faith",
+        "knowledge",
+        "basics"
+      ],
       "language": "en",
       "quality": "hd"
     },
@@ -172,7 +196,13 @@
         "nameRussian": "Исламские лекции",
         "icon": "🎤"
       },
-      "tags": ["khutbah", "friday sermon", "prayer", "salah", "islamic lecture"],
+      "tags": [
+        "khutbah",
+        "friday sermon",
+        "prayer",
+        "salah",
+        "islamic lecture"
+      ],
       "language": "en",
       "quality": "hd"
     }

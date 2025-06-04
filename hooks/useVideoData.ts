@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export interface VideoMetadata {
   id: string;
@@ -51,18 +51,20 @@ export function useVideoData() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/video-data?type=videos');
-        
+        const response = await fetch("/api/video-data?type=videos");
+
         if (!response.ok) {
           throw new Error(`Failed to fetch video data: ${response.statusText}`);
         }
-        
+
         const videoData = await response.json();
         setData(videoData);
         setError(null);
       } catch (err) {
-        console.error('Error fetching video data:', err);
-        setError(err instanceof Error ? err.message : 'Failed to load video data');
+        console.error("Error fetching video data:", err);
+        setError(
+          err instanceof Error ? err.message : "Failed to load video data",
+        );
       } finally {
         setLoading(false);
       }
@@ -73,36 +75,39 @@ export function useVideoData() {
 
   const searchVideos = (query: string, categoryId?: string) => {
     if (!data) return [];
-    
+
     let filteredVideos = data.videos;
-    
+
     // Filter by category
     if (categoryId) {
-      filteredVideos = filteredVideos.filter(video => video.category.id === categoryId);
+      filteredVideos = filteredVideos.filter(
+        (video) => video.category.id === categoryId,
+      );
     }
-    
+
     // Filter by search query
     if (query.trim()) {
       const searchLower = query.toLowerCase();
-      filteredVideos = filteredVideos.filter(video =>
-        video.title.toLowerCase().includes(searchLower) ||
-        video.description.toLowerCase().includes(searchLower) ||
-        video.channelTitle.toLowerCase().includes(searchLower) ||
-        video.tags.some(tag => tag.toLowerCase().includes(searchLower))
+      filteredVideos = filteredVideos.filter(
+        (video) =>
+          video.title.toLowerCase().includes(searchLower) ||
+          video.description.toLowerCase().includes(searchLower) ||
+          video.channelTitle.toLowerCase().includes(searchLower) ||
+          video.tags.some((tag) => tag.toLowerCase().includes(searchLower)),
       );
     }
-    
+
     return filteredVideos;
   };
 
   const getVideosByCategory = (categoryId: string) => {
     if (!data) return [];
-    return data.videos.filter(video => video.category.id === categoryId);
+    return data.videos.filter((video) => video.category.id === categoryId);
   };
 
   const getVideoById = (id: string) => {
     if (!data) return null;
-    return data.videos.find(video => video.id === id) || null;
+    return data.videos.find((video) => video.id === id) || null;
   };
 
   return {

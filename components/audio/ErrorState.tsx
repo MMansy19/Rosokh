@@ -1,5 +1,12 @@
 import React from "react";
-import { AlertTriangle, RefreshCw, Wifi, Server, FileX, Music } from "lucide-react";
+import {
+  AlertTriangle,
+  RefreshCw,
+  Wifi,
+  Server,
+  FileX,
+  Music,
+} from "lucide-react";
 import { getTranslation } from "@/utils/translations";
 import { EnhancedErrorState } from "@/components/common/ErrorState/EnhancedErrorState";
 
@@ -142,11 +149,15 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         showDetails={showDetails}
         retryCount={retryCount}
         maxRetries={3}
-        actionLabel={getTranslation(messages, "audio.error.tryAgain", "Try Again")}
+        actionLabel={getTranslation(
+          messages,
+          "audio.error.tryAgain",
+          "Try Again",
+        )}
         context={{ type, locale }}
         className="py-16"
       />
-      
+
       {/* Custom audio-specific content */}
       {getCustomContent()}
 

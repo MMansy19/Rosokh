@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
         fileName = "youtube-videos.json";
         break;
       // case "reciters":
-  
+
       //   break;
       default:
         return NextResponse.json({ error: "Invalid type" }, { status: 400 });

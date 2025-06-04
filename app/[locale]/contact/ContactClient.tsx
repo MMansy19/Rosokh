@@ -13,6 +13,7 @@ export default function ContactClient({
   messages,
 }: ContactClientProps) {
   const { notify } = useNotifications();
+  const isRtl = locale === "ar";
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -75,29 +76,31 @@ export default function ContactClient({
   const contactMethods = [
     {
       icon: "📧",
-      title: messages?.contact?.email || "Email",
-      description: messages?.contact?.emailDesc || "Send us an email",
+      title: messages?.contact?.methods.email || "Email",
+      description: messages?.contact?.methods.emailDesc || "Send us an email",
       value: "contact@rosokh.com",
       action: "mailto:contact@rosokh.com",
     },
     {
       icon: "💬",
-      title: messages?.contact?.telegram || "Telegram",
-      description: messages?.contact?.telegramDesc || "Join our community",
+      title: messages?.contact?.methods.telegram || "Telegram",
+      description:
+        messages?.contact?.methods.telegramDesc || "Join our community",
       value: "@rosokh_support",
       action: "https://t.me/rosokh_support",
     },
     {
       icon: "🐦",
-      title: messages?.contact?.twitter || "Twitter",
-      description: messages?.contact?.twitterDesc || "Follow us for updates",
+      title: messages?.contact?.methods.twitter || "Twitter",
+      description:
+        messages?.contact?.methods.twitterDesc || "Follow us for updates",
       value: "@rosokh_app",
       action: "https://twitter.com/rosokh_app",
     },
     {
       icon: "📱",
-      title: messages?.contact?.whatsapp || "WhatsApp",
-      description: messages?.contact?.whatsappDesc || "Quick support",
+      title: messages?.contact?.methods.whatsapp || "WhatsApp",
+      description: messages?.contact?.methods.whatsappDesc || "Quick support",
       value: "+1 (555) 123-4567",
       action: "https://wa.me/15551234567",
     },
@@ -144,13 +147,16 @@ export default function ContactClient({
   ];
   if (isSubmitted) {
     return (
-      <div className="min-h-screen text-foreground transition-colors duration-300 flex items-center justify-center">
-        <div className="text-center bg-surface text-foreground rounded-lg shadow-lg p-8 max-w-md mx-4 border border-border">
+      <div
+        dir={isRtl ? "rtl" : "ltr"}
+        className="min-h-screen text-text-primary transition-colors duration-300 flex items-center justify-center"
+      >
+        <div className="text-center bg-surface text-text-primary rounded-lg shadow-lg p-8 max-w-md mx-4 border border-border">
           <div className="text-6xl mb-4">✅</div>
-          <h2 className="text-2xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl font-bold text-text-primary mb-4">
             {messages?.contact?.thankYou || "Thank You!"}
           </h2>
-          <p className="text-muted">
+          <p className="text-secondary">
             {messages?.contact?.messageReceived ||
               "Your message has been received. We'll get back to you soon."}
           </p>
@@ -160,15 +166,18 @@ export default function ContactClient({
   }
 
   return (
-    <div className="min-h-screen text-foreground transition-colors duration-300">
+    <div
+      dir={isRtl ? "rtl" : "ltr"}
+      className="min-h-screen text-text-primary transition-colors duration-300"
+    >
       <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
+          <h1 className="text-4xl font-bold text-text-primary mb-4">
             {messages?.contact?.title || "Contact Us"}
           </h1>
           <div className="text-4xl mb-4">📞</div>
-          <p className="text-lg text-muted max-w-2xl mx-auto">
+          <p className="text-lg text-secondary max-w-2xl mx-auto">
             {messages?.contact?.description ||
               "We'd love to hear from you. Send us a message and we'll respond as soon as possible."}
           </p>
@@ -178,14 +187,16 @@ export default function ContactClient({
           <div className="space-y-8">
             {/* Contact Form */}
             <div className="card group rounded-lg shadow-lg p-8 border border-border">
-              <h2 className="text-2xl font-bold text-foreground mb-6">
+              <h2 className="text-2xl font-bold text-text-primary mb-6">
                 {messages?.contact?.sendMessage || "Send us a Message"}
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      className={`block text-sm font-medium text-foreground mb-2 ${isRtl ? "text-right" : "text-left"}`}
+                    >
                       {messages?.contact?.name || "Name"} *
                     </label>
                     <input
@@ -194,7 +205,8 @@ export default function ContactClient({
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      dir={isRtl ? "rtl" : "ltr"}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${isRtl ? "text-right" : "text-left"}`}
                       placeholder={
                         messages?.contact?.namePlaceholder || "Your full name"
                       }
@@ -202,7 +214,9 @@ export default function ContactClient({
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      className={`block text-sm font-medium text-foreground mb-2 ${isRtl ? "text-right" : "text-left"}`}
+                    >
                       {messages?.contact?.email || "Email"} *
                     </label>
                     <input
@@ -211,7 +225,8 @@ export default function ContactClient({
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      dir="ltr"
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-left`}
                       placeholder={
                         messages?.contact?.emailPlaceholder ||
                         "your.email@example.com"
@@ -221,14 +236,17 @@ export default function ContactClient({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    className={`block text-sm font-medium text-foreground mb-2 ${isRtl ? "text-right" : "text-left"}`}
+                  >
                     {messages?.contact?.category || "Category"}
                   </label>
                   <select
                     name="category"
                     value={formData.category}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    dir={isRtl ? "rtl" : "ltr"}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${isRtl ? "text-right" : "text-left"}`}
                   >
                     {[
                       {
@@ -272,7 +290,9 @@ export default function ContactClient({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    className={`block text-sm font-medium text-foreground mb-2 ${isRtl ? "text-right" : "text-left"}`}
+                  >
                     {messages?.contact?.subject || "Subject"} *
                   </label>
                   <input
@@ -281,7 +301,8 @@ export default function ContactClient({
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    dir={isRtl ? "rtl" : "ltr"}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${isRtl ? "text-right" : "text-left"}`}
                     placeholder={
                       messages?.contact?.subjectPlaceholder ||
                       "Brief description of your message"
@@ -290,7 +311,9 @@ export default function ContactClient({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    className={`block text-sm font-medium text-foreground mb-2 ${isRtl ? "text-right" : "text-left"}`}
+                  >
                     {messages?.contact?.message || "Message"} *
                   </label>
                   <textarea
@@ -299,7 +322,8 @@ export default function ContactClient({
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                    dir={isRtl ? "rtl" : "ltr"}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none ${isRtl ? "text-right" : "text-left"}`}
                     placeholder={
                       messages?.contact?.messagePlaceholder ||
                       "Please provide as much detail as possible..."
@@ -310,7 +334,7 @@ export default function ContactClient({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full hover:bg-buttonHover active:bg-buttonActive bg-button text-white hover:text-foreground py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">
@@ -364,19 +388,46 @@ export default function ContactClient({
                   <a
                     key={index}
                     href={method.action}
-                    className="flex items-center gap-4 p-4 bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200"
+                    className={`flex items-center gap-4 p-4 bg-surface hover:bg-buttonHover active:bg-buttonActive text-text-primary rounded-lg transition-colors duration-200`}
                   >
-                    <div className="text-2xl">{method.icon}</div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-foreground mb-1">
-                        {method.title}
-                      </h4>
-                      <p className="text-sm text-muted">{method.description}</p>
-                      <p className="text-sm text-muted font-mono">
-                        {method.value}
-                      </p>
-                    </div>
-                    <div className="text-muted">→</div>
+                    {isRtl ? (
+                      <>
+                        <div className="text-secondary">←</div>
+                        <div className="flex-1">
+                          <h4
+                            className={`font-semibold text-text-primary mb-1`}
+                          >
+                            {method.title}
+                          </h4>
+                          <p className={`text-sm text-secondary`}>
+                            {method.description}
+                          </p>
+                          <p className={`text-sm text-secondary font-mono`}>
+                            {method.value}
+                          </p>
+                        </div>
+                        <div className="text-2xl">{method.icon}</div>
+                      </>
+                    ) : (
+                      <>
+                        {" "}
+                        <div className="text-2xl">{method.icon}</div>
+                        <div className="flex-1">
+                          <h4
+                            className={`font-semibold text-text-primary mb-1`}
+                          >
+                            {method.title}
+                          </h4>
+                          <p className={`text-sm text-secondary`}>
+                            {method.description}
+                          </p>
+                          <p className={`text-sm text-secondary font-mono`}>
+                            {method.value}
+                          </p>
+                        </div>
+                        <div className="text-secondary">→</div>
+                      </>
+                    )}
                   </a>
                 ))}
               </div>
@@ -391,13 +442,32 @@ export default function ContactClient({
               <div className="space-y-4">
                 {faqItems.map((item, index) => (
                   <details key={index} className="group">
-                    <summary className="flex justify-between items-center cursor-pointer p-3 bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200">
-                      <span className="font-medium">{item.question}</span>
-                      <span className="text-muted group-open:rotate-180 transition-transform duration-200">
-                        ↓
-                      </span>
+                    <summary
+                      className={`flex justify-between items-center cursor-pointer p-3 bg-surface hover:bg-buttonHover active:bg-buttonActive text-text-primary rounded-lg transition-colors duration-200`}
+                    >
+                      {isRtl ? (
+                        <>
+                          <span className="text-secondary group-open:rotate-180 transition-transform duration-200">
+                            ↓
+                          </span>
+                          <span className={`font-medium flex-1`}>
+                            {item.question}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className={`font-medium flex-1`}>
+                            {item.question}
+                          </span>
+                          <span className="text-secondary group-open:rotate-180 transition-transform duration-200">
+                            ↓
+                          </span>
+                        </>
+                      )}
                     </summary>
-                    <div className="p-3 text-muted text-sm">{item.answer}</div>
+                    <div className={`p-3 text-secondary text-sm`}>
+                      {item.answer}
+                    </div>
                   </details>
                 ))}
               </div>

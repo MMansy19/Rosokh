@@ -18,7 +18,6 @@
   --color-text-primary: #1a2525;
   --color-text-secondary: #4a5e5e;
   --color-muted: #6b7280; /* Maps to text-muted */
-  --color-text-muted: #6b7280;
   --color-border: #e5e7eb;
   --color-error: #dc2626;
   --color-success: #16a34a;
@@ -53,16 +52,15 @@
   --color-background: #111827; /* Rich dark background */
   --color-surface: #1f2937; /* Dark surface */
   --color-surface-child: #374151; /* Darker gray-700 */
-  --color-button: #4ade80; /* Primary button color */
-  --color-hover-button: #a7f3d0; /* Lighter hover effect */
-  --color-focus-button: #6ee7b7; /* Lighter focus state */
-  --color-active-button: #34d399; /* Lighter active state */
+  --color-button: #22c55e; /* Darker primary button color */
+  --color-hover-button: #16a34a; /* Darker hover effect */
+  --color-focus-button: #15803d; /* Darker focus state */
+  --color-active-button: #166534; /* Darker active state */
   --color-disabled-button: #374151; /* Darker disabled state */
   --color-foreground: #f9fafb; /* Maps to text-primary */
   --color-text-primary: #f9fafb;
   --color-text-secondary: #d1d5db;
   --color-muted: #9ca3af; /* Maps to text-muted */
-  --color-text-muted: #9ca3af;
   --color-border: #374151;
   --color-error: #ef4444;
   --color-success: #22c55e;
@@ -652,12 +650,6 @@ body {
 }
 .text-accent {
   color: var(--color-accent);
-}
-.text-foreground {
-  color: var(--color-foreground);
-}
-.text-muted {
-  color: var(--color-muted);
 }
 .text-error {
   color: var(--color-error);
