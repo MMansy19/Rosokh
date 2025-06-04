@@ -65,20 +65,20 @@
         "subtitle": "اكتشف نطاق منصتنا الإسلامية متعددة الوسائط",
         "items": {
           "surahs": {
-            "title": "سورة",
+            "title": "سور",
             "description": "فصول كاملة من القرآن الكريم"
           },
           "verses": {
-            "title": "آية",
+            "title": "آيات",
             "description": "آيات مقدسة للقراءة والتأمل"
           },
           "languages": {
             "title": "لغات",
-            "description": "دعم متعدد اللغات للوصول العالمي"
+            "description": "دعم متعدد اللغات للوصول العالمي "
           },
           "users": {
             "title": "مستخدمون",
-            "description": "أعضاء نشطون في مجتمعنا"
+            "description": "أعضاء نشطون في مجتمعنا  "
           },
           "downloads": {
             "title": "تحميلات",
@@ -98,7 +98,7 @@
           "response_time": "وقت الاستجابة",
           "accessibility": "إمكانية الوصول",
           "security": "الأمان",
-          "support": "الدعم"
+          "support": "الدعم "
         }
       }
     },
@@ -168,64 +168,65 @@
     },
     "readingHabits": "عادات القراءة",
     "progressChart": "مخطط التقدم",
-    "achievements": "الإنجازات"
+    "achievements": "الإنجازات",
+    "testimonials": {
+      "title": "ماذا يقول مستخدمونا",
+      "subtitle": "تجارب حقيقية من مجتمعنا الإسلامي العالمي",
+      "items": {
+        "ahmed": {
+          "name": "أحمد حسن",
+          "text": "لقد غيّرت منصة رسوخ طريقة قراءتي اليومية للقرآن. الواجهة الجميلة والدعم متعدد اللغات يجعلها مثالية لعائلتي.",
+          "occupation": "عالم إسلامي"
+        },
+        "fatima": {
+          "name": "فاطمة وونغ",
+          "text": "كطالبة، أحب متتبع الختمة. يساعدني على البقاء منتظمة في أهداف القراءة.",
+          "occupation": "طالبة"
+        },
+        "mohammed": {
+          "name": "محمد الراشد",
+          "text": "جودة الصوت استثنائية. مثالية لإمامة الصلاة والتعليم.",
+          "occupation": "إمام"
+        },
+        "aisha": {
+          "name": "عائشة باتيل",
+          "text": "أستخدم رسوخ لتعليم طلابي. الألعاب تجعل تعلم القرآن ممتعاً.",
+          "occupation": "معلمة"
+        },
+        "omar": {
+          "name": "عمر بن علي",
+          "text": "نظيفة وسريعة وموثوقة. كل ما أحتاجه لرحلتي الروحية.",
+          "occupation": "مهندس"
+        },
+        "khadija": {
+          "name": "خديجة رحمن",
+          "text": "ميزة أوقات الصلاة دقيقة بشكل لا يصدق. أعتمد عليها يومياً.",
+          "occupation": "طبيبة"
+        }
+      },
+      "stats": {
+        "satisfaction": "معدل الرضا",
+        "active_users": "المستخدمون النشطون",
+        "countries": "البلدان"
+      },
+      "cta": {
+        "title": "انضم إلى مجتمعنا",
+        "description": "كن جزءاً من مجتمع عالمي مكرس للتعلم الإسلامي",
+        "join_button": "انضم الآن",
+        "learn_more": "اعرف المزيد"
+      },
+      "blessing": {
+        "arabic": "بَارَكَ اللَّهُ فِيكُمْ",
+        "translation": "بارك الله فيكم جميعاً"
+      }
+    }
   },
   "cta": {
     "title": "جاهز لبدء رحلتك؟",
     "description": "ابدأ في استكشاف القرآن وتعمق في معرفتك الإسلامية اليوم",
     "button": "ابدأ القراءة"
   },
-  "testimonials": {
-    "title": "ماذا يقول مستخدمونا",
-    "subtitle": "تجارب حقيقية من مجتمعنا الإسلامي العالمي",
-    "items": {
-      "ahmed": {
-        "name": "أحمد حسن",
-        "text": "لقد غيّرت منصة رسوخ طريقة قراءتي اليومية للقرآن. الواجهة الجميلة والدعم متعدد اللغات يجعلها مثالية لعائلتي.",
-        "occupation": "عالم إسلامي"
-      },
-      "fatima": {
-        "name": "فاطمة وونغ",
-        "text": "كطالبة، أحب متتبع الختمة. يساعدني على البقاء منتظمة في أهداف القراءة.",
-        "occupation": "طالبة"
-      },
-      "mohammed": {
-        "name": "محمد الراشد",
-        "text": "جودة الصوت استثنائية. مثالية لإمامة الصلاة والتعليم.",
-        "occupation": "إمام"
-      },
-      "aisha": {
-        "name": "عائشة باتيل",
-        "text": "أستخدم رسوخ لتعليم طلابي. الألعاب تجعل تعلم القرآن ممتعاً.",
-        "occupation": "معلمة"
-      },
-      "omar": {
-        "name": "عمر بن علي",
-        "text": "نظيفة وسريعة وموثوقة. كل ما أحتاجه لرحلتي الروحية.",
-        "occupation": "مهندس"
-      },
-      "khadija": {
-        "name": "خديجة رحمن",
-        "text": "ميزة أوقات الصلاة دقيقة بشكل لا يصدق. أعتمد عليها يومياً.",
-        "occupation": "طبيبة"
-      }
-    },
-    "stats": {
-      "satisfaction": "معدل الرضا",
-      "active_users": "المستخدمون النشطون",
-      "countries": "البلدان"
-    },
-    "cta": {
-      "title": "انضم إلى مجتمعنا",
-      "description": "كن جزءاً من مجتمع عالمي مكرس للتعلم الإسلامي",
-      "join_button": "انضم الآن",
-      "learn_more": "اعرف المزيد"
-    },
-    "blessing": {
-      "arabic": "بَارَكَ اللَّهُ فِيكُمْ",
-      "translation": "بارك الله فيكم جميعاً"
-    }
-  },
+
   "quran_reader": {
     "title": "قارئ القرآن",
     "select_chapter": "اختر السورة",
@@ -241,18 +242,168 @@
   },
   "audio": {
     "title": "مكتبة الصوتيات الإسلامية",
+    "subtitle": "اكتشف تلاوات القرآن الجميلة والمحاضرات الإسلامية والأدعية والأناشيد من علماء وقراء مشهورين حول العالم",
     "description": "استمع إلى تلاوات القرآن والأدعية والمحاضرات والأناشيد",
     "by": "بصوت",
+    "loading": {
+      "loadingAudio": "جاري تحميل الصوتيات...",
+      "preparingAudioExperience": "نقوم بتحضير تجربة صوتية رائعة لك",
+      "audioTracks": "تحميل المقاطع الصوتية...",
+      "pleaseWait": "يرجى الانتظار قليلاً..."
+    },
+    "error": {
+      "connectionError": "خطأ في الاتصال",
+      "connectionErrorDesc": "تحقق من اتصالك بالإنترنت وحاول مرة أخرى",
+      "serverError": "خطأ في الخادم",
+      "serverErrorDesc": "حدث خطأ في الخادم. يرجى المحاولة لاحقاً",
+      "notFound": "لم يتم العثور على المحتوى",
+      "notFoundDesc": "المحتوى الصوتي المطلوب غير متوفر حالياً",
+      "tryAgain": "حاول مرة أخرى",
+      "goBack": "العودة للخلف",
+      "troubleshootingTips": "نصائح لحل المشاكل:",
+      "checkConnection": "• تحقق من اتصالك بالإنترنت",
+      "refreshPage": "• حدث الصفحة",
+      "clearCache": "• امسح ذاكرة التخزين المؤقت للمتصفح",
+      "contactSupport": "• تواصل مع الدعم الفني إذا استمرت المشكلة"
+    },
+    "search": {
+      "placeholder": "ابحث عن التلاوات والأدعية والمحاضرات...",
+      "smartSearch": "البحث الذكي",
+      "searchDescription": "ابحث بالعنوان أو القارئ أو الفئة أو الوصف",
+      "noResults": "لا توجد نتائج",
+      "noResultsDesc": "لم نجد أي نتائج مطابقة لبحثك. جرب كلمات مختلفة",
+      "searchHistory": "تاريخ البحث",
+      "clearHistory": "مسح التاريخ"
+    },
+    "filters": {
+      "category": "الفئة",
+      "quality": "الجودة",
+      "duration": "المدة",
+      "reciter": "القارئ",
+      "clearFilters": "مسح الفلاتر",
+      "applyFilters": "تطبيق الفلاتر",
+      "showFilters": "إظهار الفلاتر",
+      "hideFilters": "إخفاء الفلاتر",
+      "activeFilters": "الفلاتر النشطة"
+    },
     "categories": {
       "all": "الجميع",
       "quran": "القرآن",
       "dua": "الأدعية",
       "lecture": "المحاضرات",
-      "nasheed": "الأناشيد"
+      "nasheed": "الأناشيد",
+      "hadith": "الحديث",
+      "seerah": "السيرة",
+      "tafsir": "التفسير"
+    },
+    "qualities": {
+      "high": "جودة عالية",
+      "medium": "جودة متوسطة",
+      "low": "جودة منخفضة"
+    },
+    "quality": {
+      "high": "جودة عالية (320 kbps)",
+      "medium": "جودة متوسطة (192 kbps)",
+      "low": "جودة عادية (128 kbps)",
+      "lossless": "جودة مثالية (FLAC)"
+    },
+    "player": {
+      "nowPlaying": "قيد التشغيل الآن",
+      "audioPlayer": "مشغل الصوت",
+      "poweredByGoogleDrive": "مدعوم بـ Google Drive",
+      "googleDriveAudioPlayer": "مشغل الصوت Google Drive",
+      "readyToPlay": "جاهز للتشغيل",
+      "audioReady": "الصوت جاهز!",
+      "speedControlInfo": "معلومات التحكم في السرعة",
+      "speedControlMessage": "لتغيير سرعة التشغيل، انقر بزر الماوس الأيمن على مشغل الصوت واختر السرعة من القائمة المنبثقة، أو استخدم عناصر التحكم المدمجة في المتصفح.",
+      "playerTipsAndControls": "نصائح وعناصر تحكم المشغل",
+      "basicControls": "عناصر التحكم الأساسية:",
+      "spacebarPlayPause": "مفتاح المسافة للتشغيل/الإيقاف",
+      "clickTimelineSeek": "انقر على الخط الزمني للبحث",
+      "volumeControlAvailable": "التحكم في مستوى الصوت متاح",
+      "streamingReady": "جاهز للبث",
+      "highQualityAudio": "صوت عالي الجودة",
+      "cloudHosted": "مستضاف على السحابة",
+      "liveStream": "بث مباشر",
+      "highFidelity": "دقة عالية",
+      "format": "التنسيق: MP3",
+      "source": "المصدر: Google Drive",
+      "viewOnGoogleDrive": "عرض في Google Drive"
+    },
+    "track": {
+      "by": "بصوت",
+      "duration": "المدة",
+      "category": "الفئة",
+      "quality": "الجودة",
+      "format": "الصيغة",
+      "size": "الحجم",
+      "addToFavorites": "إضافة للمفضلة",
+      "removeFromFavorites": "إزالة من المفضلة",
+      "download": "تحميل",
+      "share": "مشاركة",
+      "report": "إبلاغ",
+      "moreInfo": "المزيد من المعلومات",
+      "relatedTracks": "مقاطع ذات صلة"
+    },
+    "stats": {
+      "title": "إحصائيات المجموعة",
+      "subtitle": "نظرة عامة على مكتبتك الصوتية الإسلامية",
+      "totalTracks": "إجمالي المقاطع",
+      "reciters": "القراء",
+      "totalDuration": "إجمالي المدة",
+      "favoriteCount": "المفضلة",
+      "availableCategories": "الفئات",
+      "categoriesTitle": "فئات المحتوى",
+      "qualityTitle": "جودة الصوت",
+      "tracks": "مقاطع",
+      "premiumQuality": "جودة عالية",
+      "islamicContent": "محتوى إسلامي",
+      "mobileFriendly": "متوافق مع الهاتف المحمول",
+      "iconAlt": "أيقونة مجموعة الموسيقى",
+      "hdQuality": "جودة عالية الدقة متاحة",
+      "mainStatsLabel": "الإحصائيات الرئيسية",
+      "categoriesLabel": "تفصيل فئات المحتوى",
+      "qualityLabel": "توزيع جودة الصوت",
+      "mostPopular": "الأكثر شعبية",
+      "recentlyAdded": "مضاف حديثاً",
+      "topReciters": "أفضل القراء",
+      "categories": "الفئات",
+      "downloads": "التحميلات",
+      "plays": "مرات التشغيل"
     },
     "noTracks": "لا توجد تسجيلات",
     "tryDifferentCategory": "جرب اختيار فئة مختلفة",
-    "features": "مميزات مكتبة الصوتيات",
+    "features": {
+      "title": "مميزات مكتبة الصوتيات",
+      "subtitle": "اكتشف المزايا القوية لمكتبة الصوتيات الإسلامية",
+      "powerfulFeatures": "مزايا قوية",
+      "hdAudioQuality": {
+        "title": "جودة صوت عالية الدقة",
+        "description": "استمتع بجودة صوت عالية الوضوح مع خيارات متعددة للجودة تناسب اتصالك"
+      },
+      "smartSearch": {
+        "title": "بحث ذكي",
+        "description": "ابحث بسهولة في مكتبتنا الواسعة بالعنوان أو القارئ أو الفئة"
+      },
+      "offlineDownload": {
+        "title": "تحميل للاستماع بدون إنترنت",
+        "description": "حمل مقاطعك المفضلة للاستماع إليها في أي وقت بدون اتصال"
+      },
+      "multipleFormats": {
+        "title": "صيغ متعددة",
+        "description": "متوفر بصيغ مختلفة: MP3، FLAC، OGG لتناسب جميع الأجهزة"
+      },
+      "speedControl": {
+        "title": "التحكم في السرعة",
+        "description": "تحكم في سرعة التشغيل من 0.5x إلى 2x لتحسين التعلم والحفظ"
+      },
+      "mobileOptimized": {
+        "title": "محسن للجوال",
+        "description": "تجربة مثالية على جميع الأجهزة مع واجهة سريعة الاستجابة"
+      },
+      "exploreNow": "استكشف الآن",
+      "learnMore": "تعلم المزيد"
+    },
     "quranRecitations": "تلاوات القرآن",
     "quranDesc": "تلاوات رائعة من قراء مشهورين",
     "duas": "الأدعية والأذكار",
@@ -299,7 +450,22 @@
     "download": "تحميل",
     "quality": "جودة عالية - مجاني من Google Drive",
     "speed": "السرعة",
-    "loading": "جاري تحميل الصوت..."
+    "loading": "جاري تحميل الصوت...",
+    "play": "تشغيل",
+    "pause": "إيقاف مؤقت",
+    "stop": "إيقاف",
+    "next": "التالي",
+    "previous": "السابق",
+    "mute": "كتم الصوت",
+    "unmute": "إلغاء كتم الصوت",
+    "volume": "مستوى الصوت",
+    "repeat": "إعادة",
+    "shuffle": "تشغيل عشوائي",
+    "currentTime": "الوقت الحالي",
+    "totalTime": "إجمالي الوقت",
+    "playbackRate": "معدل التشغيل",
+    "audioSettings": "إعدادات الصوت",
+    "trackInfo": "معلومات المقطع"
   },
   "memorization_games": {
     "title": "ألعاب الحفظ",

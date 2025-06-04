@@ -27,7 +27,8 @@
       "light_mode": "Light Mode",
       "toggle_menu": "Toggle Menu",
       "language": "Change Language",
-      "appearance": "Appearance"
+      "appearance": "Appearance",
+      "close": "Close"
     },
     "brand": {
       "name": "Rosokh",
@@ -235,7 +236,121 @@
   "audio": {
     "title": "Islamic Audio Library",
     "description": "Listen to Quran recitations, duas, lectures, and nasheeds",
+    "subtitle": "Discover beautiful Quran recitations, Islamic lectures, duas, and nasheeds from renowned scholars and reciters worldwide",
     "by": "By",
+    "loading": {
+      "title": "Loading your Islamic audio collection...",
+      "message": "We're preparing your Islamic audio collection with beautiful recitations and spiritual content.",
+      "audioTracks": "Loading audio tracks...",
+      "preparingGame": "Preparing game...",
+      "loadingAudio": "Loading audio...",
+      "loadingAudioPlayer": "Loading Audio Player",
+      "preparingAudioExperience": "Preparing your audio experience..."
+    },
+    "error": {
+      "connectionError": "Connection Error",
+      "serverError": "Server Error",
+      "notFound": "Content Not Found",
+      "somethingWentWrong": "Something Went Wrong",
+      "networkMessage": "Please check your internet connection and try again.",
+      "serverMessage": "Our servers are experiencing issues. Please try again in a moment.",
+      "notFoundMessage": "The audio content you're looking for could not be found.",
+      "generalMessage": "An unexpected error occurred while loading the audio content.",
+      "technicalDetails": "Technical details",
+      "tryAgain": "Try Again",
+      "refreshPage": "Refresh Page",
+      "troubleshootingTips": "Troubleshooting Tips",
+      "checkConnection": "Check your internet connection",
+      "refreshThePage": "Try refreshing the page",
+      "clearCache": "Clear your browser cache and cookies",
+      "disableAdBlockers": "Disable ad blockers or browser extensions",
+      "failedToLoadData": "Failed to load audio data",
+      "retry": "Retry",
+      "audioError": "Audio Error"
+    },
+    "search": {
+      "placeholder": "Search tracks, reciters, or surahs...",
+      "smartSearch": "Smart Search",
+      "searchDescription": "Find specific surahs, reciters, or topics with intelligent search"
+    },
+    "filters": {
+      "categories": {
+        "all": "All Categories",
+        "quran": "Quran",
+        "dua": "Duas",
+        "lecture": "Lectures",
+        "nasheed": "Nasheeds"
+      },
+      "quality": {
+        "all": "All Qualities",
+        "high": "High Quality",
+        "medium": "Medium Quality",
+        "low": "Low Quality"
+      },
+      "viewMode": {
+        "grid": "Grid View",
+        "list": "List View"
+      },
+      "showFavoritesOnly": "Favorites Only",
+      "clearFilters": "Clear Filters"
+    },
+    "player": {
+      "nowPlaying": "Now playing:",
+      "audioPlayer": "Audio Player",
+      "poweredByGoogleDrive": "Powered by Google Drive",
+      "googleDriveAudioPlayer": "Google Drive Audio Player",
+      "readyToPlay": "Ready to Play",
+      "audioReady": "Audio Ready!",
+      "speedControlInfo": "Speed Control Information",
+      "speedControlMessage": "To change playback speed, right-click on the audio player and select speed from the context menu, or use your browser's built-in media controls.",
+      "playerTipsAndControls": "Player Tips & Controls",
+      "basicControls": "Basic Controls:",
+      "spacebarPlayPause": "Spacebar for play/pause",
+      "clickTimelineSeek": "Click timeline to seek",
+      "volumeControlAvailable": "Volume control available",
+      "streamingReady": "Streaming Ready",
+      "highQualityAudio": "High Quality Audio",
+      "cloudHosted": "Cloud Hosted",
+      "liveStream": "Live Stream",
+      "highFidelity": "High Fidelity",
+      "format": "Format: MP3",
+      "source": "Source: Google Drive",
+      "viewOnGoogleDrive": "View on Google Drive",
+      "stopped": "Audio stopped"
+    },
+    "track": {
+      "duration": "Duration",
+      "size": "Size",
+      "category": "Category",
+      "format": "Format",
+      "quality": "Quality",
+      "download": "Download",
+      "addToFavorites": "Add to Favorites",
+      "removeFromFavorites": "Remove from Favorites",
+      "addedToFavorites": "Added to favorites:",
+      "removedFromFavorites": "Removed from favorites:",
+      "offline": "Offline"
+    },
+    "stats": {
+      "title": "Collection Statistics",
+      "subtitle": "Your Islamic audio library overview",
+      "totalTracks": "Total Tracks",
+      "reciters": "Reciters",
+      "totalDuration": "Total Duration",
+      "favoriteCount": "Favorites",
+      "availableCategories": "Categories",
+      "categoriesTitle": "Content Categories",
+      "qualityTitle": "Audio Quality",
+      "tracks": "tracks",
+      "premiumQuality": "Premium Quality",
+      "islamicContent": "Islamic Content",
+      "mobileFriendly": "Mobile Friendly",
+      "iconAlt": "Music collection icon",
+      "hdQuality": "HD Quality available",
+      "mainStatsLabel": "Main statistics",
+      "categoriesLabel": "Content categories breakdown",
+      "qualityLabel": "Audio quality distribution"
+    },
     "categories": {
       "all": "All",
       "quran": "Quran",
@@ -243,9 +358,16 @@
       "lecture": "Lectures",
       "nasheed": "Nasheeds"
     },
+    "qualities": {
+      "high": "High Quality",
+      "medium": "Medium Quality",
+      "low": "Low Quality"
+    },
     "noTracks": "No tracks found",
     "tryDifferentCategory": "Try selecting a different category",
     "features": "Audio Library Features",
+    "powerfulFeatures": "Powerful Features",
+    "featuresDescription": "Experience the best Islamic audio platform with features designed for modern Muslims",
     "quranRecitations": "Quran Recitations",
     "quranDesc": "Beautiful recitations by renowned qaris",
     "duas": "Duas & Adhkar",
@@ -254,6 +376,14 @@
     "lecturesDesc": "Educational content by scholars",
     "nasheeds": "Nasheeds",
     "nasheedsDesc": "Inspiring Islamic songs and chants",
+    "hdAudioQuality": "HD Audio Quality",
+    "hdAudioDescription": "Crystal clear sound with multiple quality options for your preference",
+    "mobileOptimized": "Mobile Optimized",
+    "mobileDescription": "Seamless experience across all devices - phone, tablet, and desktop",
+    "safeSecure": "Safe & Secure",
+    "safeDescription": "Trusted content from verified reciters with secure streaming",
+    "startListeningNow": "Start Listening Now",
+    "learnMore": "Learn More",
     "sampleTracks": {
       "surah_al_fatiha": {
         "title": "Surah Al-Fatiha",
