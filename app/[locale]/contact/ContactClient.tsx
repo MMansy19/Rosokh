@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useNotifications } from "@/contexts/GlobalContext";
 
 interface ContactClientProps {
   locale: string;
@@ -11,6 +12,7 @@ export default function ContactClient({
   locale,
   messages,
 }: ContactClientProps) {
+  const { notify } = useNotifications();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,23 +39,36 @@ export default function ContactClient({
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Simulate form submission
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      notify.success(
+        messages?.contact?.thankYou || "Thank You!",
+        messages?.contact?.messageReceived || "Your message has been received. We'll get back to you soon."
+      );
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-        category: "general",
-      });
-    }, 3000);
+      setIsSubmitted(true);
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+          category: "general",
+        });
+      }, 3000);
+    } catch (error) {
+      notify.error(
+        "Submission Failed",
+        "There was an error sending your message. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactMethods = [

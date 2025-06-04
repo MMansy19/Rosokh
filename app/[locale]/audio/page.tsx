@@ -9,5 +9,5 @@ export default async function AudioPage({
   const { locale } = await params;
   const messages = await getMessages(locale);
 
-  return <AudioClient />;
+  return <AudioClient locale={locale} messages={messages} />;
 }

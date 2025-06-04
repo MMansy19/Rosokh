@@ -138,10 +138,10 @@ export function StatsSection({ locale, messages }: StatsSectionProps) {
         <div className="text-center space-y-4 mb-16">
           {" "}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            {messages?.home?.stats?.title || "Platform Statistics"}
+            {messages?.home?.hero?.stats?.title || "Platform Statistics"}
           </h2>
           <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto leading-relaxed">
-            {messages?.home?.stats?.subtitle ||
+            {messages?.home?.hero?.stats?.subtitle ||
               "Discover the scope of our Islamic multimedia platform"}
           </p>
         </div>
@@ -173,11 +173,11 @@ export function StatsSection({ locale, messages }: StatsSectionProps) {
                       />
                     </div>{" "}
                     <h3 className="text-lg font-semibold text-foreground">
-                      {messages?.home?.stats?.items?.[stat.key]?.title ||
+                      {messages?.home?.hero?.stats?.items?.[stat.key]?.title ||
                         stat.key}
                     </h3>
                     <p className="text-muted text-sm leading-relaxed">
-                      {messages?.home?.stats?.items?.[stat.key]?.description ||
+                      {messages?.home?.hero?.stats?.items?.[stat.key]?.description ||
                         `${stat.key} description`}
                     </p>
                   </div>
@@ -193,15 +193,15 @@ export function StatsSection({ locale, messages }: StatsSectionProps) {
             <div className="space-y-6">
               {" "}
               <div className="quran-text text-2xl md:text-3xl text-primary">
-                {messages?.home?.stats?.quote?.arabic ||
+                {messages?.home?.hero?.stats?.quote?.arabic ||
                   "وَنَزَّلْنَا عَلَيْكَ الْكِتَابَ تِبْيَانًا لِّكُلِّ شَيْءٍ"}
               </div>
               <div className="text-lg md:text-xl text-muted italic">
-                {messages?.home?.stats?.quote?.translation ||
+                {messages?.home?.hero?.stats?.quote?.translation ||
                   "And We have sent down to you the Book as clarification for all things"}
               </div>
               <div className="text-sm text-muted font-medium">
-                {messages?.home?.stats?.quote?.reference || "Quran 16:89"}
+                {messages?.home?.hero?.stats?.quote?.reference || "Quran 16:89"}
               </div>
             </div>
           </div>
@@ -224,7 +224,7 @@ export function StatsSection({ locale, messages }: StatsSectionProps) {
                 {metric.value}
               </div>{" "}
               <div className="text-sm text-muted">
-                {messages?.home?.stats?.metrics?.[metric.key] || metric.key}
+                {messages?.home?.hero?.stats?.metrics?.[metric.key] || metric.key}
               </div>
             </div>
           ))}
