@@ -62,6 +62,14 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     description: "Beautiful Quran recitations from renowned reciters",
   },
   {
+    id: "quran_tafsir",
+    name: "Quran Tafsir",
+    nameArabic: "تفسير القرآن",
+    nameRussian: "Тафсир Корана",
+    icon: "📜",
+    description: "Explanations and interpretations of Quranic verses",
+  },
+  {
     id: "islamic_lectures",
     name: "Islamic Lectures",
     nameArabic: "المحاضرات الإسلامية",

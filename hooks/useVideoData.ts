@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 export interface VideoMetadata {
   id: string;
+  youtubeId?: string; // Actual YouTube video ID for playlist videos
   title: string;
   description: string;
   channelTitle: string;
@@ -34,13 +35,135 @@ export interface VideoCategory {
 
 export interface VideoData {
   videos: VideoMetadata[];
-  categories: VideoCategory[];
   metadata: {
     totalVideos: number;
     lastUpdated: string;
     version: string;
   };
 }
+
+export const VIDEO_CATEGORIES: VideoCategory[] = [
+  {
+    id: "quran_recitation",
+    name: "Quran Recitation",
+    nameArabic: "تلاوة القرآن",
+    nameRussian: "Чтение Корана",
+    icon: "📖",
+    color: "emerald"
+  },
+  {
+    id: "quran_tafsir",
+    name: "Quran Tafsir",
+    nameArabic: "تفسير القرآن الكريم",
+    nameRussian: "Тафсир Корана",
+    icon: "📚",
+    color: "blue"
+  },
+  {
+    id: "islamic_lectures",
+    name: "Islamic Lectures",
+    nameArabic: "محاضرات إسلامية",
+    nameRussian: "Исламские лекции",
+    icon: "🎓",
+    color: "purple"
+  },
+  {
+    id: "nasheed",
+    name: "Islamic Nasheed",
+    nameArabic: "أناشيد إسلامية",
+    nameRussian: "Исламские нашиды",
+    icon: "🎵",
+    color: "pink"
+  },
+  {
+    id: "hajj_umrah",
+    name: "Hajj & Umrah",
+    nameArabic: "الحج والعمرة",
+    nameRussian: "Хадж и Умра",
+    icon: "🕋",
+    color: "orange"
+  },
+  {
+    id: "ramadan",
+    name: "Ramadan",
+    nameArabic: "رمضان",
+    nameRussian: "Рамадан",
+    icon: "🌙",
+    color: "yellow"
+  },
+  {
+    id: "islamic_history",
+    name: "Islamic History",
+    nameArabic: "التاريخ الإسلامي",
+    nameRussian: "Исламская история",
+    icon: "📜",
+    color: "amber"
+  },
+  {
+    id: "prophet_stories",
+    name: "Prophet Stories",
+    nameArabic: "قصص الأنبياء",
+    nameRussian: "Истории пророков",
+    icon: "👥",
+    color: "indigo"
+  },
+  {
+    id: "islamic_knowledge",
+    name: "Islamic Knowledge",
+    nameArabic: "العلوم الإسلامية",
+    nameRussian: "Исламские знания",
+    icon: "🧠",
+    color: "cyan"
+  },
+  {
+    id: "islamic_education",
+    name: "Islamic Education",
+    nameArabic: "التربية الإسلامية",
+    nameRussian: "Исламское образование",
+    icon: "📚",
+    color: "teal"
+  },
+  {
+    id: "islamic_reminders",
+    name: "Islamic Reminders",
+    nameArabic: "تذكير إسلامي",
+    nameRussian: "Исламские напоминания",
+    icon: "💝",
+    color: "red"
+  },
+  {
+    id: "dua_supplications",
+    name: "Dua & Supplications",
+    nameArabic: "الدعاء والأذكار",
+    nameRussian: "Дуа и мольбы",
+    icon: "🤲",
+    color: "green"
+  },
+  {
+    id: "islamic_guidance",
+    name: "Islamic Guidance",
+    nameArabic: "الإرشاد الإسلامي",
+    nameRussian: "Исламское руководство",
+    icon: "🧭",
+    color: "slate"
+  },
+  {
+    id: "islamic_youth",
+    name: "Islamic Youth",
+    nameArabic: "الشباب الإسلامي",
+    nameRussian: "Исламская молодежь",
+    icon: "👨‍🎓",
+    color: "violet"
+  },
+  {
+    id: "islamic_family",
+    name: "Islamic Family",
+    nameArabic: "الأسرة الإسلامية",
+    nameRussian: "Исламская семья",
+    icon: "👨‍👩‍👧‍👦",
+    color: "rose"
+  }
+];
 
 export function useVideoData() {
   const [data, setData] = useState<VideoData | null>(null);
@@ -118,6 +241,5 @@ export function useVideoData() {
     getVideosByCategory,
     getVideoById,
     videos: data?.videos || [],
-    categories: data?.categories || [],
   };
 }

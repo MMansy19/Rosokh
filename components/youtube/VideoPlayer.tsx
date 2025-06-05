@@ -470,6 +470,16 @@ interface VideoInfoProps {
   isExpanded?: boolean;
   locale: string;
   messages: any;
+  playlist?: {
+    id: string;
+    title: string;
+    category: {
+      id: string;
+      name: string;
+      nameArabic?: string;
+      nameRussian?: string;
+    };
+  };
 }
 
 export function VideoInfo({
@@ -477,6 +487,7 @@ export function VideoInfo({
   isExpanded = false,
   locale,
   messages,
+  playlist = null,
 }: VideoInfoProps) {
   const [showFullDescription, setShowFullDescription] = useState(isExpanded);
 
@@ -522,13 +533,22 @@ export function VideoInfo({
       {/* Category */}
       <div className="mb-4">
         <span className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-          <span>{video.category.icon}</span>
           <span>
-            {locale === "ar" && video.category.nameArabic
-              ? video.category.nameArabic
-              : locale === "ru" && video.category.nameRussian
-                ? video.category.nameRussian
-                : video.category.name}
+            {playlist ? (
+              // If video is from a playlist, show playlist category
+              locale === "ar" && playlist.category.nameArabic
+                ? playlist.category.nameArabic
+                : locale === "ru" && playlist.category.nameRussian
+                  ? playlist.category.nameRussian
+                  : playlist.category.name
+            ) : (
+              // If video is standalone, show video category
+              locale === "ar" && video.category.nameArabic
+                ? video.category.nameArabic
+                : locale === "ru" && video.category.nameRussian
+                  ? video.category.nameRussian
+                  : video.category.name
+            )}
           </span>
         </span>
       </div>
