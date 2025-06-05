@@ -487,7 +487,7 @@ export function VideoInfo({
   isExpanded = false,
   locale,
   messages,
-  playlist = null,
+  playlist,
 }: VideoInfoProps) {
   const [showFullDescription, setShowFullDescription] = useState(isExpanded);
 
