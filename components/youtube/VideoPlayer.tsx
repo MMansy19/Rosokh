@@ -11,13 +11,6 @@ import {
   SkipBack,
   SkipForward,
   Settings,
-  Download,
-  Share2,
-  Heart,
-  Bookmark,
-  MoreHorizontal,
-  ChevronDown,
-  ChevronUp,
   X, // Add X icon for close button
   Eye, // Add Eye icon for VideoInfo
   Clock, // Add Clock icon for VideoInfo
@@ -517,7 +510,7 @@ export function VideoInfo({
       <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border">
         <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
           <span className="text-primary font-bold">
-            {video.channelTitle.charAt(0).toUpperCase()}
+            {video.channelTitle}
           </span>
         </div>
         <div>

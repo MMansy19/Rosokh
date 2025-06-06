@@ -26,33 +26,74 @@ export interface PlaylistVideo extends VideoMetadata {
   playlistIndex: number;
 }
 
+interface PlaylistManifest {
+  files: string[];
+}
+
+interface PlaylistDataFile {
+  playlists: PlaylistMetadata[];
+}
+
+interface PlaylistManifest {
+  files: string[];
+}
+
+interface PlaylistDataFile {
+  playlists: PlaylistMetadata[];
+}
+
 export const usePlaylistData = () => {
   const [playlists, setPlaylists] = useState<PlaylistMetadata[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);  useEffect(() => {
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
     const fetchPlaylists = async () => {
       try {
         setLoading(true);
-        setError(null);
+        setError(null);        // First, fetch the manifest to get all available playlist files
+        const manifestResponse = await fetch('/data/youtube-playlists/manifest.json');
+        if (!manifestResponse.ok) {
+          throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
+        }
+        
+        const manifest: PlaylistManifest = await manifestResponse.json();
+        const playlistFiles = manifest.files || [];
 
-        // Fetch playlist files from the new folder structure
-        const [hudaResponse, quranTafsirResponse] = await Promise.all([
-          fetch('/data/youtube-playlists/huda-lilnas.json'),
-          fetch('/data/youtube-playlists/quran-tafsir.json')
-        ]);
-
-        if (!hudaResponse.ok || !quranTafsirResponse.ok) {
-          throw new Error(`HTTP error! Huda: ${hudaResponse.status}, Quran Tafsir: ${quranTafsirResponse.status}`);
+        if (playlistFiles.length === 0) {
+          console.warn('No playlist files found in manifest');
+          setPlaylists([]);
+          return;
         }
 
-        const [hudaData, quranTafsirData] = await Promise.all([
-          hudaResponse.json(),
-          quranTafsirResponse.json()
-        ]);        // Combine playlists from both files
-        const allPlaylists = [
-          ...(hudaData.playlists || []),
-          ...(quranTafsirData.playlists || [])
-        ];
+        // Fetch all playlist files dynamically
+        const playlistResponses = await Promise.all(
+          playlistFiles.map((filename: string) => 
+            fetch(`/data/youtube-playlists/${filename}`)
+          )
+        );
+
+        // Check if all responses are successful
+        const failedRequests = playlistResponses
+          .map((response, index) => ({ response, filename: playlistFiles[index] }))
+          .filter(({ response }) => !response.ok);
+
+        if (failedRequests.length > 0) {
+          const errorMessages = failedRequests.map(({ response, filename }) => 
+            `${filename}: ${response.status}`
+          );
+          throw new Error(`Failed to fetch playlist files: ${errorMessages.join(', ')}`);
+        }
+
+        // Parse all JSON responses
+        const playlistDataArray: PlaylistDataFile[] = await Promise.all(
+          playlistResponses.map(response => response.json())
+        );
+
+        // Combine playlists from all files
+        const allPlaylists = playlistDataArray.reduce((acc, data) => {
+          return [...acc, ...(data.playlists || [])];
+        }, [] as PlaylistMetadata[]);
 
         setPlaylists(allPlaylists);
       } catch (err) {
