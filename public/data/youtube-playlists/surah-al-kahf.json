@@ -1,0 +1,111 @@
+{
+  "playlists": [
+    {
+      "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ",
+      "title": "تفسير سورة الكهف | د. أحمد عبد المنعم",
+      "titleEnglish": "Interpretation of Surah Al-Kahf - Dr. Ahmed Abdel Moneim",
+      "titleRussian": "Толкование суры Аль-Кахф - Доктор Ахмед Абдель Монеим",
+      "description": "سلسلة تفسير سورة الكهف من القرآن الكريم مع الدكتور أحمد عبد المنعم - تفسير مفصل للسورة الكاملة",
+      "descriptionEnglish": "Complete interpretation series of Surah Al-Kahf from the Holy Quran with Dr. Ahmed Abdel Moneim - Detailed interpretation of the complete chapter",
+      "descriptionRussian": "Полная серия толкования суры Аль-Кахф из Священного Корана с доктором Ахмедом Абдель Монеимом - Подробная интерпретация всей главы",
+      "thumbnailUrl": "https://i.ytimg.com/vi/am4hcsllzL0/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLAVgX7Fonde_ZjrCYqBMnGGLz_01w",
+      "publishedAt": "2020-01-01T00:00:00Z",
+      "videoCount": 7,
+      "totalDuration": 32220,
+      "viewCount": 601000,
+      "category": {
+        "id": "quran_tafsir",
+        "name": "Quran Interpretation",
+        "nameArabic": "تفسير القرآن الكريم",
+        "nameRussian": "Толкование Корана",
+        "icon": "📖"
+      },
+      "videos": [
+        {
+          "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ&index=1",
+          "youtubeId": "am4hcsllzL0",
+          "title": "تفسير سورة الكهف (1) | الآيات (1-8) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 1-8 من سورة الكهف - مقدمة السورة وأهميتها",
+          "publishedAt": "2020-01-01T00:00:00Z",
+          "duration": 4166,
+          "viewCount": 206000,
+          "likeCount": 10300,
+          "thumbnailUrl": "https://i.ytimg.com/vi/am4hcsllzL0/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLAVgX7Fonde_ZjrCYqBMnGGLz_01w",
+          "playlistIndex": 1
+        },
+        {
+          "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ&index=2",
+          "youtubeId": "l4OPSMrbeZM",
+          "title": "تفسير سورة الكهف (2) | الآيات (9-26) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 9-26 من سورة الكهف - قصة أصحاب الكهف",
+          "publishedAt": "2020-01-08T00:00:00Z",
+          "duration": 4798,
+          "viewCount": 107000,
+          "likeCount": 5350,
+          "thumbnailUrl": "https://i.ytimg.com/vi/l4OPSMrbeZM/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBXMKQ8PmGGxTRRNIHv3gxWQpFFoQ",
+          "playlistIndex": 2
+        },
+        {
+          "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ&index=3",
+          "youtubeId": "HMoJNfwLrdY",
+          "title": "تفسير سورة الكهف (3) | الآيات (26-31) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 26-31 من سورة الكهف - الحكم والعبر من القصة",
+          "publishedAt": "2020-01-15T00:00:00Z",
+          "duration": 3851,
+          "viewCount": 70000,
+          "likeCount": 3500,
+          "thumbnailUrl": "https://i.ytimg.com/vi/HMoJNfwLrdY/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBA0PAZiR13u6T9hXK-baNMPg_Xww",
+          "playlistIndex": 3
+        },
+        {
+          "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ&index=4",
+          "youtubeId": "5kKhuvtjLes",
+          "title": "تفسير سورة الكهف (4) | الآيات (32-45) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 32-45 من سورة الكهف - قصة صاحب الجنتين",
+          "publishedAt": "2020-01-22T00:00:00Z",
+          "duration": 4882,
+          "viewCount": 65000,
+          "likeCount": 3250,
+          "thumbnailUrl": "https://i.ytimg.com/vi/5kKhuvtjLes/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLCcIaIUrgY5sgX59S9fZLOcdTuXrQ",
+          "playlistIndex": 4
+        },
+        {
+          "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ&index=5",
+          "youtubeId": "ki89hQR5x4A",
+          "title": "تفسير سورة الكهف (5) | الآيات (46-59) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 46-59 من سورة الكهف - الحياة الدنيا والآخرة",
+          "publishedAt": "2020-01-29T00:00:00Z",
+          "duration": 4760,
+          "viewCount": 56000,
+          "likeCount": 2800,
+          "thumbnailUrl": "https://i.ytimg.com/vi/ki89hQR5x4A/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBylIlynktv5clS7vjRmnyCd0aWqw",
+          "playlistIndex": 5
+        },
+        {
+          "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ&index=6",
+          "youtubeId": "SJBYUrWfN1g",
+          "title": "تفسير سورة الكهف (6) | الآيات (60-82) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 60-82 من سورة الكهف - قصة موسى والخضر عليهما السلام",
+          "publishedAt": "2020-02-05T00:00:00Z",
+          "duration": 5295,
+          "viewCount": 53000,
+          "likeCount": 2650,
+          "thumbnailUrl": "https://i.ytimg.com/vi/SJBYUrWfN1g/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLAiiDfpgWI3skox7Lnrapjt6g4lLw",
+          "playlistIndex": 6
+        },
+        {
+          "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ&index=7",
+          "youtubeId": "7AhEgQ12xMs",
+          "title": "تفسير سورة الكهف (7) | الآيات (83-110) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 83-110 من سورة الكهف - قصة ذي القرنين وخاتمة السورة",
+          "publishedAt": "2020-02-12T00:00:00Z",
+          "duration": 5216,
+          "viewCount": 44000,
+          "likeCount": 2200,
+          "thumbnailUrl": "https://i.ytimg.com/vi/7AhEgQ12xMs/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLD_qRcUPLv2nUzaNjqczr5fg9719A",
+          "playlistIndex": 7
+        }
+      ]
+    }
+  ]
+}

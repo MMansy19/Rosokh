@@ -1,0 +1,136 @@
+{
+  "playlists": [    {
+      "id": "PLnpYU8_AiEPdZtOcZemEHETeOjWakJpKE",
+      "title": "تفسير جزء (عَمَّ) | د. أحمد عبد المنعم",
+      "titleEnglish": "Interpretation of Juz Amma - Dr. Ahmed Abdel Moneim",
+      "titleRussian": "Толкование Джуз Амма - Доктор Ахмед Абдель Монеим",
+      "description": "سلسلة تفسير جزء عم كاملاً مع الدكتور أحمد عبد المنعم - تدبر وتفسير آيات جزء عم من القرآن الكريم",
+      "descriptionEnglish": "Complete interpretation series of Juz Amma with Dr. Ahmed Abdel Moneim - Contemplation and interpretation of Juz Amma verses from the Holy Quran",
+      "descriptionRussian": "Полная серия толкования Джуз Амма с доктором Ахмедом Абдель Монеимом - Размышления и толкование стихов Джуз Амма из Священного Корана",
+      "thumbnailUrl": "https://i.ytimg.com/vi/mDP084pOle8/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDALETh-Mv1tL4VZ71FASkdAlHddg",
+      "publishedAt": "2020-01-01T00:00:00Z",
+      "videoCount": 37,
+      "totalDuration": 112800,
+      "viewCount": 284407,
+      "channelTitle": "Dr. Ahmed Abdel Moneim",
+      "category": {
+        "id": "quran_tafsir",
+        "name": "Quran Interpretation",
+        "nameArabic": "تفسير القرآن الكريم",
+        "nameRussian": "Толкование Корана",
+        "icon": "📖"
+      },
+      "dataFile": "juz-amma-tafsir.json"
+    },    {
+      "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b",
+      "title": "تفسير جزء (تبارك) | د. أحمد عبد المنعم",
+      "titleEnglish": "Interpretation of Juz Tabarak - Dr. Ahmed Abdel Moneim",
+      "titleRussian": "Толкование Джуз Табарак - Доктор Ахмед Абдель Монеим",
+      "description": "سلسلة تفسير جزء تبارك من القرآن الكريم مع الدكتور أحمد عبد المنعم - تفسير مفصل للسور من الملك إلى القيامة",
+      "descriptionEnglish": "Complete interpretation series of Juz Tabarak from the Holy Quran with Dr. Ahmed Abdel Moneim - Detailed interpretation of Surahs from Al-Mulk to Al-Qiyamah",
+      "descriptionRussian": "Полная серия толкования Джуз Табарак из Священного Корана с доктором Ахмедом Абдель Монеимом - Подробная интерпретация сур от Аль-Мульк до Аль-Кыяма",
+      "thumbnailUrl": "https://i.ytimg.com/vi/xA1PQCEjKCA/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLDkz_EMz3QOuePkq4GtpgciqeNLhA",
+      "publishedAt": "2020-01-01T00:00:00Z",
+      "videoCount": 15,
+      "totalDuration": 46800,
+      "viewCount": 342900,
+      "channelTitle": "Dr. Ahmed Abdel Moneim",
+      "category": {
+        "id": "quran_tafsir",
+        "name": "Quran Interpretation",
+        "nameArabic": "تفسير القرآن الكريم",
+        "nameRussian": "Толкование Корана",
+        "icon": "📖"
+      },
+      "dataFile": "juz-tabarak.json"
+    },    {
+      "id": "PLx8eSI7UgsiGA9f1ztAHoemtDlfJUd5a3",
+      "title": "هدى للناس - تفسير القرآن المبسط",
+      "titleEnglish": "Huda Lil Nas - Simplified Quran Commentary",
+      "titleRussian": "Худа Лиль Нас - Упрощенный комментарий к Корану",
+      "description": "سلسلة تفسير القرآن الكريم مع الدكتور أحمد عبد المنعم - برنامج هدى للناس يهدف إلى تبسيط معاني القرآن لهداية الناس",
+      "descriptionEnglish": "Quran commentary series with Dr. Ahmed Abdel Moneim - Huda Lil Nas program aims to simplify Quran meanings for people's guidance",
+      "descriptionRussian": "Серия комментариев к Корану с доктором Ахмедом Абдель Монеимом - программа Худа Лиль Нас направлена на упрощение значений Корана для руководства людей",
+      "thumbnailUrl": "https://i.ytimg.com/vi/U_BAOVorAnQ/hqdefault.jpg",
+      "publishedAt": "2025-03-05T22:00:00Z",
+      "videoCount": 19,
+      "totalDuration": 32883,
+      "viewCount": 2167000,
+      "channelTitle": "Dr. Ahmed Abdel Moneim",
+      "category": {
+        "id": "quran_tafsir",
+        "name": "Quran Interpretation",
+        "nameArabic": "تفسير القرآن الكريم",
+        "nameRussian": "Толкование Корана",
+        "icon": "📖"
+      },
+      "dataFile": "huda-lilnas.json"
+    },    {
+      "id": "PLnpYU8_AiEPdQadSameaTafsir2024",
+      "title": "تفسير جزء (قد سمع) | د. أحمد عبد المنعم",
+      "titleEnglish": "Interpretation of Qad Samea Part - Dr. Ahmed Abdel Moneim",
+      "titleRussian": "Толкование части Кад Самиа - Доктор Ахмед Абдель Монеим",
+      "description": "سلسلة تفسير جزء قد سمع مع الدكتور أحمد عبد المنعم - تدبر وتفسير سور المجادلة والصف والجمعة والمنافقون والتغابن والتحريم",
+      "descriptionEnglish": "Interpretation series of Qad Samea part with Dr. Ahmed Abdel Moneim - Contemplation and interpretation of Surat Al-Mujadila, As-Saff, Al-Jumua, Al-Munafiqun, At-Taghabun, and At-Tahrim",
+      "descriptionRussian": "Серия толкования части Кад Самиа с доктором Ахмедом Абдель Монеимом - Размышления и толкование сур Аль-Муджадила, Ас-Сафф, Аль-Джумуа, Аль-Мунафикун, Ат-Тагабун и Ат-Тахрим",
+      "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId1/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDALETh-Mv1tL4VZ71FASkdAlHddg",
+      "publishedAt": "2021-03-01T00:00:00Z",
+      "videoCount": 8,
+      "totalDuration": 19200,
+      "viewCount": 156000,
+      "channelTitle": "Dr. Ahmed Abdel Moneim",
+      "category": {
+        "id": "quran_tafsir",
+        "name": "Quran Interpretation",
+        "nameArabic": "تفسير القرآن الكريم",
+        "nameRussian": "Толкование Корана",
+        "icon": "📖"
+      },
+      "dataFile": "qad-samea-tafsir.json"
+    },    {
+      "id": "PLnpYU8_AiEPct7B-VmBrWJWifYEcb2TtC",
+      "title": "مجالس القرآن - د. أحمد عبد المنعم",
+      "titleEnglish": "Quran Councils - Dr. Ahmed Abdel Moneim",
+      "titleRussian": "Советы Корана - Доктор Ахмед Абдель Монеим",
+      "description": "سلسلة مجالس القرآن مع الدكتور أحمد عبد المنعم - مجالس تدبر وتفسير وتأمل في آيات القرآن الكريم",
+      "descriptionEnglish": "Quran Councils series with Dr. Ahmed Abdel Moneim - Sessions of contemplation, interpretation and reflection on verses of the Holy Quran",
+      "descriptionRussian": "Серия Советов Корана с доктором Ахмедом Абдель Монеимом - Сессии размышления, интерпретации и размышления о стихах Священного Корана",
+      "thumbnailUrl": "https://i.ytimg.com/vi/lIHL1w6x1iM/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAtlbC12IlO9_elmtup_ijQkbIh1Q",
+      "publishedAt": "2024-12-15T18:00:00Z",
+      "videoCount": 5,
+      "totalDuration": 21600,
+      "viewCount": 1425000,
+      "channelTitle": "Dr. Ahmed Abdel Moneim",
+      "category": {
+        "id": "quran_tafsir",
+        "name": "Quran Interpretation",
+        "nameArabic": "تفسير القرآن الكريم",
+        "nameRussian": "Толкование Корана",
+        "icon": "📖"
+      },      "dataFile": "quran-tafsir.json"
+    },
+    {
+      "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ",
+      "title": "تفسير سورة الكهف | د. أحمد عبد المنعم",
+      "titleEnglish": "Interpretation of Surah Al-Kahf - Dr. Ahmed Abdel Moneim",
+      "titleRussian": "Толкование суры Аль-Кахф - Доктор Ахмед Абдель Монеим",
+      "description": "سلسلة تفسير سورة الكهف من القرآن الكريم مع الدكتور أحمد عبد المنعم - تفسير مفصل للسورة الكاملة",
+      "descriptionEnglish": "Complete interpretation series of Surah Al-Kahf from the Holy Quran with Dr. Ahmed Abdel Moneim - Detailed interpretation of the complete chapter",
+      "descriptionRussian": "Полная серия толкования суры Аль-Кахф из Священного Корана с доктором Ахмедом Абдель Монеимом - Подробная интерпретация всей главы",
+      "thumbnailUrl": "https://i.ytimg.com/vi/am4hcsllzL0/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLAVgX7Fonde_ZjrCYqBMnGGLz_01w",
+      "publishedAt": "2020-01-01T00:00:00Z",
+      "videoCount": 7,
+      "totalDuration": 32220,
+      "viewCount": 601000,
+      "channelTitle": "Dr. Ahmed Abdel Moneim",
+      "category": {
+        "id": "quran_tafsir",
+        "name": "Quran Interpretation",
+        "nameArabic": "تفسير القرآن الكريم",
+        "nameRussian": "Толкование Корана",
+        "icon": "📖"
+      },
+      "dataFile": "surah-al-kahf.json"
+    }
+  ]
+}

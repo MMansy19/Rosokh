@@ -25,7 +25,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update-playlist-manifest": "node scripts/update-playlist-manifest.js"
   },
   "dependencies": {
     "googleapis": "^149.0.0",

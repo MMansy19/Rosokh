@@ -1,0 +1,175 @@
+{
+  "playlists": [
+    {
+      "id": "PLnpYU8_AiEPdQadSameaTafsir2024",
+      "title": "تفسير جزء (قد سمع) | د. أحمد عبد المنعم",
+      "titleEnglish": "Interpretation of Qad Samea Part - Dr. Ahmed Abdel Moneim",
+      "titleRussian": "Толкование части Кад Самиа - Доктор Ахмед Абдель Монеим",
+      "description": "سلسلة تفسير جزء قد سمع مع الدكتور أحمد عبد المنعم - تدبر وتفسير سور المجادلة والصف والجمعة والمنافقون والتغابن والتحريم",
+      "descriptionEnglish": "Interpretation series of Qad Samea part with Dr. Ahmed Abdel Moneim - Contemplation and interpretation of Surat Al-Mujadila, As-Saff, Al-Jumua, Al-Munafiqun, At-Taghabun, and At-Tahrim",
+      "descriptionRussian": "Серия толкования части Кад Самиа с доктором Ахмедом Абдель Монеимом - Размышления и толкование сур Аль-Муджадила, Ас-Сафф, Аль-Джумуа, Аль-Мунафикун, Ат-Тагабун и Ат-Тахрим",
+      "channelTitle": "إنه القرآن",
+      "channelId": "UC_HUDA_LIL_NAS",
+      "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId1/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDALETh-Mv1tL4VZ71FASkdAlHddg",
+      "publishedAt": "2021-03-01T00:00:00Z",
+      "videoCount": 8,
+      "totalDuration": 19200,
+      "viewCount": 156000,
+      "category": {
+        "id": "quran_tafsir",
+        "name": "Quran Interpretation",
+        "nameArabic": "تفسير القرآن الكريم",
+        "nameRussian": "Толкование Корана",
+        "icon": "📖"
+      },
+      "tags": ["تفسير القرآن", "قد سمع", "quran interpretation", "islamic knowledge", "ahmed abdelmonem", "تدبر", "قرآن"],
+      "language": "ar",
+      "videos": [
+        {
+          "id": "PLnpYU8_AiEPdQadSameaTafsir2024&index=1",
+          "youtubeId": "QadSameaId1",
+          "title": "تفسير سورة المجادلة (1) | د. أحمد عبد المنعم",
+          "description": "تفسير وتدبر سورة المجادلة - الجزء الأول مع الدكتور أحمد عبد المنعم",
+          "publishedAt": "2021-03-01T00:00:00Z",
+          "duration": 2400,
+          "viewCount": 32000,
+          "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId1/hqdefault.jpg",
+          "playlistIndex": 1,
+          "category": {
+            "id": "quran_tafsir",
+            "name": "Quran Interpretation",
+            "nameArabic": "تفسير القرآن الكريم",
+            "nameRussian": "Толкование Корана",
+            "icon": "📖"
+          }
+        },
+        {
+          "id": "PLnpYU8_AiEPdQadSameaTafsir2024&index=2",
+          "youtubeId": "QadSameaId2",
+          "title": "تفسير سورة المجادلة (2) | د. أحمد عبد المنعم",
+          "description": "تفسير وتدبر سورة المجادلة - الجزء الثاني مع الدكتور أحمد عبد المنعم",
+          "publishedAt": "2021-03-08T00:00:00Z",
+          "duration": 2500,
+          "viewCount": 28000,
+          "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId2/hqdefault.jpg",
+          "playlistIndex": 2,
+          "category": {
+            "id": "quran_tafsir",
+            "name": "Quran Interpretation",
+            "nameArabic": "تفسير القرآن الكريم",
+            "nameRussian": "Толкование Корана",
+            "icon": "📖"
+          }
+        },
+        {
+          "id": "PLnpYU8_AiEPdQadSameaTafsir2024&index=3",
+          "youtubeId": "QadSameaId3",
+          "title": "تفسير سورة الصف | د. أحمد عبد المنعم",
+          "description": "تفسير وتدبر سورة الصف مع الدكتور أحمد عبد المنعم",
+          "publishedAt": "2021-03-15T00:00:00Z",
+          "duration": 2300,
+          "viewCount": 25000,
+          "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId3/hqdefault.jpg",
+          "playlistIndex": 3,
+          "category": {
+            "id": "quran_tafsir",
+            "name": "Quran Interpretation",
+            "nameArabic": "تفسير القرآن الكريم",
+            "nameRussian": "Толкование Корана",
+            "icon": "📖"
+          }
+        },
+        {
+          "id": "PLnpYU8_AiEPdQadSameaTafsir2024&index=4",
+          "youtubeId": "QadSameaId4",
+          "title": "تفسير سورة الجمعة | د. أحمد عبد المنعم",
+          "description": "تفسير وتدبر سورة الجمعة مع الدكتور أحمد عبد المنعم",
+          "publishedAt": "2021-03-22T00:00:00Z",
+          "duration": 2600,
+          "viewCount": 30000,
+          "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId4/hqdefault.jpg",
+          "playlistIndex": 4,
+          "category": {
+            "id": "quran_tafsir",
+            "name": "Quran Interpretation",
+            "nameArabic": "تفسير القرآن الكريم",
+            "nameRussian": "Толкование Корана",
+            "icon": "📖"
+          }
+        },
+        {
+          "id": "PLnpYU8_AiEPdQadSameaTafsir2024&index=5",
+          "youtubeId": "QadSameaId5",
+          "title": "تفسير سورة المنافقون | د. أحمد عبد المنعم",
+          "description": "تفسير وتدبر سورة المنافقون مع الدكتور أحمد عبد المنعم",
+          "publishedAt": "2021-03-29T00:00:00Z",
+          "duration": 2400,
+          "viewCount": 22000,
+          "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId5/hqdefault.jpg",
+          "playlistIndex": 5,
+          "category": {
+            "id": "quran_tafsir",
+            "name": "Quran Interpretation",
+            "nameArabic": "تفسير القرآن الكريم",
+            "nameRussian": "Толкование Корана",
+            "icon": "📖"
+          }
+        },
+        {
+          "id": "PLnpYU8_AiEPdQadSameaTafsir2024&index=6",
+          "youtubeId": "QadSameaId6",
+          "title": "تفسير سورة التغابن (1) | د. أحمد عبد المنعم",
+          "description": "تفسير وتدبر سورة التغابن - الجزء الأول مع الدكتور أحمد عبد المنعم",
+          "publishedAt": "2021-04-05T00:00:00Z",
+          "duration": 2300,
+          "viewCount": 19000,
+          "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId6/hqdefault.jpg",
+          "playlistIndex": 6,
+          "category": {
+            "id": "quran_tafsir",
+            "name": "Quran Interpretation",
+            "nameArabic": "تفسير القرآن الكريم",
+            "nameRussian": "Толкование Корана",
+            "icon": "📖"
+          }
+        },
+        {
+          "id": "PLnpYU8_AiEPdQadSameaTafsir2024&index=7",
+          "youtubeId": "QadSameaId7",
+          "title": "تفسير سورة التغابن (2) | د. أحمد عبد المنعم",
+          "description": "تفسير وتدبر سورة التغابن - الجزء الثاني مع الدكتور أحمد عبد المنعم",
+          "publishedAt": "2021-04-12T00:00:00Z",
+          "duration": 2200,
+          "viewCount": 18000,
+          "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId7/hqdefault.jpg",
+          "playlistIndex": 7,
+          "category": {
+            "id": "quran_tafsir",
+            "name": "Quran Interpretation",
+            "nameArabic": "تفسير القرآن الكريم",
+            "nameRussian": "Толкование Корана",
+            "icon": "📖"
+          }
+        },
+        {
+          "id": "PLnpYU8_AiEPdQadSameaTafsir2024&index=8",
+          "youtubeId": "QadSameaId8",
+          "title": "تفسير سورة التحريم | د. أحمد عبد المنعم",
+          "description": "تفسير وتدبر سورة التحريم مع الدكتور أحمد عبد المنعم",
+          "publishedAt": "2021-04-19T00:00:00Z",
+          "duration": 2500,
+          "viewCount": 24000,
+          "thumbnailUrl": "https://i.ytimg.com/vi/QadSameaId8/hqdefault.jpg",
+          "playlistIndex": 8,
+          "category": {
+            "id": "quran_tafsir",
+            "name": "Quran Interpretation",
+            "nameArabic": "تفسير القرآن الكريم",
+            "nameRussian": "Толкование Корана",
+            "icon": "📖"
+          }
+        }
+      ]
+    }
+  ]
+}

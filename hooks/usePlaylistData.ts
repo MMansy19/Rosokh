@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { VideoMetadata, VideoCategory } from '@/hooks/useVideoData';
 
+// Playlist metadata (without videos - for performance)
 export interface PlaylistMetadata {
   id: string;
   title: string;
@@ -9,16 +10,18 @@ export interface PlaylistMetadata {
   description: string;
   descriptionEnglish?: string;
   descriptionRussian?: string;
-  channelTitle: string;
-  channelId: string;
   thumbnailUrl: string;
   publishedAt: string;
   videoCount: number;
   totalDuration: number;
   viewCount: number;
   category: VideoCategory;
-  tags: string[];
-  language: string;
+  dataFile: string; // Reference to the full data file
+  channelTitle?: string; // Channel title (optional for backward compatibility)
+}
+
+// Full playlist data (with videos - loaded on demand)
+export interface PlaylistWithVideos extends Omit<PlaylistMetadata, 'dataFile'> {
   videos: VideoMetadata[];
 }
 
@@ -26,89 +29,128 @@ export interface PlaylistVideo extends VideoMetadata {
   playlistIndex: number;
 }
 
-interface PlaylistManifest {
-  files: string[];
-}
-
-interface PlaylistDataFile {
+interface PlaylistMetadataFile {
   playlists: PlaylistMetadata[];
 }
 
-interface PlaylistManifest {
-  files: string[];
-}
-
 interface PlaylistDataFile {
-  playlists: PlaylistMetadata[];
+  playlists: PlaylistWithVideos[];
 }
 
 export const usePlaylistData = () => {
   const [playlists, setPlaylists] = useState<PlaylistMetadata[]>([]);
+  const [loadedPlaylistVideos, setLoadedPlaylistVideos] = useState<Map<string, VideoMetadata[]>>(new Map());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [loadingVideos, setLoadingVideos] = useState<Set<string>>(new Set());
 
+  // Stage 1: Load only playlist metadata for fast initial load
   useEffect(() => {
-    const fetchPlaylists = async () => {
+    const fetchPlaylistMetadata = async () => {
       try {
         setLoading(true);
-        setError(null);        // First, fetch the manifest to get all available playlist files
-        const manifestResponse = await fetch('/data/youtube-playlists/manifest.json');
-        if (!manifestResponse.ok) {
-          throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
+        setError(null);
+
+        const response = await fetch('/data/youtube-playlists/playlists-metadata.json');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch playlist metadata: ${response.status}`);
         }
         
-        const manifest: PlaylistManifest = await manifestResponse.json();
-        const playlistFiles = manifest.files || [];
-
-        if (playlistFiles.length === 0) {
-          console.warn('No playlist files found in manifest');
-          setPlaylists([]);
-          return;
-        }
-
-        // Fetch all playlist files dynamically
-        const playlistResponses = await Promise.all(
-          playlistFiles.map((filename: string) => 
-            fetch(`/data/youtube-playlists/${filename}`)
-          )
-        );
-
-        // Check if all responses are successful
-        const failedRequests = playlistResponses
-          .map((response, index) => ({ response, filename: playlistFiles[index] }))
-          .filter(({ response }) => !response.ok);
-
-        if (failedRequests.length > 0) {
-          const errorMessages = failedRequests.map(({ response, filename }) => 
-            `${filename}: ${response.status}`
-          );
-          throw new Error(`Failed to fetch playlist files: ${errorMessages.join(', ')}`);
-        }
-
-        // Parse all JSON responses
-        const playlistDataArray: PlaylistDataFile[] = await Promise.all(
-          playlistResponses.map(response => response.json())
-        );
-
-        // Combine playlists from all files
-        const allPlaylists = playlistDataArray.reduce((acc, data) => {
-          return [...acc, ...(data.playlists || [])];
-        }, [] as PlaylistMetadata[]);
-
-        setPlaylists(allPlaylists);
+        const data: PlaylistMetadataFile = await response.json();
+        setPlaylists(data.playlists || []);
       } catch (err) {
-        console.error('Error fetching playlists:', err);
+        console.error('Error fetching playlist metadata:', err);
         setError(err instanceof Error ? err.message : 'Failed to load playlists');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPlaylists();
+    fetchPlaylistMetadata();
   }, []);
+
+  // Stage 2: Load videos for a specific playlist on demand
+  const loadPlaylistVideos = async (playlistId: string): Promise<VideoMetadata[]> => {
+    // Check if already loaded
+    if (loadedPlaylistVideos.has(playlistId)) {
+      return loadedPlaylistVideos.get(playlistId)!;
+    }
+
+    // Check if currently loading
+    if (loadingVideos.has(playlistId)) {
+      // Wait for current loading to complete
+      return new Promise((resolve) => {
+        const checkLoaded = () => {
+          if (loadedPlaylistVideos.has(playlistId)) {
+            resolve(loadedPlaylistVideos.get(playlistId)!);
+          } else {
+            setTimeout(checkLoaded, 100);
+          }
+        };
+        checkLoaded();
+      });
+    }
+
+    try {
+      // Mark as loading
+      setLoadingVideos(prev => new Set(prev).add(playlistId));
+
+      // Find the playlist metadata to get the data file name
+      const playlist = playlists.find(p => p.id === playlistId);
+      if (!playlist) {
+        throw new Error(`Playlist with ID ${playlistId} not found`);
+      }
+
+      // Fetch the full playlist data file
+      const response = await fetch(`/data/youtube-playlists/${playlist.dataFile}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch playlist data: ${response.status}`);
+      }
+
+      const data: PlaylistDataFile = await response.json();
+      const playlistData = data.playlists.find(p => p.id === playlistId);
+      
+      if (!playlistData) {
+        throw new Error(`Playlist data for ID ${playlistId} not found in ${playlist.dataFile}`);
+      }
+
+      // Cache the videos
+      setLoadedPlaylistVideos(prev => new Map(prev).set(playlistId, playlistData.videos));
+      
+      return playlistData.videos;
+    } catch (err) {
+      console.error(`Error loading videos for playlist ${playlistId}:`, err);
+      throw err;
+    } finally {
+      // Remove from loading set
+      setLoadingVideos(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(playlistId);
+        return newSet;
+      });
+    }
+  };
 
   const getPlaylistById = (playlistId: string): PlaylistMetadata | null => {
     return playlists.find(playlist => playlist.id === playlistId) || null;
+  };
+
+  // Get playlist with videos (loads videos if not already loaded)
+  const getPlaylistWithVideos = async (playlistId: string): Promise<PlaylistWithVideos | null> => {
+    const metadata = getPlaylistById(playlistId);
+    if (!metadata) return null;
+
+    try {
+      const videos = await loadPlaylistVideos(playlistId);
+      const { dataFile, ...metadataWithoutFile } = metadata;
+      return {
+        ...metadataWithoutFile,
+        videos
+      };
+    } catch (err) {
+      console.error(`Failed to load videos for playlist ${playlistId}:`, err);
+      return null;
+    }
   };
 
   const searchPlaylists = (query: string, categoryId?: string): PlaylistMetadata[] => {
@@ -130,9 +172,7 @@ export const usePlaylistData = () => {
         playlist.titleRussian?.toLowerCase().includes(lowerQuery) ||
         playlist.description.toLowerCase().includes(lowerQuery) ||
         playlist.descriptionEnglish?.toLowerCase().includes(lowerQuery) ||
-        playlist.descriptionRussian?.toLowerCase().includes(lowerQuery) ||
-        playlist.channelTitle.toLowerCase().includes(lowerQuery) ||
-        playlist.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+        playlist.descriptionRussian?.toLowerCase().includes(lowerQuery)
       );
     }
 
@@ -161,10 +201,29 @@ export const usePlaylistData = () => {
     return `${minutes}m`;
   };
 
+  // Check if videos are loaded for a playlist
+  const areVideosLoaded = (playlistId: string): boolean => {
+    return loadedPlaylistVideos.has(playlistId);
+  };
+
+  // Check if videos are currently loading for a playlist
+  const areVideosLoading = (playlistId: string): boolean => {
+    return loadingVideos.has(playlistId);
+  };
+
   return {
+    // Metadata-only data (always available after initial load)
     playlists,
     loading,
     error,
+    
+    // Video loading functions
+    loadPlaylistVideos,
+    getPlaylistWithVideos,
+    areVideosLoaded,
+    areVideosLoading,
+    
+    // Utility functions
     getPlaylistById,
     searchPlaylists,
     getPlaylistsByCategory,

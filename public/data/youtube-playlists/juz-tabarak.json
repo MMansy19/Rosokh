@@ -1,0 +1,206 @@
+{
+  "playlists": [
+    {
+      "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b",
+      "title": "تفسير جزء (تبارك) | د. أحمد عبد المنعم",
+      "titleEnglish": "Interpretation of Juz Tabarak - Dr. Ahmed Abdel Moneim",
+      "titleRussian": "Толкование Джуз Табарак - Доктор Ахмед Абдель Монеим",
+      "description": "سلسلة تفسير جزء تبارك من القرآن الكريم مع الدكتور أحمد عبد المنعم - تفسير مفصل للسور من الملك إلى القيامة",
+      "descriptionEnglish": "Complete interpretation series of Juz Tabarak from the Holy Quran with Dr. Ahmed Abdel Moneim - Detailed interpretation of Surahs from Al-Mulk to Al-Qiyamah",
+      "descriptionRussian": "Полная серия толкования Джуз Табарак из Священного Корана с доктором Ахмедом Абдель Монеимом - Подробная интерпретация сур от Аль-Мульк до Аль-Кыяма",
+      "thumbnailUrl": "https://i.ytimg.com/vi/xA1PQCEjKCA/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLDkz_EMz3QOuePkq4GtpgciqeNLhA",
+      "publishedAt": "2020-01-01T00:00:00Z",
+      "videoCount": 15,
+      "totalDuration": 46800,
+      "viewCount": 342900,
+      "category": {
+        "id": "quran_tafsir",
+        "name": "Quran Interpretation",
+        "nameArabic": "تفسير القرآن الكريم",
+        "nameRussian": "Толкование Корана",
+        "icon": "📖"
+      },      "videos": [
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=1",
+          "youtubeId": "xA1PQCEjKCA",
+          "title": "تفسير سورة الملك (1) | (مقدمة) | د. أحمد عبد المنعم",
+          "description": "مقدمة تفسير سورة الملك - التعريف بالسورة وموضوعاتها الرئيسية",
+          "publishedAt": "2020-01-01T00:00:00Z",
+          "duration": 1046,
+          "viewCount": 29000,
+          "likeCount": 1200,
+          "thumbnailUrl": "https://i.ytimg.com/vi/xA1PQCEjKCA/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLDkz_EMz3QOuePkq4GtpgciqeNLhA",
+          "playlistIndex": 1
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=2",
+          "youtubeId": "FdSbvm-5BcI",
+          "title": "تفسير سورة الملك (2) | الآيات (1-12) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 1-12 من سورة الملك - آيات التسبيح والملكوت",
+          "publishedAt": "2020-01-08T00:00:00Z",
+          "duration": 1056,
+          "viewCount": 16000,
+          "likeCount": 800,
+          "thumbnailUrl": "https://i.ytimg.com/vi/FdSbvm-5BcI/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBBufVENrcKyWewD1n8ibTrq8pfoA",
+          "playlistIndex": 2
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=3",
+          "youtubeId": "HQMap5Wv8JU",
+          "title": "تفسير سورة الملك (3) | الآيات (13-21) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 13-21 من سورة الملك - آيات الخوف والرجاء",
+          "publishedAt": "2020-01-15T00:00:00Z",
+          "duration": 1072,
+          "viewCount": 12000,
+          "likeCount": 600,
+          "thumbnailUrl": "https://i.ytimg.com/vi/HQMap5Wv8JU/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLCYhvq0RMlMJFASDbvFDEJgvvGP_A",
+          "playlistIndex": 3
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=4",
+          "youtubeId": "kZ1aa8NdcV8",
+          "title": "تفسير سورة الملك (4) | الآيات (22-30) | د. أحمد عبد المنعم",
+          "description": "تفسير الآيات 22-30 من سورة الملك - خاتمة السورة والعبر",
+          "publishedAt": "2020-01-22T00:00:00Z",
+          "duration": 1115,
+          "viewCount": 10000,
+          "likeCount": 500,
+          "thumbnailUrl": "https://i.ytimg.com/vi/kZ1aa8NdcV8/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLCrUCXyO_tQuQVLw4zvQC7Md3QgtA",
+          "playlistIndex": 4
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=5",
+          "youtubeId": "U_erOD1AtgQ",
+          "title": "أسئلة سورة الملك | خطبة | د. أحمد عبد المنعم",
+          "description": "خطبة حول الأسئلة المهمة المستفادة من سورة الملك",
+          "publishedAt": "2018-01-01T00:00:00Z",
+          "duration": 2099,
+          "viewCount": 16000,
+          "likeCount": 800,
+          "thumbnailUrl": "https://i.ytimg.com/vi/U_erOD1AtgQ/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLC28VD97_p_5Oal-kiD7lwtV2g4Wg",
+          "playlistIndex": 5
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=6",
+          "youtubeId": "aS01-J08Pss",
+          "title": "وقفات مع سورة القلم | قصة أصحاب الجنة | د. أحمد عبد المنعم",
+          "description": "وقفات تدبرية مع سورة القلم وقصة أصحاب الجنة وعبرها",
+          "publishedAt": "2020-02-01T00:00:00Z",
+          "duration": 1486,
+          "viewCount": 28000,
+          "likeCount": 1400,
+          "thumbnailUrl": "https://i.ytimg.com/vi/aS01-J08Pss/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBBcsp4IC75PSkVa0OnBeXnsmgw1g",
+          "playlistIndex": 6
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=7",
+          "youtubeId": "Wt_KZk6XgZQ",
+          "title": "تفسير سورة المعارج | د. أحمد عبد المنعم",
+          "description": "تفسير كامل لسورة المعارج وموضوعاتها الأساسية",
+          "publishedAt": "2020-02-15T00:00:00Z",
+          "duration": 4224,
+          "viewCount": 7500,
+          "likeCount": 375,
+          "thumbnailUrl": "https://i.ytimg.com/vi/Wt_KZk6XgZQ/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLCawciRux8ndFllijxkx7og1nMy4w",
+          "playlistIndex": 7
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=8",
+          "youtubeId": "FLspQ7GOcaI",
+          "title": "وقفات مع سورة المعارج | خطبة | د. أحمد عبد المنعم",
+          "description": "خطبة جمعة حول وقفات تدبرية مع سورة المعارج",
+          "publishedAt": "2020-03-01T00:00:00Z",
+          "duration": 2255,
+          "viewCount": 3800,
+          "likeCount": 190,
+          "thumbnailUrl": "https://i.ytimg.com/vi/FLspQ7GOcaI/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLB98pMwnvmzpcgp13XX24P_jY3wvw",
+          "playlistIndex": 8
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=9",
+          "youtubeId": "IhI8FUBRnxo",
+          "title": "تفسير سورة نوح | د. أحمد عبد المنعم",
+          "description": "تفسير كامل لسورة نوح وقصة النبي نوح عليه السلام",
+          "publishedAt": "2020-03-15T00:00:00Z",
+          "duration": 3996,
+          "viewCount": 4500,
+          "likeCount": 225,
+          "thumbnailUrl": "https://i.ytimg.com/vi/IhI8FUBRnxo/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBDP5DeAb6LAWDTqOP70gdVWTbPKA",
+          "playlistIndex": 9
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=10",
+          "youtubeId": "PQaCex-VGhs",
+          "title": "تفسير سورة الجن | د. أحمد عبد المنعم",
+          "description": "تفسير كامل لسورة الجن وما تتضمنه من أحكام وحكم",
+          "publishedAt": "2019-01-01T00:00:00Z",
+          "duration": 5802,
+          "viewCount": 100000,
+          "likeCount": 5000,
+          "thumbnailUrl": "https://i.ytimg.com/vi/PQaCex-VGhs/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLAzY610IYVLNpvT0afaOj95BR88tA",
+          "playlistIndex": 10
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=11",
+          "youtubeId": "anEllwuWB1Q",
+          "title": "تفسير سورة المزمل | د. أحمد عبد المنعم",
+          "description": "تفسير كامل لسورة المزمل وأحكام قيام الليل",
+          "publishedAt": "2020-04-01T00:00:00Z",
+          "duration": 4217,
+          "viewCount": 8300,
+          "likeCount": 415,
+          "thumbnailUrl": "https://i.ytimg.com/vi/anEllwuWB1Q/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLB7OEvRUWbRuEDf5UXDxaL8q3O2TA",
+          "playlistIndex": 11
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=12",
+          "youtubeId": "J1YPJZQEVm4",
+          "title": "تفسير سورة المدثر | د. أحمد عبد المنعم",
+          "description": "تفسير كامل لسورة المدثر وبداية الرسالة المحمدية",
+          "publishedAt": "2020-04-15T00:00:00Z",
+          "duration": 3685,
+          "viewCount": 16000,
+          "likeCount": 800,
+          "thumbnailUrl": "https://i.ytimg.com/vi/J1YPJZQEVm4/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBgQm65oILTdD8xxxH-bepW9tgzhg",
+          "playlistIndex": 12
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=13",
+          "youtubeId": "nirg5XEoN3s",
+          "title": "وقفات مع سورة المدثر | خطبة | د. أحمد عبد المنعم",
+          "description": "خطبة جمعة حول وقفات تدبرية مع سورة المدثر",
+          "publishedAt": "2020-05-01T00:00:00Z",
+          "duration": 2585,
+          "viewCount": 5300,
+          "likeCount": 265,
+          "thumbnailUrl": "https://i.ytimg.com/vi/nirg5XEoN3s/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLAnaMLNYRb6ZClE7P6gfNb8g-DFdg",
+          "playlistIndex": 13
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=14",
+          "youtubeId": "NZk4SqB-luE",
+          "title": "تفسير سورة القيامة | د. أحمد عبد المنعم",
+          "description": "تفسير كامل لسورة القيامة وأهوال يوم القيامة",
+          "publishedAt": "2020-05-15T00:00:00Z",
+          "duration": 4642,
+          "viewCount": 4700,
+          "likeCount": 235,
+          "thumbnailUrl": "https://i.ytimg.com/vi/NZk4SqB-luE/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLCIJfo1DASB1y9T7PjXLwXFcAStIw",
+          "playlistIndex": 14
+        },
+        {
+          "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b&index=15",
+          "youtubeId": "q1KeSvK86WY",
+          "title": "وقفات مع سورة القيامة | خطبة | د. أحمد عبد المنعم",
+          "description": "خطبة جمعة حول وقفات تدبرية مع سورة القيامة",
+          "publishedAt": "2018-06-01T00:00:00Z",
+          "duration": 2041,
+          "viewCount": 5600,
+          "likeCount": 280,
+          "thumbnailUrl": "https://i.ytimg.com/vi/q1KeSvK86WY/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLARLmVo-_4x31oM0eXXTfj3Ya2V0Q",
+          "playlistIndex": 15
+        }
+      ]
+    }
+  ]
+}

@@ -8,7 +8,6 @@ import {
   Play,
   Clock,
   Eye,
-  TrendingUp,
   BookOpen,
   Music,
   GraduationCap,
@@ -152,6 +151,9 @@ export default function YoutubeClient({
     searchPlaylists,
     getPlaylistsByCategory,
     formatPlaylistDuration,
+    loadPlaylistVideos,
+    areVideosLoaded,
+    areVideosLoading,
   } = usePlaylistData();
 
   const [filteredVideos, setFilteredVideos] = useState<VideoMetadata[]>([]);
@@ -160,8 +162,9 @@ export default function YoutubeClient({
     null,
   );
   const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistMetadata | null>(null);
+  const [playlistVideos, setPlaylistVideos] = useState<VideoMetadata[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState<"videos" | "trending" | "playlists">("playlists");
+  const [activeTab, setActiveTab] = useState<"videos" | "playlists">("playlists");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [showFilters, setShowFilters] = useState(false);
@@ -208,12 +211,6 @@ export default function YoutubeClient({
     }
   };
 
-  const loadTrendingVideos = () => {
-    // For now, show videos sorted by view count
-    const trending = [...videos].sort((a, b) => b.viewCount - a.viewCount);
-    setFilteredVideos(trending);
-  };
-
   const handleVideoSelect = (video: VideoMetadata) => {
     setSelectedVideo(video);
     setShowVideoDetails(true);
@@ -236,14 +233,26 @@ export default function YoutubeClient({
     localStorage.setItem("youtube_watch_history", JSON.stringify(newHistory));
   };
 
-  const handlePlaylistSelect = (playlist: PlaylistMetadata) => {
+  const handlePlaylistSelect = async (playlist: PlaylistMetadata) => {
     setSelectedPlaylist(playlist);
     setActiveTab("videos");
-    setFilteredVideos(playlist.videos);
+    
+    try {
+      // Load videos for the selected playlist if not already loaded
+      const videos = await loadPlaylistVideos(playlist.id);
+      setPlaylistVideos(videos);
+      setFilteredVideos(videos);
+    } catch (error) {
+      console.error('Failed to load playlist videos:', error);
+      // Show empty state or error message
+      setPlaylistVideos([]);
+      setFilteredVideos([]);
+    }
   };
 
   const handleBackToPlaylists = () => {
     setSelectedPlaylist(null);
+    setPlaylistVideos([]);
     setActiveTab("playlists");
     setFilteredPlaylists(playlists);
   };
@@ -275,7 +284,7 @@ export default function YoutubeClient({
         {/* Video Player Modal */}
         {selectedVideo && showVideoDetails && (
           <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-            <div className="bg-surface rounded-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-surface rounded-xl max-w-5xl w-full max-h-[90vh] mt-auto overflow-y-auto">
               <div className="p-6">
                 {/* Close Button */}
                 <div className="flex justify-end mb-4">
@@ -360,49 +369,49 @@ export default function YoutubeClient({
               </div>
 
               {/* Category Filters */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                <button
-                  onClick={() => handleCategoryFilter("")}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    selectedCategory === ""
-                      ? "bg-primary text-white"
-                      : "bg-secondary text-foreground hover:bg-accent hover:text-white"
-                  }`}
-                >
-                  {messages?.youtube?.search?.allCategories || "All Categories"}
-                </button>
-
-                {VIDEO_CATEGORIES.map((category) => (
+              {showFilters && (
+                <div className="flex flex-wrap gap-2 mb-4">
                   <button
-                    key={category.id}
-                    onClick={() => handleCategoryFilter(category.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      selectedCategory === category.id
+                    onClick={() => handleCategoryFilter("")}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      selectedCategory === ""
                         ? "bg-primary text-white"
                         : "bg-secondary text-foreground hover:bg-accent hover:text-white"
                     }`}
                   >
-                    {getCategoryIcon(category.id)}
-                    {locale === "ar" && category.nameArabic
-                      ? category.nameArabic
-                      : locale === "ru" && category.nameRussian
-                        ? category.nameRussian
-                        : category.name}
+                    {messages?.youtube?.search?.allCategories || "All Categories"}
                   </button>
-                ))}
-              </div>
+
+                  {VIDEO_CATEGORIES.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => handleCategoryFilter(category.id)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        selectedCategory === category.id
+                          ? "bg-primary text-white"
+                          : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                      }`}
+                    >
+                      {getCategoryIcon(category.id)}
+                      {locale === "ar" && category.nameArabic
+                        ? category.nameArabic
+                        : locale === "ru" && category.nameRussian
+                          ? category.nameRussian
+                          : category.name}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Tabs and View Controls */}
-              <div className="flex items-center justify-between">
+              <div className="flex  md:flex-row flex-col gap-2 w-full items-center justify-between">
                 <div className="flex gap-2">
-                  {["videos", "playlists", "trending"].map((tab) => (
+                  {["playlists", "videos"].map((tab) => (
                     <button
                       key={tab}
                       onClick={() => {
                         setActiveTab(tab as typeof activeTab);
-                        if (tab === "trending") {
-                          loadTrendingVideos();
-                        } else if (tab === "playlists") {
+                        if (tab === "playlists") {
                           setFilteredPlaylists(playlists);
                           setSelectedPlaylist(null);
                         } else {
@@ -416,9 +425,6 @@ export default function YoutubeClient({
                           : "bg-secondary text-foreground hover:bg-accent hover:text-white"
                       }`}
                     >
-                      {tab === "trending" && (
-                        <TrendingUp className="w-4 h-4" />
-                      )}
                       {tab === "playlists" && (
                         <PlaySquare className="w-4 h-4" />
                       )}
@@ -433,10 +439,15 @@ export default function YoutubeClient({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setShowFilters(!showFilters)}
-                    className="flex items-center gap-2 px-3 py-2 bg-secondary text-foreground rounded-lg hover:bg-accent hover:text-white transition-colors"
+                    className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+                      showFilters 
+                        ? "bg-primary text-white" 
+                        : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                    }`}
                   >
                     <Filter className="w-4 h-4" />
                     Filters
+                    {showFilters ? " ▲" : " ▼"}
                   </button>
 
                   <div className="flex bg-secondary rounded-lg p-1">
@@ -658,17 +669,7 @@ export default function YoutubeClient({
                   </div>
                 ))}
               </div>
-            ) : (
-              <div className="text-center py-12">
-                <TrendingUp className="w-12 h-12 mx-auto mb-4 text-muted" />
-                <h3 className="text-xl font-semibold text-foreground mb-2">
-                  Trending Islamic Videos
-                </h3>
-                <p className="text-muted">
-                  Popular Islamic content trending now
-                </p>
-              </div>
-            )}
+            ) : null}
 
             {/* Empty State */}
             {!loading && !playlistLoading && (

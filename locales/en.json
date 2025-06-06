@@ -288,12 +288,20 @@
         "medium": "Medium Quality",
         "low": "Low Quality"
       },
+      "reciters": {
+        "all": "All Reciters",
+        "ahmad-fathy": "Ahmad Fathy",
+        "osama-hamed": "Osama Hamed"
+      },
       "viewMode": {
         "grid": "Grid View",
         "list": "List View"
       },
       "showFavoritesOnly": "Favorites Only",
-      "clearFilters": "Clear Filters"
+      "clearFilters": "Clear Filters",
+      "category": "Category",
+      "reciter": "Reciter",
+      "activeFilters": "Active filters"
     },
     "player": {
       "nowPlaying": "Now playing:",
