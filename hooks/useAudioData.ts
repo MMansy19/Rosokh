@@ -1,15 +1,7 @@
-import { useState, useEffect } from "react";
-import {
-  AudioTrack,
-  Reciter,
-  Surah,
-  AudioData,
-  ReciterData,
-} from "@/types/audio";
-import { generateAudioTracks } from "../utils/audioUtils";
-import { API_ENDPOINTS } from "../constants/audio";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { AudioTrack, Reciter, Surah } from "@/types/audio";
 
-interface UseAudioDataReturn {
+interface useAudioDataReturn {
   data: {
     tracks: AudioTrack[];
     reciters: Reciter[];
@@ -17,79 +9,73 @@ interface UseAudioDataReturn {
   } | null;
   loading: boolean;
   error: string | null;
-  refetch: () => void;
+  refetch: (filters?: { reciter?: string; surah?: string }) => void;
 }
 
 /**
- * Custom hook for fetching and managing audio data
+ * Enhanced audio data hook that loads Quran audio data from the new API
  */
-export const useAudioData = (): UseAudioDataReturn => {
+export const useAudioData = (filters?: { reciter?: string; surah?: string }): useAudioDataReturn => {
   const [audioTracks, setAudioTracks] = useState<AudioTrack[]>([]);
   const [reciters, setReciters] = useState<Reciter[]>([]);
   const [surahs, setSurahs] = useState<Surah[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const abortController = new AbortController();
+  // Memoize filter values to prevent unnecessary re-renders
+  const filterKey = useMemo(() => {
+    return JSON.stringify({
+      reciter: filters?.reciter || 'all',
+      surah: filters?.surah || 'all'
+    });
+  }, [filters?.reciter, filters?.surah]);
 
-    const loadData = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const [audioResponse, recitersResponse] = await Promise.all([
-          fetch(API_ENDPOINTS.audioTracks, { signal: abortController.signal }),
-          fetch(API_ENDPOINTS.reciters, { signal: abortController.signal }),
-        ]);
-
-        if (!audioResponse.ok || !recitersResponse.ok) {
-          throw new Error("Failed to load data");
-        }
-
-        const [audioData, recitersData]: [AudioData, ReciterData] =
-          await Promise.all([audioResponse.json(), recitersResponse.json()]);
-
-        const generatedTracks = generateAudioTracks(audioData, recitersData);
-
-        setSurahs(audioData.surahs);
-        setReciters(recitersData.reciters);
-        setAudioTracks(generatedTracks);
-      } catch (error) {
-        if (!abortController.signal.aborted) {
-          console.error("Error loading audio data:", error);
-          setError(
-            error instanceof Error ? error.message : "Failed to load data",
-          );
-        }
-      } finally {
-        if (!abortController.signal.aborted) {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    loadData();
-
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-  const refetch = () => {
+  const loadData = useCallback(async (currentFilters?: { reciter?: string; surah?: string }) => {
     setIsLoading(true);
     setError(null);
-    // The useEffect will handle the actual refetch
-  };
 
+    try {
+      // Build query parameters
+      const params = new URLSearchParams();
+      if (currentFilters?.reciter && currentFilters.reciter !== 'all') {
+        params.append('reciter', currentFilters.reciter);
+      }
+      if (currentFilters?.surah && currentFilters.surah !== 'all') {
+        params.append('surah', currentFilters.surah);
+      }
+
+      const url = `/api/audio${params.toString() ? `?${params.toString()}` : ''}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch audio data: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      
+      setAudioTracks(data.tracks || []);
+      setReciters(data.reciters || []);
+      setSurahs(data.surahs || []);
+    } catch (err) {
+      console.error("Error loading audio data:", err);      setError(err instanceof Error ? err.message : "Failed to load audio data");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadData(filters);
+  }, [filterKey, loadData]);
+
+  const refetch = useCallback((newFilters?: { reciter?: string; surah?: string }) => {
+    loadData(newFilters || filters);
+  }, [filters, loadData]);
   return {
-    data:
-      isLoading || error
-        ? null
-        : {
-            tracks: audioTracks,
-            reciters,
-            surahs,
-          },
+    data: audioTracks.length > 0 || reciters.length > 0 ? {
+      tracks: audioTracks,
+      reciters,
+      surahs,
+    } : null,
     loading: isLoading,
     error,
     refetch,

@@ -68,5 +68,6 @@ export interface AudioPlayerState {
 export interface FilterState {
   category: string;
   quality: string;
+  reciter: string;
   showFavoritesOnly: boolean;
 }

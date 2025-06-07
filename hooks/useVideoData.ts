@@ -174,7 +174,7 @@ export function useVideoData() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/api/video-data?type=videos");
+        const response = await fetch("/api/video?type=videos");
 
         if (!response.ok) {
           throw new Error(`Failed to fetch video data: ${response.statusText}`);

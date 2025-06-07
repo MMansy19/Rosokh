@@ -20,6 +20,7 @@ export const useFilters = (): UseFiltersReturn => {
   const [filters, setFilters] = useState<FilterState>({
     category: "all",
     quality: "all",
+    reciter: "all",
     showFavoritesOnly: false,
   });
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
@@ -28,6 +29,7 @@ export const useFilters = (): UseFiltersReturn => {
     setFilters({
       category: "all",
       quality: "all",
+      reciter: "all",
       showFavoritesOnly: false,
     });
     setSearchTerm("");

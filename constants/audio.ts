@@ -13,6 +13,12 @@ export const AUDIO_QUALITIES = [
   { value: "low", label: "Low Quality" },
 ];
 
+export const AUDIO_RECITERS = [
+  { value: "all", label: "All Reciters" },
+  { value: "osama-hamed", label: "Osama Hamed" },
+  { value: "ahmad-fathy", label: "Ahmad Fathy" },
+];
+
 export const SPEED_OPTIONS = [0.5, 0.75, 1, 1.25, 1.5, 2] as const;
 
 export const DURATION_ESTIMATES = {
@@ -29,8 +35,7 @@ export const QUALITY_COLORS = {
 } as const;
 
 export const API_ENDPOINTS = {
-  audioTracks: "/data/drive-audios.json",
-  reciters: "/data/reciters.json",
+  audio: "/api/audio",
 } as const;
 
 export const LOADING_STATES = {

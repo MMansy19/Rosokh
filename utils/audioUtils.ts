@@ -62,15 +62,17 @@ export const filterTracks = (
   filters: {
     category: string;
     quality: string;
+    reciter: string;
     showFavoritesOnly: boolean;
   },
   favorites: string[],
 ): AudioTrack[] => {
-  const { category, quality, showFavoritesOnly } = filters;
+  const { category, quality, reciter, showFavoritesOnly } = filters;
 
   return tracks.filter((track) => {
     const matchesCategory = category === "all" || track.category === category;
     const matchesQuality = quality === "all" || track.quality === quality;
+    const matchesReciter = reciter === "all" || track.reciter.id === reciter;
     const matchesSearch =
       searchTerm === "" ||
       track.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -79,7 +81,7 @@ export const filterTracks = (
     const matchesFavorites = !showFavoritesOnly || favorites.includes(track.id);
 
     return (
-      matchesCategory && matchesQuality && matchesSearch && matchesFavorites
+      matchesCategory && matchesQuality && matchesReciter && matchesSearch && matchesFavorites
     );
   });
 };

@@ -132,146 +132,19 @@ class GoogleDriveService {
   }
 
   /**
-   * Load audio tracks data from local JSON files and enhance with Google Drive URLs
+   * Load audio tracks data from the new API endpoint
    */
   async loadAudioTracks(): Promise<AudioTrack[]> {
     try {
-      // Load local data
-      const [tracksResponse, recitersResponse] = await Promise.all([
-        fetch("/data/drive-audios.json"),
-        fetch("/data/reciters.json"),
-      ]);
-
-      const tracksData = await tracksResponse.json();
-      const recitersData = await recitersResponse.json();
-
-      const tracks: AudioTrack[] = [];
-
-      // Process Quran recitations
-      if (tracksData.surahs) {
-        for (const surah of tracksData.surahs) {
-          for (const reciter of recitersData.reciters) {
-            if (surah.driveFiles && surah.driveFiles[reciter.id]) {
-              const fileId = surah.driveFiles[reciter.id];
-              tracks.push({
-                id: `${surah.id}-${reciter.id}`,
-                title: surah.name,
-                arabicTitle: surah.arabicName,
-                reciter: reciter.name,
-                reciterArabic: reciter.arabicName,
-                duration: this.estimateDuration(surah.verses), // Estimate based on verses
-                category: "quran",
-                surah: surah.id,
-                quality: "high",
-                size: "0 MB", // Will be updated when metadata is loaded
-                driveFileId: fileId,
-                downloadUrl: this.getDirectDownloadUrl(fileId),
-                streamUrl: this.getStreamingUrl(fileId),
-              });
-            }
-          }
-        }
+      // Use the new API endpoint
+      const response = await fetch("/api/audio");
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch audio data: ${response.statusText}`);
       }
 
-      // Process special recitations
-      if (tracksData.specialRecitations) {
-        for (const special of tracksData.specialRecitations) {
-          for (const reciter of recitersData.reciters) {
-            if (special.driveFiles && special.driveFiles[reciter.id]) {
-              const fileId = special.driveFiles[reciter.id];
-              tracks.push({
-                id: `${special.id}-${reciter.id}`,
-                title: special.name,
-                arabicTitle: special.arabicName,
-                reciter: reciter.name,
-                reciterArabic: reciter.arabicName,
-                duration: "5:00", // Default duration
-                category: special.category as "quran",
-                verses: special.verses,
-                quality: "high",
-                size: "0 MB",
-                driveFileId: fileId,
-                downloadUrl: this.getDirectDownloadUrl(fileId),
-                streamUrl: this.getStreamingUrl(fileId),
-              });
-            }
-          }
-        }
-      }
-
-      // Process duas
-      if (tracksData.duas) {
-        for (const dua of tracksData.duas) {
-          for (const reciterKey in dua.driveFiles) {
-            const reciter = recitersData.reciters.find(
-              (r: any) => r.id === reciterKey,
-            );
-            if (reciter) {
-              const fileId = dua.driveFiles[reciterKey];
-              tracks.push({
-                id: `${dua.id}-${reciterKey}`,
-                title: dua.name,
-                arabicTitle: dua.arabicName,
-                reciter: reciter.name,
-                reciterArabic: reciter.arabicName,
-                duration: dua.duration,
-                category: "dua",
-                quality: "high",
-                size: "0 MB",
-                driveFileId: fileId,
-                downloadUrl: this.getDirectDownloadUrl(fileId),
-                streamUrl: this.getStreamingUrl(fileId),
-              });
-            }
-          }
-        }
-      }
-
-      // Process lectures
-      if (tracksData.lectures) {
-        for (const lecture of tracksData.lectures) {
-          for (const langKey in lecture.driveFiles) {
-            const fileId = lecture.driveFiles[langKey];
-            tracks.push({
-              id: `${lecture.id}-${langKey}`,
-              title: lecture.name,
-              arabicTitle: lecture.arabicName,
-              reciter: lecture.speaker,
-              duration: lecture.duration,
-              category: "lecture",
-              quality: "high",
-              size: "0 MB",
-              driveFileId: fileId,
-              downloadUrl: this.getDirectDownloadUrl(fileId),
-              streamUrl: this.getStreamingUrl(fileId),
-            });
-          }
-        }
-      }
-
-      // Process nasheeds
-      if (tracksData.nasheeds) {
-        for (const nasheed of tracksData.nasheeds) {
-          for (const artistKey in nasheed.driveFiles) {
-            const fileId = nasheed.driveFiles[artistKey];
-            tracks.push({
-              id: `${nasheed.id}-${artistKey}`,
-              title: nasheed.name,
-              arabicTitle: nasheed.arabicName,
-              reciter: nasheed.artist,
-              duration: nasheed.duration,
-              category: "nasheed",
-              quality: "high",
-              size: "0 MB",
-              driveFileId: fileId,
-              downloadUrl: this.getDirectDownloadUrl(fileId),
-              streamUrl: this.getStreamingUrl(fileId),
-            });
-          }
-        }
-      }
-
-      return tracks;
+      const data = await response.json();
+      return data.tracks || [];
     } catch (error) {
       console.error("Error loading audio tracks:", error);
       return [];

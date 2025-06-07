@@ -9,8 +9,9 @@ import {
   BookOpen,
   Heart,
   Mic,
+  User,
 } from "lucide-react";
-import { FilterState, ViewMode } from "@/types/audio";
+import { FilterState, ViewMode, Reciter } from "@/types/audio";
 import { AUDIO_CATEGORIES, AUDIO_QUALITIES } from "@/constants/audio";
 import { getTranslation } from "@/utils/translations";
 
@@ -19,6 +20,7 @@ interface SearchFiltersProps {
   filters: FilterState;
   viewMode: ViewMode;
   favoriteCount: number;
+  reciters?: Reciter[];
   onSearchChange: (term: string) => void;
   onFilterChange: (filters: FilterState) => void;
   onViewModeChange: (mode: ViewMode) => void;
@@ -32,6 +34,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
   filters,
   viewMode,
   favoriteCount,
+  reciters = [],
   onSearchChange,
   onFilterChange,
   onViewModeChange,
@@ -42,6 +45,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
   const hasActiveFilters =
     filters.category !== "all" ||
     filters.quality !== "all" ||
+    filters.reciter !== "all" ||
     filters.showFavoritesOnly;
 
   const getCategoryIcon = (category: string) => {
@@ -143,6 +147,28 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
                     `audio.quality.${quality.value}`,
                     quality.label,
                   )}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* Reciter Filter */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-muted-foreground">
+              {getTranslation(messages, "audio.filters.reciter", "Reciter")}:
+            </span>
+            <select
+              value={filters.reciter}
+              onChange={(e) =>
+                onFilterChange({ ...filters, reciter: e.target.value as any })
+              }
+              className="px-3 py-1.5 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
+            >
+              <option value="all">
+                {getTranslation(messages, "audio.reciters.all", "All Reciters")}
+              </option>
+              {reciters.map((reciter) => (
+                <option key={reciter.id} value={reciter.id}>
+                  {reciter.name}
                 </option>
               ))}
             </select>
@@ -255,6 +281,18 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
                   filters.quality,
                 )}{" "}
                 {getTranslation(messages, "audio.filters.quality", "Quality")}
+              </span>
+            </div>
+          )}
+          {filters.reciter !== "all" && (
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium dark:bg-blue-950 dark:text-blue-300">
+              <User className="w-3 h-3" />
+              <span className="capitalize">
+                {getTranslation(
+                  messages,
+                  `audio.reciters.${filters.reciter}`,
+                  filters.reciter,
+                )}
               </span>
             </div>
           )}

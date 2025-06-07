@@ -31,9 +31,6 @@ export const AudioClient: React.FC<AudioClientProps> = ({
   const analytics = useMemo(() => AnalyticsService.getInstance(), []);
   const notifications = useMemo(() => NotificationService.getInstance(), []);
 
-  // Data fetching
-  const { data, loading, error, refetch } = useAudioData();
-
   // Favorites management
   const { favorites, toggleFavorite } = useFavorites();
 
@@ -47,10 +44,17 @@ export const AudioClient: React.FC<AudioClientProps> = ({
     setViewMode,
     clearFilters,
   } = useFilters();
+
+  // Data fetching with filters - memoize to prevent unnecessary re-renders
+  const audioFilters = useMemo(() => ({
+    reciter: filters.reciter !== "all" ? filters.reciter : undefined,
+  }), [filters.reciter]);
+
+  const { data, loading, error, refetch } = useAudioData(audioFilters);
   // Audio player state
   const [currentTrack, setCurrentTrack] = useState<AudioTrack | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isPlayerExpanded, setIsPlayerExpanded] = useState(false); // Track page view and session start
+  const [isPlayerExpanded, setIsPlayerExpanded] = useState(false);  // Track page view and session start
   useEffect(() => {
     analytics.trackPageView("/audio", "Audio Library");
     analytics.trackEvent("audio_library_visit", "user", {
@@ -58,16 +62,25 @@ export const AudioClient: React.FC<AudioClientProps> = ({
       locale,
       section: "audio-library",
     });
-  }, [analytics, locale]); // Filter tracks based on search and filters
+  }, [analytics, locale]);// Filter tracks based on search and filters (excluding reciter since API handles that)
   const filteredTracks = useMemo(() => {
     if (!data?.tracks) return [];
+    
+    // Create filters without reciter since API already handles that
+    const clientFilters = {
+      category: filters.category,
+      quality: filters.quality,
+      reciter: "all", // Don't filter by reciter on client side
+      showFavoritesOnly: filters.showFavoritesOnly,
+    };
+    
     return filterTracks(
       data.tracks,
       searchTerm,
-      filters,
+      clientFilters,
       Array.from(favorites),
     );
-  }, [data?.tracks, searchTerm, filters, favorites]); // Handle play/pause
+  }, [data?.tracks, searchTerm, filters.category, filters.quality, filters.showFavoritesOnly, favorites]);// Handle play/pause
   const handlePlay = async (track: AudioTrack) => {
     try {
       if (currentTrack?.id !== track.id) {
@@ -221,6 +234,7 @@ export const AudioClient: React.FC<AudioClientProps> = ({
         filters={filters}
         viewMode={viewMode}
         favoriteCount={favoriteCount}
+        reciters={data?.reciters || []}
         onSearchChange={setSearchTerm}
         onFilterChange={setFilters}
         onViewModeChange={setViewMode}
