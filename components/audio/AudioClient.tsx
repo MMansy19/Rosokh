@@ -63,6 +63,7 @@ export const AudioClient: React.FC<AudioClientProps> = ({
       section: "audio-library",
     });
   }, [analytics, locale]);// Filter tracks based on search and filters (excluding reciter since API handles that)
+  
   const filteredTracks = useMemo(() => {
     if (!data?.tracks) return [];
     
@@ -81,6 +82,7 @@ export const AudioClient: React.FC<AudioClientProps> = ({
       Array.from(favorites),
     );
   }, [data?.tracks, searchTerm, filters.category, filters.quality, filters.showFavoritesOnly, favorites]);// Handle play/pause
+
   const handlePlay = async (track: AudioTrack) => {
     try {
       if (currentTrack?.id !== track.id) {

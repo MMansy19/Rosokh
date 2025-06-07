@@ -5,7 +5,6 @@ interface useAudioDataReturn {
   data: {
     tracks: AudioTrack[];
     reciters: Reciter[];
-    surahs: Surah[];
   } | null;
   loading: boolean;
   error: string | null;
@@ -18,7 +17,6 @@ interface useAudioDataReturn {
 export const useAudioData = (filters?: { reciter?: string; surah?: string }): useAudioDataReturn => {
   const [audioTracks, setAudioTracks] = useState<AudioTrack[]>([]);
   const [reciters, setReciters] = useState<Reciter[]>([]);
-  const [surahs, setSurahs] = useState<Surah[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,19 +43,20 @@ export const useAudioData = (filters?: { reciter?: string; surah?: string }): us
       }
 
       const url = `/api/audio${params.toString() ? `?${params.toString()}` : ''}`;
+      
       const response = await fetch(url);
-
+      
       if (!response.ok) {
         throw new Error(`Failed to fetch audio data: ${response.statusText}`);
       }
-
+      
       const data = await response.json();
       
       setAudioTracks(data.tracks || []);
       setReciters(data.reciters || []);
-      setSurahs(data.surahs || []);
     } catch (err) {
-      console.error("Error loading audio data:", err);      setError(err instanceof Error ? err.message : "Failed to load audio data");
+      console.error("Error loading audio data:", err);      
+      setError(err instanceof Error ? err.message : "Failed to load audio data");
     } finally {
       setIsLoading(false);
     }
@@ -70,11 +69,11 @@ export const useAudioData = (filters?: { reciter?: string; surah?: string }): us
   const refetch = useCallback((newFilters?: { reciter?: string; surah?: string }) => {
     loadData(newFilters || filters);
   }, [filters, loadData]);
+
   return {
     data: audioTracks.length > 0 || reciters.length > 0 ? {
       tracks: audioTracks,
       reciters,
-      surahs,
     } : null,
     loading: isLoading,
     error,

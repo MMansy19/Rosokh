@@ -66,7 +66,6 @@ const generateAudioTracks = (reciters: ReciterJSON[], surahs: SurahJSON[]): Audi
       }
     });
   });
-
   return tracks;
 };
 
@@ -131,7 +130,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       tracks,
       reciters: transformedReciters,
-      surahs,
+      // surahs,
       total: tracks.length,
     });
   } catch (error) {
