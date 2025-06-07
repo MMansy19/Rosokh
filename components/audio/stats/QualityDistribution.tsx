@@ -36,7 +36,7 @@ export const QualityDistribution: React.FC<QualityDistributionProps> =
       <section>
         <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
           <span role="img" aria-label="Audio quality">
-            🎵
+            
           </span>
           <span>
             {getTranslation(

@@ -79,7 +79,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
           )}
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-background to-muted/20 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 text-foreground placeholder-muted-foreground text-lg"
+          className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-background to-muted/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 text-foreground placeholder-muted-foreground text-lg"
         />
         {searchTerm && (
           <button
@@ -105,7 +105,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
               onChange={(e) =>
                 onFilterChange({ ...filters, category: e.target.value as any })
               }
-              className="px-3 py-1.5 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
+              className="px-3 py-1.5 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
             >
               <option value="all">
                 {getTranslation(
@@ -135,7 +135,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
               onChange={(e) =>
                 onFilterChange({ ...filters, quality: e.target.value as any })
               }
-              className="px-3 py-1.5 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
+              className="px-3 py-1.5 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
             >
               <option value="all">
                 {getTranslation(messages, "audio.quality.all", "All Qualities")}
@@ -161,7 +161,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
               onChange={(e) =>
                 onFilterChange({ ...filters, reciter: e.target.value as any })
               }
-              className="px-3 py-1.5 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
+              className="px-3 py-1.5 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
             >
               <option value="all">
                 {getTranslation(messages, "audio.reciters.all", "All Reciters")}

@@ -178,7 +178,7 @@ const achievements = {
   },
   audio_lover: {
     name: "Audio Enthusiast",
-    icon: "🎵",
+    icon: "",
     description: "Listen to 100 verses",
   },
   bookworm: {

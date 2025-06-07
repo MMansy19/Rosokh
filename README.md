@@ -38,7 +38,7 @@ _The most comprehensive Islamic multimedia platform with Quran, Audio, Videos, A
 
 - **🕮 Full Quran Text** - Complete Arabic text with Uthmanic script
 - **🌍 Multi-Language Translations** - Arabic, English, Russian translations
-- **🎵 Audio Recitations** - 50+ renowned Qaris with playback controls
+- ** Audio Recitations** - 50+ renowned Qaris with playback controls
 - **🔍 Advanced Search** - Search by Surah, verse, keywords, or topics
 - **📝 Personal Notes** - Add, edit, and organize your study notes
 - **🔖 Bookmarking System** - Save and organize favorite verses
@@ -46,7 +46,7 @@ _The most comprehensive Islamic multimedia platform with Quran, Audio, Videos, A
 - **🎨 Customizable Display** - Font size, theme, and layout options
 - **📱 Offline Mode** - Download surahs for offline reading
 
-### 🎵 **Audio Library - Islamic Content Hub**
+###  **Audio Library - Islamic Content Hub**
 
 <div align="center">
 <img src="https://via.placeholder.com/800x400/059669/FFFFFF?text=Audio+Library+Interface" alt="Audio Library" width="80%">
@@ -160,7 +160,7 @@ _The most comprehensive Islamic multimedia platform with Quran, Audio, Videos, A
 </div>
 
 - **📈 Reading Analytics** - Detailed Quran reading statistics
-- **🎵 Listening Insights** - Audio content engagement metrics
+- ** Listening Insights** - Audio content engagement metrics
 - **📚 Learning Progress** - Article reading and comprehension tracking
 - **🏆 Achievement System** - Gamified spiritual progress tracking
 - **📊 Visual Reports** - Beautiful charts and progress visualizations
@@ -388,7 +388,7 @@ rosokh/
 │   │   │   ├── QuranClient.tsx    # Client-side Quran logic
 │   │   │   ├── [surah]/           # Individual Surah pages
 │   │   │   └── search/            # Advanced Quran search
-│   │   ├── 🎵 audio/              # Audio library (Google Drive)
+│   │   ├──  audio/              # Audio library (Google Drive)
 │   │   │   ├── page.tsx           # Audio library interface
 │   │   │   ├── [category]/        # Audio categories
 │   │   │   └── [track]/           # Individual audio tracks
@@ -440,7 +440,7 @@ rosokh/
 │   ├── favicon.ico                # App favicon
 │   └── globals.css                # Global styles
 ├── 🧩 components/                 # Reusable React components
-│   ├── 🎵 audio/                  # Audio-related components
+│   ├──  audio/                  # Audio-related components
 │   │   ├── AudioClient.tsx        # Main audio client
 │   │   ├── AudioPlayer.tsx        # Advanced audio player
 │   │   ├── TrackCard.tsx          # Individual track display
@@ -599,7 +599,7 @@ rosokh/
 - **⌨️ Keyboard Navigation** - Complete keyboard-only navigation
 - **🎨 High Contrast Mode** - Enhanced visibility options
 - **📏 Scalable Typography** - Adjustable font sizes for all users
-- **🎵 Audio Descriptions** - Voice descriptions for visual elements
+- ** Audio Descriptions** - Voice descriptions for visual elements
 
 ---
 
@@ -629,7 +629,7 @@ rosokh/
 
 - **⏱️ Reading Time Analysis** - How long users spend with content
 - **📖 Most Popular Content** - Trending articles, audio, and videos
-- **🎵 Audio Listening Patterns** - User preferences and habits
+- ** Audio Listening Patterns** - User preferences and habits
 - **📱 Device Usage Statistics** - Platform usage across different devices
 - **🌍 Geographic Distribution** - Where users are accessing from globally
 
@@ -676,7 +676,7 @@ We welcome contributions from the global Muslim community! Here's how you can he
 #### **📝 Content Contributions**
 
 - **📚 Article Writing** - Submit Islamic articles in Arabic, English, or Russian
-- **🎵 Audio Content** - Share Islamic lectures and nasheeds
+- ** Audio Content** - Share Islamic lectures and nasheeds
 - **🌍 Translations** - Help translate the platform to new languages
 - **📖 Quran Translations** - Contribute additional Quran translations
 
@@ -727,7 +727,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ### **Special Thanks To:**
 
 - **📖 Quran.com** - For providing free Quranic text and translations
-- **🎵 Islamic Content Creators** - Scholars and speakers who share their knowledge
+- ** Islamic Content Creators** - Scholars and speakers who share their knowledge
 - **🌍 Global Muslim Community** - For inspiration, feedback, and support
 - **👨‍💻 Open Source Contributors** - Developers who make projects like this possible
 - **🕌 Islamic Organizations** - For guidance on Islamic authenticity and accuracy

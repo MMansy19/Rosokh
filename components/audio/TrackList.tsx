@@ -53,7 +53,7 @@ export const TrackList: React.FC<TrackListProps> = ({
           )}
         </p>
         <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground/50">
-          <span>🎵</span>
+          <span></span>
           <span>
             {getTranslation(
               messages,

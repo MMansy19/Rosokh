@@ -20,7 +20,7 @@ export const PlayerStatusBar: React.FC<PlayerStatusBarProps> = React.memo(
     messages,
   }) => {
     return (
-      <div className="bg-gradient-to-r from-gray-800 to-gray-700 px-4 py-3 border-b border-gray-600">
+      <div className="bg-gradient-to-br from-primary to-primary/80 px-4 py-3 border-b border-primary">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
@@ -29,7 +29,7 @@ export const PlayerStatusBar: React.FC<PlayerStatusBarProps> = React.memo(
               <div className="w-3 h-3 bg-green-500 rounded-full hover:bg-green-400 transition-colors cursor-pointer"></div>
             </div>
             <div className="h-6 w-px bg-gray-600"></div>
-            <span className="text-xs text-gray-300 font-medium flex items-center gap-2">
+            <span className="md:flex hidden text-xs font-medium items-center gap-2">
               <svg
                 className="w-4 h-4 text-blue-400"
                 fill="currentColor"
@@ -98,7 +98,7 @@ export const PlayerStatusBar: React.FC<PlayerStatusBarProps> = React.memo(
               </div>
             )}
 
-            <div className="flex items-center gap-1 text-xs text-gray-300">
+            <div className="flex items-center gap-1 text-xs">
               <svg
                 className="w-3 h-3"
                 fill="currentColor"

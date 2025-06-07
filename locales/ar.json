@@ -311,8 +311,8 @@
     "player": {
       "nowPlaying": "قيد التشغيل الآن",
       "audioPlayer": "مشغل الصوت",
-      "poweredByGoogleDrive": "مدعوم بـ Google Drive",
-      "googleDriveAudioPlayer": "مشغل الصوت Google Drive",
+      "poweredByGoogleDrive": "مدعوم بـ جوجل درايف",
+      "googleDriveAudioPlayer": "مشغل الصوت جوجل درايف",
       "readyToPlay": "جاهز للتشغيل",
       "audioReady": "الصوت جاهز!",
       "speedControlInfo": "معلومات التحكم في السرعة",
@@ -328,8 +328,8 @@
       "liveStream": "بث مباشر",
       "highFidelity": "دقة عالية",
       "format": "التنسيق: MP3",
-      "source": "المصدر: Google Drive",
-      "viewOnGoogleDrive": "عرض في Google Drive"
+      "source": "المصدر: جوجل درايف",
+      "viewOnGoogleDrive": "عرض في جوجل درايف"
     },
     "track": {
       "by": "بصوت",
@@ -452,7 +452,7 @@
   "audio_player": {
     "by_reciter": "بصوت: {name}",
     "download": "تحميل",
-    "quality": "جودة عالية - مجاني من Google Drive",
+    "quality": "جودة عالية - مجاني من جوجل درايف",
     "speed": "السرعة",
     "loading": "جاري تحميل الصوت...",
     "play": "تشغيل",

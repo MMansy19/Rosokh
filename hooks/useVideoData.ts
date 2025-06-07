@@ -72,7 +72,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     name: "Islamic Nasheed",
     nameArabic: "أناشيد إسلامية",
     nameRussian: "Исламские нашиды",
-    icon: "🎵",
+    icon: "",
     color: "pink"
   },
   {

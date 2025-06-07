@@ -214,7 +214,7 @@ export const AudioClient: React.FC<AudioClientProps> = ({
       <div className="text-center space-y-4">
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
-            <span className="text-2xl">🎵</span>
+            <span className="text-2xl"></span>
           </div>
           <h1 className="text-4xl font-bold text-foreground">
             {getTranslation(messages, "audio.title", "Islamic Audio Library")}
@@ -265,8 +265,8 @@ export const AudioClient: React.FC<AudioClientProps> = ({
       />
       {/* Audio Player */}{" "}
       {currentTrack && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-t border-border">
-          <div className="container mx-auto px-4">
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-t border-primary">
+          <div className="container mx-auto md:px-4 px-2">
             <AudioPlayer
               track={currentTrack}
               isExpanded={isPlayerExpanded}

@@ -9,29 +9,12 @@ interface PlayerFooterProps {
 export const PlayerFooter: React.FC<PlayerFooterProps> = React.memo(
   ({ locale, messages }) => {
     return (
-      <footer className="bg-gradient-to-r from-gray-800 to-gray-700 px-4 py-2">
-        <div className="flex items-center justify-between text-xs text-gray-300">
+      <footer className="bg-gradient-to-br from-primary to-primary/80 border-t border-primary px-4 py-2">
+        <div className="flex items-center justify-between text-xs">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <span className="text-green-400">●</span>
-              <span>
-                {getTranslation(
-                  messages,
-                  "audio.player.liveStream",
-                  "Live Stream",
-                )}
-              </span>
-            </div>
-            <div className="flex items-center gap-1">
               <span role="img" aria-label="Music">
-                🎵
-              </span>
-              <span>
-                {getTranslation(
-                  messages,
-                  "audio.player.highFidelity",
-                  "High Fidelity",
-                )}
+                
               </span>
             </div>
           </div>

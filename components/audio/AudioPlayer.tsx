@@ -2,7 +2,6 @@ import React from "react";
 import { AudioTrack } from "@/types/audio";
 import {
   PlayerHeader,
-  SpeedControlInfo,
   PlayerStatusBar,
   PlayerFrame,
   PlayerFooter,
@@ -30,7 +29,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = React.memo(
       hasError,
     } = useAudioPlayerEnhanced({ track });
     return (
-      <article className="mt-6 bg-gradient-to-br from-background to-secondary/20 rounded-xl p-6 border border-border shadow-inner relative overflow-hidden">
+      <article className="md:mt-6 mt-2 bg-gradient-to-br from-background to-secondary/20 rounded-xl md:p-6 p-2 shadow-inner relative overflow-hidden">
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-5" aria-hidden="true">
           <svg
@@ -64,12 +63,10 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = React.memo(
           onClose={onClose}
         />
         {/* Player Container */}
-        <section className="relative mb-4">
-          <SpeedControlInfo locale={locale} messages={messages} />
-
+        <section className="relative md:mb-4 mb-2">
           {/* Enhanced background */}
           <div
-            className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 rounded-xl"
+            className="absolute inset-0 bg-gradient-to-br from-primary to-primary/80 rounded-xl"
             aria-hidden="true"
           ></div>
           <div className="absolute inset-0 opacity-10" aria-hidden="true">
@@ -110,7 +107,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = React.memo(
             </svg>
           </div>
 
-          <div className="relative bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 rounded-xl border border-gray-700 overflow-hidden shadow-2xl">
+          <div className="relative bg-gradient-to-br from-primary to-primary/80 rounded-xl overflow-hidden shadow-2xl">
             <PlayerStatusBar
               iframeLoading={iframeLoading}
               audioReady={audioReady}

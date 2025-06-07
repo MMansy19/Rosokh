@@ -28,13 +28,13 @@ export const PlayerFrame: React.FC<PlayerFrameProps> = React.memo(
     const previewUrl = getGoogleDrivePreviewUrl(track.id);
 
     return (
-      <div className="relative bg-gradient-to-br from-gray-900 to-slate-900">
+      <div className="relative bg-gradient-to-br from-primary to-primary/80 md:h-[25vh] h-[30vh]">
         {/* Loading overlay */}
         {iframeLoading && (
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 to-slate-900/90 backdrop-blur-sm flex items-center justify-center z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/80 backdrop-blur-sm flex items-center justify-center z-10">
             <div className="text-center">
               <div className="w-16 h-16 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mb-4 mx-auto"></div>
-              <div className="text-white text-sm font-medium mb-2">
+              <div className="text-sm font-medium mb-2">
                 {getTranslation(
                   messages,
                   "audio.loading.loadingAudioPlayer",
@@ -70,7 +70,7 @@ export const PlayerFrame: React.FC<PlayerFrameProps> = React.memo(
 
         {/* Audio ready overlay */}
         {audioReady && !iframeLoading && (
-          <div className="absolute top-4 right-4 bg-green-600/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs flex items-center gap-2 z-10 animate-fade-in">
+          <div className="absolute top-4 right-4 bg-green-600/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs flex items-center gap-2 z-10 animate-fade-in">
             <div
               className="w-2 h-2 bg-white rounded-full animate-pulse"
               role="status"
