@@ -70,7 +70,7 @@ export const PlayerFrame: React.FC<PlayerFrameProps> = React.memo(
 
         {/* Audio ready overlay */}
         {audioReady && !iframeLoading && (
-          <div className="absolute top-4 right-4 bg-green-600/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs flex items-center gap-2 z-10 animate-fade-in">
+          <div className="absolute top-4 right-4 bg-green-600/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white flex items-center gap-2 z-10 animate-fade-in">
             <div
               className="w-2 h-2 bg-white rounded-full animate-pulse"
               role="status"

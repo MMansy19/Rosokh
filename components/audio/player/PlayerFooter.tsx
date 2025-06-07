@@ -13,9 +13,7 @@ export const PlayerFooter: React.FC<PlayerFooterProps> = React.memo(
         <div className="flex items-center justify-between text-xs">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <span role="img" aria-label="Music">
-                
-              </span>
+              <span role="img" aria-label="Music"></span>
             </div>
           </div>
 

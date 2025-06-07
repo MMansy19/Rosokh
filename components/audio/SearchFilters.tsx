@@ -66,7 +66,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
   return (
     <div className="space-y-6">
       {/* Search Bar */}
-      <div className="relative">
+      <div className='relative' dir={locale === "ar" ? "rtl" : "ltr"}>
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <Search className="w-5 h-5 text-muted-foreground" />
         </div>{" "}

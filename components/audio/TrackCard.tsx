@@ -14,8 +14,11 @@ import {
   showNotification,
 } from "@/utils/audioUtils";
 import { QUALITY_COLORS } from "@/constants/audio";
+import { getTranslation } from "@/utils/translations";
 
 interface TrackCardProps {
+  locale: string;
+  messages: any;
   track: AudioTrack;
   isPlaying: boolean;
   isFavorite: boolean;
@@ -26,6 +29,8 @@ interface TrackCardProps {
 }
 
 export const TrackCard: React.FC<TrackCardProps> = ({
+  locale,
+  messages,
   track,
   isPlaying,
   isFavorite,
@@ -87,7 +92,7 @@ export const TrackCard: React.FC<TrackCardProps> = ({
               <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <User className="w-4 h-4" />
-                  <span>{track.reciter.name}</span>
+                  <span>{locale === "ar" ? track.reciter.arabicName : track.reciter.name}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
@@ -96,7 +101,9 @@ export const TrackCard: React.FC<TrackCardProps> = ({
                 {track.surah && (
                   <div className="flex items-center gap-1">
                     <BookOpen className="w-4 h-4" />
-                    <span>Surah {track.surah}</span>
+                    <span>
+                      {getTranslation(messages, "search.surah", "Surah")}:{" "}
+                      {track.surah}</span>
                   </div>
                 )}
               </div>
@@ -180,7 +187,7 @@ export const TrackCard: React.FC<TrackCardProps> = ({
         <div className="space-y-2 mb-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <User className="w-4 h-4 flex-shrink-0" />
-            <span className="truncate">{track.reciter.name}</span>
+            <span className="truncate">{locale === "ar" ? track.reciter.arabicName : track.reciter.name}</span>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -190,7 +197,7 @@ export const TrackCard: React.FC<TrackCardProps> = ({
             {track.surah && (
               <div className="flex items-center gap-1">
                 <BookOpen className="w-4 h-4 flex-shrink-0" />
-                <span>Surah {track.surah}</span>
+                <span>{getTranslation(messages, "search.surah", "Surah")}:{" "} {track.surah}</span>
               </div>
             )}
           </div>

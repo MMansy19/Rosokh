@@ -46,7 +46,7 @@ _The most comprehensive Islamic multimedia platform with Quran, Audio, Videos, A
 - **🎨 Customizable Display** - Font size, theme, and layout options
 - **📱 Offline Mode** - Download surahs for offline reading
 
-###  **Audio Library - Islamic Content Hub**
+### **Audio Library - Islamic Content Hub**
 
 <div align="center">
 <img src="https://via.placeholder.com/800x400/059669/FFFFFF?text=Audio+Library+Interface" alt="Audio Library" width="80%">

@@ -42,9 +42,7 @@ export const PlayerHeader: React.FC<PlayerHeaderProps> = React.memo(
           </div>
           <div className="flex-col">
             <span className="text-sm font-semibold text-foreground flex items-center gap-2">
-              <span className="text-lg" role="img" aria-label="Music">
-                
-              </span>
+              <span className="text-lg" role="img" aria-label="Music"></span>
               {getTranslation(
                 messages,
                 "audio.player.audioPlayer",
@@ -61,7 +59,6 @@ export const PlayerHeader: React.FC<PlayerHeaderProps> = React.memo(
           </div>
         </div>
         <div className="flex items-center gap-2">
-          
           {/* Quality indicator */}
           <div className="md:flex hidden items-center gap-1 px-3 py-1.5 bg-primary/10 rounded-full border border-primary/20 backdrop-blur-sm">
             <div
@@ -83,7 +80,7 @@ export const PlayerHeader: React.FC<PlayerHeaderProps> = React.memo(
               )}
             </span>
           </div>
-          
+
           {/* View on Google Drive button */}
           <button
             onClick={handleViewOnGoogleDrive}
@@ -112,7 +109,7 @@ export const PlayerHeader: React.FC<PlayerHeaderProps> = React.memo(
               />
             </svg>
           </button>
-          
+
           {/* Download button */}
           <button
             onClick={handleDownload}

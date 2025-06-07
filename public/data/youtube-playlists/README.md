@@ -5,14 +5,16 @@ This system allows the application to dynamically load all playlist files from t
 ## How It Works
 
 ### 1. Manifest File
+
 - **Location**: `public/data/youtube-playlists/manifest.json`
 - **Purpose**: Contains a list of all available playlist JSON files
 - **Structure**:
+
 ```json
 {
   "files": [
     "huda-lilnas.json",
-    "juz-amma-tafsir.json", 
+    "juz-amma-tafsir.json",
     "juz-tabarak.json",
     "qad-samea-tafsir.json",
     "quran-tafsir.json"
@@ -21,6 +23,7 @@ This system allows the application to dynamically load all playlist files from t
 ```
 
 ### 2. Dynamic Loading Hook
+
 - **File**: `hooks/usePlaylistData.ts`
 - **Process**:
   1. Fetches the manifest file to get the list of available playlist files
@@ -31,16 +34,19 @@ This system allows the application to dynamically load all playlist files from t
 ### 3. Automatic Manifest Updates
 
 #### Using the NPM Script (Recommended)
+
 ```bash
 npm run update-playlist-manifest
 ```
 
 #### Manual Script Execution
+
 ```bash
 node scripts/update-playlist-manifest.js
 ```
 
 #### What the Script Does
+
 - Scans the `public/data/youtube-playlists/` directory
 - Finds all `.json` files (excluding `manifest.json`)
 - Updates the manifest file with the current list of files
@@ -49,11 +55,13 @@ node scripts/update-playlist-manifest.js
 ## Adding New Playlist Files
 
 ### Option 1: Automatic (Recommended)
+
 1. Add your new playlist JSON file to `public/data/youtube-playlists/`
 2. Run `npm run update-playlist-manifest`
 3. The new file will be automatically included in the next app reload
 
 ### Option 2: Manual
+
 1. Add your new playlist JSON file to `public/data/youtube-playlists/`
 2. Manually add the filename to `manifest.json` in the `files` array
 3. Restart your development server
@@ -61,6 +69,7 @@ node scripts/update-playlist-manifest.js
 ## Playlist File Structure
 
 Each playlist file should follow this structure:
+
 ```json
 {
   "playlists": [
@@ -70,7 +79,7 @@ Each playlist file should follow this structure:
       "titleEnglish": "English Title",
       "titleRussian": "Russian Title",
       "description": "Description in Arabic",
-      "descriptionEnglish": "English Description", 
+      "descriptionEnglish": "English Description",
       "descriptionRussian": "Russian Description",
       "thumbnailUrl": "https://...",
       "publishedAt": "2020-01-01T00:00:00Z",
@@ -104,15 +113,18 @@ Each playlist file should follow this structure:
 ## Troubleshooting
 
 ### Manifest Not Updating
+
 - Ensure the script has proper permissions
 - Check that the file path in the script is correct
 - Verify that new files are valid JSON
 
 ### New Files Not Loading
+
 - Run `npm run update-playlist-manifest` after adding files
 - Check browser developer tools for network errors
 - Verify file names in manifest match actual files
 
 ### TypeScript Errors
+
 - Ensure new playlist files follow the correct interface structure
 - Check that all required fields are present in playlist objects

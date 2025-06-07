@@ -1,9 +1,5 @@
 import {
   AudioTrack,
-  Reciter,
-  Surah,
-  AudioData,
-  ReciterData,
 } from "@/types/audio";
 import { DURATION_ESTIMATES } from "../constants/audio";
 
@@ -19,38 +15,6 @@ export const getGoogleDrivePreviewUrl = (fileId: string): string => {
  */
 export const getGoogleDriveDownloadUrl = (fileId: string): string => {
   return `https://drive.google.com/uc?export=download&id=${fileId}`;
-};
-
-/**
- * Generate audio tracks from surahs and reciters data
- */
-export const generateAudioTracks = (
-  audioData: AudioData,
-  recitersData: ReciterData,
-): AudioTrack[] => {
-  return audioData.surahs.flatMap((surah: Surah) =>
-    recitersData.reciters
-      .filter((reciter: Reciter) => surah.driveFiles?.[reciter.id])
-      .map(
-        (reciter: Reciter): AudioTrack => ({
-          id: surah.driveFiles[reciter.id],
-          title: surah.name,
-          arabicTitle: surah.arabicName,
-          reciter: {
-            id: reciter.id,
-            name: reciter.name,
-            arabicName: reciter.arabicName,
-          },
-          duration: "Unknown",
-          url: `https://drive.google.com/file/d/${surah.driveFiles[reciter.id]}/view`,
-          category: "quran" as const,
-          surah: surah.id,
-          quality: "high" as const,
-          size: "Unknown",
-          isOfflineAvailable: false,
-        }),
-      ),
-  );
 };
 
 /**
@@ -81,7 +45,11 @@ export const filterTracks = (
     const matchesFavorites = !showFavoritesOnly || favorites.includes(track.id);
 
     return (
-      matchesCategory && matchesQuality && matchesReciter && matchesSearch && matchesFavorites
+      matchesCategory &&
+      matchesQuality &&
+      matchesReciter &&
+      matchesSearch &&
+      matchesFavorites
     );
   });
 };
@@ -121,23 +89,4 @@ export const showNotification = (
   `;
   document.body.appendChild(notification);
   setTimeout(() => notification.remove(), 4000);
-};
-
-/**
- * Scroll to element smoothly
- */
-export const scrollToElement = (
-  selector: string,
-  delay: number = 100,
-): void => {
-  setTimeout(() => {
-    const element = document.querySelector(selector);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    }
-  }, delay);
 };

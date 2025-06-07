@@ -22,7 +22,15 @@
         "nameRussian": "Толкование Корана",
         "icon": "📖"
       },
-      "tags": ["تفسير القرآن", "قد سمع", "quran interpretation", "islamic knowledge", "ahmed abdelmonem", "تدبر", "قرآن"],
+      "tags": [
+        "تفسير القرآن",
+        "قد سمع",
+        "quran interpretation",
+        "islamic knowledge",
+        "ahmed abdelmonem",
+        "تدبر",
+        "قرآن"
+      ],
       "language": "ar",
       "videos": [
         {

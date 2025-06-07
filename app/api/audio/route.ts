@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
-import fs from 'fs';
-import { AudioTrack, Reciter, Surah } from '@/types/audio';
+import { NextRequest, NextResponse } from "next/server";
+import path from "path";
+import fs from "fs";
+import { AudioTrack, Reciter, Surah } from "@/types/audio";
 
 interface ReciterJSON {
   desc: {
@@ -13,7 +13,6 @@ interface ReciterJSON {
     totalRecitations: number;
     style: string;
     image: string;
-    driveFolder: string;
     featured: boolean;
   };
   surahs: { [key: string]: string };
@@ -39,15 +38,18 @@ const getGoogleDriveAudioUrl = (fileId: string): string => {
 /**
  * Generate audio tracks from reciters and surahs data
  */
-const generateAudioTracks = (reciters: ReciterJSON[], surahs: SurahJSON[]): AudioTrack[] => {
+const generateAudioTracks = (
+  reciters: ReciterJSON[],
+  surahs: SurahJSON[],
+): AudioTrack[] => {
   const tracks: AudioTrack[] = [];
-  
+
   reciters.forEach((reciter) => {
     Object.entries(reciter.surahs).forEach(([surahId, fileId]) => {
-      const surah = surahs.find(s => s.id === parseInt(surahId));
+      const surah = surahs.find((s) => s.id === parseInt(surahId));
       if (surah && fileId) {
         tracks.push({
-          id: `${reciter.desc.id}-${surahId}`,
+          id:fileId,
           title: surah.name,
           arabicTitle: surah.arabicName,
           reciter: {
@@ -55,7 +57,7 @@ const generateAudioTracks = (reciters: ReciterJSON[], surahs: SurahJSON[]): Audi
             name: reciter.desc.name,
             arabicName: reciter.desc.arabicName,
           },
-          duration: "Unknown", // We can estimate based on surah length
+          duration: "Unknown",
           url: getGoogleDriveAudioUrl(fileId),
           category: "quran",
           surah: surah.id,
@@ -73,7 +75,7 @@ const generateAudioTracks = (reciters: ReciterJSON[], surahs: SurahJSON[]): Audi
  * Transform reciter data for the frontend
  */
 const transformReciters = (reciters: ReciterJSON[]): Reciter[] => {
-  return reciters.map(reciter => ({
+  return reciters.map((reciter) => ({
     id: reciter.desc.id,
     name: reciter.desc.name,
     arabicName: reciter.desc.arabicName,
@@ -82,7 +84,6 @@ const transformReciters = (reciters: ReciterJSON[]): Reciter[] => {
     totalRecitations: reciter.desc.totalRecitations,
     style: reciter.desc.style,
     image: reciter.desc.image,
-    driveFolder: reciter.desc.driveFolder,
     featured: reciter.desc.featured,
   }));
 };
@@ -90,38 +91,48 @@ const transformReciters = (reciters: ReciterJSON[]): Reciter[] => {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const reciterFilter = searchParams.get('reciter');
-    const surahFilter = searchParams.get('surah');
-    
+    const reciterFilter = searchParams.get("reciter");
+    const surahFilter = searchParams.get("surah");
+
     // Read the JSON files
-    const recitersPath = path.join(process.cwd(), 'public', 'data', 'reciters.json');
-    const surahsPath = path.join(process.cwd(), 'public', 'data', 'surahs.json');
-    
+    const recitersPath = path.join(
+      process.cwd(),
+      "public",
+      "data",
+      "reciters.json",
+    );
+    const surahsPath = path.join(
+      process.cwd(),
+      "public",
+      "data",
+      "surahs.json",
+    );
+
     if (!fs.existsSync(recitersPath) || !fs.existsSync(surahsPath)) {
       return NextResponse.json(
-        { error: 'Data files not found' },
-        { status: 404 }
+        { error: "Data files not found" },
+        { status: 404 },
       );
     }
 
-    const recitersData = JSON.parse(fs.readFileSync(recitersPath, 'utf8'));
-    const surahsData = JSON.parse(fs.readFileSync(surahsPath, 'utf8'));
+    const recitersData = JSON.parse(fs.readFileSync(recitersPath, "utf8"));
+    const surahsData = JSON.parse(fs.readFileSync(surahsPath, "utf8"));
 
     let reciters: ReciterJSON[] = recitersData.reciters || [];
     const surahs: SurahJSON[] = surahsData.surahs || [];
 
     // Apply reciter filter if specified
-    if (reciterFilter && reciterFilter !== 'all') {
-      reciters = reciters.filter(r => r.desc.id === reciterFilter);
+    if (reciterFilter && reciterFilter !== "all") {
+      reciters = reciters.filter((r) => r.desc.id === reciterFilter);
     }
 
     // Generate audio tracks
     let tracks = generateAudioTracks(reciters, surahs);
 
     // Apply surah filter if specified
-    if (surahFilter && surahFilter !== 'all') {
+    if (surahFilter && surahFilter !== "all") {
       const surahId = parseInt(surahFilter);
-      tracks = tracks.filter(track => track.surah === surahId);
+      tracks = tracks.filter((track) => track.surah === surahId);
     }
 
     // Transform reciters for frontend
@@ -130,14 +141,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       tracks,
       reciters: transformedReciters,
-      // surahs,
       total: tracks.length,
     });
   } catch (error) {
-    console.error('Error in audio API:', error);
+    console.error("Error in audio API:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }

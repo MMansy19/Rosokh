@@ -39,7 +39,7 @@ class ReciterDataService {
       ReciterDataService.instance = new ReciterDataService();
     }
     return ReciterDataService.instance;
-  }  /**
+  } /**
    * Load surah metadata from drive-audio.json
    */
   private async loadSurahsData(): Promise<Surah[]> {
@@ -105,7 +105,7 @@ class ReciterDataService {
         } catch (error) {
           console.warn(`Failed to load data for ${reciter.name}:`, error);
         }
-      })
+      }),
     );
 
     return results;
@@ -116,7 +116,7 @@ class ReciterDataService {
    */
   async convertToAudioTracks(
     reciterId: string,
-    data: ReciterSurahData
+    data: ReciterSurahData,
   ): Promise<AudioTrack[]> {
     const reciter = AVAILABLE_RECITERS.find((r) => r.id === reciterId);
     if (!reciter) {
@@ -124,15 +124,18 @@ class ReciterDataService {
     }
 
     // Load surah metadata
-    const surahs = await this.loadSurahsData();    // Load surah metadata
+    const surahs = await this.loadSurahsData(); // Load surah metadata
     const surahsData = await this.loadSurahsData();
-    
+
     // Create a map for faster surah lookup
-    const surahMap = new Map(surahsData.map(surah => [surah.id.toString(), surah]));    return Object.entries(data).map(([surahId, fileId]) => {
+    const surahMap = new Map(
+      surahsData.map((surah) => [surah.id.toString(), surah]),
+    );
+    return Object.entries(data).map(([surahId, fileId]) => {
       const surah = surahMap.get(surahId);
       const surahName = surah ? surah.name : `Surah ${surahId}`;
       const arabicName = surah ? surah.arabicName : `سورة ${surahId}`;
-      
+
       return {
         id: `${reciterId}-${surahId}`,
         title: surahName,

@@ -1,5 +1,6 @@
 {
-  "playlists": [    {
+  "playlists": [
+    {
       "id": "PLnpYU8_AiEPdZtOcZemEHETeOjWakJpKE",
       "title": "تفسير جزء (عَمَّ) | د. أحمد عبد المنعم",
       "titleEnglish": "Interpretation of Juz Amma - Dr. Ahmed Abdel Moneim",
@@ -21,7 +22,8 @@
         "icon": "📖"
       },
       "dataFile": "juz-amma-tafsir.json"
-    },    {
+    },
+    {
       "id": "PLnpYU8_AiEPeRwRLwExs7WaNRt3Y5rn7b",
       "title": "تفسير جزء (تبارك) | د. أحمد عبد المنعم",
       "titleEnglish": "Interpretation of Juz Tabarak - Dr. Ahmed Abdel Moneim",
@@ -43,7 +45,8 @@
         "icon": "📖"
       },
       "dataFile": "juz-tabarak.json"
-    },    {
+    },
+    {
       "id": "PLx8eSI7UgsiGA9f1ztAHoemtDlfJUd5a3",
       "title": "هدى للناس - تفسير القرآن المبسط",
       "titleEnglish": "Huda Lil Nas - Simplified Quran Commentary",
@@ -65,7 +68,8 @@
         "icon": "📖"
       },
       "dataFile": "huda-lilnas.json"
-    },    {
+    },
+    {
       "id": "PLnpYU8_AiEPdQadSameaTafsir2024",
       "title": "تفسير جزء (قد سمع) | د. أحمد عبد المنعم",
       "titleEnglish": "Interpretation of Qad Samea Part - Dr. Ahmed Abdel Moneim",
@@ -87,7 +91,8 @@
         "icon": "📖"
       },
       "dataFile": "qad-samea-tafsir.json"
-    },    {
+    },
+    {
       "id": "PLnpYU8_AiEPct7B-VmBrWJWifYEcb2TtC",
       "title": "مجالس القرآن - د. أحمد عبد المنعم",
       "titleEnglish": "Quran Councils - Dr. Ahmed Abdel Moneim",
@@ -107,7 +112,8 @@
         "nameArabic": "تفسير القرآن الكريم",
         "nameRussian": "Толкование Корана",
         "icon": "📖"
-      },      "dataFile": "quran-tafsir.json"
+      },
+      "dataFile": "quran-tafsir.json"
     },
     {
       "id": "PLnpYU8_AiEPegC34BzlfEWoLDPvSNfYUJ",

@@ -4,9 +4,6 @@ import { useGlobalError } from "@/contexts/GlobalContext";
 import {
   StatsHeader,
   MainStatsGrid,
-  CategoriesBreakdown,
-  QualityDistribution,
-  StatsFooter,
   useStatsCalculations,
 } from "./stats";
 
@@ -38,7 +35,6 @@ export const StatsSection: React.FC<StatsSectionProps> = React.memo(
             locale={locale}
             messages={messages}
           />
-
           <MainStatsGrid
             totalReciters={stats.totalReciters}
             formattedDuration={stats.formattedDuration}
@@ -46,21 +42,6 @@ export const StatsSection: React.FC<StatsSectionProps> = React.memo(
             locale={locale}
             messages={messages}
           />
-
-          <CategoriesBreakdown
-            categories={stats.categories}
-            locale={locale}
-            messages={messages}
-          />
-
-          <QualityDistribution
-            qualities={stats.qualities}
-            totalTracks={stats.totalTracks}
-            locale={locale}
-            messages={messages}
-          />
-
-          <StatsFooter locale={locale} messages={messages} />
         </article>
       );
     } catch (error) {

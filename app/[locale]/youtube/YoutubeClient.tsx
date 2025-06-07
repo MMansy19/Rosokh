@@ -27,10 +27,7 @@ import {
   VideoMetadata,
   VIDEO_CATEGORIES,
 } from "@/hooks/useVideoData";
-import {
-  usePlaylistData,
-  PlaylistMetadata,
-} from "@/hooks/usePlaylistData";
+import { usePlaylistData, PlaylistMetadata } from "@/hooks/usePlaylistData";
 
 // Add error handling for YoutubeClient
 interface ErrorBoundaryState {
@@ -135,14 +132,9 @@ export default function YoutubeClient({
   locale,
   messages,
 }: YoutubeClientProps) {
-  const {
-    videos,
-    loading,
-    error,
-    searchVideos,
-    getVideosByCategory,
-  } = useVideoData();
-  
+  const { videos, loading, error, searchVideos, getVideosByCategory } =
+    useVideoData();
+
   const {
     playlists,
     loading: playlistLoading,
@@ -157,14 +149,19 @@ export default function YoutubeClient({
   } = usePlaylistData();
 
   const [filteredVideos, setFilteredVideos] = useState<VideoMetadata[]>([]);
-  const [filteredPlaylists, setFilteredPlaylists] = useState<PlaylistMetadata[]>([]);
+  const [filteredPlaylists, setFilteredPlaylists] = useState<
+    PlaylistMetadata[]
+  >([]);
   const [selectedVideo, setSelectedVideo] = useState<VideoMetadata | null>(
     null,
   );
-  const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistMetadata | null>(null);
+  const [selectedPlaylist, setSelectedPlaylist] =
+    useState<PlaylistMetadata | null>(null);
   const [playlistVideos, setPlaylistVideos] = useState<VideoMetadata[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState<"videos" | "playlists">("playlists");
+  const [activeTab, setActiveTab] = useState<"videos" | "playlists">(
+    "playlists",
+  );
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [showFilters, setShowFilters] = useState(false);
@@ -236,14 +233,14 @@ export default function YoutubeClient({
   const handlePlaylistSelect = async (playlist: PlaylistMetadata) => {
     setSelectedPlaylist(playlist);
     setActiveTab("videos");
-    
+
     try {
       // Load videos for the selected playlist if not already loaded
       const videos = await loadPlaylistVideos(playlist.id);
       setPlaylistVideos(videos);
       setFilteredVideos(videos);
     } catch (error) {
-      console.error('Failed to load playlist videos:', error);
+      console.error("Failed to load playlist videos:", error);
       // Show empty state or error message
       setPlaylistVideos([]);
       setFilteredVideos([]);
@@ -262,18 +259,18 @@ export default function YoutubeClient({
     if (video.youtubeId) {
       return video.youtubeId;
     }
-    
+
     // Try to extract from thumbnail URL first
     const thumbnailMatch = video.thumbnailUrl.match(/\/vi\/([^\/]+)\//);
     if (thumbnailMatch) {
       return thumbnailMatch[1];
     }
-    
+
     // If it's a standard YouTube video ID format
-    if (video.id && !video.id.includes('&index=')) {
+    if (video.id && !video.id.includes("&index=")) {
       return video.id;
     }
-    
+
     // Fallback: return the ID as is
     return video.id;
   };
@@ -315,11 +312,15 @@ export default function YoutubeClient({
                     isExpanded={true}
                     locale={locale}
                     messages={messages}
-                    playlist={selectedPlaylist ? {
-                      id: selectedPlaylist.id,
-                      title: selectedPlaylist.title,
-                      category: selectedPlaylist.category
-                    } : undefined}
+                    playlist={
+                      selectedPlaylist
+                        ? {
+                            id: selectedPlaylist.id,
+                            title: selectedPlaylist.title,
+                            category: selectedPlaylist.category,
+                          }
+                        : undefined
+                    }
                   />
                 </div>
               </div>
@@ -379,7 +380,8 @@ export default function YoutubeClient({
                         : "bg-secondary text-foreground hover:bg-accent hover:text-white"
                     }`}
                   >
-                    {messages?.youtube?.search?.allCategories || "All Categories"}
+                    {messages?.youtube?.search?.allCategories ||
+                      "All Categories"}
                   </button>
 
                   {VIDEO_CATEGORIES.map((category) => (
@@ -428,9 +430,7 @@ export default function YoutubeClient({
                       {tab === "playlists" && (
                         <PlaySquare className="w-4 h-4" />
                       )}
-                      {tab === "videos" && (
-                        <Play className="w-4 h-4" />
-                      )}
+                      {tab === "videos" && <Play className="w-4 h-4" />}
                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
                     </button>
                   ))}
@@ -440,8 +440,8 @@ export default function YoutubeClient({
                   <button
                     onClick={() => setShowFilters(!showFilters)}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-                      showFilters 
-                        ? "bg-primary text-white" 
+                      showFilters
+                        ? "bg-primary text-white"
                         : "bg-secondary text-foreground hover:bg-accent hover:text-white"
                     }`}
                   >
@@ -487,17 +487,21 @@ export default function YoutubeClient({
                       ? selectedPlaylist.title
                       : locale === "ru" && selectedPlaylist.titleRussian
                         ? selectedPlaylist.titleRussian
-                        : selectedPlaylist.titleEnglish || selectedPlaylist.title}
+                        : selectedPlaylist.titleEnglish ||
+                          selectedPlaylist.title}
                   </h2>
                   <p className="text-muted text-sm mb-2">
-                    {selectedPlaylist.channelTitle} • {selectedPlaylist.videoCount} videos • {formatPlaylistDuration(selectedPlaylist.totalDuration)}
+                    {selectedPlaylist.channelTitle} •{" "}
+                    {selectedPlaylist.videoCount} videos •{" "}
+                    {formatPlaylistDuration(selectedPlaylist.totalDuration)}
                   </p>
                   <p className="text-muted text-sm">
                     {locale === "ar" && selectedPlaylist.description
                       ? selectedPlaylist.description
                       : locale === "ru" && selectedPlaylist.descriptionRussian
                         ? selectedPlaylist.descriptionRussian
-                        : selectedPlaylist.descriptionEnglish || selectedPlaylist.description}
+                        : selectedPlaylist.descriptionEnglish ||
+                          selectedPlaylist.description}
                   </p>
                 </div>
               </div>
@@ -611,7 +615,7 @@ export default function YoutubeClient({
                       <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs">
                         {formatDuration(video.duration)}
                       </div>
-                      {selectedPlaylist && 'playlistIndex' in video && (
+                      {selectedPlaylist && "playlistIndex" in video && (
                         <div className="absolute top-2 left-2 bg-black/80 text-white px-2 py-1 rounded text-xs">
                           {(video as any).playlistIndex}
                         </div>
@@ -648,21 +652,21 @@ export default function YoutubeClient({
 
                       <div className="mt-2">
                         <span className="inline-block px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
-                          {selectedPlaylist ? (
-                            // If viewing playlist videos, show playlist category
-                            locale === "ar" && selectedPlaylist.category.nameArabic
+                          {selectedPlaylist
+                            ? // If viewing playlist videos, show playlist category
+                              locale === "ar" &&
+                              selectedPlaylist.category.nameArabic
                               ? selectedPlaylist.category.nameArabic
-                              : locale === "ru" && selectedPlaylist.category.nameRussian
+                              : locale === "ru" &&
+                                  selectedPlaylist.category.nameRussian
                                 ? selectedPlaylist.category.nameRussian
                                 : selectedPlaylist.category.name
-                          ) : (
-                            // If viewing individual videos, show video category
-                            locale === "ar" && video.category.nameArabic
+                            : // If viewing individual videos, show video category
+                              locale === "ar" && video.category.nameArabic
                               ? video.category.nameArabic
                               : locale === "ru" && video.category.nameRussian
                                 ? video.category.nameRussian
-                                : video.category.name
-                          )}
+                                : video.category.name}
                         </span>
                       </div>
                     </div>
@@ -689,17 +693,18 @@ export default function YoutubeClient({
                 )}
 
                 {/* Playlists Empty State */}
-                {filteredPlaylists.length === 0 && activeTab === "playlists" && (
-                  <div className="text-center py-12">
-                    <div className="text-6xl mb-4">📺</div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">
-                      No playlists found
-                    </h3>
-                    <p className="text-muted">
-                      Try adjusting your search terms or filters
-                    </p>
-                  </div>
-                )}
+                {filteredPlaylists.length === 0 &&
+                  activeTab === "playlists" && (
+                    <div className="text-center py-12">
+                      <div className="text-6xl mb-4">📺</div>
+                      <h3 className="text-xl font-semibold text-foreground mb-2">
+                        No playlists found
+                      </h3>
+                      <p className="text-muted">
+                        Try adjusting your search terms or filters
+                      </p>
+                    </div>
+                  )}
               </>
             )}
           </div>

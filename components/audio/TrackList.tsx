@@ -104,6 +104,8 @@ export const TrackList: React.FC<TrackListProps> = ({
         {tracks.map((track) => (
           <TrackCard
             key={track.id}
+            locale={locale}
+            messages={messages}
             track={track}
             isPlaying={currentTrack?.id === track.id && isPlaying}
             isFavorite={favorites.includes(track.id)}

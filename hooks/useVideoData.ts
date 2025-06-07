@@ -49,7 +49,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "تلاوة القرآن",
     nameRussian: "Чтение Корана",
     icon: "📖",
-    color: "emerald"
+    color: "emerald",
   },
   {
     id: "quran_tafsir",
@@ -57,7 +57,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "تفسير القرآن الكريم",
     nameRussian: "Тафсир Корана",
     icon: "📚",
-    color: "blue"
+    color: "blue",
   },
   {
     id: "islamic_lectures",
@@ -65,7 +65,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "محاضرات إسلامية",
     nameRussian: "Исламские лекции",
     icon: "🎓",
-    color: "purple"
+    color: "purple",
   },
   {
     id: "nasheed",
@@ -73,7 +73,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "أناشيد إسلامية",
     nameRussian: "Исламские нашиды",
     icon: "",
-    color: "pink"
+    color: "pink",
   },
   {
     id: "hajj_umrah",
@@ -81,7 +81,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "الحج والعمرة",
     nameRussian: "Хадж и Умра",
     icon: "🕋",
-    color: "orange"
+    color: "orange",
   },
   {
     id: "ramadan",
@@ -89,7 +89,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "رمضان",
     nameRussian: "Рамадан",
     icon: "🌙",
-    color: "yellow"
+    color: "yellow",
   },
   {
     id: "islamic_history",
@@ -97,7 +97,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "التاريخ الإسلامي",
     nameRussian: "Исламская история",
     icon: "📜",
-    color: "amber"
+    color: "amber",
   },
   {
     id: "prophet_stories",
@@ -105,7 +105,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "قصص الأنبياء",
     nameRussian: "Истории пророков",
     icon: "👥",
-    color: "indigo"
+    color: "indigo",
   },
   {
     id: "islamic_knowledge",
@@ -113,7 +113,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "العلوم الإسلامية",
     nameRussian: "Исламские знания",
     icon: "🧠",
-    color: "cyan"
+    color: "cyan",
   },
   {
     id: "islamic_education",
@@ -121,7 +121,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "التربية الإسلامية",
     nameRussian: "Исламское образование",
     icon: "📚",
-    color: "teal"
+    color: "teal",
   },
   {
     id: "islamic_reminders",
@@ -129,7 +129,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "تذكير إسلامي",
     nameRussian: "Исламские напоминания",
     icon: "💝",
-    color: "red"
+    color: "red",
   },
   {
     id: "dua_supplications",
@@ -137,7 +137,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "الدعاء والأذكار",
     nameRussian: "Дуа и мольбы",
     icon: "🤲",
-    color: "green"
+    color: "green",
   },
   {
     id: "islamic_guidance",
@@ -145,7 +145,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "الإرشاد الإسلامي",
     nameRussian: "Исламское руководство",
     icon: "🧭",
-    color: "slate"
+    color: "slate",
   },
   {
     id: "islamic_youth",
@@ -153,7 +153,7 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "الشباب الإسلامي",
     nameRussian: "Исламская молодежь",
     icon: "👨‍🎓",
-    color: "violet"
+    color: "violet",
   },
   {
     id: "islamic_family",
@@ -161,8 +161,8 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     nameArabic: "الأسرة الإسلامية",
     nameRussian: "Исламская семья",
     icon: "👨‍👩‍👧‍👦",
-    color: "rose"
-  }
+    color: "rose",
+  },
 ];
 
 export function useVideoData() {

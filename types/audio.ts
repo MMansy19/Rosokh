@@ -24,9 +24,6 @@ export interface Reciter {
   biography: string;
   country?: string;
   totalRecitations: number;
-  style: string;
-  image?: string;
-  driveFolder?: string;
   featured?: boolean;
 }
 
