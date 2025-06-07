@@ -25,75 +25,75 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({
 
   const features = [
     {
-      icon: <Download className="w-6 h-6" />,
-      title: "Free Downloads",
+      icon: <BookOpen className="w-6 h-6" />,
+      title: "Complete Quran Collection",
       description:
-        "Download high-quality Islamic audio content for offline listening",
+        "Access all 114 surahs with detailed information including verses count and revelation type",
+      color: "from-emerald-500 to-emerald-600",
+      bgColor: "bg-emerald-100 dark:bg-emerald-950",
+    },
+    {
+      icon: <Users className="w-6 h-6" />,
+      title: "Renowned Reciters",
+      description:
+        "Listen to beautiful recitations from world-famous Quran reciters and scholars",
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-100 dark:bg-blue-950",
     },
     {
-      icon: <Heart className="w-6 h-6" />,
-      title: "Favorites System",
+      icon: <Download className="w-6 h-6" />,
+      title: "Free Downloads",
       description:
-        "Save your favorite recitations and build your personal collection",
+        "Download high-quality Quran recitations for offline listening and memorization",
+      color: "from-indigo-500 to-indigo-600",
+      bgColor: "bg-indigo-100 dark:bg-indigo-950",
+    },
+    {
+      icon: <Heart className="w-6 h-6" />,
+      title: "Personal Favorites",
+      description:
+        "Save your favorite surahs and reciters to build your personal Quran collection",
       color: "from-red-500 to-red-600",
       bgColor: "bg-red-100 dark:bg-red-950",
     },
     {
       icon: <Search className="w-6 h-6" />,
-      title: "Smart Search",
+      title: "Surah Search",
       description:
-        "Find specific surahs, reciters, or topics with intelligent search",
+        "Quickly find specific surahs by name, number, or meaning with intelligent search",
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-100 dark:bg-green-950",
     },
     {
       icon: <Volume2 className="w-6 h-6" />,
-      title: "HD Audio Quality",
+      title: "Crystal Clear Audio",
       description:
-        "Crystal clear sound with multiple quality options for your preference",
+        "Experience pristine sound quality with high-fidelity Quran recitations",
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-100 dark:bg-purple-950",
-    },
-    {
-      icon: <Smartphone className="w-6 h-6" />,
-      title: "Mobile Optimized",
-      description:
-        "Seamless experience across all devices - phone, tablet, and desktop",
-      color: "from-orange-500 to-orange-600",
-      bgColor: "bg-orange-100 dark:bg-orange-950",
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: "Safe & Secure",
-      description:
-        "Trusted content from verified reciters with secure streaming",
-      color: "from-gray-500 to-gray-600",
-      bgColor: "bg-gray-100 dark:bg-gray-950",
     },
   ];
 
   const highlights = [
     {
       icon: <BookOpen className="w-5 h-5" />,
-      stat: "1000+",
-      label: "Quran Recitations",
+      stat: "114",
+      label: "Complete Surahs",
     },
     {
       icon: <Users className="w-5 h-5" />,
       stat: "50+",
-      label: "Renowned Reciters",
+      label: "World-Class Reciters",
     },
     {
-      icon: <Clock className="w-5 h-5" />,
-      stat: "100+",
-      label: "Hours of Content",
+      icon: <Globe className="w-5 h-5" />,
+      stat: "6,236",
+      label: "Total Verses",
     },
     {
       icon: <Star className="w-5 h-5" />,
-      stat: "4.9",
-      label: "User Rating",
+      stat: "100%",
+      label: "Authentic Recitations",
     },
   ];
 

@@ -235,18 +235,18 @@
     "loading": "Loading the Holy Quran..."
   },
   "audio": {
-    "title": "Islamic Audio Library",
-    "description": "Listen to Quran recitations, duas, lectures, and nasheeds",
-    "subtitle": "Discover beautiful Quran recitations, Islamic lectures, duas, and nasheeds from renowned scholars and reciters worldwide",
+    "title": "Quran Recitations Library",
+    "description": "Listen to beautiful Quran recitations from renowned reciters worldwide",
+    "subtitle": "Discover beautiful Quran recitations from renowned reciters worldwide with detailed surah information",
     "by": "By",
     "loading": {
-      "title": "Loading your Islamic audio collection...",
-      "message": "We're preparing your Islamic audio collection with beautiful recitations and spiritual content.",
-      "audioTracks": "Loading audio tracks...",
+      "title": "Loading your Quran recitations collection...",
+      "message": "We're preparing your Quran recitations collection with beautiful recitations from renowned reciters.",
+      "audioTracks": "Loading recitation tracks...",
       "preparingGame": "Preparing game...",
-      "loadingAudio": "Loading audio...",
-      "loadingAudioPlayer": "Loading Audio Player",
-      "preparingAudioExperience": "Preparing your audio experience..."
+      "loadingAudio": "Loading recitation...",
+      "loadingAudioPlayer": "Loading Quran Recitation Player",
+      "preparingAudioExperience": "Preparing your recitation experience..."
     },
     "error": {
       "connectionError": "Connection Error",
@@ -270,9 +270,9 @@
       "audioError": "Audio Error"
     },
     "search": {
-      "placeholder": "Search tracks, reciters, or surahs...",
+      "placeholder": "Search surahs, reciters, or verses...",
       "smartSearch": "Smart Search",
-      "searchDescription": "Find specific surahs, reciters, or topics with intelligent search"
+      "searchDescription": "Find specific surahs, reciters, or verses with intelligent search"
     },
     "filters": {
       "categories": {
@@ -306,6 +306,7 @@
     "player": {
       "nowPlaying": "Now playing:",
       "audioPlayer": "Audio Player",
+      "quranPlayer": "Quran Recitation Player",
       "poweredByGoogleDrive": "Powered by Google Drive",
       "googleDriveAudioPlayer": "Google Drive Audio Player",
       "readyToPlay": "Ready to Play",
@@ -326,6 +327,16 @@
       "source": "Source: Google Drive",
       "viewOnGoogleDrive": "View on Google Drive",
       "stopped": "Audio stopped"
+    },
+    "surah": {
+      "details": "Surah Details",
+      "number": "Surah Number",
+      "verses": "Verses",
+      "revelationType": "Revelation Type",
+      "meaning": "Meaning"
+    },
+    "reciter": {
+      "name": "Reciter"
     },
     "track": {
       "duration": "Duration",

@@ -236,7 +236,7 @@ export const AudioClient: React.FC<AudioClientProps> = ({
           {getTranslation(
             messages,
             "audio.subtitle",
-            "Discover beautiful Quran recitations, Islamic lectures, duas, and nasheeds from renowned scholars and reciters worldwide",
+            "Discover beautiful Quran recitations from renowned reciters worldwide with detailed surah information",
           )}
         </p>
       </div>{" "}
