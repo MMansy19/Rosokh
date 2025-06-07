@@ -93,7 +93,15 @@ export const TrackList: React.FC<TrackListProps> = ({
 
         {/* View Mode Indicator */}
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <span className="capitalize">{viewMode} view</span>
+          <span className="capitalize">
+          {
+              getTranslation(
+                messages,
+                "youtube.filters.viewMode",
+                "View",
+              )}
+              {" "}
+            {viewMode}</span>
           <div className="w-1 h-1 bg-muted-foreground/50 rounded-full"></div>
           <span>{viewMode === "grid" ? "🔲" : "📄"}</span>
         </div>
