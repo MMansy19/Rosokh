@@ -767,6 +767,12 @@
       "audio": "Audio",
       "youtube": "YouTube"
     },
+    "placeholder": {
+      "all": "Search Quran, audio, videos...",
+      "quran": "Search verses, surahs...",
+      "audio": "Search reciters, tracks...",
+      "youtube": "Search Islamic videos..."
+    },
     "placeholderText": "Search for verses, keywords, or concepts...",
     "placeholderSurah": "Enter surah name or number...",
     "placeholderVerse": "Enter verse reference (e.g., 2:255)...",

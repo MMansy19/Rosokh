@@ -249,13 +249,13 @@ export const AudioClient: React.FC<AudioClientProps> = ({
         messages={messages}
       />
       {/* Statistics Section */}
-      <StatsSection
+      {/* <StatsSection
         tracks={filteredTracks}
         favoriteCount={favoriteCount}
         isVisible={filteredTracks.length > 0}
         locale={locale}
         messages={messages}
-      />{" "}
+      /> */}
       {/* Track List */}
       <TrackList
         tracks={filteredTracks}

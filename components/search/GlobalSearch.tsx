@@ -22,8 +22,8 @@ import { getTranslation } from "@/utils/translations";
 interface SearchContext {
   type: "quran" | "audio" | "youtube" | "all";
   icon: React.ComponentType<any>;
-  label: string;
-  placeholder: string;
+  labelKey: string;
+  placeholderKey: string;
   route: string;
 }
 
@@ -39,22 +39,22 @@ const searchContexts: SearchContext[] = [
   {
     type: "quran",
     icon: BookOpen,
-    label: "Quran",
-    placeholder: "Search verses, surahs...",
+    labelKey: "search.context.quran",
+    placeholderKey: "search.placeholder.quran",
     route: "/quran",
   },
   {
     type: "audio",
     icon: Headphones,
-    label: "Audio",
-    placeholder: "Search reciters, tracks...",
+    labelKey: "search.context.audio",
+    placeholderKey: "search.placeholder.audio",
     route: "/audio",
   },
   {
     type: "youtube",
     icon: Video,
-    label: "Videos",
-    placeholder: "Search Islamic videos...",
+    labelKey: "search.context.youtube",
+    placeholderKey: "search.placeholder.youtube",
     route: "/youtube",
   },
 ];
@@ -331,19 +331,18 @@ export function GlobalSearch({
       <div className="relative md:flex md:flex-row gap-2">        
         {/* Enhanced Context Selector (Desktop) */}
         {isExpanded && (
-          <div className="hidden md:flex items-center border-l border-border pl-4 ml-4" ref={contextDropdownRef}>
+          <div className={`hidden md:flex items-center ${locale === 'ar' ? 'border-l border-border pl-4 ml-4' : 'border-r border-border pr-4 mr-4'}`} ref={contextDropdownRef}>
             <div className="relative">
               <button
                 onClick={() => setIsContextDropdownOpen(!isContextDropdownOpen)}
                 className="search-context-button flex items-center gap-2 px-3 py-2 bg-surface border border-border rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary/50 group"
                 aria-label="Select search context"
-              >
-                <selectedContext.icon className="w-4 h-4 text-primary" />
+              >                <selectedContext.icon className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">
                   {getTranslation(
                     messages,
-                    `search.context.${selectedContext.type}`,
-                    selectedContext.label
+                    selectedContext.labelKey,
+                    selectedContext.type
                   )}
                 </span>
                 <ChevronDown className={`w-4 h-4 text-muted transition-transform duration-200 ${isContextDropdownOpen ? 'rotate-180' : ''}`} />
@@ -367,12 +366,11 @@ export function GlobalSearch({
                             ${isActive ? 'bg-primary/10 text-primary' : 'text-foreground'}
                           `}
                         >
-                          <Icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'text-muted'}`} />
-                          <span className="text-sm font-medium">
+                          <Icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'text-muted'}`} />                          <span className="text-sm font-medium">
                             {getTranslation(
                               messages,
-                              `search.context.${context.type}`,
-                              context.label
+                              context.labelKey,
+                              context.type
                             )}
                           </span>
                           {isActive && (
@@ -388,7 +386,7 @@ export function GlobalSearch({
         )}
 
         {/* Search Input */}
-        <div className="relative flex items-center">          
+        <div className="relative w-full flex items-center">          
           <div className="absolute left-3 pointer-events-none">
             {isLoading ? (
               <Loader2 className="w-4 h-4 text-muted animate-spin transition-all duration-200" />
@@ -407,10 +405,10 @@ export function GlobalSearch({
             onKeyDown={handleKeyDown}            placeholder={
               getTranslation(
                 messages,
-                `search.placeholder.${selectedContext.type}`,
-                selectedContext.placeholder
-              ) || "Search..."
-            }            className={`
+                selectedContext.placeholderKey,
+                "Search..."
+              )
+            }className={`
               search-input-enhanced w-full pl-10 py-2.5 bg-background border border-border rounded-lg
               focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary
               text-foreground placeholder:text-muted transition-all duration-200
@@ -458,18 +456,18 @@ export function GlobalSearch({
                     }
                   `}
                 >
-                  <Icon className="w-4 h-4" />
-                  {getTranslation(
+                  <Icon className="w-4 h-4" />                  {getTranslation(
                     messages,
-                    `search.context.${context.type}`,
-                    context.label
+                    context.labelKey,
+                    context.type
                   )}
                 </button>
               );
             })}
           </div>
         )}
-      </div>      {/* Suggestions Dropdown */}
+      </div>     
+       {/* Suggestions Dropdown */}
       {showSuggestions && isExpanded && (hasItems || searchTerm.length >= 2) && (
         <div className="search-suggestions absolute top-full left-0 right-0 mt-2 rounded-lg z-50 max-h-96 overflow-hidden animate-slideDown">
           {hasItems ? (
@@ -557,11 +555,10 @@ export function GlobalSearch({
                     )}{" "}
                     "{searchTerm}"
                   </div>
-                  <div className="text-sm text-muted">
-                    {getTranslation(
+                  <div className="text-sm text-muted">                    {getTranslation(
                       messages,
-                      `search.context.${selectedContext.type}`,
-                      selectedContext.label
+                      selectedContext.labelKey,
+                      selectedContext.type
                     )}
                   </div>
                 </div>

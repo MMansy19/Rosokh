@@ -6,7 +6,6 @@ import { useTheme } from "@/components/providers/ThemeProvider";
 import { GlobalSearch } from "@/components/search";
 import {
   Menu,
-  X,
   Sun,
   Moon,
   Languages,
@@ -136,7 +135,7 @@ export function Header({
           </div>
 
           {/* Global Search - Desktop */}
-          <div className="hidden md:flex flex-1 max-w-2xl mx-6">
+          <div className="hidden md:flex flex-1 max-w-3xl mx-6">
             <GlobalSearch
               locale={locale}
               messages={messages}
