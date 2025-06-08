@@ -139,7 +139,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
           </div>
           
           {/* View Mode Toggle */}
-          <div className="flex gap-1 bg-secondary rounded-lg p-1 ml-auto sm:ml-0">
+          <div className="hidden sm:flex gap-1 bg-secondary rounded-lg p-1 ml-auto sm:ml-0">
             <button
               onClick={() => onViewModeChange("grid")}
               className={`p-1.5 sm:p-2 rounded transition-colors ${viewMode === "grid" ? "bg-primary text-white" : "text-foreground"}`}
