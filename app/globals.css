@@ -879,3 +879,172 @@ body {
 .animate-audio-wave {
   animation: audio-wave 1.5s ease-in-out infinite;
 }
+
+/* Sidebar Animations and Enhancements */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes sidebarItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInFromLeft {
+  animation: slideInFromLeft 0.3s ease-out;
+}
+
+.animate-slideOutToLeft {
+  animation: slideOutToLeft 0.3s ease-in;
+}
+
+.animate-sidebarItemFadeIn {
+  animation: sidebarItemFadeIn 0.4s ease-out;
+}
+
+/* Sidebar Enhancement Styles */
+.sidebar-item {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--color-primary);
+  border-radius: 0 3px 3px 0;
+  transition: height 0.2s ease;
+}
+
+.sidebar-item.active::before {
+  height: 60%;
+}
+
+.sidebar-item:hover::before {
+  height: 40%;
+  background: var(--color-accent);
+}
+
+/* Sidebar collapse/expand animations */
+.sidebar-text {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-collapsed .sidebar-text {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.sidebar-icon {
+  transition: transform 0.2s ease;
+}
+
+.sidebar-item:hover .sidebar-icon {
+  transform: scale(1.1);
+}
+
+/* Enhanced backdrop blur for mobile */
+.sidebar-backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Mobile-first responsive sidebar */
+@media (max-width: 1024px) {
+  .sidebar-mobile {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* Sidebar Tooltip Styles */
+.sidebar-tooltip {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 1000;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.sidebar-tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-right-color: rgba(0, 0, 0, 0.9);
+}
+
+.group:hover .sidebar-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Improved hover effects for collapsed sidebar items */
+.sidebar-item.collapsed-item {
+  position: relative;
+}
+
+.sidebar-item.collapsed-item:hover {
+  transform: translateX(2px);
+}
+
+/* Enhanced active indicator for collapsed state */
+.sidebar-collapsed-indicator {
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  background: var(--color-primary);
+  border-radius: 2px 0 0 2px;
+  transition: all 0.2s ease;
+}
+
+/* Smooth transition for sidebar width changes */
+.sidebar-transition {
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

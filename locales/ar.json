@@ -770,8 +770,19 @@
     }
   },
   "search": {
-    "title": "البحث في القرآن",
-    "subtitle": "ابحث في القرآن الكريم بالنص أو السورة أو الآية",
+    "title": "البحث",
+    "subtitle": "ابحث في القرآن والصوتيات والفيديو",
+    "placeholder": "ابحث في القرآن والصوتيات والفيديو...",
+    "globalSearch": "البحث الشامل",
+    "searchEverything": "البحث في كل شيء",
+    "searchIn": "البحث في",
+    "in": "في",
+    "context": {
+      "all": "كل شيء",
+      "quran": "القرآن",
+      "audio": "الصوتيات",
+      "youtube": "يوتيوب"
+    },
     "placeholderText": "ابحث عن الآيات أو الكلمات أو المفاهيم...",
     "placeholderSurah": "أدخل اسم السورة أو رقمها...",
     "placeholderVerse": "أدخل مرجع الآية (مثل: 2:255)...",
@@ -779,14 +790,74 @@
     "searchSurah": "البحث في السورة",
     "searchVerse": "البحث في الآية",
     "translation": "الترجمة",
+    "suggestions": {
+      "title": "الاقتراحات",
+      "noSuggestions": "لا توجد اقتراحات متاحة",
+      "loading": "جاري تحميل الاقتراحات..."
+    },
+    "history": {
+      "title": "البحثات الأخيرة",
+      "clear": "مسح التاريخ",
+      "empty": "لا توجد بحثات سابقة"
+    },
+    "popular": {
+      "title": "البحثات الشائعة",
+      "empty": "لا توجد بحثات شائعة"
+    },
     "recentSearches": "البحثات الأخيرة",
     "clearAll": "مسح الكل",
     "searching": "جاري البحث...",
+    "results": {
+      "title": "نتائج البحث",
+      "found": "نتيجة موجودة",
+      "noResults": "لا توجد نتائج",
+      "noResultsDesc": "جرب كلمات مختلفة أو تأكد من الإملاء",
+      "loading": "جاري البحث...",
+      "error": "فشل البحث",
+      "errorDesc": "حدث خطأ أثناء البحث. يرجى المحاولة مرة أخرى."
+    },
     "resultsFound": "وُجدت {count} نتيجة",
-    "noResults": "لا توجد نتائج",
-    "noResultsDesc": "جرب كلمات مختلفة أو تأكد من الإملاء",
     "startSearching": "ابدأ البحث",
-    "startSearchingDesc": "أدخل مصطلح البحث أعلاه للعثور على الآيات أو السور أو مفاهيم محددة في القرآن",
+    "startSearchingDesc": "أدخل مصطلح البحث أعلاه للعثور على الآيات أو السور أو مفاهيم محددة",
+    "filters": {
+      "title": "المرشحات",
+      "clear": "مسح المرشحات",
+      "clearAll": "مسح الكل",
+      "apply": "تطبيق المرشحات",
+      "category": "الفئة",
+      "type": "النوع",
+      "reciter": "القارئ",
+      "quality": "الجودة",
+      "duration": "المدة",
+      "language": "اللغة"
+    },
+    "sorting": {
+      "title": "ترتيب حسب",
+      "relevance": "الصلة",
+      "date": "التاريخ",
+      "popularity": "الشعبية",
+      "duration": "المدة",
+      "alphabetical": "أبجدي"
+    },
+    "viewMode": {
+      "list": "قائمة",
+      "grid": "شبكة",
+      "compact": "مضغوط"
+    },
+    "actions": {
+      "search": "بحث",
+      "clear": "مسح",
+      "retry": "حاول مرة أخرى",
+      "viewAll": "عرض جميع النتائج",
+      "showMore": "عرض المزيد",
+      "showLess": "عرض أقل"
+    },
+    "keyboard": {
+      "enterToSearch": "اضغط Enter للبحث",
+      "escToClose": "اضغط Esc للإغلاق",
+      "upDown": "استخدم ↑↓ للتنقل",
+      "selectItem": "اضغط Enter للاختيار"
+    },
     "surah": "سورة",
     "verse": "آية",
     "match": "مطابقة",

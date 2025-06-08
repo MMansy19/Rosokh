@@ -26,6 +26,7 @@ export const AudioClient: React.FC<AudioClientProps> = ({
   locale,
   messages,
 }) => {
+  const dir = locale === "ar" ? "rtl" : "ltr";
   // Notification and Analytics services
   const { notify } = useNotifications();
   const analytics = useMemo(() => AnalyticsService.getInstance(), []);
@@ -221,7 +222,7 @@ export const AudioClient: React.FC<AudioClientProps> = ({
   const favoriteCount = favorites.size;
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
+    <div dir={dir} className="container mx-auto px-4 py-8 space-y-8">
       {/* Header Section */}
       <div className="text-center space-y-4">
         <div className="flex items-center justify-center gap-3 mb-4">

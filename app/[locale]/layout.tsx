@@ -70,7 +70,8 @@ export default async function RootLayout({
 }: RootLayoutProps) {
   const { locale } = await params;
   const dir =
-    locale === "ar" ? "rtl" : "ltr";
+    // locale === "ar" ? "rtl" :
+    "ltr";
   const fontClass = locale === "ar" ? `${amiri.variable}` : `${inter.variable}`;
   const messages = await getMessages(locale);
 

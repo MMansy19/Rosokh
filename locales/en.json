@@ -754,8 +754,19 @@
     "about": "About Us"
   },
   "search": {
-    "title": "Quran Search",
-    "subtitle": "Search through the Holy Quran by text, surah, or verse",
+    "title": "Search",
+    "subtitle": "Search through Quran, audio, and videos",
+    "placeholder": "Search Quran, audio, videos...",
+    "globalSearch": "Global Search",
+    "searchEverything": "Search everything",
+    "searchIn": "Search in",
+    "in": "in",
+    "context": {
+      "all": "Everything",
+      "quran": "Quran",
+      "audio": "Audio",
+      "youtube": "YouTube"
+    },
     "placeholderText": "Search for verses, keywords, or concepts...",
     "placeholderSurah": "Enter surah name or number...",
     "placeholderVerse": "Enter verse reference (e.g., 2:255)...",
@@ -763,14 +774,74 @@
     "searchSurah": "Search Surah",
     "searchVerse": "Search Verse",
     "translation": "Translation",
+    "suggestions": {
+      "title": "Suggestions",
+      "noSuggestions": "No suggestions available",
+      "loading": "Loading suggestions..."
+    },
+    "history": {
+      "title": "Recent Searches",
+      "clear": "Clear History",
+      "empty": "No recent searches"
+    },
+    "popular": {
+      "title": "Popular Searches",
+      "empty": "No popular searches"
+    },
     "recentSearches": "Recent Searches",
     "clearAll": "Clear All",
     "searching": "Searching...",
+    "results": {
+      "title": "Search Results",
+      "found": "results found",
+      "noResults": "No results found",
+      "noResultsDesc": "Try different keywords or check your spelling",
+      "loading": "Searching...",
+      "error": "Search failed",
+      "errorDesc": "There was an error performing your search. Please try again."
+    },
     "resultsFound": "Found {count} results",
-    "noResults": "No results found",
-    "noResultsDesc": "Try different keywords or check your spelling",
     "startSearching": "Start Searching",
-    "startSearchingDesc": "Enter your search term above to find verses, surahs, or specific concepts in the Quran",
+    "startSearchingDesc": "Enter your search term above to find verses, surahs, or specific concepts",
+    "filters": {
+      "title": "Filters",
+      "clear": "Clear Filters",
+      "clearAll": "Clear all",
+      "apply": "Apply Filters",
+      "category": "Category",
+      "type": "Type",
+      "reciter": "Reciter",
+      "quality": "Quality",
+      "duration": "Duration",
+      "language": "Language"
+    },
+    "sorting": {
+      "title": "Sort by",
+      "relevance": "Relevance",
+      "date": "Date",
+      "popularity": "Popularity",
+      "duration": "Duration",
+      "alphabetical": "Alphabetical"
+    },
+    "viewMode": {
+      "list": "List",
+      "grid": "Grid",
+      "compact": "Compact"
+    },
+    "actions": {
+      "search": "Search",
+      "clear": "Clear",
+      "retry": "Try Again",
+      "viewAll": "View All Results",
+      "showMore": "Show More",
+      "showLess": "Show Less"
+    },
+    "keyboard": {
+      "enterToSearch": "Press Enter to search",
+      "escToClose": "Press Esc to close",
+      "upDown": "Use ↑↓ to navigate",
+      "selectItem": "Press Enter to select"
+    },
     "surah": "Surah",
     "verse": "Verse",
     "match": "match",

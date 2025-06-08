@@ -3,38 +3,25 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { GlobalSearch } from "@/components/search";
 import {
   Menu,
   X,
   Sun,
   Moon,
-  BookOpen,
-  Headphones,
-  Video,
-  Calendar,
-  BarChart3,
-  Mail,
-  Home,
   Languages,
-  Book,
-  Brain,
+  Search,
+  PanelLeftClose,
+  PanelLeft,
 } from "lucide-react";
 
 interface HeaderProps {
   locale: string;
   messages: any;
+  onSidebarToggle: () => void;
+  isSidebarCollapsed?: boolean;
+  onSidebarCollapse?: () => void;
 }
-
-const navigation = [
-  { key: "home", href: "/", icon: Home },
-  { key: "quran", href: "/quran", icon: BookOpen },
-  { key: "audio", href: "/audio", icon: Headphones },
-  { key: "youtube", href: "/youtube", icon: Video },
-  { key: "khatma", href: "/khatma", icon: Book },
-  { key: "calendar", href: "/calendar", icon: Calendar },
-  { key: "analytics", href: "/analytics", icon: BarChart3 },
-  { key: "contact", href: "/contact", icon: Mail },
-];
 
 const languages = [
   { code: "ar", name: "العربية", dir: "rtl" },
@@ -42,9 +29,23 @@ const languages = [
   { code: "ru", name: "Русский", dir: "ltr" },
 ];
 
-export function Header({ locale, messages }: HeaderProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+interface HeaderProps {
+  locale: string;
+  messages: any;
+  onSidebarToggle: () => void;
+  isSidebarCollapsed?: boolean;
+  onSidebarCollapse?: () => void;
+}
+
+export function Header({ 
+  locale, 
+  messages, 
+  onSidebarToggle, 
+  isSidebarCollapsed = false,
+  onSidebarCollapse 
+}: HeaderProps) {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const currentLang = languages.find((lang) => lang.code === locale);
@@ -53,22 +54,10 @@ export function Header({ locale, messages }: HeaderProps) {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isMenuOpen]);
-
   // Close menu on escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setIsMenuOpen(false);
         setIsLangMenuOpen(false);
       }
     };
@@ -103,38 +92,67 @@ export function Header({ locale, messages }: HeaderProps) {
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
-          {/* Logo */}
-          <Link
-            href={`/${locale}`}
-            className="flex items-center space-x-2 rtl:space-x-reverse shrink-0"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center"></div>
-            <div className="flex flex-col">
-              <span className="font-bold text-base sm:text-lg text-foreground">
-                {messages?.common?.brand?.name || "Rosokh"}
-              </span>
-            </div>
-          </Link>
+          {/* Sidebar Toggle & Logo */}
+          <div className="flex items-center space-x-3">
+            {/* Sidebar Toggle Button */}
+            <button
+              onClick={onSidebarToggle}
+              className="lg:hidden p-2 rounded-lg hover:bg-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label={messages?.common?.actions?.toggle_menu || "Toggle menu"}
+            >
+              <Menu className="w-5 h-5 text-foreground" />
+            </button>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navigation.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.key}
-                  href={`/${locale}${item.href === "/" ? "" : item.href}`}
-                  className="flex items-center space-x-1.5 lg:space-x-2 rtl:space-x-reverse text-muted hover:text-primary transition-colors duration-200 group"
-                >
-                  <Icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
-                  <span className="font-medium text-sm lg:text-base">
-                    {messages?.common?.navigation?.[item.key] || item.key}
-                  </span>
-                </Link>
-              );
-            })}
-          </nav>
+            {/* Desktop Sidebar Collapse Button */}
+            {onSidebarCollapse && (
+              <button
+                onClick={onSidebarCollapse}
+                className="hidden lg:flex p-2 rounded-lg hover:bg-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+                title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              >
+                {isSidebarCollapsed ? (
+                  <PanelLeft className="w-5 h-5 text-muted" />
+                ) : (
+                  <PanelLeftClose className="w-5 h-5 text-muted" />
+                )}
+              </button>
+            )}
+
+            {/* Logo */}
+            <Link
+              href={`/${locale}`}
+              className="flex items-center space-x-2 rtl:space-x-reverse shrink-0"
+            >
+              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">R</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-base sm:text-lg text-foreground">
+                  {messages?.common?.brand?.name || "Rosokh"}
+                </span>
+              </div>
+            </Link>
+          </div>
+
+          {/* Global Search - Desktop */}
+          <div className="hidden md:flex flex-1 max-w-2xl mx-6">
+            <GlobalSearch
+              locale={locale}
+              messages={messages}
+              isExpanded={true}
+              className="w-full"
+            />
+          </div>
+
+          {/* Mobile Search Toggle */}
+          <button
+            onClick={() => setIsSearchExpanded(!isSearchExpanded)}
+            className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
+            aria-label={messages?.common?.actions?.search || "Search"}
+          >
+            <Search className="w-5 h-5 text-muted" />
+          </button>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3 lg:space-x-4 rtl:space-x-reverse">
@@ -200,137 +218,86 @@ export function Header({ locale, messages }: HeaderProps) {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            aria-label={messages?.common?.actions?.toggle_menu || "Toggle menu"}
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? (
-              <X className="w-5 h-5 text-foreground" />
-            ) : (
-              <Menu className="w-5 h-5 text-foreground" />
-            )}
-          </button>
-        </div>
-      </div>
+          {/* Mobile Actions */}
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Language Selector */}
+            <div className="relative" data-dropdown>
+              <button
+                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+                className="p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
+                aria-label={messages?.common?.actions?.language || "Language"}
+              >
+                <Languages className="w-5 h-5 text-muted" />
+              </button>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="md:hidden fixed inset-0 top-14 sm:top-16 z-30 bg-black/50 backdrop-blur-sm"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          {/* Mobile Menu Panel */}
-          <div className="md:hidden fixed inset-x-0 top-14 sm:top-16 z-40 bg-surface border-t border-border shadow-2xl min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] h-full overflow-y-auto">
-            <div className="p-2 space-y-3">
-              {/* Mobile Navigation */}
-              <nav className="space-y-1">
-                <div className="text-xs font-semibold text-muted uppercase tracking-wider px-3 py-2">
-                  {messages?.common?.navigation?.menu || "Menu"}
-                </div>
-                {navigation.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.key}
-                      href={`/${locale}${item.href === "/" ? "" : item.href}`}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="flex items-center space-x-3 rtl:space-x-reverse px-3 py-2.5 rounded-xl hover:bg-secondary transition-all duration-200 group active:scale-95"
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-200">
-                        <Icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-200" />
-                      </div>
-                      <div className="flex-1">
-                        <span className="font-medium text-foreground block">
-                          {messages?.common?.navigation?.[item.key] || item.key}
-                        </span>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </nav>
-
-              {/* Mobile Actions */}
-              <div className="pt-4 border-t border-border space-y-4">
-                {/* Language Selector */}
-                <div className="space-y-3">
-                  <div className="text-xs font-semibold text-muted uppercase tracking-wider px-3">
-                    {messages?.common?.actions?.language || "Language"}
-                  </div>
-                  <div className="grid grid-cols-3 gap-2">
+              {isLangMenuOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-10"
+                    onClick={() => setIsLangMenuOpen(false)}
+                  />
+                  <div className="absolute top-full mt-2 right-0 rtl:right-auto rtl:left-0 bg-surface border border-border rounded-lg shadow-lg min-w-[120px] animate-fadeIn z-20">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
                         onClick={() => {
                           handleLanguageChange(lang.code);
-                          setIsMenuOpen(false);
+                          setIsLangMenuOpen(false);
                         }}
-                        className={`p-3 rounded-lg transition-all duration-200 text-center active:scale-95 ${
+                        className={`w-full text-left rtl:text-right px-4 py-2 text-sm hover:bg-secondary transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg ${
                           locale === lang.code
-                            ? "bg-primary text-white font-medium shadow-md"
-                            : "bg-secondary text-foreground hover:bg-border"
+                            ? "bg-primary/10 text-primary font-medium"
+                            : "text-foreground"
                         }`}
                       >
-                        <div className="text-sm font-medium">{lang.name}</div>
+                        {lang.name}
                       </button>
                     ))}
                   </div>
-                </div>
+                </>
+              )}
+            </div>
 
-                {/* Theme Toggle */}
-                <div className="space-y-3">
-                  <div className="text-xs font-semibold text-muted uppercase tracking-wider px-3">
-                    {messages?.common?.actions?.appearance || "Appearance"}
-                  </div>
-                  <button
-                    onClick={() => {
-                      toggleTheme();
-                      setIsMenuOpen(false);
-                    }}
-                    className="w-full flex items-center justify-between p-3 rounded-xl bg-secondary hover:bg-border transition-all duration-200 group active:scale-95"
-                  >
-                    <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                      {mounted ? (
-                        theme === "light" ? (
-                          <>
-                            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                              <Moon className="w-5 h-5 text-primary" />
-                            </div>
-                            <span className="font-medium text-foreground">
-                              {messages?.common?.actions?.dark_mode ||
-                                "Dark Mode"}
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                              <Sun className="w-5 h-5 text-primary" />
-                            </div>
-                            <span className="font-medium text-foreground">
-                              {messages?.common?.actions?.light_mode ||
-                                "Light Mode"}
-                            </span>
-                          </>
-                        )
-                      ) : (
-                        <>
-                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <Sun className="w-5 h-5 text-primary" />
-                          </div>
-                          <span className="font-medium text-foreground">
-                            {messages?.common?.actions?.light_mode ||
-                              "Light Mode"}
-                          </span>
-                        </>
-                      )}
-                    </div>
-                  </button>
-                </div>
-              </div>
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
+              aria-label={
+                messages?.common?.actions?.toggle_theme || "Toggle theme"
+              }
+            >
+              {mounted ? (
+                theme === "light" ? (
+                  <Moon className="w-5 h-5 text-muted" />
+                ) : (
+                  <Sun className="w-5 h-5 text-muted" />
+                )
+              ) : (
+                <Sun className="w-5 h-5 text-muted" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Search Dropdown */}
+      {isSearchExpanded && (
+        <>
+          {/* Search Backdrop */}
+          <div
+            className="md:hidden fixed inset-0 top-14 sm:top-16 z-30 bg-black/50 backdrop-blur-sm"
+            onClick={() => setIsSearchExpanded(false)}
+          />
+          {/* Search Panel */}
+          <div className="md:hidden fixed inset-x-0 top-14 sm:top-16 z-40 bg-surface border-t border-border shadow-2xl">
+            <div className="p-4">
+              <GlobalSearch
+                locale={locale}
+                messages={messages}
+                isExpanded={true}
+                onToggle={() => setIsSearchExpanded(false)}
+                className="w-full"
+              />
             </div>
           </div>
         </>
