@@ -233,13 +233,6 @@ export const AudioClient: React.FC<AudioClientProps> = ({
             {getTranslation(messages, "audio.title", "Islamic Audio Library")}
           </h1>
         </div>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          {getTranslation(
-            messages,
-            "audio.subtitle",
-            "Discover beautiful Quran recitations from renowned reciters worldwide with detailed surah information",
-          )}
-        </p>
       </div>{" "}
       {/* Search and Filters */}
       <SearchFilters

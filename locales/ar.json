@@ -288,7 +288,8 @@
       "applyFilters": "تطبيق الفلاتر",
       "showFilters": "إظهار الفلاتر",
       "hideFilters": "إخفاء الفلاتر",
-      "activeFilters": "الفلاتر النشطة"
+      "activeFilters": "الفلاتر النشطة",
+      "showFavoritesOnly": "إظهار المفضلة فقط"
     },
     "categories": {
       "all": "الجميع",

@@ -79,7 +79,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
           )}
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-background to-muted/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 text-foreground placeholder-muted-foreground text-lg"
+          className="w-full pl-12 pr-10 py-4 bg-gradient-to-r from-background to-muted/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 text-foreground placeholder-muted-foreground text-lg"
         />
         {searchTerm && (
           <button
@@ -93,125 +93,82 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
       {/* Filters and View Controls */}
       <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
         {/* Filter Controls */}
-        <div className="flex flex-wrap items-center gap-3">
-          {" "}
-          {/* Category Filter */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-muted-foreground">
-              {getTranslation(messages, "audio.filters.category", "Category")}:
-            </span>
-            <select
-              value={filters.category}
-              onChange={(e) =>
-                onFilterChange({ ...filters, category: e.target.value as any })
+        <div className="flex flex-col gap-4 w-full">
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Favorites Filter */}
+            <button
+              onClick={() =>
+                onFilterChange({
+                  ...filters,
+                  showFavoritesOnly: !filters.showFavoritesOnly,
+                })
               }
-              className="px-3 py-1.5 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                filters.showFavoritesOnly
+                ? "bg-error text-white border border-error"
+                  : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-transparent"
+              }`}
             >
-              <option value="all">
-                {getTranslation(
-                  messages,
-                  "audio.categories.all",
-                  "All Categories",
-                )}
-              </option>
-              {AUDIO_CATEGORIES.map((category) => (
-                <option key={category.value} value={category.value}>
+              <Heart
+                className={`w-4 h-4 ${filters.showFavoritesOnly ? "fill-current" : ""}`}
+              />
+              <span>
+                {getTranslation(messages, "audio.stats.favoriteCount", "Favorites")}{" "}
+                {favoriteCount > 0 && `(${favoriteCount})`}
+              </span>
+            </button>
+            {/* Clear Filters */}
+            {hasActiveFilters && (
+              <button
+                onClick={onClearFilters}
+                className="flex items-center gap-2 px-3 py-1.5 bg-secondary/50 text-secondary-foreground hover:bg-secondary rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105"
+              >
+                <X className="w-4 h-4" />
+                <span>
                   {getTranslation(
                     messages,
-                    `audio.categories.${category.value}`,
-                    category.label,
+                    "audio.filters.clearFilters",
+                    "Clear",
                   )}
-                </option>
-              ))}
-            </select>
+                </span>
+              </button>
+            )}
           </div>
-          {/* Quality Filter */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-muted-foreground">
-              {getTranslation(messages, "audio.filters.quality", "Quality")}:
-            </span>
-            <select
-              value={filters.quality}
-              onChange={(e) =>
-                onFilterChange({ ...filters, quality: e.target.value as any })
-              }
-              className="px-3 py-1.5 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
-            >
-              <option value="all">
-                {getTranslation(messages, "audio.quality.all", "All Qualities")}
-              </option>
-              {AUDIO_QUALITIES.map((quality) => (
-                <option key={quality.value} value={quality.value}>
-                  {getTranslation(
-                    messages,
-                    `audio.quality.${quality.value}`,
-                    quality.label,
-                  )}
-                </option>
-              ))}
-            </select>
-          </div>
+        
           {/* Reciter Filter */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center gap-2">
+            {locale !== "ar" ? (
             <span className="text-sm font-medium text-muted-foreground">
               {getTranslation(messages, "audio.filters.reciter", "Reciter")}:
             </span>
-            <select
-              value={filters.reciter}
-              onChange={(e) =>
-                onFilterChange({ ...filters, reciter: e.target.value as any })
-              }
-              className="px-3 py-1.5 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
-            >
-              <option value="all">
-                {getTranslation(messages, "audio.reciters.all", "All Reciters")}
-              </option>
+            ) : null}
+            <div className="flex flex-wrap items-center gap-2">
               {reciters.map((reciter) => (
-                <option key={reciter.id} value={reciter.id}>
-                  {reciter.name}
-                </option>
+                <button
+                  key={reciter.id}
+                  onClick={() => onFilterChange({ ...filters, reciter: reciter.id })}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                    filters.reciter === reciter.id
+                      ? "bg-primary text-white shadow-sm"
+                      : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                  title={locale === "ar" ? reciter.arabicName : reciter.name}
+                >
+                  <div className="flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    <span>
+                      {locale === "ar" ? reciter.arabicName : reciter.name}
+                    </span>
+                  </div>
+                </button>
               ))}
-            </select>
-          </div>
-          {/* Favorites Filter */}
-          <button
-            onClick={() =>
-              onFilterChange({
-                ...filters,
-                showFavoritesOnly: !filters.showFavoritesOnly,
-              })
-            }
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-              filters.showFavoritesOnly
-                ? "bg-red-100 text-red-700 border border-red-200 dark:bg-red-950 dark:text-red-300 dark:border-red-800"
-                : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-transparent"
-            }`}
-          >
-            {" "}
-            <Heart
-              className={`w-4 h-4 ${filters.showFavoritesOnly ? "fill-current" : ""}`}
-            />
-            <span>
-              {getTranslation(messages, "common.favorites", "Favorites")}{" "}
-              {favoriteCount > 0 && `(${favoriteCount})`}
-            </span>
-          </button>
-          {/* Clear Filters */}
-          {hasActiveFilters && (
-            <button
-              onClick={onClearFilters}
-              className="flex items-center gap-2 px-3 py-1.5 bg-secondary/50 text-secondary-foreground hover:bg-secondary rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105"
-            >
-              <X className="w-4 h-4" />
-              <span>
-                {getTranslation(
-                  messages,
-                  "audio.filters.clearFilters",
-                  "Clear",
-                )}
+            </div>
+            {locale === "ar" ? (
+              <span className="text-sm font-medium text-muted-foreground">
+                {getTranslation(messages, "audio.filters.reciter", "Reciter")}:
               </span>
-            </button>
-          )}
+            ) : null} 
+          </div>
         </div>{" "}
         {/* View Mode Toggle */}
         <div className="flex items-center gap-2">
@@ -285,24 +242,25 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
             </div>
           )}
           {filters.reciter !== "all" && (
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium dark:bg-blue-950 dark:text-blue-300">
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-primary text-white rounded-full text-xs font-medium">
               <User className="w-3 h-3" />
               <span className="capitalize">
-                {getTranslation(
-                  messages,
-                  `audio.reciters.${filters.reciter}`,
-                  filters.reciter,
-                )}
+                {(() => {
+                  const selectedReciter = reciters.find(r => r.id === filters.reciter);
+                  return selectedReciter 
+                    ? (locale === "ar" ? selectedReciter.arabicName : selectedReciter.name)
+                    : filters.reciter;
+                })()}
               </span>
             </div>
           )}
           {filters.showFavoritesOnly && (
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium dark:bg-red-950 dark:text-red-300">
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-error text-white border border-error rounded-full text-xs font-medium">
               <Heart className="w-3 h-3 fill-current" />
               <span>
                 {getTranslation(
                   messages,
-                  "common.favoritesOnly",
+                  "audio.filters.showFavoritesOnly",
                   "Favorites Only",
                 )}
               </span>
