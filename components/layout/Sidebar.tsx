@@ -47,6 +47,7 @@ export function Sidebar({
   onCollapse 
 }: SidebarProps) {
   const [internalCollapsed, setInternalCollapsed] = useState(false);
+  const isRtl = locale === "ar";
   const pathname = usePathname();
 
   // Use external collapsed state if provided, otherwise use internal state
@@ -87,7 +88,8 @@ export function Sidebar({
           className="lg:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
           onClick={onToggle}
         />
-      )}          {/* Sidebar */}
+      )}          
+      {/* Sidebar */}
       <aside
         className={`
           fixed top-0 left-0 z-50 h-full bg-surface border-r border-border sidebar-transition
@@ -97,9 +99,9 @@ export function Sidebar({
         `}
         style={{ height: '100vh' }}
       >
-        <div className="flex flex-col h-full pt-[60px]">
+        <div className="flex flex-col h-full">
           {/* Sidebar Header */}
-          <div className="flex items-center justify-between p-4 border-b border-border">
+          <div className="flex items-center justify-between h-14 sm:h-16 px-4 border-b border-border">
             <div className={`flex items-center justify-center gap-4 transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden lg:justify-center lg:w-full" : "opacity-100"}`}>
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">R</span>
@@ -167,7 +169,7 @@ export function Sidebar({
                     <Icon className={`
                       w-5 h-5 transition-all duration-200 sidebar-icon shrink-0
                       ${isActive ? "text-white" : "text-muted group-hover:text-primary"}
-                      ${isCollapsed ? "lg:w-6 lg:h-6" : ""}
+                      ${isCollapsed ? "md:w-6 md:h-6 w-4 h-4" : ""}
                     `} />
                     <span className={`
                       font-medium transition-all duration-200 whitespace-nowrap
@@ -186,12 +188,13 @@ export function Sidebar({
                   </Link>
                 </div>
               );
-            })}          </nav>
+            })}          
+            </nav>
 
           {/* Sidebar Footer */}
           <div className={`p-4 border-t border-border transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:pointer-events-none" : "opacity-100"}`}>
-            <div className="text-xs text-muted text-center sidebar-text">
-              © 2024 {messages?.common?.brand?.name || "Rosokh"}
+              <div className="text-xs text-muted text-center sidebar-text">
+              © 2025 {messages?.common?.brand?.name || "Rosokh"}
             </div>
           </div>
         </div>

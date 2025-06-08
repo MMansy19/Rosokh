@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Search, BookOpen, X } from "lucide-react";
 
 interface SearchResult {
@@ -20,6 +21,7 @@ interface QuranSearchProps {
 }
 
 export default function QuranSearch({ locale, messages }: QuranSearchProps) {
+  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +37,14 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
     includeArabic: true,
     exactMatch: false,
   });
+
+  // Initialize search term from URL parameters (for global search integration)
+  useEffect(() => {
+    const urlSearchTerm = searchParams.get("q");
+    if (urlSearchTerm && urlSearchTerm !== searchTerm) {
+      setSearchTerm(urlSearchTerm);
+    }
+  }, [searchParams]);
 
   // Load recent searches from localStorage
   useEffect(() => {
@@ -292,7 +302,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
                     <button
                       key={index}
                       onClick={() => setSearchTerm(term)}
-                      className="px-3 py-1 bg-white/50 dark:bg-slate-700/50 hover:bg-white/70 dark:hover:bg-slate-700/70 rounded-full text-sm text-foreground transition-colors duration-200"
+                      className="px-3 py-1 bg-surface hover:bg-surface/70 rounded-full text-sm text-foreground transition-colors duration-200"
                     >
                       {term}
                     </button>
@@ -327,7 +337,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
               {searchResults.map((result) => (
                 <div
                   key={result.id}
-                  className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-xl p-6 border border-white/20 shadow-lg hover:shadow-xl transition-shadow duration-200"
+                  className="bg-surface backdrop-blur-sm rounded-xl p-6 border border-white/20 shadow-lg hover:shadow-xl transition-shadow duration-200"
                 >
                   <div className="flex justify-between items-start mb-4">
                     <div>
@@ -342,7 +352,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
                           {messages?.search?.surah || "Surah"}{" "}
                           {result.surahNumber}:{result.verseNumber}
                         </span>
-                        <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 rounded-full text-xs">
+                        <span className="px-2 py-1 bg-info text-white rounded-full text-xs">
                           {result.relevanceScore}%{" "}
                           {messages?.search?.match || "match"}
                         </span>
@@ -361,7 +371,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
                   </div>
 
                   {/* Translation */}
-                  <div className="p-4 bg-white/50 dark:bg-slate-700/50 rounded-lg">
+                  <div className="p-4 bg-surface/50 rounded-lg">
                     <p className="text-foreground leading-relaxed">
                       {result.translation}
                     </p>

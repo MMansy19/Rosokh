@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { FilterState, ViewMode } from "@/types/audio";
 
 interface UseFiltersReturn {
@@ -14,8 +15,10 @@ interface UseFiltersReturn {
 
 /**
  * Custom hook for managing filter and view state
+ * Automatically initializes search term from URL parameters for global search integration
  */
 export const useFilters = (): UseFiltersReturn => {
+  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState<FilterState>({
     category: "all",
@@ -24,6 +27,14 @@ export const useFilters = (): UseFiltersReturn => {
     showFavoritesOnly: false,
   });
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
+
+  // Initialize search term from URL parameters (for global search integration)
+  useEffect(() => {
+    const urlSearchTerm = searchParams.get("q");
+    if (urlSearchTerm && urlSearchTerm !== searchTerm) {
+      setSearchTerm(urlSearchTerm);
+    }
+  }, [searchParams]);
 
   const clearFilters = () => {
     setFilters({

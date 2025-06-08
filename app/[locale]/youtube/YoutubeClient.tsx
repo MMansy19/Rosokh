@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   Search,
   Filter,
@@ -28,6 +29,7 @@ import {
   VIDEO_CATEGORIES,
 } from "@/hooks/useVideoData";
 import { usePlaylistData, PlaylistMetadata } from "@/hooks/usePlaylistData";
+import { getTranslation } from "@/utils/translations";
 
 // Add error handling for YoutubeClient
 interface ErrorBoundaryState {
@@ -132,6 +134,7 @@ export default function YoutubeClient({
   locale,
   messages,
 }: YoutubeClientProps) {
+  const searchParams = useSearchParams();
   const { videos, loading, error, searchVideos, getVideosByCategory } =
     useVideoData();
 
@@ -163,6 +166,27 @@ export default function YoutubeClient({
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [showFilters, setShowFilters] = useState(false);
   const [showVideoDetails, setShowVideoDetails] = useState(false);
+
+  // Initialize search term from URL parameters (for global search integration)
+  useEffect(() => {
+    const urlSearchTerm = searchParams.get("q");
+    if (urlSearchTerm && urlSearchTerm !== searchTerm) {
+      setSearchTerm(urlSearchTerm);
+    }
+  }, [searchParams, searchTerm]);
+
+  // Perform search when search term changes from URL parameters
+  useEffect(() => {
+    if (searchTerm) {
+      if (activeTab === "playlists") {
+        const results = searchPlaylists(searchTerm, selectedCategory);
+        setFilteredPlaylists(results);
+      } else {
+        const results = searchVideos(searchTerm, selectedCategory);
+        setFilteredVideos(results);
+      }
+    }
+  }, [searchTerm, activeTab, selectedCategory, searchPlaylists, searchVideos]);
 
   const loadFeaturedContent = useCallback(() => {
     setFilteredVideos(videos);
@@ -374,7 +398,7 @@ export default function YoutubeClient({
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                       selectedCategory === ""
                         ? "bg-primary text-white"
-                        : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                        : "bg-secondary text-foreground hover:bg-accent"
                     }`}
                   >
                     {messages?.youtube?.search?.allCategories ||
@@ -388,7 +412,7 @@ export default function YoutubeClient({
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         selectedCategory === category.id
                           ? "bg-primary text-white"
-                          : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                          : "bg-secondary text-foreground hover:bg-accent"
                       }`}
                     >
                       {getCategoryIcon(category.id)}
@@ -421,7 +445,7 @@ export default function YoutubeClient({
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         activeTab === tab
                           ? "bg-primary text-white"
-                          : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                          : "bg-secondary text-foreground hover:bg-accent"
                       }`}
                     >
                       {tab === "playlists" && (
@@ -439,11 +463,15 @@ export default function YoutubeClient({
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                       showFilters
                         ? "bg-primary text-white"
-                        : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                        : "bg-secondary text-foreground hover:bg-accent"
                     }`}
                   >
                     <Filter className="w-4 h-4" />
-                    Filters
+                    {getTranslation(
+                      messages,
+                              "search.filters.title",
+                              "Filters",
+                            )}
                     {showFilters ? " ▲" : " ▼"}
                   </button>
 
@@ -473,7 +501,7 @@ export default function YoutubeClient({
               <div className="mb-6">
                 <button
                   onClick={handleBackToPlaylists}
-                  className="flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-accent text-foreground hover:text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-accent text-foreground rounded-lg transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Back to Playlists

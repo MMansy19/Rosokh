@@ -88,12 +88,12 @@ export function Header({
   return (
     <header
       dir={currentLang?.dir || "ltr"}
-      className="sticky top-0 z-50 bg-surface/95 backdrop-blur-sm border-b border-border"
+      className="sticky top-0 z-40 bg-surface/95 backdrop-blur-sm border-b border-border"
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Sidebar Toggle & Logo */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center gap-3">
             {/* Sidebar Toggle Button */}
             <button
               onClick={onSidebarToggle}
@@ -122,7 +122,7 @@ export function Header({
             {/* Logo */}
             <Link
               href={`/${locale}`}
-              className="flex items-center space-x-2 rtl:space-x-reverse shrink-0"
+              className={`${isSidebarCollapsed ? "flex" : "md:hidden"} items-center space-x-2 rtl:space-x-reverse shrink-0`}
             >
               <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">R</span>

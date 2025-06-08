@@ -79,7 +79,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
           )}
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full pl-12 pr-10 py-4 bg-gradient-to-r from-background to-muted/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 text-foreground placeholder-muted-foreground text-lg"
+          className="w-full pl-12 pr-10 py-4 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background text-foreground placeholder:text-muted-foreground transition-colors duration-200"
         />
         {searchTerm && (
           <button
@@ -93,7 +93,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
       {/* Filters and View Controls */}
       <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
         {/* Filter Controls */}
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col justify-end items-center gap-4 w-full">
           <div className="flex flex-wrap items-center gap-3">
             {/* Favorites Filter */}
             <button
@@ -134,7 +134,6 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
               </button>
             )}
           </div>
-        
           {/* Reciter Filter */}
           <div className="flex flex-col items-center gap-2">
             {locale !== "ar" ? (
@@ -170,39 +169,19 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
             ) : null} 
           </div>
         </div>{" "}
-        {/* View Mode Toggle */}
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-muted-foreground mr-2">
-            {getTranslation(messages, "common.view", "View")}:
-          </span>
-          <div className="flex items-center bg-muted rounded-lg p-1">
-            <button
-              onClick={() => onViewModeChange("grid")}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
-                viewMode === "grid"
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <Grid className="w-4 h-4" />
-              <span className="hidden sm:inline">
-                {getTranslation(messages, "common.grid", "Grid")}
-              </span>
-            </button>
-            <button
-              onClick={() => onViewModeChange("list")}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
-                viewMode === "list"
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <List className="w-4 h-4" />
-              <span className="hidden sm:inline">
-                {getTranslation(messages, "common.list", "List")}
-              </span>
-            </button>
-          </div>
+        <div className="flex gap-2 bg-secondary rounded-lg p-1">
+          <button
+            onClick={() => onViewModeChange("grid")}
+            className={`p-2 rounded ${viewMode === "grid" ? "bg-primary text-white" : "text-foreground"}`}
+          >
+            <Grid className="lg:w-5 lg:h-5 w-4 h-4" />
+          </button>
+          <button
+            onClick={() => onViewModeChange("list")}
+            className={`p-2 rounded ${viewMode === "list" ? "bg-primary text-white" : "text-foreground"}`}
+          >
+            <List className="lg:w-5 lg:h-5 w-4 h-4" />
+          </button>
         </div>
       </div>{" "}
       {/* Active Filters Display */}

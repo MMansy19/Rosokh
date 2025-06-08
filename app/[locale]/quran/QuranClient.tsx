@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import { useNotifications } from "@/contexts/GlobalContext";
 import { AnalyticsService } from "@/services/AnalyticsService";
 import { NotificationService } from "@/services/NotificationService";
@@ -79,6 +80,7 @@ const reciters = [
 ];
 
 export function QuranClient({ locale, messages }: QuranClientProps) {
+  const searchParams = useSearchParams();
   // Notification and Analytics services
   const { notify } = useNotifications();
   const analytics = useMemo(() => AnalyticsService.getInstance(), []);
@@ -98,6 +100,14 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
   );
   const [showSettings, setShowSettings] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Initialize active tab based on URL parameters (for global search integration)
+  useEffect(() => {
+    const urlSearchTerm = searchParams.get("q");
+    if (urlSearchTerm && activeTab !== "search") {
+      setActiveTab("search");
+    }
+  }, [searchParams, activeTab]);
 
   const [audioPlayer, setAudioPlayer] = useState<AudioPlayerState>({
     isPlaying: false,
