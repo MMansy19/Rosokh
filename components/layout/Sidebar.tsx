@@ -79,24 +79,25 @@ export function Sidebar({
     }
     return pathname.startsWith(`/${locale}${href}`);
   };
-
   return (
-    <>      {/* Mobile Backdrop */}
+    <>      
+      {/* Mobile Backdrop */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-40 duration-300"
+          className="lg:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
           onClick={onToggle}
         />
-      )}      {/* Sidebar */}
+      )}          {/* Sidebar */}
       <aside
         className={`
-          fixed top-[60px] left-0 z-50 h-full bg-surface border-r border-border sidebar-transition
+          fixed top-0 left-0 z-50 h-full bg-surface border-r border-border sidebar-transition
           ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-          ${isCollapsed ? "lg:w-20" : "lg:w-48"}
-          w-64 sidebar-mobile
+          ${isCollapsed ? "lg:w-20" : "lg:w-48 xl:w-64"}
+          w-64
         `}
+        style={{ height: '100vh' }}
       >
-        <div className="flex flex-col h-full">          
+        <div className="flex flex-col h-full pt-[60px]">
           {/* Sidebar Header */}
           <div className="flex items-center justify-between p-4 border-b border-border">
             <div className={`flex items-center justify-center gap-4 transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden lg:justify-center lg:w-full" : "opacity-100"}`}>
@@ -116,6 +117,7 @@ export function Sidebar({
             >
               <X className="w-5 h-5 text-foreground" />
             </button>            
+            
             {/* Desktop Collapse Toggle */}
             <button
               onClick={toggleCollapsed}
@@ -129,7 +131,7 @@ export function Sidebar({
                 <ChevronLeft className="w-6 h-6 text-muted" />
               )}
             </button>
-          </div>          
+          </div>
           {/* Navigation */}
           <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
             <div className={`text-xs font-semibold text-muted uppercase tracking-wider px-3 py-2 transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:h-0 lg:overflow-hidden lg:py-0" : "opacity-100"}`}>
@@ -184,8 +186,7 @@ export function Sidebar({
                   </Link>
                 </div>
               );
-            })}
-          </nav>
+            })}          </nav>
 
           {/* Sidebar Footer */}
           <div className={`p-4 border-t border-border transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:pointer-events-none" : "opacity-100"}`}>
@@ -194,11 +195,7 @@ export function Sidebar({
             </div>
           </div>
         </div>
-      </aside>      {/* Main Content Spacer */}
-      <div className={`
-        hidden lg:block sidebar-transition
-        ${isCollapsed ? "lg:w-20" : "lg:w-64"}
-      `} />
+      </aside>
     </>
   );
 }

@@ -63,7 +63,7 @@ function ClientLayoutInner({
   useKeyboardShortcuts({ shortcuts });
 
   return (
-    <div className="min-h-screen flex flex-col page-bg relative">
+    <div className="min-h-screen flex page-bg relative">
       {/* Geometric Background Pattern */}
       <div className="geometric-bg"></div>
 
@@ -78,7 +78,9 @@ function ClientLayoutInner({
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
+      <div className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${
+        isSidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
+      } ml-0`}>
         <Header
           locale={locale}
           messages={messages}
