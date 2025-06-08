@@ -56,6 +56,9 @@ export const usePlaylistData = () => {
         const response = await fetch(
           "/data/youtube-playlists/playlists-metadata.json",
         );
+        console.log(
+          `Fetching playlist metadata from: ${response.url}`,
+        );
         if (!response.ok) {
           throw new Error(
             `Failed to fetch playlist metadata: ${response.status}`,
@@ -147,30 +150,6 @@ export const usePlaylistData = () => {
     }
   };
 
-  const getPlaylistById = (playlistId: string): PlaylistMetadata | null => {
-    return playlists.find((playlist) => playlist.id === playlistId) || null;
-  };
-
-  // Get playlist with videos (loads videos if not already loaded)
-  const getPlaylistWithVideos = async (
-    playlistId: string,
-  ): Promise<PlaylistWithVideos | null> => {
-    const metadata = getPlaylistById(playlistId);
-    if (!metadata) return null;
-
-    try {
-      const videos = await loadPlaylistVideos(playlistId);
-      const { dataFile, ...metadataWithoutFile } = metadata;
-      return {
-        ...metadataWithoutFile,
-        videos,
-      };
-    } catch (err) {
-      console.error(`Failed to load videos for playlist ${playlistId}:`, err);
-      return null;
-    }
-  };
-
   const searchPlaylists = (
     query: string,
     categoryId?: string,
@@ -205,19 +184,6 @@ export const usePlaylistData = () => {
     return playlists.filter((playlist) => playlist.category.id === categoryId);
   };
 
-  const getTotalVideosInPlaylists = (): number => {
-    return playlists.reduce(
-      (total, playlist) => total + playlist.videoCount,
-      0,
-    );
-  };
-
-  const getTotalPlaylistDuration = (): number => {
-    return playlists.reduce(
-      (total, playlist) => total + playlist.totalDuration,
-      0,
-    );
-  };
 
   const formatPlaylistDuration = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
@@ -229,15 +195,6 @@ export const usePlaylistData = () => {
     return `${minutes}m`;
   };
 
-  // Check if videos are loaded for a playlist
-  const areVideosLoaded = (playlistId: string): boolean => {
-    return loadedPlaylistVideos.has(playlistId);
-  };
-
-  // Check if videos are currently loading for a playlist
-  const areVideosLoading = (playlistId: string): boolean => {
-    return loadingVideos.has(playlistId);
-  };
 
   return {
     // Metadata-only data (always available after initial load)
@@ -247,16 +204,10 @@ export const usePlaylistData = () => {
 
     // Video loading functions
     loadPlaylistVideos,
-    getPlaylistWithVideos,
-    areVideosLoaded,
-    areVideosLoading,
 
     // Utility functions
-    getPlaylistById,
     searchPlaylists,
     getPlaylistsByCategory,
-    getTotalVideosInPlaylists,
-    getTotalPlaylistDuration,
     formatPlaylistDuration,
   };
 };

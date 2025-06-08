@@ -9,7 +9,7 @@ function isMissingLocale(pathname: string): boolean {
     return false;
   }
   // Exclude static files, API routes, and special files
-  return !pathname.match(/^\/(_next|favicon\.ico|api|public|images|pdfs|assets|pdf-worker)\//);
+  return !pathname.match(/^\/(_next|favicon\.ico|api|public|images|pdfs|assets|pdf-worker|data)\//);
 }
 
 export function middleware(request: NextRequest) {
@@ -27,7 +27,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|public|images|pdfs|assets|pdf-worker).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|public|images|pdfs|assets|pdf-worker|data).*)',
     '/',
   ],
 };

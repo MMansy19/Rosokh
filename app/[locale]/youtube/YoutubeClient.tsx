@@ -139,13 +139,10 @@ export default function YoutubeClient({
     playlists,
     loading: playlistLoading,
     error: playlistError,
-    getPlaylistById,
     searchPlaylists,
     getPlaylistsByCategory,
     formatPlaylistDuration,
     loadPlaylistVideos,
-    areVideosLoaded,
-    areVideosLoading,
   } = usePlaylistData();
 
   const [filteredVideos, setFilteredVideos] = useState<VideoMetadata[]>([]);
