@@ -145,15 +145,6 @@ export function Header({
             />
           </div>
 
-          {/* Mobile Search Toggle */}
-          <button
-            onClick={() => setIsSearchExpanded(!isSearchExpanded)}
-            className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
-            aria-label={messages?.common?.actions?.search || "Search"}
-          >
-            <Search className="w-5 h-5 text-muted" />
-          </button>
-
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3 lg:space-x-4 rtl:space-x-reverse">
             {/* Language Selector */}
@@ -219,7 +210,15 @@ export function Header({
           </div>
 
           {/* Mobile Actions */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="md:hidden flex items-center space-x-1">
+            {/* Mobile Search Toggle */}
+            <button
+              onClick={() => setIsSearchExpanded(!isSearchExpanded)}
+              className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors duration-200"
+              aria-label={messages?.common?.actions?.search || "Search"}
+            >
+              <Search className="w-5 h-5 text-muted" />
+            </button>
             {/* Language Selector */}
             <div className="relative" data-dropdown>
               <button
@@ -236,7 +235,7 @@ export function Header({
                     className="fixed inset-0 z-10"
                     onClick={() => setIsLangMenuOpen(false)}
                   />
-                  <div className="absolute top-full mt-2 right-0 rtl:right-auto rtl:left-0 bg-surface border border-border rounded-lg shadow-lg min-w-[120px] animate-fadeIn z-20">
+                  <div className="absolute top-full mt-2 right-0 bg-surface border border-border rounded-lg shadow-lg min-w-[120px] animate-fadeIn z-20">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}

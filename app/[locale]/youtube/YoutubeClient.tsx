@@ -66,7 +66,7 @@ class YouTubeErrorBoundary extends React.Component<
             </p>
             <button
               onClick={() => this.setState({ hasError: false })}
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+              className="px-6 py-3 bg-primary text-foreground rounded-lg hover:bg-primary/90 transition-colors"
             >
               {this.props.messages?.common?.retry || "Try Again"}
             </button>

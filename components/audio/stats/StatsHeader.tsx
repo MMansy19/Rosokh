@@ -22,7 +22,7 @@ export const StatsHeader: React.FC<StatsHeaderProps> = React.memo(
               "Music collection icon",
             )}
           >
-            <Music className="w-5 h-5 text-primary-foreground" />
+            <Music className="w-5 h-5 text-foreground" />
           </div>
           <div>
             <h3 className="font-semibold text-foreground">

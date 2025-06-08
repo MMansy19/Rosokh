@@ -35,7 +35,7 @@ const mainFeatures = [
     color: "from-accent/20 to-accent/5",
   },
   {
-    key: "video_content",
+    key: "youtube",
     icon: Video,
     href: "/videos",
     color: "from-success/20 to-success/5",

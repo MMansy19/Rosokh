@@ -68,7 +68,7 @@ export const TrackCard: React.FC<TrackCardProps> = ({
         {/* Play/Pause Button */}
         <button
           onClick={handlePlayPause}
-          className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/80 hover:from-primary/90 hover:to-primary flex items-center justify-center text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 group-hover:shadow-primary/25"
+          className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/80 hover:from-primary/90 hover:to-primary flex items-center justify-center text-foreground shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 group-hover:shadow-primary/25"
         >
           {isPlaying ? (
             <Pause className="w-5 h-5" />
@@ -207,7 +207,7 @@ export const TrackCard: React.FC<TrackCardProps> = ({
         <div className="flex items-center gap-3">
           <button
             onClick={handlePlayPause}
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground rounded-lg font-medium transition-all duration-200 hover:scale-[1.02] hover:shadow-lg group-hover:shadow-primary/25"
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-foreground rounded-lg font-medium transition-all duration-200 hover:scale-[1.02] hover:shadow-lg group-hover:shadow-primary/25"
           >
             {isPlaying ? (
               <>

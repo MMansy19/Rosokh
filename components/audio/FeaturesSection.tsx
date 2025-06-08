@@ -104,7 +104,7 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
             <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
-              <Zap className="w-5 h-5 text-primary-foreground" />
+              <Zap className="w-5 h-5 text-foreground" />
             </div>
             <h3 className="text-2xl font-bold text-foreground">
               Powerful Features
@@ -187,7 +187,7 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({
           the world
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <button className="px-6 py-3 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground rounded-lg font-medium hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <button className="px-6 py-3 bg-gradient-to-r from-primary to-primary/90 text-foreground rounded-lg font-medium hover:shadow-lg transition-all duration-200 hover:scale-105">
             Start Listening Now
           </button>
           <button className="px-6 py-3 bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground rounded-lg font-medium transition-all duration-200">
