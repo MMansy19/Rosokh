@@ -197,9 +197,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
           source: "alquran_cloud_api",
         });
 
-        notify.success(
-          messages?.quran?.surahsLoaded || "Quran chapters loaded successfully",
-        );
+       
       } catch (error) {
         console.error("Error fetching surahs:", error);
 
@@ -218,7 +216,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
     };
 
     fetchSurahs();
-  }, [analytics, messages, notify]);
+  }, [analytics, messages]);
 
   // Fetch Ayahs for selected Surah with translations
   useEffect(() => {
@@ -285,10 +283,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
           hasTranslation: !!translationData.data,
         });
 
-        notify.success(
-          messages?.quran?.surahLoaded?.replace("{name}", surahName) ||
-            `${surahName} loaded successfully`,
-        );
+       
       } catch (error) {
         console.error("Error fetching ayahs:", error);
 
@@ -308,7 +303,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
     };
 
     fetchAyahs();
-  }, [selectedSurah, locale, analytics, messages, notify, surahs]);
+  }, [selectedSurah, locale, analytics, messages, surahs]);
 
   // Audio functions
   const playAyah = async (ayahNumber: number) => {
