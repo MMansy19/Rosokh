@@ -65,18 +65,14 @@ interface AudioPlayerState {
 // Available reciters with their API IDs
 const reciters = [
   { id: "7", name: "Abdul Rahman Al-Sudais", arabicName: "عبد الرحمن السديس" },
-  {
-    id: "3",
-    name: "Abdul Basit Abdul Samad",
-    arabicName: "عبد الباسط عبد الصمد",
-  },
+  { id: "3", name: "Abdul Basit Abdul Samad", arabicName: "عبد الباسط عبد الصمد" },
   { id: "1", name: "Alafasy", arabicName: "العفاسي" },
   { id: "6", name: "Abu Bakr Ash-Shaatree", arabicName: "أبو بكر الشاطري" },
   { id: "11", name: "Maher Al Mueaqly", arabicName: "ماهر المعيقلي" },
   { id: "4", name: "Saad Al Ghamdi", arabicName: "سعد الغامدي" },
-  { id: "1", name: "Mishary Rashid Alafasy", arabicName: "مشاري راشد العفاسي" },
+  { id: "8", name: "Mishary Rashid Alafasy", arabicName: "مشاري راشد العفاسي" }, 
   { id: "5", name: "Sa'ud Ash-Shuraym", arabicName: "سعود الشريم" },
-  { id: "6", name: "Saad Al-Ghamdi", arabicName: "سعد الغامدي" },
+  { id: "9", name: "Saad Al-Ghamdi", arabicName: "سعد الغامدي" }, 
 ];
 
 export function QuranClient({ locale, messages }: QuranClientProps) {
