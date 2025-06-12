@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 import QuranSearch from "@/components/quran/QuranSearch";
 import { VerseInteraction } from "@/components/quran/VerseInteraction";
+import QuranPage from "./page";
+import QuranReader from './QuranReader';
 
 interface Surah {
   number: number;
@@ -569,6 +571,8 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
           </div>
         </div>
 
+      <QuranReader locale={locale} messages={messages} />
+      
         {/* Tab Content */}
         {activeTab === "search" ? (
           <QuranSearch locale={locale} messages={messages} />

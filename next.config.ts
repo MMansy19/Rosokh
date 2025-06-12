@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.qurango.net",
+        pathname: "/Sura2/files/mobile/**",
+      },
     ],
   },
   async headers() {

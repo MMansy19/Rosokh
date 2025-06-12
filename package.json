@@ -30,6 +30,7 @@
     "update-playlist-manifest": "node scripts/update-playlist-manifest.js"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "googleapis": "^149.0.0",
     "lucide-react": "^0.511.0",
     "next": "15.3.3",

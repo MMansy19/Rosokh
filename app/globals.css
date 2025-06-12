@@ -2115,3 +2115,171 @@ kbd {
 .sidebar-transition {
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+
+/* globals.css */
+.fliping-book {
+  perspective: 1500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  overflow-x: hidden;
+}
+
+.fliping-book .book {
+  position: relative;
+  width: 60vw;
+  aspect-ratio: 7 / 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7f7;
+  border: 16px solid #2d5c72;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.fliping-book .book .pages {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.fliping-book .book .spread {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.fliping-book .page {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000); /* Improved easing */
+  cursor: pointer;
+  background-color: #f5f7f7; /* Add background color to prevent white flash */
+}
+
+.fliping-book .page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: #f5f7f7; /* Match page background */
+}
+
+.fliping-book .page.left {
+  left: 50%;
+  transform-origin: left;
+  z-index: 2;
+  border-left: 1px solid #ccc;
+  box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.fliping-book .page.right {
+  left: 0;
+  transform-origin: right;
+  z-index: 3;
+  border-right: 1px solid #ccc;
+  box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.fliping-book .page.left.flipped {
+  transform: rotateY(-180deg);
+  z-index: 4; /* Higher z-index during animation */
+  box-shadow: -10px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.fliping-book .page.right.flipped {
+  transform: rotateY(180deg);
+  z-index: 4; /* Higher z-index during animation */
+  box-shadow: 10px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional styles for globals.css */
+.fliping-book .book {
+  position: relative;
+  width: 75vw;
+  aspect-ratio: 7 / 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7f7;
+  border: 16px solid #2d5c72;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.fliping-book .book-spine {
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  background-color: #1a3a48;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.fliping-book .page-number {
+  position: absolute;
+  bottom: 10px;
+  font-size: 14px;
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.fliping-book .page.left .page-number {
+  right: 10px;
+}
+
+.fliping-book .page.right .page-number {
+  left: 10px;
+}
+
+/* Enhanced page turning effect */
+.fliping-book .page.left.flipped {
+  transform: rotateY(-180deg);
+  z-index: 4; /* Higher z-index during animation */
+  box-shadow: -10px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.fliping-book .page.right.flipped {
+  transform: rotateY(180deg);
+  z-index: 4; /* Higher z-index during animation */
+  box-shadow: 10px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Add page curl effect on hover */
+.fliping-book .page.left:hover:not(.flipped) {
+  box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1), -2px 0 5px rgba(0, 0, 0, 0.1);
+  transform: perspective(2500px) rotateY(-5deg);
+}
+
+.fliping-book .page.right:hover:not(.flipped) {
+  box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.1), 2px 0 5px rgba(0, 0, 0, 0.1);
+  transform: perspective(2500px) rotateY(5deg);
+}
+
+/* Add touch support for mobile devices */
+@media (max-width: 768px) {
+  .fliping-book .book {
+    border-width: 8px;
+  }
+  
+  .fliping-book .page-number {
+    font-size: 12px;
+    padding: 1px 4px;
+  }
+}
