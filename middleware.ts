@@ -4,40 +4,61 @@ const LOCALES = ["en", "ar", "ru"];
 const DEFAULT_LOCALE = "ar";
 
 function isMissingLocale(pathname: string): boolean {
-  // Check if the pathname already includes a locale
-  if (
-    LOCALES.some(
-      (locale) =>
-        pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
-    )
-  ) {
+  // Extract the first segment of the path
+  const pathParts = pathname.split('/').filter(Boolean);
+  const firstSegment = pathParts[0];
+
+  // If the first segment is a valid locale, return false
+  if (LOCALES.includes(firstSegment)) {
     return false;
   }
-  // Exclude static files, API routes, and special files
-  return !pathname.match(
-    /^\/(_next|favicon\.ico|api|public|images|pdfs|assets|pdf-worker|data)\//,
-  );
+
+  // List of paths to exclude from locale redirection
+  const excludedPaths = [
+    '/_next/',
+    '/api/',
+    '/favicon.ico',
+    '/robots.txt',
+    '/sitemap.xml',
+    '/images/',
+    '/assets/',
+    '/public/',
+    '/data/',
+    '/logo',
+    '/sw.js',
+    '/workbox-',
+    '/manifest.json'
+  ];
+
+  return !excludedPaths.some(excluded => pathname.startsWith(excluded));
 }
 
 export function middleware(request: NextRequest) {
-  const { pathname } = new URL(request.url);
+  const { pathname, search } = request.nextUrl;
+  console.log(`[Middleware] Processing: ${pathname}`);
 
+  // Skip if locale is already present or path should be excluded
   if (!isMissingLocale(pathname)) {
+    console.log(`[Middleware] Skipping: ${pathname}`);
     return NextResponse.next();
   }
 
-  const locale = DEFAULT_LOCALE;
-  const newUrl = new URL(
-    `/${locale}${pathname === "/" ? "" : pathname}`,
-    request.url,
-  );
+  // Special case: if someone tries to access /[locale], redirect to default locale
+  if (pathname.startsWith('/[locale]')) {
+    const newPath = pathname.replace('/[locale]', `/${DEFAULT_LOCALE}`);
+    console.log(`[Middleware] Redirecting dynamic segment to: ${newPath}`);
+    return NextResponse.redirect(new URL(newPath + search, request.url));
+  }
 
-  return NextResponse.redirect(newUrl, { status: 307 });
+  // Construct new URL with default locale
+  const newPath = `/${DEFAULT_LOCALE}${pathname === '/' ? '' : pathname}`;
+  console.log(`[Middleware] Redirecting to: ${newPath}`);
+
+  return NextResponse.redirect(new URL(newPath + search, request.url), 307);
 }
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|public|images|pdfs|assets|pdf-worker|data).*)",
-    "/",
+    '/((?!_next/|api/|static/|favicon.ico|robots.txt|sitemap.xml|images/|assets/|public/|data/|logo|\\[locale\\]).*)',
   ],
 };

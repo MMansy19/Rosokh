@@ -6,10 +6,9 @@ import { AnalyticsService } from "@/services/AnalyticsService";
 import { NotificationService } from "@/services/NotificationService";
 import QuranSearch from "@/components/quran/QuranSearch";
 import { QuranRead } from "@/components/quran/QuranRead";
-import { QuranMushaf } from "@/components/quran/QuranMushaf";
 import { TabNavigation } from "@/components/quran/ui/TabNavigation";
 import { TabType, QuranClientProps } from "@/components/quran/types";
-import QuranReader from "./QuranReader";
+import QuranReader from "@/components/quran/QuranReader";
 
 export function QuranClient({ locale, messages }: QuranClientProps) {
   const searchParams = useSearchParams();
@@ -71,7 +70,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
 
   return (
     <div className="min-h-screen text-foreground transition-colors duration-300">
-      <div className="container mx-auto px-4 py-8 relative z-10">
+      <div className="container mx-auto md:px-4 py-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-foreground mb-4">
