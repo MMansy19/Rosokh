@@ -224,20 +224,18 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
     >
       <div className="flex flex-col items-center">
         {/* Navigation Controls */}
-        <div className="flex flex-col gap-4 mb-6 w-full max-w-4xl px-4">
-          {/* Current Surah Info */}
-          <div className="text-center">
+        <div className="flex flex-col gap-4 mb-6 w-full max-w-4xl px-4">          {/* Current Surah Info */}
+          <div className="text-center" dir="rtl">
             <h2 className="text-xl font-bold mb-2" style={{ color: "var(--color-text-primary)" }}>
               سورة {currentSurah.name} - الصفحة {currentPage}
             </h2>
           </div>
           
           {/* Filter Controls */}
-          <div className="flex flex-wrap gap-4 justify-center items-center">
-            {/* Surah Selector */}
+          <div className="flex flex-wrap gap-4 justify-center items-center">            {/* Surah Selector */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
-                {t("selectSurah") || "اختر السورة"}
+                اختر السورة
               </label>
               <select
                 value={currentSurah.number}
@@ -248,6 +246,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                   color: "var(--color-text-primary)",
                   border: "1px solid var(--color-border)",
                 }}
+                dir="rtl"
               >
                 {SURAH_ARRAY.map((surah) => (
                   <option key={surah.number} value={surah.number}>
@@ -260,21 +259,22 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
             {/* Page Selector */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
-                {t("selectPage") || "اختر الصفحة"}
+                اختر الصفحة
               </label>
               <select
                 value={currentPage}
-                onChange={(e) => handlePageSelect(Number(e.target.value) + 1)}
+                onChange={(e) => handlePageSelect(Number(e.target.value))}
                 className="px-3 py-2 rounded border text-center min-w-[120px]"
                 style={{
                   backgroundColor: "var(--color-surface)",
                   color: "var(--color-text-primary)",
                   border: "1px solid var(--color-border)",
                 }}
+                dir="rtl"
               >
                 {Array.from({ length: QURAN_PAGES }, (_, i) => i + 1).map((page) => (
                   <option key={page} value={page}>
-                    {t("page") || "صفحة"} {page}
+                    صفحة {page}
                   </option>
                 ))}
               </select>
@@ -283,7 +283,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
             {/* Quick Page Input */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
-                {t("goToPage") || "اذهب إلى صفحة"}
+                اذهب إلى صفحة
               </label>
               <input
                 type="number"
@@ -302,6 +302,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                   color: "var(--color-text-primary)",
                   border: "1px solid var(--color-border)",
                 }}
+                dir="rtl"
               />
             </div>
           </div>
@@ -393,7 +394,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                     {currentPage > 1 && (
                       <div
                         className={classNames("page left", {
-                          flipped: flipDirection === "next",
+                          flipped: flipDirection === "prev",
                         })}
                         style={dragStart !== null ? getPageStyle() : {}}
                         onMouseDown={(e) => handleMouseDown(e)}
@@ -402,6 +403,10 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                         onMouseLeave={(e) =>
                           dragStart !== null && handleMouseUp(e)
                         }
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+                        onClick={() => handlePrevPage()}
                       >
                         <Image
                           src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage}.jpg`}
@@ -420,7 +425,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                     {/* Right Page */}
                     <div
                       className={classNames("page right", {
-                        flipped: flipDirection === "prev",
+                        flipped: flipDirection === "next",
                       })}
                       style={dragStart !== null ? getPageStyle() : {}}
                       onMouseDown={(e) => handleMouseDown(e)}
@@ -429,6 +434,10 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                       onMouseLeave={(e) =>
                         dragStart !== null && handleMouseUp(e)
                       }
+                      onTouchStart={handleTouchStart}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={handleTouchEnd}
+                      onClick={() => handleNextPage()}
                     >
                       <Image
                         src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage + 1}.jpg`}
@@ -447,9 +456,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="flex gap-4 mt-6 justify-center">
+        </div>        <div className="flex gap-4 mt-6 justify-center">
           <button
             onClick={handlePrevPage}
             disabled={currentPage <= 1 || isAnimating}
@@ -467,7 +474,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                 currentPage <= 1 || isAnimating ? "none" : "var(--shadow-sm)",
             }}
           >
-            {t("previous") || "السابق"}
+            السابق
           </button>
 
           <button
@@ -489,7 +496,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                   : "var(--shadow-sm)",
             }}
           >
-            {t("next") || "التالي"}
+            التالي
           </button>
         </div>
       </div>

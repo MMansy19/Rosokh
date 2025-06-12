@@ -26,22 +26,22 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     {
       id: "learn" as TabType,
       icon: GraduationCap,
-      label: messages?.quran?.learn || "Learn",
+      label: "تعلم",
     },
     {
       id: "read" as TabType,
       icon: BookOpen,
-      label: messages?.quran?.read || "Read",
+      label: "اقرأ",
     },
     {
       id: "search" as TabType,
       icon: Search,
-      label: messages?.quran?.search || "Search",
+      label: "بحث",
     },
     {
       id: "mushaf" as TabType,
       icon: Book,
-      label: messages?.quran?.mushaf || "Mushaf",
+      label: "المصحف",
     },
   ];
 

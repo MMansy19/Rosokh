@@ -77,7 +77,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">
-            {messages?.loading || "Loading..."}
+            جاري التحميل...
           </p>
         </div>
       </div>
@@ -90,7 +90,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
         <div className="text-center">
           <div className="text-4xl mb-4">⚠️</div>
           <h3 className="text-lg font-semibold text-foreground mb-2">
-            {messages?.error || "Error loading data"}
+            خطأ في تحميل البيانات
           </h3>
           <p className="text-muted-foreground">{error}</p>
         </div>
@@ -111,12 +111,11 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
           </button>
           <div className="text-center">
             <h1 className="text-2xl font-bold text-foreground mb-1">
-              سورة {currentSurahInfo?.arabicName} -{" "}
-              {currentSurahInfo?.englishName}
+              سورة {currentSurahInfo?.arabicName}
             </h1>
             <p className="text-sm text-muted-foreground">
               {currentSurahInfo?.revelationType === "Meccan" ? "مكية" : "مدنية"}{" "}
-              • {currentSurahInfo?.numberOfAyahs} {messages?.ayahs || "آيات"}
+              • {currentSurahInfo?.numberOfAyahs} آيات
             </p>
           </div>
 
@@ -146,7 +145,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-foreground">
-                {messages?.fontSize || "حجم الخط"}
+                حجم الخط
               </label>
               <div className="flex items-center gap-2">
                 <button
@@ -169,7 +168,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
 
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-foreground">
-                {messages?.lineHeight || "المسافة بين السطور"}
+                المسافة بين السطور
               </label>
               <div className="flex items-center gap-2">
                 <button
@@ -283,7 +282,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
 
                 <button className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-green-500 hover:bg-green-600 text-white transition-colors">
                   <BookOpen className="w-4 h-4" />
-                  {messages?.bookmark || "إشارة مرجعية"}
+                  إشارة مرجعية
                 </button>
               </div>
             </div>
@@ -299,13 +298,14 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
           className="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface hover:bg-surface/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
         >
           <ChevronRight className="w-4 h-4" />
-          {messages?.previousSurah || "السورة السابقة"}
+          السورة السابقة
         </button>
         <div className="text-center">
           <select
             value={currentSurah}
             onChange={(e) => setCurrentSurah(Number(e.target.value))}
             className="px-4 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-center"
+                      dir={locale === "ar" ? "rtl" : "ltr"}
           >
             {surahs.map((surah) => (
               <option key={surah.number} value={surah.number}>
@@ -320,7 +320,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
           disabled={currentSurah >= 114}
           className="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface hover:bg-surface/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
         >
-          {messages?.nextSurah || "السورة التالية"}
+          السورة التالية
           <ChevronLeft className="w-4 h-4" />
         </button>
       </div>

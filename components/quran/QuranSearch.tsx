@@ -184,11 +184,10 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-foreground mb-4">
-            {messages?.search?.title || "Quran Search"}
+            البحث في القرآن
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {messages?.search?.subtitle ||
-              "Search through the Holy Quran by text, surah, or verse"}
+            ابحث في القرآن الكريم بالنص أو السورة أو الآية
           </p>
         </div>
 
@@ -200,17 +199,17 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
               {[
                 {
                   key: "text",
-                  label: messages?.search?.searchText || "Search Text",
+                  label: "البحث في النص",
                   icon: "🔍",
                 },
                 {
                   key: "surah",
-                  label: messages?.search?.searchSurah || "Search Surah",
+                  label: "البحث في السورة",
                   icon: "📖",
                 },
                 {
                   key: "verse",
-                  label: messages?.search?.searchVerse || "Search Verse",
+                  label: "البحث في الآية",
                   icon: "🎯",
                 },
               ].map(({ key, label, icon }) => (
@@ -241,13 +240,10 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder={
                   searchType === "text"
-                    ? messages?.search?.placeholderText ||
-                      "Search for verses, keywords, or concepts..."
+                    ? "ابحث عن الآيات أو الكلمات أو المفاهيم..."
                     : searchType === "surah"
-                      ? messages?.search?.placeholderSurah ||
-                        "Enter surah name or number..."
-                      : messages?.search?.placeholderVerse ||
-                        "Enter verse reference (e.g., 2:255)..."
+                      ? "أدخل اسم السورة أو رقمها..."
+                      : "أدخل مرجع الآية (مثل: 2:255)..."
                 }
                 className="w-full px-10 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
@@ -264,7 +260,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
             {/* Translation Selector */}
             <div className="mb-4">
               <label className="block text-sm font-medium text-foreground mb-2">
-                {messages?.search?.translation || "Translation"}
+                التفسير
               </label>
               <select
                 value={selectedTranslation}
@@ -288,13 +284,13 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
               <div className="mt-4">
                 <div className="flex justify-between items-center mb-2">
                   <h3 className="text-sm font-medium text-foreground">
-                    {messages?.search?.recentSearches || "Recent Searches"}
+                    عمليات البحث الأخيرة
                   </h3>
                   <button
                     onClick={clearRecentSearches}
                     className="text-xs text-muted-foreground hover:text-foreground"
                   >
-                    {messages?.search?.clearAll || "Clear All"}
+                    مسح الكل
                   </button>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -319,7 +315,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
               <p className="text-muted-foreground">
-                {messages?.search?.searching || "Searching..."}
+                جاري البحث...
               </p>
             </div>
           ) : searchResults.length > 0 ? (
@@ -364,7 +360,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
                   <div className="mb-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg">
                     <p
                       className="text-xl leading-relaxed text-right font-arabic text-foreground"
-                      dir="rtl"
+                    
                     >
                       {result.arabicText}
                     </p>

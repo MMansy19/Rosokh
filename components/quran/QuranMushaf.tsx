@@ -40,11 +40,10 @@ export const QuranMushaf: React.FC<QuranMushafProps> = ({
     <div className="w-full">
       <div className="text-center mb-4 sm:mb-6">
         <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-          {messages?.quran?.mushaf || "Mushaf View"}
+          عرض المصحف
         </h2>
         <p className="text-sm sm:text-base text-muted px-4">
-          {messages?.quran?.mushafDescription ||
-            "Interactive Mushaf with page-by-page reading experience"}
+          المصحف التفاعلي مع تجربة القراءة صفحة بصفحة
         </p>
       </div>
 
@@ -62,7 +61,7 @@ export const QuranMushaf: React.FC<QuranMushafProps> = ({
             ))}
           </div>
           <p className="text-xs text-muted mt-2">
-            {messages?.quran?.currentPage || "Current Page"}: {currentPage}
+            الصفحة الحالية: {currentPage}
           </p>
         </div>
       )}
@@ -79,8 +78,7 @@ export const QuranMushaf: React.FC<QuranMushafProps> = ({
       {/* Optional: Add surah navigation helper */}
       <div className="mt-6 text-center">
         <p className="text-sm text-muted">
-          {messages?.quran?.totalSurahs || "Total Surahs"}: {SURAH_ARRAY.length}{" "}
-          |{messages?.quran?.totalPages || "Total Pages"}: 604
+          إجمالي السور: {SURAH_ARRAY.length} | إجمالي الصفحات: 604
         </p>
       </div>
     </div>
