@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import QuranSearch from "@/components/quran/QuranSearch";
 import { VerseInteraction } from "@/components/quran/VerseInteraction";
-import QuranPage from "./page";
+// Removed unused import of QuranPage
 import QuranReader from './QuranReader';
 
 interface Surah {
