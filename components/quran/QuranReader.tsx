@@ -1,6 +1,10 @@
 "use client";
 import { useState, useEffect, useMemo, useRef } from "react";
-import { SurahMap, SURAH_ARRAY, QuranReaderProps } from "@/components/quran/types";
+import {
+  SurahMap,
+  SURAH_ARRAY,
+  QuranReaderProps,
+} from "@/components/quran/types";
 import Image from "next/image";
 import classNames from "classnames";
 import "@/app/globals.css";
@@ -14,7 +18,9 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
 
   const [currentPage, setCurrentPage] = useState(3);
   const [zoomLevel, setZoomLevel] = useState(1);
-  const [flipDirection, setFlipDirection] = useState<"next" | "prev" | null>(null);
+  const [flipDirection, setFlipDirection] = useState<"next" | "prev" | null>(
+    null,
+  );
   const [isAnimating, setIsAnimating] = useState(false);
   const [dragStart, setDragStart] = useState<number | null>(null);
   const [dragCurrent, setDragCurrent] = useState<number | null>(null);
@@ -24,15 +30,15 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth <= 1024); // Tablet and mobile
     };
-   
+
     if (isMobile) {
       setZoomLevel(1.1);
       setCurrentPage(2);
     }
 
     checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    return () => window.removeEventListener('resize', checkIfMobile);
+    window.addEventListener("resize", checkIfMobile);
+    return () => window.removeEventListener("resize", checkIfMobile);
   }, [isMobile]);
 
   useEffect(() => {
@@ -274,9 +280,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                       priority={true}
                       unoptimized
                     />
-                    <div className="page-number">
-                      {currentPage}
-                    </div>
+                    <div className="page-number">{currentPage}</div>
                   </div>
                 ) : (
                   /* Dual Page View for Desktop */
@@ -291,7 +295,9 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                         onMouseDown={(e) => handleMouseDown(e)}
                         onMouseMove={handleMouseMove}
                         onMouseUp={(e) => handleMouseUp(e)}
-                        onMouseLeave={(e) => dragStart !== null && handleMouseUp(e)}
+                        onMouseLeave={(e) =>
+                          dragStart !== null && handleMouseUp(e)
+                        }
                       >
                         <Image
                           src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage - 1}.jpg`}
@@ -303,9 +309,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                           priority={true}
                           unoptimized
                         />
-                        <div className="page-number">
-                          {currentPage - 1}
-                        </div>
+                        <div className="page-number">{currentPage - 1}</div>
                       </div>
                     )}
 
@@ -318,7 +322,9 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                       onMouseDown={(e) => handleMouseDown(e)}
                       onMouseMove={handleMouseMove}
                       onMouseUp={(e) => handleMouseUp(e)}
-                      onMouseLeave={(e) => dragStart !== null && handleMouseUp(e)}
+                      onMouseLeave={(e) =>
+                        dragStart !== null && handleMouseUp(e)
+                      }
                     >
                       <Image
                         src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage}.jpg`}
@@ -330,9 +336,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                         priority={true}
                         unoptimized
                       />
-                      <div className="page-number">
-                        {currentPage}
-                      </div>
+                      <div className="page-number">{currentPage}</div>
                     </div>
                   </>
                 )}

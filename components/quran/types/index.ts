@@ -48,7 +48,7 @@ export interface QuranClientProps {
   messages: any;
 }
 
-export type TabType = "read" | "search" | "mushaf";
+export type TabType = "learn" | "read" | "search" | "mushaf";
 export type RepeatMode = "none" | "verse" | "surah";
 
 export interface Reciter {
@@ -69,7 +69,7 @@ export type QuranReaderProps = {
   locale: string;
   messages: { [key: string]: string };
   onPageChange?: (page: number) => void;
-}
+};
 
 export const SURAH_ARRAY = [
   { number: 1, name: "الفاتحة", page: 1 },

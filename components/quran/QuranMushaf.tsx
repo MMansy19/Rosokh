@@ -25,9 +25,9 @@ export const QuranMushaf: React.FC<QuranMushafProps> = ({
 
   // Function to find which surah(s) are on the current page
   const getCurrentPageSurahs = (page: number) => {
-    const surahs = SURAH_ARRAY.filter(surah => {
+    const surahs = SURAH_ARRAY.filter((surah) => {
       // Find surah that starts on or before this page
-      const nextSurah = SURAH_ARRAY.find(s => s.number === surah.number + 1);
+      const nextSurah = SURAH_ARRAY.find((s) => s.number === surah.number + 1);
       const surahEndPage = nextSurah ? nextSurah.page - 1 : 604;
       return surah.page <= page && page <= surahEndPage;
     });
@@ -69,8 +69,8 @@ export const QuranMushaf: React.FC<QuranMushafProps> = ({
 
       {/* Integrated QuranReader component with responsive design */}
       <div className="w-full max-w-7xl mx-auto px-2 sm:px-4">
-        <QuranReader 
-          locale={locale} 
+        <QuranReader
+          locale={locale}
           messages={messages}
           onPageChange={setCurrentPage}
         />
@@ -79,8 +79,8 @@ export const QuranMushaf: React.FC<QuranMushafProps> = ({
       {/* Optional: Add surah navigation helper */}
       <div className="mt-6 text-center">
         <p className="text-sm text-muted">
-          {messages?.quran?.totalSurahs || "Total Surahs"}: {SURAH_ARRAY.length} | 
-          {messages?.quran?.totalPages || "Total Pages"}: 604
+          {messages?.quran?.totalSurahs || "Total Surahs"}: {SURAH_ARRAY.length}{" "}
+          |{messages?.quran?.totalPages || "Total Pages"}: 604
         </p>
       </div>
     </div>

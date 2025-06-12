@@ -1,5 +1,6 @@
 // Main components
 export { QuranRead } from "./QuranRead";
+export { QuranUthmani } from "./QuranUthmani";
 export { QuranMushaf } from "./QuranMushaf";
 
 // UI components

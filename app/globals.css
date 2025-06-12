@@ -2335,7 +2335,6 @@ kbd {
 
 /* Responsive Breakpoints */
 @media (min-width: 1025px) {
-
   /* Desktop Styles */
   .fliping-book .book {
     width: 60vw;
@@ -2348,7 +2347,6 @@ kbd {
 }
 
 @media (max-width: 1024px) {
-
   /* Tablet & Mobile Styles */
   .fliping-book {
     padding: 2rem 0;
@@ -2378,7 +2376,6 @@ kbd {
 }
 
 @media (max-width: 480px) {
-
   /* Mobile-specific adjustments */
   .fliping-book .book {
     aspect-ratio: 2/3;

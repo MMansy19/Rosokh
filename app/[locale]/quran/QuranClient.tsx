@@ -4,18 +4,19 @@ import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { AnalyticsService } from "@/services/AnalyticsService";
 import { NotificationService } from "@/services/NotificationService";
+import { QuranUthmani } from "@/components/quran/QuranUthmani";
 import QuranSearch from "@/components/quran/QuranSearch";
 import { QuranRead } from "@/components/quran/QuranRead";
 import { TabNavigation } from "@/components/quran/ui/TabNavigation";
 import { TabType, QuranClientProps } from "@/components/quran/types";
-import QuranReader from "@/components/quran/QuranReader";
+import { QuranMushaf } from "@/components/quran";
 
 export function QuranClient({ locale, messages }: QuranClientProps) {
   const searchParams = useSearchParams();
   const analytics = useMemo(() => AnalyticsService.getInstance(), []);
   const notifications = useMemo(() => NotificationService.getInstance(), []);
 
-  const [activeTab, setActiveTab] = useState<TabType>("read");
+  const [activeTab, setActiveTab] = useState<TabType>("learn");
 
   // Initialize active tab based on URL parameters (for global search integration)
   useEffect(() => {
@@ -57,12 +58,14 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
   // Render tab content
   const renderTabContent = () => {
     switch (activeTab) {
-      case "read":
+      case "learn":
         return <QuranRead locale={locale} messages={messages} />;
+      case "read":
+        return <QuranUthmani locale={locale} messages={messages} />;
       case "search":
         return <QuranSearch locale={locale} messages={messages} />;
       case "mushaf":
-        return <QuranReader locale={locale} messages={messages} />;
+        return <QuranMushaf locale={locale} messages={messages} />;
       default:
         return <QuranRead locale={locale} messages={messages} />;
     }

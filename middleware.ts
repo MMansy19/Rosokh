@@ -5,7 +5,7 @@ const DEFAULT_LOCALE = "ar";
 
 function isMissingLocale(pathname: string): boolean {
   // Extract the first segment of the path
-  const pathParts = pathname.split('/').filter(Boolean);
+  const pathParts = pathname.split("/").filter(Boolean);
   const firstSegment = pathParts[0];
 
   // If the first segment is a valid locale, return false
@@ -15,22 +15,22 @@ function isMissingLocale(pathname: string): boolean {
 
   // List of paths to exclude from locale redirection
   const excludedPaths = [
-    '/_next/',
-    '/api/',
-    '/favicon.ico',
-    '/robots.txt',
-    '/sitemap.xml',
-    '/images/',
-    '/assets/',
-    '/public/',
-    '/data/',
-    '/logo',
-    '/sw.js',
-    '/workbox-',
-    '/manifest.json'
+    "/_next/",
+    "/api/",
+    "/favicon.ico",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/images/",
+    "/assets/",
+    "/public/",
+    "/data/",
+    "/logo",
+    "/sw.js",
+    "/workbox-",
+    "/manifest.json",
   ];
 
-  return !excludedPaths.some(excluded => pathname.startsWith(excluded));
+  return !excludedPaths.some((excluded) => pathname.startsWith(excluded));
 }
 
 export function middleware(request: NextRequest) {
@@ -44,14 +44,14 @@ export function middleware(request: NextRequest) {
   }
 
   // Special case: if someone tries to access /[locale], redirect to default locale
-  if (pathname.startsWith('/[locale]')) {
-    const newPath = pathname.replace('/[locale]', `/${DEFAULT_LOCALE}`);
+  if (pathname.startsWith("/[locale]")) {
+    const newPath = pathname.replace("/[locale]", `/${DEFAULT_LOCALE}`);
     console.log(`[Middleware] Redirecting dynamic segment to: ${newPath}`);
     return NextResponse.redirect(new URL(newPath + search, request.url));
   }
 
   // Construct new URL with default locale
-  const newPath = `/${DEFAULT_LOCALE}${pathname === '/' ? '' : pathname}`;
+  const newPath = `/${DEFAULT_LOCALE}${pathname === "/" ? "" : pathname}`;
   console.log(`[Middleware] Redirecting to: ${newPath}`);
 
   return NextResponse.redirect(new URL(newPath + search, request.url), 307);
@@ -59,6 +59,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/|api/|static/|favicon.ico|robots.txt|sitemap.xml|images/|assets/|public/|data/|logo|\\[locale\\]).*)',
+    "/((?!_next/|api/|static/|favicon.ico|robots.txt|sitemap.xml|images/|assets/|public/|data/|logo|\\[locale\\]).*)",
   ],
 };
