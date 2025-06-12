@@ -1,4 +1,3 @@
-// components/QuranReader.tsx
 "use client";
 import { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
@@ -326,24 +325,39 @@ const QuranReader = ({ locale, messages }: QuranReaderProps) => {
   };
 
   return (
-    <div className="min-h-screen py-6  bg-gray-100">
+    <div className="min-h-screen py-6" style={{ backgroundColor: 'var(--color-background)' }}>
       <div className="flex flex-col items-center">
         <div className="flex flex-wrap gap-2 mb-6 justify-center">
           <button
             onClick={() => setZoomLevel((z) => Math.min(2, z + 0.1))}
-            className="px-3 py-1 bg-emerald-600 text-white rounded"
+            className="px-3 py-1 rounded transition-all duration-200 hover:scale-105"
+            style={{ 
+              backgroundColor: 'var(--color-button)', 
+              color: 'var(--color-background)',
+              boxShadow: 'var(--shadow-sm)' 
+            }}
           >
             +
           </button>
           <button
             onClick={() => setZoomLevel(1)}
-            className="px-3 py-1 bg-gray-300 rounded"
+            className="px-3 py-1 rounded transition-colors duration-200"
+            style={{ 
+              backgroundColor: 'var(--color-surface)', 
+              color: 'var(--color-text-primary)',
+              border: `1px solid var(--color-border)` 
+            }}
           >
             {Math.round(zoomLevel * 100)}%
           </button>
           <button
             onClick={() => setZoomLevel((z) => Math.max(0.5, z - 0.1))}
-            className="px-3 py-1 bg-emerald-600 text-white rounded"
+            className="px-3 py-1 rounded transition-all duration-200 hover:scale-105"
+            style={{ 
+              backgroundColor: 'var(--color-button)', 
+              color: 'var(--color-background)',
+              boxShadow: 'var(--shadow-sm)' 
+            }}
           >
             -
           </button>
@@ -490,7 +504,18 @@ const QuranReader = ({ locale, messages }: QuranReaderProps) => {
           <button
             onClick={() => handlePrevPage("left")}
             disabled={currentPage <= 2 || isAnimating}
-            className={`px-4 py-2 rounded ${currentPage <= 2 || isAnimating ? "bg-gray-300" : "bg-emerald-600 text-white"}`}
+            className="px-4 py-2 rounded transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              backgroundColor: currentPage <= 2 || isAnimating 
+                ? 'var(--color-disabled-button)' 
+                : 'var(--color-button)',
+              color: currentPage <= 2 || isAnimating 
+                ? 'var(--color-muted)' 
+                : 'var(--color-background)',
+              boxShadow: currentPage <= 2 || isAnimating 
+                ? 'none' 
+                : 'var(--shadow-sm)'
+            }}
           >
             {t("previous") || "السابق"}
           </button>
@@ -498,7 +523,18 @@ const QuranReader = ({ locale, messages }: QuranReaderProps) => {
           <button
             onClick={() => handleNextPage("right")}
             disabled={currentPage >= TOTAL_PAGES || isAnimating}
-            className={`px-4 py-2 rounded ${currentPage >= TOTAL_PAGES || isAnimating ? "bg-gray-300" : "bg-emerald-600 text-white"}`}
+            className="px-4 py-2 rounded transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              backgroundColor: currentPage >= TOTAL_PAGES || isAnimating 
+                ? 'var(--color-disabled-button)' 
+                : 'var(--color-button)',
+              color: currentPage >= TOTAL_PAGES || isAnimating 
+                ? 'var(--color-muted)' 
+                : 'var(--color-background)',
+              boxShadow: currentPage >= TOTAL_PAGES || isAnimating 
+                ? 'none' 
+                : 'var(--shadow-sm)'
+            }}
           >
             {t("next") || "التالي"}
           </button>

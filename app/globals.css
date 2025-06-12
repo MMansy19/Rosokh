@@ -2145,11 +2145,12 @@ kbd {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f7f7;
-  border: 16px solid #2d5c72;
+  background-color: var(--color-surface);
+  border: 16px solid var(--color-primary);
   border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-xl);
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .fliping-book .book .pages {
@@ -2174,9 +2175,9 @@ kbd {
   overflow: hidden;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1); /* Improved easing */
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
   cursor: pointer;
-  background-color: #f5f7f7; /* Add background color to prevent white flash */
+  background-color: var(--color-surface);
 }
 
 .fliping-book .page img {
@@ -2184,14 +2185,14 @@ kbd {
   height: 100%;
   object-fit: cover;
   display: block;
-  background-color: #f5f7f7; /* Match page background */
+  background-color: var(--color-surface);
 }
 
 .fliping-book .page.left {
   left: 50%;
   transform-origin: left;
   z-index: 2;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid var(--color-border);
   box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -2199,44 +2200,43 @@ kbd {
   left: 0;
   transform-origin: right;
   z-index: 3;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid var(--color-border);
   box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .fliping-book .page.left.flipped {
   transform: rotateY(-180deg);
-  z-index: 4; /* Higher z-index during animation */
+  z-index: 4;
   box-shadow: -10px 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .fliping-book .page.right.flipped {
   transform: rotateY(180deg);
-  z-index: 4; /* Higher z-index during animation */
+  z-index: 4;
   box-shadow: 10px 0 15px rgba(0, 0, 0, 0.2);
 }
-
-/* Additional styles for globals.css */
-/* Removed redundant .fliping-book .book styles as they are already defined earlier */
 
 .fliping-book .book-spine {
   position: absolute;
   width: 4px;
   height: 100%;
-  background-color: #1a3a48;
+  background-color: var(--color-primary);
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .fliping-book .page-number {
   position: absolute;
   bottom: 10px;
   font-size: 14px;
-  color: #333;
-  background-color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   padding: 2px 8px;
   border-radius: 10px;
+  box-shadow: var(--shadow-sm);
 }
 
 .fliping-book .page.left .page-number {
@@ -2245,19 +2245,6 @@ kbd {
 
 .fliping-book .page.right .page-number {
   left: 10px;
-}
-
-/* Enhanced page turning effect */
-.fliping-book .page.left.flipped {
-  transform: rotateY(-180deg);
-  z-index: 4; /* Higher z-index during animation */
-  box-shadow: -10px 0 15px rgba(0, 0, 0, 0.2);
-}
-
-.fliping-book .page.right.flipped {
-  transform: rotateY(180deg);
-  z-index: 4; /* Higher z-index during animation */
-  box-shadow: 10px 0 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Add page curl effect on hover */
@@ -2273,6 +2260,35 @@ kbd {
     inset -4px 0 10px rgba(0, 0, 0, 0.1),
     2px 0 5px rgba(0, 0, 0, 0.1);
   transform: perspective(2500px) rotateY(5deg);
+}
+
+/* Dark mode specific adjustments */
+[data-theme="dark"] .fliping-book .page.left {
+  box-shadow: inset 4px 0 10px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .fliping-book .page.right {
+  box-shadow: inset -4px 0 10px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .fliping-book .page.left:hover:not(.flipped) {
+  box-shadow:
+    inset 4px 0 10px rgba(255, 255, 255, 0.05),
+    -2px 0 5px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .fliping-book .page.right:hover:not(.flipped) {
+  box-shadow:
+    inset -4px 0 10px rgba(255, 255, 255, 0.05),
+    2px 0 5px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .fliping-book .page.left.flipped {
+  box-shadow: -10px 0 15px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .fliping-book .page.right.flipped {
+  box-shadow: 10px 0 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Add touch support for mobile devices */
