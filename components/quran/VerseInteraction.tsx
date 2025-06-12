@@ -48,7 +48,6 @@ export function VerseInteraction({
 }: VerseInteractionProps) {
   const [showActions, setShowActions] = useState(false);
   const [readingTime, setReadingTime] = useState(0);
-  const [isReading, setIsReading] = useState(false);
   const [isMemorized, setIsMemorized] = useState(false);
   const [verseActivities, setVerseActivities] = useState<VerseActivity[]>([]);
   const [notes, setNotes] = useState("");
@@ -74,40 +73,9 @@ export function VerseInteraction({
     }
   }, [surahNumber, ayahNumber]);
 
-  // Track reading time
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isReading) {
-      interval = setInterval(() => {
-        setReadingTime((prev) => prev + 1);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [isReading]);
 
-  // Start reading timer when verse comes into view
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsReading(entry.isIntersecting);
-        if (!entry.isIntersecting && readingTime > 3) {
-          // Log reading activity if spent more than 3 seconds
-          logVerseActivity("read", readingTime);
-          setReadingTime(0);
-        }
-      },
-      { threshold: 0.5 },
-    );
 
-    const verseElement = document.getElementById(
-      `verse-${surahNumber}-${ayahNumber}`,
-    );
-    if (verseElement) {
-      observer.observe(verseElement);
-    }
-
-    return () => observer.disconnect();
-  }, [surahNumber, ayahNumber, readingTime]);
+  
 
   const logVerseActivity = (
     action: VerseActivity["action"],
@@ -286,13 +254,7 @@ export function VerseInteraction({
         </div>
       )}
 
-      {/* Reading Time Indicator */}
-      {isReading && readingTime > 0 && (
-        <div className="absolute -top-6 left-0 text-xs bg-blue-500 text-white px-2 py-1 rounded">
-          <Clock className="w-3 h-3 inline mr-1" />
-          {readingTime}s
-        </div>
-      )}
+      
 
       {/* Notes Input */}
       {showNotes && (
@@ -328,14 +290,7 @@ export function VerseInteraction({
         </div>
       )}
 
-      {/* Activity Summary (shown on hover) */}
-      {(readCount > 0 || listenCount > 0 || totalReadingTime > 0) && (
-        <div className="absolute -bottom-6 left-0 text-xs text-muted opacity-0 group-hover:opacity-100 transition-opacity">
-          {readCount > 0 && `${readCount} reads`}
-          {listenCount > 0 && ` • ${listenCount} listens`}
-          {totalReadingTime > 0 && ` • ${Math.round(totalReadingTime)}s total`}
-        </div>
-      )}
+    
     </div>
   );
 }
