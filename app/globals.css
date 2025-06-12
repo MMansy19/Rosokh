@@ -2205,19 +2205,7 @@ kbd {
 }
 
 /* Additional styles for globals.css */
-.fliping-book .book {
-  position: relative;
-  width: 75vw;
-  aspect-ratio: 7 / 5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f7f7;
-  border: 16px solid #2d5c72;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
+/* Removed redundant .fliping-book .book styles as they are already defined earlier */
 
 .fliping-book .book-spine {
   position: absolute;
