@@ -163,7 +163,6 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
     if (dragStart === null) return;
     setDragCurrent(e.touches[0].clientX);
   };
-
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (dragStart === null || dragCurrent === null) return;
 
@@ -196,12 +195,117 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
     };
   };
 
-  return (
-    <div
+  // Navigate to specific surah
+  const handleSurahSelect = (surahNumber: number) => {
+    const surah = SURAH_ARRAY.find(s => s.number === surahNumber);
+    if (surah) {
+      setCurrentPage(surah.page);
+    }
+  };
+
+  // Navigate to specific page
+  const handlePageSelect = (page: number) => {
+    if (page >= 1 && page <= QURAN_PAGES) {
+      setCurrentPage(page);
+    }
+  };
+
+  // Get current surah info based on current page
+  const getCurrentSurah = () => {
+    const surahs = [...SURAH_ARRAY].reverse();
+    return surahs.find(surah => currentPage >= surah.page) || SURAH_ARRAY[0];
+  };
+
+  const currentSurah = getCurrentSurah();
+
+  return (    <div
       className="min-h-screen py-6"
       style={{ backgroundColor: "var(--color-background)" }}
     >
       <div className="flex flex-col items-center">
+        {/* Navigation Controls */}
+        <div className="flex flex-col gap-4 mb-6 w-full max-w-4xl px-4">
+          {/* Current Surah Info */}
+          <div className="text-center">
+            <h2 className="text-xl font-bold mb-2" style={{ color: "var(--color-text-primary)" }}>
+              سورة {currentSurah.name} - الصفحة {currentPage}
+            </h2>
+          </div>
+          
+          {/* Filter Controls */}
+          <div className="flex flex-wrap gap-4 justify-center items-center">
+            {/* Surah Selector */}
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
+                {t("selectSurah") || "اختر السورة"}
+              </label>
+              <select
+                value={currentSurah.number}
+                onChange={(e) => handleSurahSelect(Number(e.target.value))}
+                className="px-3 py-2 rounded border text-center min-w-[200px]"
+                style={{
+                  backgroundColor: "var(--color-surface)",
+                  color: "var(--color-text-primary)",
+                  border: "1px solid var(--color-border)",
+                }}
+              >
+                {SURAH_ARRAY.map((surah) => (
+                  <option key={surah.number} value={surah.number}>
+                    {surah.number}. {surah.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Page Selector */}
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
+                {t("selectPage") || "اختر الصفحة"}
+              </label>
+              <select
+                value={currentPage}
+                onChange={(e) => handlePageSelect(Number(e.target.value) + 1)}
+                className="px-3 py-2 rounded border text-center min-w-[120px]"
+                style={{
+                  backgroundColor: "var(--color-surface)",
+                  color: "var(--color-text-primary)",
+                  border: "1px solid var(--color-border)",
+                }}
+              >
+                {Array.from({ length: QURAN_PAGES }, (_, i) => i + 1).map((page) => (
+                  <option key={page} value={page}>
+                    {t("page") || "صفحة"} {page}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Quick Page Input */}
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
+                {t("goToPage") || "اذهب إلى صفحة"}
+              </label>
+              <input
+                type="number"
+                min="1"
+                max={QURAN_PAGES}
+                value={currentPage}
+                onChange={(e) => {
+                  const page = Number(e.target.value);
+                  if (page >= 1 && page <= QURAN_PAGES) {
+                    handlePageSelect(page);
+                  }
+                }}
+                className="px-3 py-2 rounded border text-center w-20"
+                style={{
+                  backgroundColor: "var(--color-surface)",
+                  color: "var(--color-text-primary)",
+                  border: "1px solid var(--color-border)",
+                }}
+              />
+            </div>
+          </div>
+        </div>        {/* Zoom Controls */}
         <div className="flex flex-wrap gap-2 mb-6 justify-center">
           <button
             onClick={() => setZoomLevel((z) => Math.min(2, z + 0.1))}
@@ -271,7 +375,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                     onTouchEnd={handleTouchEnd}
                   >
                     <Image
-                      src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage}.jpg`}
+                      src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage + 1}.jpg`}
                       alt={`الصفحة ${currentPage}`}
                       width={400}
                       height={600}
@@ -300,8 +404,8 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                         }
                       >
                         <Image
-                          src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage - 1}.jpg`}
-                          alt={`الصفحة ${currentPage - 1}`}
+                          src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage}.jpg`}
+                          alt={`الصفحة ${currentPage}`}
                           width={400}
                           height={600}
                           quality={90}
@@ -309,7 +413,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                           priority={true}
                           unoptimized
                         />
-                        <div className="page-number">{currentPage - 1}</div>
+                        <div className="page-number">{currentPage}</div>
                       </div>
                     )}
 
@@ -327,8 +431,8 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                       }
                     >
                       <Image
-                        src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage}.jpg`}
-                        alt={`الصفحة ${currentPage}`}
+                        src={`https://cdn.qurango.net/Sura2/files/mobile/${currentPage + 1}.jpg`}
+                        alt={`الصفحة ${currentPage + 1}`}
                         width={400}
                         height={600}
                         quality={90}
@@ -336,7 +440,7 @@ const QuranReader = ({ locale, messages, onPageChange }: QuranReaderProps) => {
                         priority={true}
                         unoptimized
                       />
-                      <div className="page-number">{currentPage}</div>
+                      <div className="page-number">{currentPage + 1}</div>
                     </div>
                   </>
                 )}
