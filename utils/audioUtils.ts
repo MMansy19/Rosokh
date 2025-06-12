@@ -1,6 +1,4 @@
-import {
-  AudioTrack,
-} from "@/types/audio";
+import { AudioTrack } from "@/types/audio";
 import { DURATION_ESTIMATES } from "../constants/audio";
 
 /**

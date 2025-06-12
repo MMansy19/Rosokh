@@ -1,11 +1,7 @@
 import React from "react";
 import { AudioTrack } from "@/types/audio";
 import { useGlobalError } from "@/contexts/GlobalContext";
-import {
-  StatsHeader,
-  MainStatsGrid,
-  useStatsCalculations,
-} from "./stats";
+import { StatsHeader, MainStatsGrid, useStatsCalculations } from "./stats";
 
 interface StatsSectionProps {
   tracks: AudioTrack[];

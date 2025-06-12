@@ -469,9 +469,9 @@ export default function YoutubeClient({
                     <Filter className="w-4 h-4" />
                     {getTranslation(
                       messages,
-                              "search.filters.title",
-                              "Filters",
-                            )}
+                      "search.filters.title",
+                      "Filters",
+                    )}
                     {showFilters ? " ▲" : " ▼"}
                   </button>
 

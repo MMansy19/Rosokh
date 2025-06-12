@@ -67,7 +67,6 @@ export const VIDEO_CATEGORIES: VideoCategory[] = [
     icon: "🎓",
     color: "purple",
   },
-  
 ];
 
 export function useVideoData() {

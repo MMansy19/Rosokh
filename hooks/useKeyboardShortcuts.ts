@@ -17,12 +17,15 @@ interface UseKeyboardShortcutsProps {
   enabled?: boolean;
 }
 
-export function useKeyboardShortcuts({ shortcuts, enabled = true }: UseKeyboardShortcutsProps) {
+export function useKeyboardShortcuts({
+  shortcuts,
+  enabled = true,
+}: UseKeyboardShortcutsProps) {
   useEffect(() => {
     if (!enabled) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      const matchingShortcut = shortcuts.find(shortcut => {
+      const matchingShortcut = shortcuts.find((shortcut) => {
         return (
           shortcut.key.toLowerCase() === event.key.toLowerCase() &&
           !!shortcut.ctrlKey === !!event.ctrlKey &&
@@ -35,10 +38,11 @@ export function useKeyboardShortcuts({ shortcuts, enabled = true }: UseKeyboardS
       if (matchingShortcut) {
         // Don't trigger shortcuts when user is typing in an input
         const activeElement = document.activeElement;
-        const isTyping = activeElement?.tagName === 'INPUT' || 
-                        activeElement?.tagName === 'TEXTAREA' || 
-                        activeElement?.getAttribute('contenteditable') === 'true';
-        
+        const isTyping =
+          activeElement?.tagName === "INPUT" ||
+          activeElement?.tagName === "TEXTAREA" ||
+          activeElement?.getAttribute("contenteditable") === "true";
+
         if (!isTyping) {
           event.preventDefault();
           matchingShortcut.action();
@@ -65,7 +69,7 @@ export const createCommonShortcuts = (actions: {
       key: "b",
       ctrlKey: true,
       action: actions.toggleSidebar,
-      description: "Toggle sidebar"
+      description: "Toggle sidebar",
     });
   }
 
@@ -73,13 +77,13 @@ export const createCommonShortcuts = (actions: {
     shortcuts.push({
       key: "/",
       action: actions.focusSearch,
-      description: "Focus search"
+      description: "Focus search",
     });
     shortcuts.push({
       key: "k",
       ctrlKey: true,
       action: actions.focusSearch,
-      description: "Focus search"
+      description: "Focus search",
     });
   }
 
@@ -88,7 +92,7 @@ export const createCommonShortcuts = (actions: {
       key: "d",
       ctrlKey: true,
       action: actions.toggleTheme,
-      description: "Toggle dark mode"
+      description: "Toggle dark mode",
     });
   }
 
@@ -97,7 +101,7 @@ export const createCommonShortcuts = (actions: {
       key: "h",
       ctrlKey: true,
       action: actions.goHome,
-      description: "Go to home page"
+      description: "Go to home page",
     });
   }
 

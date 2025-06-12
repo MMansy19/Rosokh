@@ -73,7 +73,8 @@ export function GlobalSearch({
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [popularSearches, setPopularSearches] = useState<string[]>([]);
   const [selectedContext, setSelectedContext] = useState<SearchContext>(
-    searchContexts[0]  );
+    searchContexts[0],
+  );
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isContextDropdownOpen, setIsContextDropdownOpen] = useState(false);
@@ -88,7 +89,7 @@ export function GlobalSearch({
   useEffect(() => {
     const currentPath = pathname.split("/")[2]; // Remove locale prefix
     const context = searchContexts.find((ctx) =>
-      currentPath ? ctx.route.includes(currentPath) : false
+      currentPath ? ctx.route.includes(currentPath) : false,
     );
     if (context && context.type !== "all") {
       setSelectedContext(context);
@@ -127,7 +128,7 @@ export function GlobalSearch({
   const saveRecentSearch = (term: string) => {
     const updated = [term, ...recentSearches.filter((s) => s !== term)].slice(
       0,
-      10
+      10,
     );
     setRecentSearches(updated);
     localStorage.setItem("global_recent_searches", JSON.stringify(updated));
@@ -139,9 +140,8 @@ export function GlobalSearch({
       if (searchTerm.length >= 2) {
         try {
           setIsLoading(true);
-          const searchSuggestions = await searchService.getSearchSuggestions(
-            searchTerm
-          );
+          const searchSuggestions =
+            await searchService.getSearchSuggestions(searchTerm);
           setSuggestions(searchSuggestions);
         } catch (error) {
           console.error("Failed to get suggestions:", error);
@@ -169,7 +169,7 @@ export function GlobalSearch({
       case "ArrowDown":
         e.preventDefault();
         setFocusedIndex((prev) =>
-          prev < allItems.length - 1 ? prev + 1 : prev
+          prev < allItems.length - 1 ? prev + 1 : prev,
         );
         break;
       case "ArrowUp":
@@ -221,7 +221,7 @@ export function GlobalSearch({
     // Close suggestions and clear search if needed
     setShowSuggestions(false);
     setFocusedIndex(-1);
-    
+
     // Keep search term for mobile or clear for desktop
     if (window.innerWidth < 768) {
       onToggle?.();
@@ -240,7 +240,7 @@ export function GlobalSearch({
     setTimeout(() => {
       setIsInputFocused(false);
     }, 200);
-  };  // Handle click outside
+  }; // Handle click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -250,7 +250,7 @@ export function GlobalSearch({
         setShowSuggestions(false);
         setFocusedIndex(-1);
       }
-      
+
       if (
         contextDropdownRef.current &&
         !contextDropdownRef.current.contains(event.target as Node)
@@ -266,7 +266,7 @@ export function GlobalSearch({
   // Keyboard shortcut to focus search (Ctrl/Cmd + K)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'k' && (e.ctrlKey || e.metaKey)) {
+      if (e.key === "k" && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         inputRef.current?.focus();
         if (!isExpanded && onToggle) {
@@ -275,8 +275,8 @@ export function GlobalSearch({
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isExpanded, onToggle]);
 
   // Clear search
@@ -291,7 +291,7 @@ export function GlobalSearch({
   // Get display items for suggestions dropdown
   const getDisplayItems = () => {
     const items = [];
-    
+
     if (suggestions.length > 0) {
       items.push({
         type: "section",
@@ -328,25 +328,32 @@ export function GlobalSearch({
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       {/* Search Input Container */}
-      <div className="relative md:flex md:flex-row gap-2">        
+      <div className="relative md:flex md:flex-row gap-2">
         {/* Enhanced Context Selector (Desktop) */}
         {isExpanded && (
-          <div className={`hidden md:flex items-center ${locale === 'ar' ? 'border-l border-border pl-4 ml-4' : 'border-r border-border pr-4 mr-4'}`} ref={contextDropdownRef}>
+          <div
+            className={`hidden md:flex items-center ${locale === "ar" ? "border-l border-border pl-4 ml-4" : "border-r border-border pr-4 mr-4"}`}
+            ref={contextDropdownRef}
+          >
             <div className="relative">
               <button
                 onClick={() => setIsContextDropdownOpen(!isContextDropdownOpen)}
                 className="search-context-button flex items-center gap-2 px-3 py-2 bg-surface border border-border rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary/50 group"
                 aria-label="Select search context"
-              >                <selectedContext.icon className="w-4 h-4 text-primary" />
+              >
+                {" "}
+                <selectedContext.icon className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">
                   {getTranslation(
                     messages,
                     selectedContext.labelKey,
-                    selectedContext.type
+                    selectedContext.type,
                   )}
                 </span>
-                <ChevronDown className={`w-4 h-4 text-muted transition-transform duration-200 ${isContextDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>              
+                <ChevronDown
+                  className={`w-4 h-4 text-muted transition-transform duration-200 ${isContextDropdownOpen ? "rotate-180" : ""}`}
+                />
+              </button>
               {/* Dropdown Menu */}
               {isContextDropdownOpen && (
                 <div className="search-context-dropdown absolute top-full left-0 mt-2 rounded-lg shadow-lg z-50 min-w-[160px] animate-slideDown">
@@ -354,8 +361,9 @@ export function GlobalSearch({
                     {searchContexts.map((context) => {
                       const Icon = context.icon;
                       const isActive = selectedContext.type === context.type;
-                      
-                      return (                        <button
+
+                      return (
+                        <button
                           key={context.type}
                           onClick={() => {
                             setSelectedContext(context);
@@ -363,14 +371,17 @@ export function GlobalSearch({
                           }}
                           className={`
                             search-context-item w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-secondary transition-colors duration-200
-                            ${isActive ? 'bg-primary/10 text-primary' : 'text-foreground'}
+                            ${isActive ? "bg-primary/10 text-primary" : "text-foreground"}
                           `}
                         >
-                          <Icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'text-muted'}`} />                          <span className="text-sm font-medium">
+                          <Icon
+                            className={`w-4 h-4 ${isActive ? "text-primary" : "text-muted"}`}
+                          />{" "}
+                          <span className="text-sm font-medium">
                             {getTranslation(
                               messages,
                               context.labelKey,
-                              context.type
+                              context.type,
                             )}
                           </span>
                           {isActive && (
@@ -379,36 +390,40 @@ export function GlobalSearch({
                         </button>
                       );
                     })}
-                  </div>                </div>
+                  </div>{" "}
+                </div>
               )}
             </div>
           </div>
         )}
 
         {/* Search Input */}
-        <div className="relative w-full flex items-center">          
+        <div className="relative w-full flex items-center">
           <div className="absolute left-3 pointer-events-none">
             {isLoading ? (
               <Loader2 className="w-4 h-4 text-muted animate-spin transition-all duration-200" />
             ) : (
-              <Search className={`w-4 h-4 text-muted transition-all duration-200 ${
-                isInputFocused || showSuggestions ? 'text-primary' : ''
-              }`} />
+              <Search
+                className={`w-4 h-4 text-muted transition-all duration-200 ${
+                  isInputFocused || showSuggestions ? "text-primary" : ""
+                }`}
+              />
             )}
-          </div><input
+          </div>
+          <input
             ref={inputRef}
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
-            onKeyDown={handleKeyDown}            placeholder={
-              getTranslation(
-                messages,
-                selectedContext.placeholderKey,
-                "Search..."
-              )
-            }className={`
+            onKeyDown={handleKeyDown}
+            placeholder={getTranslation(
+              messages,
+              selectedContext.placeholderKey,
+              "Search...",
+            )}
+            className={`
               search-input-enhanced w-full pl-10 py-2.5 bg-background border border-border rounded-lg
               focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary
               text-foreground placeholder:text-muted transition-all duration-200
@@ -416,20 +431,27 @@ export function GlobalSearch({
               ${isInputFocused || showSuggestions ? "search-input-active" : ""}
             `}
             dir={locale === "ar" ? "rtl" : "ltr"}
-          />          {/* Keyboard Shortcut Hint */}
+          />{" "}
+          {/* Keyboard Shortcut Hint */}
           {!isExpanded && (
             <div className="absolute right-3 hidden lg:flex items-center gap-1 text-xs text-muted pointer-events-none">
               <kbd className="px-1.5 py-0.5 bg-muted/20 border border-border rounded text-[10px] font-mono">
-                {typeof window !== 'undefined' && window.navigator.platform.indexOf('Mac') > -1 ? '⌘' : 'Ctrl'}
+                {typeof window !== "undefined" &&
+                window.navigator.platform.indexOf("Mac") > -1
+                  ? "⌘"
+                  : "Ctrl"}
               </kbd>
-              <kbd className="px-1.5 py-0.5 bg-muted/20 border border-border rounded text-[10px] font-mono">K</kbd>
+              <kbd className="px-1.5 py-0.5 bg-muted/20 border border-border rounded text-[10px] font-mono">
+                K
+              </kbd>
             </div>
-          )}          {/* Clear Button */}
+          )}{" "}
+          {/* Clear Button */}
           {searchTerm && (
             <button
               onClick={clearSearch}
               className={`absolute p-1 hover:bg-muted rounded-full transition-colors ${
-                isExpanded ? 'right-3' : 'right-16 lg:right-20'
+                isExpanded ? "right-3" : "right-16 lg:right-20"
               }`}
               aria-label="Clear search"
             >
@@ -443,7 +465,8 @@ export function GlobalSearch({
           <div className="md:hidden mt-3 flex gap-2 overflow-x-auto pb-2">
             {searchContexts.map((context) => {
               const Icon = context.icon;
-              return (                <button
+              return (
+                <button
                   key={context.type}
                   onClick={() => setSelectedContext(context)}
                   className={`
@@ -456,117 +479,118 @@ export function GlobalSearch({
                     }
                   `}
                 >
-                  <Icon className="w-4 h-4" />                  {getTranslation(
-                    messages,
-                    context.labelKey,
-                    context.type
-                  )}
+                  <Icon className="w-4 h-4" />{" "}
+                  {getTranslation(messages, context.labelKey, context.type)}
                 </button>
               );
             })}
           </div>
         )}
-      </div>     
-       {/* Suggestions Dropdown */}
-      {showSuggestions && isExpanded && (hasItems || searchTerm.length >= 2) && (
-        <div className="search-suggestions absolute top-full left-0 right-0 mt-2 rounded-lg z-50 max-h-96 overflow-hidden animate-slideDown">
-          {hasItems ? (
-            <div className="py-2">
-              {displayItems.map((section, sectionIndex) => {
-                if (section.items.length === 0) return null;
+      </div>
+      {/* Suggestions Dropdown */}
+      {showSuggestions &&
+        isExpanded &&
+        (hasItems || searchTerm.length >= 2) && (
+          <div className="search-suggestions absolute top-full left-0 right-0 mt-2 rounded-lg z-50 max-h-96 overflow-hidden animate-slideDown">
+            {hasItems ? (
+              <div className="py-2">
+                {displayItems.map((section, sectionIndex) => {
+                  if (section.items.length === 0) return null;
 
-                return (
-                  <div key={section.type + sectionIndex}>
-                    {/* Section Header */}
-                    <div className="px-4 py-2 text-xs font-semibold text-muted uppercase tracking-wider flex items-center gap-2">
-                      <section.icon className="w-3 h-3" />
-                      {section.title}
-                    </div>
+                  return (
+                    <div key={section.type + sectionIndex}>
+                      {/* Section Header */}
+                      <div className="px-4 py-2 text-xs font-semibold text-muted uppercase tracking-wider flex items-center gap-2">
+                        <section.icon className="w-3 h-3" />
+                        {section.title}
+                      </div>
 
-                    {/* Section Items */}
-                    {section.items.map((item, itemIndex) => {
-                      const globalIndex = displayItems
-                        .slice(0, sectionIndex)
-                        .reduce((acc, s) => acc + s.items.length, 0) + itemIndex;
+                      {/* Section Items */}
+                      {section.items.map((item, itemIndex) => {
+                        const globalIndex =
+                          displayItems
+                            .slice(0, sectionIndex)
+                            .reduce((acc, s) => acc + s.items.length, 0) +
+                          itemIndex;
 
-                      return (                        <button
-                          key={`${section.type}-${itemIndex}`}
-                          onClick={() => handleSearch(item)}
-                          className={`
+                        return (
+                          <button
+                            key={`${section.type}-${itemIndex}`}
+                            onClick={() => handleSearch(item)}
+                            className={`
                             search-suggestion-item w-full px-4 py-2.5 text-left hover:bg-muted
                             flex items-center justify-between group
-                            ${
-                              focusedIndex === globalIndex
-                                ? "bg-muted"
-                                : ""
-                            }
+                            ${focusedIndex === globalIndex ? "bg-muted" : ""}
                           `}
-                        >
-                          <span className="text-foreground truncate">
-                            {item}
-                          </span>
-                          <ArrowRight className="w-4 h-4 text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
-                      );
-                    })}
+                          >
+                            <span className="text-foreground truncate">
+                              {item}
+                            </span>
+                            <ArrowRight className="w-4 h-4 text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </button>
+                        );
+                      })}
+                    </div>
+                  );
+                })}{" "}
+              </div>
+            ) : isLoading && searchTerm.length >= 2 ? (
+              <div className="py-4">
+                {/* Loading Shimmer */}
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="px-4 py-2.5 flex items-center gap-3">
+                    <div className="search-loading-shimmer w-4 h-4 rounded bg-muted/20"></div>
+                    <div className="search-loading-shimmer flex-1 h-4 rounded bg-muted/20"></div>
                   </div>
-                );
-              })}            </div>
-          ) : isLoading && searchTerm.length >= 2 ? (
-            <div className="py-4">
-              {/* Loading Shimmer */}
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="px-4 py-2.5 flex items-center gap-3">
-                  <div className="search-loading-shimmer w-4 h-4 rounded bg-muted/20"></div>
-                  <div className="search-loading-shimmer flex-1 h-4 rounded bg-muted/20"></div>
-                </div>
-              ))}
-            </div>
-          ) : searchTerm.length >= 2 ? (
-            <div className="py-8 text-center text-muted">
-              <Search className="w-8 h-8 mx-auto mb-2 opacity-50" />
-              <p className="text-sm">
-                {getTranslation(
-                  messages,
-                  "search.noSuggestions",
-                  "No suggestions found"
-                )}
-              </p>
-            </div>
-          ) : null}
+                ))}
+              </div>
+            ) : searchTerm.length >= 2 ? (
+              <div className="py-8 text-center text-muted">
+                <Search className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                <p className="text-sm">
+                  {getTranslation(
+                    messages,
+                    "search.noSuggestions",
+                    "No suggestions found",
+                  )}
+                </p>
+              </div>
+            ) : null}
 
-          {/* Search Button for Current Term */}
-          {searchTerm.trim() && (
-            <>
-              <div className="border-t border-border" />
-              <button
-                onClick={() => handleSearch(searchTerm)}
-                className="w-full px-4 py-3 text-left hover:bg-muted transition-colors flex items-center gap-3"
-              >
-                <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                  <Search className="w-4 h-4 text-primary" />
-                </div>
-                <div>
-                  <div className="font-medium text-foreground">
-                    {getTranslation(
-                      messages,
-                      "search.searchFor",
-                      "Search for"
-                    )}{" "}
-                    "{searchTerm}"
+            {/* Search Button for Current Term */}
+            {searchTerm.trim() && (
+              <>
+                <div className="border-t border-border" />
+                <button
+                  onClick={() => handleSearch(searchTerm)}
+                  className="w-full px-4 py-3 text-left hover:bg-muted transition-colors flex items-center gap-3"
+                >
+                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Search className="w-4 h-4 text-primary" />
                   </div>
-                  <div className="text-sm text-muted">                    {getTranslation(
-                      messages,
-                      selectedContext.labelKey,
-                      selectedContext.type
-                    )}
+                  <div>
+                    <div className="font-medium text-foreground">
+                      {getTranslation(
+                        messages,
+                        "search.searchFor",
+                        "Search for",
+                      )}{" "}
+                      "{searchTerm}"
+                    </div>
+                    <div className="text-sm text-muted">
+                      {" "}
+                      {getTranslation(
+                        messages,
+                        selectedContext.labelKey,
+                        selectedContext.type,
+                      )}
+                    </div>
                   </div>
-                </div>
-              </button>
-            </>
-          )}
-        </div>
-      )}
+                </button>
+              </>
+            )}
+          </div>
+        )}
     </div>
   );
 }

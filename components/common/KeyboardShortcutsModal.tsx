@@ -16,17 +16,21 @@ interface ShortcutDisplay {
   category: string;
 }
 
-export function KeyboardShortcutsModal({ isOpen, onClose, messages }: KeyboardShortcutsModalProps) {
+export function KeyboardShortcutsModal({
+  isOpen,
+  onClose,
+  messages,
+}: KeyboardShortcutsModalProps) {
   // Close modal with Escape key
   useKeyboardShortcuts({
     shortcuts: [
       {
         key: "Escape",
         action: onClose,
-        description: "Close modal"
-      }
+        description: "Close modal",
+      },
     ],
-    enabled: isOpen
+    enabled: isOpen,
   });
 
   if (!isOpen) return null;
@@ -35,41 +39,42 @@ export function KeyboardShortcutsModal({ isOpen, onClose, messages }: KeyboardSh
     {
       keys: ["Ctrl", "B"],
       description: messages?.shortcuts?.toggleSidebar || "Toggle sidebar",
-      category: "Navigation"
+      category: "Navigation",
     },
     {
       keys: ["/"],
       description: messages?.shortcuts?.focusSearch || "Focus search",
-      category: "Search"
+      category: "Search",
     },
     {
       keys: ["Ctrl", "K"],
-      description: messages?.shortcuts?.focusSearchAlt || "Focus search (alternative)",
-      category: "Search"
+      description:
+        messages?.shortcuts?.focusSearchAlt || "Focus search (alternative)",
+      category: "Search",
     },
     {
       keys: ["Ctrl", "D"],
       description: messages?.shortcuts?.toggleTheme || "Toggle dark mode",
-      category: "Interface"
+      category: "Interface",
     },
     {
       keys: ["Ctrl", "H"],
       description: messages?.shortcuts?.goHome || "Go to home page",
-      category: "Navigation"
+      category: "Navigation",
     },
     {
       keys: ["Escape"],
       description: messages?.shortcuts?.closeModal || "Close modals/overlays",
-      category: "Interface"
+      category: "Interface",
     },
     {
       keys: ["?"],
       description: messages?.shortcuts?.showHelp || "Show keyboard shortcuts",
-      category: "Help"
-    }
+      category: "Help",
+    },
   ];
 
-  const categories = Array.from(new Set(shortcuts.map(s => s.category)));
+  const categories = Array.from(new Set(shortcuts.map((s) => s.category)));
 
   const renderKeys = (keys: string[]) => {
     return keys.map((key, index) => (
@@ -89,7 +94,7 @@ export function KeyboardShortcutsModal({ isOpen, onClose, messages }: KeyboardSh
         className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
-      
+
       {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="bg-surface border border-border rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
@@ -104,7 +109,8 @@ export function KeyboardShortcutsModal({ isOpen, onClose, messages }: KeyboardSh
                   {messages?.shortcuts?.title || "Keyboard Shortcuts"}
                 </h2>
                 <p className="text-sm text-muted">
-                  {messages?.shortcuts?.description || "Speed up your workflow with these shortcuts"}
+                  {messages?.shortcuts?.description ||
+                    "Speed up your workflow with these shortcuts"}
                 </p>
               </div>
             </div>
@@ -125,10 +131,10 @@ export function KeyboardShortcutsModal({ isOpen, onClose, messages }: KeyboardSh
                   <div className="w-2 h-2 bg-primary rounded-full mr-3" />
                   {category}
                 </h3>
-                
+
                 <div className="space-y-3">
                   {shortcuts
-                    .filter(shortcut => shortcut.category === category)
+                    .filter((shortcut) => shortcut.category === category)
                     .map((shortcut, index) => (
                       <div
                         key={index}
@@ -141,8 +147,7 @@ export function KeyboardShortcutsModal({ isOpen, onClose, messages }: KeyboardSh
                           {renderKeys(shortcut.keys)}
                         </div>
                       </div>
-                    ))
-                  }
+                    ))}
                 </div>
               </div>
             ))}
@@ -152,7 +157,9 @@ export function KeyboardShortcutsModal({ isOpen, onClose, messages }: KeyboardSh
           <div className="px-6 py-4 border-t border-border bg-secondary/30">
             <p className="text-sm text-muted text-center">
               {messages?.shortcuts?.tip || "Tip: Press"}{" "}
-              <kbd className="px-1 py-0.5 bg-background text-foreground text-xs rounded border">?</kbd>{" "}
+              <kbd className="px-1 py-0.5 bg-background text-foreground text-xs rounded border">
+                ?
+              </kbd>{" "}
               {messages?.shortcuts?.tipEnd || "anytime to open this help"}
             </p>
           </div>

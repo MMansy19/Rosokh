@@ -37,7 +37,11 @@ export const MainStatsGrid: React.FC<MainStatsGridProps> = React.memo(
       {
         icon: Heart,
         value: favoriteCount,
-        label: getTranslation(messages, "audio.stats.favoriteCount", "Favorites"),
+        label: getTranslation(
+          messages,
+          "audio.stats.favoriteCount",
+          "Favorites",
+        ),
         colorClass: "bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400",
         ariaLabel: `${favoriteCount} ${getTranslation(messages, "audio.stats.favoriteCount", "Favorites")}`,
       },

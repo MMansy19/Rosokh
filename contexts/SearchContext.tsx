@@ -61,8 +61,10 @@ export function SearchProvider({ children, locale }: SearchProviderProps) {
   // Initialize search state from URL parameters
   useEffect(() => {
     const query = searchParams.get("q") || "";
-    const context = searchParams.get("context") as SearchState["context"] || detectContextFromPath();
-    
+    const context =
+      (searchParams.get("context") as SearchState["context"]) ||
+      detectContextFromPath();
+
     setState((prev) => ({
       ...prev,
       query,
@@ -102,7 +104,7 @@ export function SearchProvider({ children, locale }: SearchProviderProps) {
         searchService.getPopularSearches(),
         loadRecentSearches(),
       ]);
-      
+
       setState((prev) => ({
         ...prev,
         popularSearches: popular,
@@ -144,13 +146,18 @@ export function SearchProvider({ children, locale }: SearchProviderProps) {
   // Perform search
   const performSearch = async (
     query?: string,
-    context?: string
+    context?: string,
   ): Promise<void> => {
     const searchQuery = query || state.query;
     const searchContext = context || state.context;
 
     if (!searchQuery.trim()) {
-      setState((prev) => ({ ...prev, results: [], totalCount: 0, error: null }));
+      setState((prev) => ({
+        ...prev,
+        results: [],
+        totalCount: 0,
+        error: null,
+      }));
       return;
     }
 
@@ -169,7 +176,11 @@ export function SearchProvider({ children, locale }: SearchProviderProps) {
       const endTime = performance.now();
 
       // Save search analytics
-      await searchService.saveSearch(searchQuery, result.totalCount, searchFilters);
+      await searchService.saveSearch(
+        searchQuery,
+        result.totalCount,
+        searchFilters,
+      );
 
       // Save to recent searches
       saveSearchToHistory(searchQuery);
@@ -221,7 +232,7 @@ export function SearchProvider({ children, locale }: SearchProviderProps) {
   const navigateToSearch = (query: string, context?: string) => {
     const searchContext = context || state.context;
     const targetRoute = getRouteForContext(searchContext);
-    
+
     const params = new URLSearchParams();
     params.set("q", query);
     if (searchContext !== "all") {

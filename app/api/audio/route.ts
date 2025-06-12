@@ -49,7 +49,7 @@ const generateAudioTracks = (
       const surah = surahs.find((s) => s.id === parseInt(surahId));
       if (surah && fileId) {
         tracks.push({
-          id:fileId,
+          id: fileId,
           title: surah.name,
           arabicTitle: surah.arabicName,
           reciter: {

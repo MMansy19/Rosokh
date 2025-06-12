@@ -5,7 +5,11 @@ import path from "path";
 // Mock search implementation using local data files
 export async function POST(request: NextRequest) {
   try {
-    const { query, filters = {}, pagination = { page: 1, limit: 20 } } = await request.json();
+    const {
+      query,
+      filters = {},
+      pagination = { page: 1, limit: 20 },
+    } = await request.json();
 
     if (!query || query.trim().length === 0) {
       return NextResponse.json({
@@ -28,7 +32,11 @@ export async function POST(request: NextRequest) {
     const searchQuery = query.toLowerCase();
 
     // Search in Quran data
-    if (!filters.type || filters.type === "quran" || filters.category === "quran") {
+    if (
+      !filters.type ||
+      filters.type === "quran" ||
+      filters.category === "quran"
+    ) {
       const quranResults = searchInQuran(surahsData, searchQuery);
       searchResults.push(...quranResults);
     }
@@ -40,14 +48,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Search in YouTube data
-    if (!filters.type || filters.type === "video" || filters.source === "youtube") {
+    if (
+      !filters.type ||
+      filters.type === "video" ||
+      filters.source === "youtube"
+    ) {
       const youtubeResults = searchInYoutube(youtubeData, searchQuery);
       searchResults.push(...youtubeResults);
     }
 
     // Apply pagination
     const startIndex = (pagination.page - 1) * pagination.limit;
-    const paginatedResults = searchResults.slice(startIndex, startIndex + pagination.limit);
+    const paginatedResults = searchResults.slice(
+      startIndex,
+      startIndex + pagination.limit,
+    );
 
     // Generate facets
     const facets = generateFacets(searchResults);
@@ -62,12 +77,11 @@ export async function POST(request: NextRequest) {
       suggestions,
       searchTime: 0, // Will be calculated by the service
     });
-
   } catch (error) {
     console.error("Search API error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -90,9 +104,10 @@ function searchInQuran(surahsData: any, query: string) {
   const surahs = surahsData.surahs || surahsData;
 
   for (const surah of surahs) {
-    const matchesName = surah.englishName?.toLowerCase().includes(query) ||
-                       surah.arabicName?.toLowerCase().includes(query) ||
-                       surah.name?.toLowerCase().includes(query);
+    const matchesName =
+      surah.englishName?.toLowerCase().includes(query) ||
+      surah.arabicName?.toLowerCase().includes(query) ||
+      surah.name?.toLowerCase().includes(query);
 
     if (matchesName) {
       results.push({
@@ -119,15 +134,15 @@ function searchInAudio(audioData: any, query: string, filters: any) {
   if (!audioData) return [];
 
   const results = [];
-  
+
   // Search through audio categories
   for (const [categoryName, categoryData] of Object.entries(audioData)) {
     if (typeof categoryData !== "object" || !categoryData) continue;
 
     const tracks = (categoryData as any).tracks || [];
-    
+
     for (const track of tracks) {
-      const matchesQuery = 
+      const matchesQuery =
         track.title?.toLowerCase().includes(query) ||
         track.arabicTitle?.toLowerCase().includes(query) ||
         track.reciter?.toLowerCase().includes(query) ||
@@ -165,9 +180,9 @@ function searchInYoutube(youtubeData: any, query: string) {
   if (!youtubeData || !youtubeData.videos) return [];
 
   const results = [];
-  
+
   for (const video of youtubeData.videos) {
-    const matchesQuery = 
+    const matchesQuery =
       video.title?.toLowerCase().includes(query) ||
       video.description?.toLowerCase().includes(query) ||
       video.channelTitle?.toLowerCase().includes(query);
@@ -201,7 +216,7 @@ function applyAudioFilters(track: any, filters: any): boolean {
   if (filters.reciter && track.reciter !== filters.reciter) {
     return false;
   }
-  
+
   if (filters.quality && track.quality !== filters.quality) {
     return false;
   }
@@ -240,12 +255,18 @@ function generateFacets(results: any[]) {
   for (const result of results) {
     // Categories
     if (result.category) {
-      categories.set(result.category, (categories.get(result.category) || 0) + 1);
+      categories.set(
+        result.category,
+        (categories.get(result.category) || 0) + 1,
+      );
     }
 
     // Reciters
     if (result.reciterName) {
-      reciters.set(result.reciterName, (reciters.get(result.reciterName) || 0) + 1);
+      reciters.set(
+        result.reciterName,
+        (reciters.get(result.reciterName) || 0) + 1,
+      );
     }
 
     // Duration ranges
@@ -255,28 +276,43 @@ function generateFacets(results: any[]) {
       if (durationMinutes > 5) durationRange = "5-15 min";
       if (durationMinutes > 15) durationRange = "15-30 min";
       if (durationMinutes > 30) durationRange = "30+ min";
-      
+
       durations.set(durationRange, (durations.get(durationRange) || 0) + 1);
     }
   }
 
   return {
-    categories: Array.from(categories.entries()).map(([name, count]) => ({ name, count })),
-    reciters: Array.from(reciters.entries()).map(([name, count]) => ({ name, count })),
-    languages: Array.from(languages.entries()).map(([name, count]) => ({ name, count })),
-    durations: Array.from(durations.entries()).map(([range, count]) => ({ range, count })),
+    categories: Array.from(categories.entries()).map(([name, count]) => ({
+      name,
+      count,
+    })),
+    reciters: Array.from(reciters.entries()).map(([name, count]) => ({
+      name,
+      count,
+    })),
+    languages: Array.from(languages.entries()).map(([name, count]) => ({
+      name,
+      count,
+    })),
+    durations: Array.from(durations.entries()).map(([range, count]) => ({
+      range,
+      count,
+    })),
   };
 }
 
 function generateSuggestions(query: string, results: any[]): string[] {
   const suggestions = new Set<string>();
-  
+
   // Add suggestions based on matching results
   for (const result of results.slice(0, 5)) {
     if (result.title && !result.title.toLowerCase().includes(query)) {
       suggestions.add(result.title);
     }
-    if (result.reciterName && !result.reciterName.toLowerCase().includes(query)) {
+    if (
+      result.reciterName &&
+      !result.reciterName.toLowerCase().includes(query)
+    ) {
       suggestions.add(result.reciterName);
     }
   }

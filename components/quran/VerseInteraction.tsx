@@ -73,10 +73,6 @@ export function VerseInteraction({
     }
   }, [surahNumber, ayahNumber]);
 
-
-
-  
-
   const logVerseActivity = (
     action: VerseActivity["action"],
     duration?: number,
@@ -254,8 +250,6 @@ export function VerseInteraction({
         </div>
       )}
 
-      
-
       {/* Notes Input */}
       {showNotes && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-800 border border-border rounded-lg p-3 shadow-lg z-10">
@@ -289,8 +283,6 @@ export function VerseInteraction({
           </div>
         </div>
       )}
-
-    
     </div>
   );
 }

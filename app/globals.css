@@ -313,7 +313,7 @@ body {
   backdrop-filter: blur(8px);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  box-shadow: 
+  box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
     0 0 0 1px rgba(var(--color-primary-rgb), 0.05);
@@ -325,7 +325,7 @@ body {
 
 .search-context-button:hover {
   transform: translateY(-1px);
-  box-shadow: 
+  box-shadow:
     0 4px 8px -2px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
@@ -336,7 +336,7 @@ body {
 }
 
 .search-context-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -360,7 +360,7 @@ body {
   backdrop-filter: blur(12px);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  box-shadow: 
+  box-shadow:
     0 10px 25px -5px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05),
     0 0 0 1px rgba(var(--color-primary-rgb), 0.05);
@@ -377,7 +377,7 @@ body {
 }
 
 .search-suggestion-item::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -398,7 +398,7 @@ body {
 }
 
 .search-input-enhanced:focus {
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(var(--color-primary-rgb), 0.1),
     0 1px 3px rgba(0, 0, 0, 0.1);
   border-color: var(--color-primary);
@@ -418,7 +418,7 @@ body {
 }
 
 .context-pill::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -458,7 +458,8 @@ body {
 
 /* Keyboard Shortcut Styling */
 kbd {
-  font-family: ui-monospace, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-family:
+    ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1;
@@ -481,7 +482,8 @@ kbd {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -1096,7 +1098,7 @@ kbd {
 }
 
 .sidebar-item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
@@ -1119,7 +1121,9 @@ kbd {
 
 /* Sidebar collapse/expand animations */
 .sidebar-text {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .sidebar-collapsed .sidebar-text {
@@ -1163,7 +1167,9 @@ kbd {
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
   z-index: 1000;
   pointer-events: none;
   backdrop-filter: blur(8px);
@@ -1171,7 +1177,7 @@ kbd {
 }
 
 .sidebar-tooltip::before {
-  content: '';
+  content: "";
   position: absolute;
   right: 100%;
   top: 50%;
@@ -1217,7 +1223,7 @@ kbd {
   backdrop-filter: blur(8px);
   background: rgba(var(--color-surface-rgb), 0.95);
   border: 1px solid rgba(var(--color-border-rgb), 0.8);
-  box-shadow: 
+  box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
     0 0 0 1px rgba(var(--color-primary-rgb), 0.05);
@@ -1229,7 +1235,7 @@ kbd {
 
 .search-context-button:hover {
   transform: translateY(-1px);
-  box-shadow: 
+  box-shadow:
     0 4px 8px -2px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
@@ -1240,7 +1246,7 @@ kbd {
 }
 
 .search-context-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -1264,7 +1270,7 @@ kbd {
   backdrop-filter: blur(12px);
   background: rgba(var(--color-surface-rgb), 0.98);
   border: 1px solid rgba(var(--color-border-rgb), 0.6);
-  box-shadow: 
+  box-shadow:
     0 10px 25px -5px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05),
     0 0 0 1px rgba(var(--color-primary-rgb), 0.05);
@@ -1281,7 +1287,7 @@ kbd {
 }
 
 .search-suggestion-item::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -1302,7 +1308,7 @@ kbd {
 }
 
 .search-input-enhanced:focus {
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(var(--color-primary-rgb), 0.1),
     0 1px 3px rgba(0, 0, 0, 0.1);
   border-color: var(--color-primary);
@@ -1322,7 +1328,7 @@ kbd {
 }
 
 .context-pill::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1362,7 +1368,8 @@ kbd {
 
 /* Keyboard Shortcut Styling */
 kbd {
-  font-family: ui-monospace, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-family:
+    ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1;
@@ -1385,7 +1392,8 @@ kbd {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -2000,7 +2008,7 @@ kbd {
 }
 
 .sidebar-item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
@@ -2023,7 +2031,9 @@ kbd {
 
 /* Sidebar collapse/expand animations */
 .sidebar-text {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .sidebar-collapsed .sidebar-text {
@@ -2067,7 +2077,9 @@ kbd {
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
   z-index: 1000;
   pointer-events: none;
   backdrop-filter: blur(8px);
@@ -2075,7 +2087,7 @@ kbd {
 }
 
 .sidebar-tooltip::before {
-  content: '';
+  content: "";
   position: absolute;
   right: 100%;
   top: 50%;
@@ -2115,7 +2127,6 @@ kbd {
 .sidebar-transition {
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 
 /* globals.css */
 .fliping-book {
@@ -2163,7 +2174,7 @@ kbd {
   overflow: hidden;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000); /* Improved easing */
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1); /* Improved easing */
   cursor: pointer;
   background-color: #f5f7f7; /* Add background color to prevent white flash */
 }
@@ -2251,12 +2262,16 @@ kbd {
 
 /* Add page curl effect on hover */
 .fliping-book .page.left:hover:not(.flipped) {
-  box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1), -2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    inset 4px 0 10px rgba(0, 0, 0, 0.1),
+    -2px 0 5px rgba(0, 0, 0, 0.1);
   transform: perspective(2500px) rotateY(-5deg);
 }
 
 .fliping-book .page.right:hover:not(.flipped) {
-  box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.1), 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    inset -4px 0 10px rgba(0, 0, 0, 0.1),
+    2px 0 5px rgba(0, 0, 0, 0.1);
   transform: perspective(2500px) rotateY(5deg);
 }
 
@@ -2265,7 +2280,7 @@ kbd {
   .fliping-book .book {
     border-width: 8px;
   }
-  
+
   .fliping-book .page-number {
     font-size: 12px;
     padding: 1px 4px;

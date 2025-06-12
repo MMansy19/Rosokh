@@ -24,7 +24,7 @@ import {
 import QuranSearch from "@/components/quran/QuranSearch";
 import { VerseInteraction } from "@/components/quran/VerseInteraction";
 // Removed unused import of QuranPage
-import QuranReader from './QuranReader';
+import QuranReader from "./QuranReader";
 
 interface Surah {
   number: number;
@@ -67,14 +67,18 @@ interface AudioPlayerState {
 // Available reciters with their API IDs
 const reciters = [
   { id: "7", name: "Abdul Rahman Al-Sudais", arabicName: "عبد الرحمن السديس" },
-  { id: "3", name: "Abdul Basit Abdul Samad", arabicName: "عبد الباسط عبد الصمد" },
+  {
+    id: "3",
+    name: "Abdul Basit Abdul Samad",
+    arabicName: "عبد الباسط عبد الصمد",
+  },
   { id: "1", name: "Alafasy", arabicName: "العفاسي" },
   { id: "6", name: "Abu Bakr Ash-Shaatree", arabicName: "أبو بكر الشاطري" },
   { id: "11", name: "Maher Al Mueaqly", arabicName: "ماهر المعيقلي" },
   { id: "4", name: "Saad Al Ghamdi", arabicName: "سعد الغامدي" },
-  { id: "8", name: "Mishary Rashid Alafasy", arabicName: "مشاري راشد العفاسي" }, 
+  { id: "8", name: "Mishary Rashid Alafasy", arabicName: "مشاري راشد العفاسي" },
   { id: "5", name: "Sa'ud Ash-Shuraym", arabicName: "سعود الشريم" },
-  { id: "9", name: "Saad Al-Ghamdi", arabicName: "سعد الغامدي" }, 
+  { id: "9", name: "Saad Al-Ghamdi", arabicName: "سعد الغامدي" },
 ];
 
 export function QuranClient({ locale, messages }: QuranClientProps) {
@@ -194,8 +198,6 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
           surahsCount: data.data.length,
           source: "alquran_cloud_api",
         });
-
-       
       } catch (error) {
         console.error("Error fetching surahs:", error);
 
@@ -280,8 +282,6 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
           translationEdition,
           hasTranslation: !!translationData.data,
         });
-
-       
       } catch (error) {
         console.error("Error fetching ayahs:", error);
 
@@ -571,8 +571,8 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
           </div>
         </div>
 
-      <QuranReader locale={locale} messages={messages} />
-      
+        <QuranReader locale={locale} messages={messages} />
+
         {/* Tab Content */}
         {activeTab === "search" ? (
           <QuranSearch locale={locale} messages={messages} />

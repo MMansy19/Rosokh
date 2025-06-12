@@ -11,7 +11,10 @@ import { ThemeProvider, useTheme } from "@/components/providers/ThemeProvider";
 import { GlobalProvider } from "@/contexts/GlobalContext";
 import { SearchProvider } from "@/contexts/SearchContext";
 import { NotificationContainer } from "@/components/common/NotificationContainer";
-import { useKeyboardShortcuts, createCommonShortcuts } from "@/hooks/useKeyboardShortcuts";
+import {
+  useKeyboardShortcuts,
+  createCommonShortcuts,
+} from "@/hooks/useKeyboardShortcuts";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -19,11 +22,7 @@ interface ClientLayoutProps {
   messages: any;
 }
 
-function ClientLayoutInner({
-  children,
-  locale,
-  messages,
-}: ClientLayoutProps) {
+function ClientLayoutInner({ children, locale, messages }: ClientLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isShortcutsModalOpen, setIsShortcutsModalOpen] = useState(false);
@@ -36,20 +35,22 @@ function ClientLayoutInner({
     toggleSidebar: () => setIsSidebarOpen(!isSidebarOpen),
     focusSearch: () => {
       // Try to focus the search input in the header
-      const searchInput = document.querySelector('input[type="search"]') as HTMLInputElement;
+      const searchInput = document.querySelector(
+        'input[type="search"]',
+      ) as HTMLInputElement;
       if (searchInput) {
         searchInput.focus();
       }
     },
     toggleTheme,
-    goHome: () => router.push(`/${locale}`)
+    goHome: () => router.push(`/${locale}`),
   });
 
   // Add help shortcut
   shortcuts.push({
     key: "?",
     action: () => setIsShortcutsModalOpen(true),
-    description: "Show keyboard shortcuts"
+    description: "Show keyboard shortcuts",
   });
 
   // Add sidebar collapse shortcut
@@ -57,7 +58,7 @@ function ClientLayoutInner({
     key: "b",
     ctrlKey: true,
     action: () => setIsSidebarCollapsed(!isSidebarCollapsed),
-    description: "Toggle sidebar collapse"
+    description: "Toggle sidebar collapse",
   });
 
   useKeyboardShortcuts({ shortcuts });
@@ -78,9 +79,11 @@ function ClientLayoutInner({
       />
 
       {/* Main Content Area */}
-      <div className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${
-        isSidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
-      } ml-0`}>
+      <div
+        className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${
+          isSidebarCollapsed ? "lg:ml-20" : "lg:ml-64"
+        } ml-0`}
+      >
         <Header
           locale={locale}
           messages={messages}
@@ -88,17 +91,17 @@ function ClientLayoutInner({
           isSidebarCollapsed={isSidebarCollapsed}
           onSidebarCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         />
-        
+
         <main className="flex-1 relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             {/* Breadcrumb Navigation */}
             <Breadcrumb locale={locale} messages={messages} />
-            
+
             {/* Page Content */}
             <div className="animate-fadeIn">{children}</div>
           </div>
         </main>
-        
+
         <Footer locale={locale} messages={messages} />
       </div>
 

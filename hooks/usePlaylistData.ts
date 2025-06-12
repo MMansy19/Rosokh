@@ -56,9 +56,7 @@ export const usePlaylistData = () => {
         const response = await fetch(
           "/data/youtube-playlists/playlists-metadata.json",
         );
-        console.log(
-          `Fetching playlist metadata from: ${response.url}`,
-        );
+        console.log(`Fetching playlist metadata from: ${response.url}`);
         if (!response.ok) {
           throw new Error(
             `Failed to fetch playlist metadata: ${response.status}`,
@@ -184,7 +182,6 @@ export const usePlaylistData = () => {
     return playlists.filter((playlist) => playlist.category.id === categoryId);
   };
 
-
   const formatPlaylistDuration = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -194,7 +191,6 @@ export const usePlaylistData = () => {
     }
     return `${minutes}m`;
   };
-
 
   return {
     // Metadata-only data (always available after initial load)

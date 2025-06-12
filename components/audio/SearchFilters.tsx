@@ -66,7 +66,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
   return (
     <div className="space-y-2 sm:space-y-4">
       {/* Search Bar */}
-      <div className='relative'>
+      <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
           <Search className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
         </div>
@@ -105,7 +105,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
               }
               className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 ${
                 filters.showFavoritesOnly
-                ? "bg-error text-white border border-error"
+                  ? "bg-error text-white border border-error"
                   : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-transparent"
               }`}
             >
@@ -113,7 +113,11 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
                 className={`w-3 h-3 sm:w-4 sm:h-4 ${filters.showFavoritesOnly ? "fill-current" : ""}`}
               />
               <span className="hidden sm:inline">
-                {getTranslation(messages, "audio.stats.favoriteCount", "Favorites")}{" "}
+                {getTranslation(
+                  messages,
+                  "audio.stats.favoriteCount",
+                  "Favorites",
+                )}{" "}
                 {favoriteCount > 0 && `(${favoriteCount})`}
               </span>
               <span className="sm:hidden">
@@ -137,7 +141,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
               </button>
             )}
           </div>
-          
+
           {/* View Mode Toggle */}
           <div className="hidden sm:flex gap-1 bg-secondary rounded-lg p-1 ml-auto sm:ml-0">
             <button
@@ -160,40 +164,44 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
         {reciters.length > 0 && (
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
             {/* Reciter Label */}
-              {locale !== "ar" ? (
-            <div className="flex justify-start">
+            {locale !== "ar" ? (
+              <div className="flex justify-start">
                 <span className="text-xs sm:text-sm font-medium text-muted-foreground">
-                  {getTranslation(messages, "audio.filters.reciter", "Reciter")}:
+                  {getTranslation(messages, "audio.filters.reciter", "Reciter")}
+                  :
                 </span>
               </div>
-              ) : null}
-            
+            ) : null}
+
             {/* Reciters Grid - Mobile: Column, Desktop: Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
               {reciters.map((reciter) => (
-              <button
-                key={reciter.id}
-                onClick={() => onFilterChange({ ...filters, reciter: reciter.id })}
+                <button
+                  key={reciter.id}
+                  onClick={() =>
+                    onFilterChange({ ...filters, reciter: reciter.id })
+                  }
                   className={`w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 border border-border hover:bg-hoverButton ${
-                filters.reciter === reciter.id
-                  ? "bg-primary text-white shadow-sm"
-                  : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
-                title={locale === "ar" ? reciter.arabicName : reciter.name}
-              >
-                <div className="flex items-center gap-2 justify-start">
-                <User className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                <span className="truncate leading-tight">
-                  {locale === "ar" ? reciter.arabicName : reciter.name}
-                </span>
-                </div>
-              </button>
+                    filters.reciter === reciter.id
+                      ? "bg-primary text-white shadow-sm"
+                      : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                  title={locale === "ar" ? reciter.arabicName : reciter.name}
+                >
+                  <div className="flex items-center gap-2 justify-start">
+                    <User className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="truncate leading-tight">
+                      {locale === "ar" ? reciter.arabicName : reciter.name}
+                    </span>
+                  </div>
+                </button>
               ))}
             </div>
             {locale === "ar" ? (
               <div className="sm:flex hidden justify-end">
                 <span className="text-xs sm:text-sm font-medium text-muted-foreground">
-                  {getTranslation(messages, "audio.filters.reciter", "Reciter")}:
+                  {getTranslation(messages, "audio.filters.reciter", "Reciter")}
+                  :
                 </span>
               </div>
             ) : null}
@@ -233,7 +241,8 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
                   filters.quality,
                 )}
                 <span className="hidden sm:inline">
-                  {" "}{getTranslation(messages, "audio.filters.quality", "Quality")}
+                  {" "}
+                  {getTranslation(messages, "audio.filters.quality", "Quality")}
                 </span>
               </span>
             </div>
@@ -243,9 +252,13 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
               <User className="w-3 h-3 flex-shrink-0" />
               <span className="capitalize truncate">
                 {(() => {
-                  const selectedReciter = reciters.find(r => r.id === filters.reciter);
-                  return selectedReciter 
-                    ? (locale === "ar" ? selectedReciter.arabicName : selectedReciter.name)
+                  const selectedReciter = reciters.find(
+                    (r) => r.id === filters.reciter,
+                  );
+                  return selectedReciter
+                    ? locale === "ar"
+                      ? selectedReciter.arabicName
+                      : selectedReciter.name
                     : filters.reciter;
                 })()}
               </span>

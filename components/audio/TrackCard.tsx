@@ -92,7 +92,11 @@ export const TrackCard: React.FC<TrackCardProps> = ({
               <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <User className="w-4 h-4" />
-                  <span>{locale === "ar" ? track.reciter.arabicName : track.reciter.name}</span>
+                  <span>
+                    {locale === "ar"
+                      ? track.reciter.arabicName
+                      : track.reciter.name}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
@@ -103,7 +107,8 @@ export const TrackCard: React.FC<TrackCardProps> = ({
                     <BookOpen className="w-4 h-4" />
                     <span>
                       {getTranslation(messages, "search.surah", "Surah")}:{" "}
-                      {track.surah}</span>
+                      {track.surah}
+                    </span>
                   </div>
                 )}
               </div>
@@ -187,7 +192,9 @@ export const TrackCard: React.FC<TrackCardProps> = ({
         <div className="space-y-2 mb-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <User className="w-4 h-4 flex-shrink-0" />
-            <span className="truncate">{locale === "ar" ? track.reciter.arabicName : track.reciter.name}</span>
+            <span className="truncate">
+              {locale === "ar" ? track.reciter.arabicName : track.reciter.name}
+            </span>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -197,7 +204,10 @@ export const TrackCard: React.FC<TrackCardProps> = ({
             {track.surah && (
               <div className="flex items-center gap-1">
                 <BookOpen className="w-4 h-4 flex-shrink-0" />
-                <span>{getTranslation(messages, "search.surah", "Surah")}:{" "} {track.surah}</span>
+                <span>
+                  {getTranslation(messages, "search.surah", "Surah")}:{" "}
+                  {track.surah}
+                </span>
               </div>
             )}
           </div>

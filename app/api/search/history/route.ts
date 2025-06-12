@@ -9,25 +9,25 @@ export async function GET() {
         query: "Surah Al-Fatiha",
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
         resultCount: 25,
-        filters: { category: "quran" }
+        filters: { category: "quran" },
       },
       {
         query: "Beautiful recitation",
         timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
         resultCount: 150,
-        filters: { type: "audio" }
+        filters: { type: "audio" },
       },
       {
         query: "Morning duas",
         timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days ago
         resultCount: 42,
-        filters: { category: "dua" }
+        filters: { category: "dua" },
       },
       {
         query: "Islamic lectures",
         timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 1 week ago
         resultCount: 89,
-        filters: { type: "video" }
+        filters: { type: "video" },
       },
     ];
 
@@ -36,7 +36,7 @@ export async function GET() {
     console.error("Search history API error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -49,7 +49,7 @@ export async function DELETE() {
     console.error("Clear search history API error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

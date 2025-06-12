@@ -38,20 +38,21 @@ const navigation = [
   { key: "contact", href: "/contact", icon: Mail },
 ];
 
-export function Sidebar({ 
-  locale, 
-  messages, 
-  isOpen, 
-  onToggle, 
-  isCollapsed: externalCollapsed, 
-  onCollapse 
+export function Sidebar({
+  locale,
+  messages,
+  isOpen,
+  onToggle,
+  isCollapsed: externalCollapsed,
+  onCollapse,
 }: SidebarProps) {
   const [internalCollapsed, setInternalCollapsed] = useState(false);
   const isRtl = locale === "ar";
   const pathname = usePathname();
 
   // Use external collapsed state if provided, otherwise use internal state
-  const isCollapsed = externalCollapsed !== undefined ? externalCollapsed : internalCollapsed;
+  const isCollapsed =
+    externalCollapsed !== undefined ? externalCollapsed : internalCollapsed;
 
   const toggleCollapsed = () => {
     if (onCollapse) {
@@ -81,14 +82,14 @@ export function Sidebar({
     return pathname.startsWith(`/${locale}${href}`);
   };
   return (
-    <>      
+    <>
       {/* Mobile Backdrop */}
       {isOpen && (
         <div
           className="lg:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
           onClick={onToggle}
         />
-      )}          
+      )}
       {/* Sidebar */}
       <aside
         className={`
@@ -97,20 +98,24 @@ export function Sidebar({
           ${isCollapsed ? "lg:w-20" : "lg:w-48 xl:w-64"}
           w-64
         `}
-        style={{ height: '100vh' }}
+        style={{ height: "100vh" }}
       >
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
           <div className="flex items-center justify-between h-14 sm:h-16 px-4 border-b border-border">
-            <div className={`flex items-center justify-center gap-4 transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden lg:justify-center lg:w-full" : "opacity-100"}`}>
+            <div
+              className={`flex items-center justify-center gap-4 transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden lg:justify-center lg:w-full" : "opacity-100"}`}
+            >
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">R</span>
               </div>
-              <span className={`font-bold text-lg text-foreground transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden" : "opacity-100"}`}>
+              <span
+                className={`font-bold text-lg text-foreground transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden" : "opacity-100"}`}
+              >
                 {messages?.common?.brand?.name || "Rosokh"}
               </span>
             </div>
-            
+
             {/* Mobile Close Button */}
             <button
               onClick={onToggle}
@@ -118,8 +123,8 @@ export function Sidebar({
               aria-label="Close sidebar"
             >
               <X className="w-5 h-5 text-foreground" />
-            </button>            
-            
+            </button>
+
             {/* Desktop Collapse Toggle */}
             <button
               onClick={toggleCollapsed}
@@ -136,14 +141,17 @@ export function Sidebar({
           </div>
           {/* Navigation */}
           <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
-            <div className={`text-xs font-semibold text-muted uppercase tracking-wider px-3 py-2 transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:h-0 lg:overflow-hidden lg:py-0" : "opacity-100"}`}>
+            <div
+              className={`text-xs font-semibold text-muted uppercase tracking-wider px-3 py-2 transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:h-0 lg:overflow-hidden lg:py-0" : "opacity-100"}`}
+            >
               {messages?.common?.navigation?.menu || "Navigation"}
-            </div>            
+            </div>
             {navigation.map((item, index) => {
               const Icon = item.icon;
               const isActive = isActivePath(item.href);
-              const itemTitle = messages?.common?.navigation?.[item.key] || item.key;
-              
+              const itemTitle =
+                messages?.common?.navigation?.[item.key] || item.key;
+
               return (
                 <div key={item.key} className="relative group">
                   <Link
@@ -156,44 +164,52 @@ export function Sidebar({
                     }}
                     className={`
                       sidebar-item flex items-center px-3 py-2.5 rounded-xl transition-all duration-200 group relative
-                      ${isActive 
-                        ? "bg-primary text-white shadow-md active" 
-                        : "text-foreground hover:text-primary"
+                      ${
+                        isActive
+                          ? "bg-primary text-white shadow-md active"
+                          : "text-foreground hover:text-primary"
                       }
                       ${isCollapsed ? "lg:justify-center lg:px-2 collapsed-item" : "space-x-3"}
                     `}
                     style={{
-                      animationDelay: `${index * 50}ms`
+                      animationDelay: `${index * 50}ms`,
                     }}
                   >
-                    <Icon className={`
+                    <Icon
+                      className={`
                       w-5 h-5 transition-all duration-200 sidebar-icon shrink-0
                       ${isActive ? "text-white" : "text-muted group-hover:text-primary"}
                       ${isCollapsed ? "md:w-6 md:h-6 w-4 h-4" : ""}
-                    `} />
-                    <span className={`
+                    `}
+                    />
+                    <span
+                      className={`
                       font-medium transition-all duration-200 whitespace-nowrap
                       ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden" : "opacity-100"}
                       ${isActive ? "text-white" : ""}
-                    `}>
+                    `}
+                    >
                       {itemTitle}
                     </span>
                     {/* Active indicator */}
                     {isActive && !isCollapsed && (
                       <div className="ml-auto w-2 h-2 bg-white rounded-full opacity-80" />
-                    )}                    {/* Collapsed state active indicator */}
+                    )}{" "}
+                    {/* Collapsed state active indicator */}
                     {isActive && isCollapsed && (
                       <div className="sidebar-collapsed-indicator lg:block hidden" />
                     )}
                   </Link>
                 </div>
               );
-            })}          
-            </nav>
+            })}
+          </nav>
 
           {/* Sidebar Footer */}
-          <div className={`p-4 border-t border-border transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:pointer-events-none" : "opacity-100"}`}>
-              <div className="text-xs text-muted text-center sidebar-text">
+          <div
+            className={`p-4 border-t border-border transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:pointer-events-none" : "opacity-100"}`}
+          >
+            <div className="text-xs text-muted text-center sidebar-text">
               © 2025 {messages?.common?.brand?.name || "Rosokh"}
             </div>
           </div>

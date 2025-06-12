@@ -36,12 +36,12 @@ interface HeaderProps {
   onSidebarCollapse?: () => void;
 }
 
-export function Header({ 
-  locale, 
-  messages, 
-  onSidebarToggle, 
+export function Header({
+  locale,
+  messages,
+  onSidebarToggle,
   isSidebarCollapsed = false,
-  onSidebarCollapse 
+  onSidebarCollapse,
 }: HeaderProps) {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
@@ -97,7 +97,9 @@ export function Header({
             <button
               onClick={onSidebarToggle}
               className="lg:hidden p-2 rounded-lg hover:bg-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label={messages?.common?.actions?.toggle_menu || "Toggle menu"}
+              aria-label={
+                messages?.common?.actions?.toggle_menu || "Toggle menu"
+              }
             >
               <Menu className="w-5 h-5 text-foreground" />
             </button>
@@ -107,8 +109,12 @@ export function Header({
               <button
                 onClick={onSidebarCollapse}
                 className="hidden lg:flex p-2 rounded-lg hover:bg-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                aria-label={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-                title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+                aria-label={
+                  isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"
+                }
+                title={
+                  isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"
+                }
               >
                 {isSidebarCollapsed ? (
                   <PanelLeft className="w-5 h-5 text-muted" />
