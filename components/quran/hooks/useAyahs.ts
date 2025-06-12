@@ -29,12 +29,12 @@ export const useAyahs = (surahNumber: number, locale: string) => {
         setAyahs(arabicData.data.ayahs);
 
         // Get translations based on locale
-        const translationEdition = 
-          TRANSLATION_EDITIONS[locale as keyof typeof TRANSLATION_EDITIONS] || 
+        const translationEdition =
+          TRANSLATION_EDITIONS[locale as keyof typeof TRANSLATION_EDITIONS] ||
           TRANSLATION_EDITIONS.default;
 
         const translationResponse = await fetch(
-          API_ENDPOINTS.surahWithTranslation(surahNumber, translationEdition)
+          API_ENDPOINTS.surahWithTranslation(surahNumber, translationEdition),
         );
         const translationData = await translationResponse.json();
 
@@ -45,7 +45,7 @@ export const useAyahs = (surahNumber: number, locale: string) => {
               text: ayah.text,
               language_name: locale,
               resource_name: translationData.data.edition.name,
-            })
+            }),
           );
           setTranslations(translationsArray);
         }
@@ -57,7 +57,8 @@ export const useAyahs = (surahNumber: number, locale: string) => {
           hasTranslation: !!translationData.data,
         });
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        const errorMessage =
+          err instanceof Error ? err.message : "Unknown error";
         setError(errorMessage);
 
         const analytics = AnalyticsService.getInstance();

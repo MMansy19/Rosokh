@@ -3,7 +3,9 @@ import { STORAGE_KEYS } from "../constants";
 import { AnalyticsService } from "@/services/AnalyticsService";
 
 export const useBookmarks = () => {
-  const [bookmarkedAyahs, setBookmarkedAyahs] = useState<Set<string>>(new Set());
+  const [bookmarkedAyahs, setBookmarkedAyahs] = useState<Set<string>>(
+    new Set(),
+  );
 
   // Load bookmarks from localStorage
   useEffect(() => {
@@ -20,10 +22,17 @@ export const useBookmarks = () => {
 
   // Save bookmarks to localStorage
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEYS.bookmarks, JSON.stringify([...bookmarkedAyahs]));
+    localStorage.setItem(
+      STORAGE_KEYS.bookmarks,
+      JSON.stringify([...bookmarkedAyahs]),
+    );
   }, [bookmarkedAyahs]);
 
-  const toggleBookmark = (surahNumber: number, ayahNumber: number, messages: any) => {
+  const toggleBookmark = (
+    surahNumber: number,
+    ayahNumber: number,
+    messages: any,
+  ) => {
     const bookmarkId = `${surahNumber}:${ayahNumber}`;
     const newBookmarks = new Set(bookmarkedAyahs);
     const isBookmarked = newBookmarks.has(bookmarkId);

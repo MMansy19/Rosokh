@@ -52,43 +52,50 @@ export const AyahsList: React.FC<AyahsListProps> = ({
       {/* Surah Header */}
       {currentSurah && (
         <SurahHeader surah={currentSurah} messages={messages} />
-      )}
-
-      {/* Bismillah */}
-      {selectedSurah !== 1 && selectedSurah !== 9 && (
-        <div className="text-center mb-8">
-          <div className="text-4xl font-amiri text-primary">
-            بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-          </div>
-        </div>
-      )}
-
+      )}{" "}
       {/* Ayahs */}
       <div className="space-y-6">
         {ayahs.map((ayah, index) => {
           const isBookmarked = bookmarkedAyahs.has(
-            `${selectedSurah}:${ayah.numberInSurah}`
+            `${selectedSurah}:${ayah.numberInSurah}`,
           );
           const translation = translations[index];
           const isCurrentlyPlaying = currentPlayingAyah === ayah.numberInSurah;
-
+          const withoutBismillah = selectedSurah !== 1 && selectedSurah !== 9;
+          if (index === 0 && withoutBismillah) {
+            // Remove Bismillah from the beginning of the ayah text
+            ayah = {
+              ...ayah,
+              text: ayah.text.substring(40).trim(),
+            };
+          }
           return (
-            <AyahItem
-              key={ayah.number}
-              ayah={ayah}
-              translation={translation}
-              isBookmarked={isBookmarked}
-              isCurrentlyPlaying={isCurrentlyPlaying}
-              showTranslation={showTranslation}
-              showTransliteration={showTransliteration}
-              fontSize={fontSize}
-              surahNumber={selectedSurah}
-              onPlayAudio={onPlayAudio}
-              onBookmark={onBookmark}
-              onShare={onShare}
-              locale={locale}
-              messages={messages}
-            />
+            <React.Fragment key={ayah.number}>
+              {/* Show Bismillah before the first ayah (except for surah 1 and 9) */}
+              {index === 0 && withoutBismillah && (
+                <div className="text-center mb-8">
+                  <div className="text-4xl font-amiri text-primary leading-relaxed">
+                    بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+                  </div>
+                </div>
+              )}
+
+              <AyahItem
+                ayah={ayah}
+                translation={translation}
+                isBookmarked={isBookmarked}
+                isCurrentlyPlaying={isCurrentlyPlaying}
+                showTranslation={showTranslation}
+                showTransliteration={showTransliteration}
+                fontSize={fontSize}
+                surahNumber={selectedSurah}
+                onPlayAudio={onPlayAudio}
+                onBookmark={onBookmark}
+                onShare={onShare}
+                locale={locale}
+                messages={messages}
+              />
+            </React.Fragment>
           );
         })}
       </div>

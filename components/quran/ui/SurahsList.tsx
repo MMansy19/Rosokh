@@ -52,9 +52,7 @@ export const SurahsList: React.FC<SurahsListProps> = ({
                 <div className="font-medium">
                   {surah.number}. {surah.englishName}
                 </div>
-                <div className="text-sm font-amiri">
-                  {surah.arabicName}
-                </div>
+                <div className="text-sm font-amiri">{surah.name}</div>
               </div>
               <div className="text-xs opacity-75">
                 {surah.numberOfAyahs} {messages?.quran?.verses || "verses"}

@@ -466,7 +466,7 @@ export default function CalendarClient({
                       }),
                     });
                   }}
-                  className="p-2 text-muted hover:bg-buttonHover hover:text-foreground rounded-lg transition-colors duration-200"
+                  className="p-2 text-muted hover:bg-hoverButton hover:text-foreground rounded-lg transition-colors duration-200"
                 >
                   ←
                 </button>
@@ -506,7 +506,7 @@ export default function CalendarClient({
                       }),
                     });
                   }}
-                  className="p-2 text-muted hover:bg-buttonHover hover:text-foreground rounded-lg transition-colors duration-200"
+                  className="p-2 text-muted hover:bg-hoverButton hover:text-foreground rounded-lg transition-colors duration-200"
                 >
                   →
                 </button>
@@ -566,8 +566,8 @@ export default function CalendarClient({
                         isToday
                           ? "bg-primary text-white"
                           : hasEvents
-                            ? "bg-surface text-foreground hover:bg-buttonHover"
-                            : "text-foreground hover:bg-buttonHover"
+                            ? "bg-surface text-foreground hover:bg-hoverButton"
+                            : "text-foreground hover:bg-hoverButton"
                       }`}
                     >
                       <div className="text-sm">{day.getDate()}</div>
@@ -718,15 +718,15 @@ export default function CalendarClient({
               </h3>
 
               <div className="space-y-3">
-                <button className="w-full p-3 bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200">
+                <button className="w-full p-3 bg-surface hover:bg-hoverButton active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200">
                   📖 {messages?.calendar?.readQuran || "Read Quran"}
                 </button>
 
-                <button className="w-full p-3 bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200">
+                <button className="w-full p-3 bg-surface hover:bg-hoverButton active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200">
                   🤲 {messages?.calendar?.makeNiyyah || "Make Niyyah"}
                 </button>
 
-                <button className="w-full p-3 bg-surface hover:bg-buttonHover active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200">
+                <button className="w-full p-3 bg-surface hover:bg-hoverButton active:bg-buttonActive text-foreground rounded-lg transition-colors duration-200">
                   📿 {messages?.calendar?.dhikr || "Dhikr Counter"}
                 </button>
               </div>

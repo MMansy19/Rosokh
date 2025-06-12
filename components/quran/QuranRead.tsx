@@ -26,8 +26,12 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
 
   // Custom hooks
   const { surahs, loading: surahsLoading, error: surahsError } = useSurahs();
-  const { ayahs, translations, loading: ayahsLoading, error: ayahsError } = 
-    useAyahs(selectedSurah, locale);
+  const {
+    ayahs,
+    translations,
+    loading: ayahsLoading,
+    error: ayahsError,
+  } = useAyahs(selectedSurah, locale);
   const { bookmarkedAyahs, toggleBookmark, isBookmarked } = useBookmarks();
   const {
     audioRef,
@@ -51,12 +55,13 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
   const handleSurahSelect = (surahNumber: number) => {
     const previousSurah = selectedSurah;
     setSelectedSurah(surahNumber);
-    
+
     analytics.trackEvent("surah_select", "user", {
       fromSurah: previousSurah,
       toSurah: surahNumber,
-      surahName: surahs.find((s: Surah) => s.number === surahNumber)?.englishName,
-      arabicName: surahs.find((s: Surah) => s.number === surahNumber)?.arabicName,
+      surahName: surahs.find((s: Surah) => s.number === surahNumber)
+        ?.englishName,
+      arabicName: surahs.find((s: Surah) => s.number === surahNumber)?.name,
     });
   };
 
@@ -69,7 +74,8 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
     if (repeatMode === "verse") {
       playAyah(currentAyahNumber, selectedSurah);
       return;
-    }    const nextAyah = ayahs.find(
+    }
+    const nextAyah = ayahs.find(
       (ayah: Ayah) => ayah.numberInSurah === currentAyahNumber + 1,
     );
     if (nextAyah) {
@@ -89,7 +95,8 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
     if (ayahs.length > 0) {
       analytics.trackEvent("surah_full_play", "engagement", {
         surahNumber: selectedSurah,
-        surahName: currentSurah?.englishName,
+        surahName:
+          locale === "ar" ? currentSurah?.name : currentSurah?.englishName,
         totalAyahs: ayahs.length,
         reciter: audioPlayer.reciter,
       });
@@ -100,8 +107,11 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
       notify.info(
         messages?.quran?.playingFullSurah?.replace(
           "{name}",
-          currentSurah?.englishName || `Surah ${selectedSurah}`,
-        ) || `Playing full ${currentSurah?.englishName || `Surah ${selectedSurah}`}`,
+          locale === "ar"
+            ? currentSurah?.name
+            : currentSurah?.englishName || `Surah ${selectedSurah}`,
+        ) ||
+          `Playing full ${locale === "ar" ? currentSurah?.name : currentSurah?.englishName || `Surah ${selectedSurah}`}`,
       );
     }
   };
@@ -109,7 +119,7 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
   // Handle bookmark toggle
   const handleBookmarkToggle = (surahNumber: number, ayahNumber: number) => {
     const wasBookmarked = toggleBookmark(surahNumber, ayahNumber, messages);
-    
+
     if (wasBookmarked) {
       notify.success(messages?.quran?.bookmarkAdded || "Verse bookmarked");
     } else {
@@ -134,7 +144,9 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
           title: `Quran ${surah}:${ayah}`,
           text: shareText,
         });
-        notify.success(messages?.quran?.shareSuccess || "Verse shared successfully");
+        notify.success(
+          messages?.quran?.shareSuccess || "Verse shared successfully",
+        );
       } catch (error) {
         console.log("Error sharing:", error);
       }
@@ -142,10 +154,15 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
       try {
         if ("clipboard" in navigator && (navigator as any).clipboard) {
           await (navigator as any).clipboard.writeText(shareText);
-          notify.success(messages?.quran?.copiedToClipboard || "Verse copied to clipboard");
+          notify.success(
+            messages?.quran?.copiedToClipboard || "Verse copied to clipboard",
+          );
         }
       } catch (error) {
-        notify.error(messages?.quran?.errors?.copyFailed || "Failed to copy verse to clipboard");
+        notify.error(
+          messages?.quran?.errors?.copyFailed ||
+            "Failed to copy verse to clipboard",
+        );
       }
     }
   };
@@ -197,10 +214,11 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
     return (
       <div className="text-center py-12">
         <p className="text-red-500 mb-4">
-          {messages?.quran?.errors?.surahsLoad || "Failed to load Quran chapters"}
+          {messages?.quran?.errors?.surahsLoad ||
+            "Failed to load Quran chapters"}
         </p>
-        <button 
-          onClick={() => window.location.reload()} 
+        <button
+          onClick={() => window.location.reload()}
           className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80"
         >
           {messages?.common?.retry || "Try Again"}
@@ -229,7 +247,9 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
         currentSurah={currentSurah}
         onPlayPause={togglePlayPause}
         onPrevious={playPreviousAyah}
-        onNext={() => audioPlayer.currentAyah && playNextAyah(audioPlayer.currentAyah)}
+        onNext={() =>
+          audioPlayer.currentAyah && playNextAyah(audioPlayer.currentAyah)
+        }
         onRepeatModeChange={handleRepeatModeChange}
         onAutoPlayToggle={() => setAutoPlay(!autoPlay)}
         onPlayFullSurah={playFullSurah}

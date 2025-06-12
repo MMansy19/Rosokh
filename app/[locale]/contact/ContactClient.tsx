@@ -334,7 +334,7 @@ export default function ContactClient({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full hover:bg-buttonHover active:bg-buttonActive bg-button text-white hover:text-foreground py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full hover:bg-hoverButton active:bg-buttonActive bg-button text-white hover:text-foreground py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">
@@ -388,7 +388,7 @@ export default function ContactClient({
                   <a
                     key={index}
                     href={method.action}
-                    className={`flex items-center gap-4 p-4 bg-surface hover:bg-buttonHover active:bg-buttonActive text-text-primary rounded-lg transition-colors duration-200`}
+                    className={`flex items-center gap-4 p-4 bg-surface hover:bg-hoverButton active:bg-buttonActive text-text-primary rounded-lg transition-colors duration-200`}
                   >
                     {isRtl ? (
                       <>
@@ -443,7 +443,7 @@ export default function ContactClient({
                 {faqItems.map((item, index) => (
                   <details key={index} className="group">
                     <summary
-                      className={`flex justify-between items-center cursor-pointer p-3 bg-surface hover:bg-buttonHover active:bg-buttonActive text-text-primary rounded-lg transition-colors duration-200`}
+                      className={`flex justify-between items-center cursor-pointer p-3 bg-surface hover:bg-hoverButton active:bg-buttonActive text-text-primary rounded-lg transition-colors duration-200`}
                     >
                       {isRtl ? (
                         <>

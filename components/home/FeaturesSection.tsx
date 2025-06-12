@@ -114,7 +114,7 @@ export function FeaturesSection({ locale, messages }: FeaturesSectionProps) {
                     </p>
 
                     <div className="pt-2">
-                      <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                      <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium group-hover:bg-primary group-hover:text-foreground transition-all duration-300">
                         {messages?.home?.features?.explore || "Explore"} →
                       </span>
                     </div>

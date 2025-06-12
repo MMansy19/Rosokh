@@ -25,7 +25,8 @@ export const useSurahs = () => {
           source: "alquran_cloud_api",
         });
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        const errorMessage =
+          err instanceof Error ? err.message : "Unknown error";
         setError(errorMessage);
 
         const analytics = AnalyticsService.getInstance();

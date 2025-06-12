@@ -7,7 +7,7 @@ import { useNotifications } from "@/contexts/GlobalContext";
 export const useAudioPlayer = (messages: any) => {
   const { notify } = useNotifications();
   const audioRef = useRef<HTMLAudioElement>(null);
-  
+
   const [audioPlayer, setAudioPlayer] = useState<AudioPlayerState>({
     isPlaying: false,
     currentAyah: null,
@@ -17,7 +17,7 @@ export const useAudioPlayer = (messages: any) => {
     isMuted: false,
     reciter: "7", // Default to Abdul Rahman Al-Sudais
   });
-  
+
   const [repeatMode, setRepeatMode] = useState<RepeatMode>("none");
   const [autoPlay, setAutoPlay] = useState(false);
 
@@ -34,7 +34,11 @@ export const useAudioPlayer = (messages: any) => {
 
       const paddedSurah = surahNumber.toString().padStart(3, "0");
       const paddedAyah = ayahNumber.toString().padStart(3, "0");
-      const audioUrl = API_ENDPOINTS.audio(audioPlayer.reciter, paddedSurah, paddedAyah);
+      const audioUrl = API_ENDPOINTS.audio(
+        audioPlayer.reciter,
+        paddedSurah,
+        paddedAyah,
+      );
 
       if (audioRef.current) {
         audioRef.current.src = audioUrl;
@@ -51,7 +55,7 @@ export const useAudioPlayer = (messages: any) => {
       }
     } catch (error) {
       console.error("Error playing audio:", error);
-      
+
       const analytics = AnalyticsService.getInstance();
       analytics.trackEvent("ayah_play_error", "error", {
         surahNumber,
@@ -62,7 +66,7 @@ export const useAudioPlayer = (messages: any) => {
 
       notify.error(
         messages?.quran?.errors?.audioPlay ||
-          "Failed to play audio. Please check your connection and try again."
+          "Failed to play audio. Please check your connection and try again.",
       );
     }
   };

@@ -756,7 +756,6 @@
   "search": {
     "title": "Search",
     "subtitle": "Search through Quran, audio, and videos",
-    "placeholder": "Search Quran, audio, videos...",
     "globalSearch": "Global Search",
     "searchEverything": "Search everything",
     "searchIn": "Search in",
@@ -858,6 +857,7 @@
     "title": "Quran Reader",
     "description": "Read and explore the Holy Quran with Arabic text, translations, and audio recitations",
     "read": "Read",
+    "mushaf": "Mushaf",
     "search": "Search",
     "surahs": "Surahs",
     "verses": "verses",

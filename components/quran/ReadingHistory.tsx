@@ -873,7 +873,7 @@ export function ReadingHistory({ locale, messages }: ReadingHistoryProps) {
                 <div className="flex justify-end gap-4 pt-4">
                   <button
                     onClick={() => setShowAddSession(false)}
-                    className="px-6 py-2 bg-secondary text-foreground rounded-lg hover:bg-accent hover:text-white transition-colors"
+                    className="px-6 py-2 bg-secondary text-foreground rounded-lg bg-hoverButton hover:text-foreground transition-colors"
                   >
                     {messages?.history?.cancel || "Cancel"}
                   </button>

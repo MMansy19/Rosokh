@@ -28,6 +28,7 @@ interface AudioPlayerBarProps {
   onVolumeChange: (volume: number) => void;
   showSettings?: boolean;
   messages: any;
+  locale?: string;
 }
 
 export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
@@ -47,6 +48,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
   onVolumeChange,
   showSettings = false,
   messages,
+  locale = "ar",
 }) => {
   if (!audioPlayer.currentAyah) return null;
 
@@ -59,7 +61,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             <button
               onClick={onPrevious}
               disabled={audioPlayer.currentAyah === 1}
-              className="p-2 bg-secondary text-foreground rounded-full hover:bg-accent hover:text-white transition-colors disabled:opacity-50"
+              className="p-2 bg-secondary text-foreground rounded-full bg-hoverButton hover:text-foreground transition-colors disabled:opacity-50"
             >
               <SkipBack className="w-4 h-4" />
             </button>
@@ -78,7 +80,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             {/* Next Button */}
             <button
               onClick={onNext}
-              className="p-2 bg-secondary text-foreground rounded-full hover:bg-accent hover:text-white transition-colors"
+              className="p-2 bg-secondary text-foreground rounded-full bg-hoverButton hover:text-foreground transition-colors"
             >
               <SkipForward className="w-4 h-4" />
             </button>
@@ -89,7 +91,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               className={`p-2 rounded-full transition-colors ${
                 repeatMode !== "none"
                   ? "bg-accent text-white"
-                  : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                  : "bg-secondary text-foreground bg-hoverButton hover:text-foreground"
               }`}
               title={`Repeat: ${repeatMode}`}
             >
@@ -98,7 +100,9 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
 
             <div className="text-sm">
               <div className="font-medium">
-                {currentSurah?.englishName || `Surah ${audioPlayer.currentSurah}`}
+                {locale === "ar"
+                  ? currentSurah?.name
+                  : currentSurah?.englishName}
               </div>
               <div className="text-muted">
                 Verse {audioPlayer.currentAyah}
@@ -118,7 +122,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               className={`px-2 py-1 text-xs rounded transition-colors ${
                 autoPlay
                   ? "bg-accent text-white"
-                  : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                  : "bg-secondary text-foreground bg-hoverButton hover:text-foreground"
               }`}
             >
               Auto

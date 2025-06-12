@@ -1,12 +1,7 @@
 import React from "react";
 import { Ayah, Translation } from "../types";
 import { VerseInteraction } from "../VerseInteraction";
-import {
-  Play,
-  Bookmark,
-  BookmarkCheck,
-  Share2,
-} from "lucide-react";
+import { Play, Bookmark, BookmarkCheck, Share2 } from "lucide-react";
 
 interface AyahItemProps {
   ayah: Ayah;
@@ -114,7 +109,7 @@ export const AyahItem: React.FC<AyahItemProps> = ({
             className={`p-2 rounded-full transition-colors ${
               isBookmarked
                 ? "bg-accent text-white"
-                : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                : "bg-secondary text-foreground bg-hoverButton hover:text-white"
             }`}
             title="Bookmark"
           >
@@ -128,7 +123,7 @@ export const AyahItem: React.FC<AyahItemProps> = ({
           {/* Share */}
           <button
             onClick={() => onShare(surahNumber, ayah.numberInSurah, ayah.text)}
-            className="p-2 bg-secondary text-foreground rounded-full hover:bg-accent hover:text-white transition-colors"
+            className="p-2 bg-secondary text-foreground rounded-full bg-hoverButton hover:text-white transition-colors"
             title="Share"
           >
             <Share2 className="w-4 h-4" />

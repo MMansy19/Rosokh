@@ -398,7 +398,7 @@ export default function YoutubeClient({
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                       selectedCategory === ""
                         ? "bg-primary text-white"
-                        : "bg-secondary text-foreground hover:bg-accent"
+                        : "bg-secondary text-foreground bg-hoverButton"
                     }`}
                   >
                     {messages?.youtube?.search?.allCategories ||
@@ -412,7 +412,7 @@ export default function YoutubeClient({
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         selectedCategory === category.id
                           ? "bg-primary text-white"
-                          : "bg-secondary text-foreground hover:bg-accent"
+                          : "bg-secondary text-foreground bg-hoverButton"
                       }`}
                     >
                       {getCategoryIcon(category.id)}
@@ -445,7 +445,7 @@ export default function YoutubeClient({
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         activeTab === tab
                           ? "bg-primary text-white"
-                          : "bg-secondary text-foreground hover:bg-accent"
+                          : "bg-secondary text-foreground bg-hoverButton"
                       }`}
                     >
                       {tab === "playlists" && (
@@ -463,7 +463,7 @@ export default function YoutubeClient({
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                       showFilters
                         ? "bg-primary text-white"
-                        : "bg-secondary text-foreground hover:bg-accent"
+                        : "bg-secondary text-foreground bg-hoverButton"
                     }`}
                   >
                     <Filter className="w-4 h-4" />
@@ -501,7 +501,7 @@ export default function YoutubeClient({
               <div className="mb-6">
                 <button
                   onClick={handleBackToPlaylists}
-                  className="flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-accent text-foreground rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-secondary bg-hoverButton text-foreground rounded-lg transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Back to Playlists

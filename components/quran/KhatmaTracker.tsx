@@ -522,7 +522,7 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
               setKhatmaProgress(null);
               localStorage.removeItem("khatma_progress");
             }}
-            className="px-6 py-3 bg-secondary text-foreground rounded-lg hover:bg-accent hover:text-white transition-colors"
+            className="px-6 py-3 bg-secondary text-foreground rounded-lg bg-hoverButton hover:text-foreground transition-colors"
           >
             {messages?.khatma?.reset || "Reset Progress"}
           </button>
@@ -689,7 +689,7 @@ export function KhatmaTracker({ locale, messages }: KhatmaTrackerProps) {
                   className={`p-3 rounded-lg text-sm font-medium transition-colors ${
                     pageNum <= khatmaProgress.currentPage
                       ? "bg-primary text-white"
-                      : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                      : "bg-secondary text-foreground bg-hoverButton hover:text-foreground"
                   }`}
                 >
                   {pageNum}

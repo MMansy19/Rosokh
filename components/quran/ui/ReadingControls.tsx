@@ -33,7 +33,7 @@ export const ReadingControls: React.FC<ReadingControlsProps> = ({
             className={`px-4 py-2 rounded-lg transition-all duration-200 ${
               showTranslation
                 ? "bg-primary text-white"
-                : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                : "bg-secondary text-foreground hover:bg-hoverButton"
             }`}
           >
             {messages?.quran?.translation || "Translation"}
@@ -44,7 +44,7 @@ export const ReadingControls: React.FC<ReadingControlsProps> = ({
             className={`px-4 py-2 rounded-lg transition-all duration-200 ${
               showTransliteration
                 ? "bg-primary text-white"
-                : "bg-secondary text-foreground hover:bg-accent hover:text-white"
+                : "bg-secondary text-foreground hover:bg-hoverButton"
             }`}
           >
             {messages?.quran?.transliteration || "Transliteration"}
@@ -69,7 +69,7 @@ export const ReadingControls: React.FC<ReadingControlsProps> = ({
           {/* Settings Button */}
           <button
             onClick={onSettingsToggle}
-            className="p-2 hover:bg-secondary rounded-lg transition-colors"
+            className="p-2 hover:bg-hoverButton rounded-lg transition-colors"
           >
             <Settings className="w-5 h-5" />
           </button>

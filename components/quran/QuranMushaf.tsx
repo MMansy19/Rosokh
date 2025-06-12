@@ -6,7 +6,10 @@ interface QuranMushafProps {
   messages: any;
 }
 
-export const QuranMushaf: React.FC<QuranMushafProps> = ({ locale, messages }) => {
+export const QuranMushaf: React.FC<QuranMushafProps> = ({
+  locale,
+  messages,
+}) => {
   return (
     <div className="w-full">
       <div className="text-center mb-6">
@@ -14,11 +17,11 @@ export const QuranMushaf: React.FC<QuranMushafProps> = ({ locale, messages }) =>
           {messages?.quran?.mushaf || "Mushaf View"}
         </h2>
         <p className="text-muted">
-          {messages?.quran?.mushafDescription || 
-           "Interactive Mushaf with page-by-page reading experience"}
+          {messages?.quran?.mushafDescription ||
+            "Interactive Mushaf with page-by-page reading experience"}
         </p>
       </div>
-      
+
       {/* Integrated QuranReader component */}
       <QuranReader locale={locale} messages={messages} />
     </div>

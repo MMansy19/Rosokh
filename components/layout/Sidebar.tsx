@@ -119,7 +119,7 @@ export function Sidebar({
             {/* Mobile Close Button */}
             <button
               onClick={onToggle}
-              className="lg:hidden p-2 rounded-lg hover:bg-buttonHover transition-colors duration-200"
+              className="lg:hidden p-2 rounded-lg hover:bg-hoverButton transition-colors duration-200"
               aria-label="Close sidebar"
             >
               <X className="w-5 h-5 text-foreground" />
@@ -128,7 +128,7 @@ export function Sidebar({
             {/* Desktop Collapse Toggle */}
             <button
               onClick={toggleCollapsed}
-              className={`hidden lg:flex p-2 rounded-lg hover:bg-buttonHover transition-all duration-200 ${isCollapsed ? "absolute top-4 right-4" : ""}`}
+              className={`hidden lg:flex p-2 rounded-lg hover:bg-hoverButton transition-all duration-200 ${isCollapsed ? "absolute top-4 right-4" : ""}`}
               aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
               title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
