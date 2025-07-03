@@ -136,6 +136,7 @@ export function Header({
                 width={32}
                 height={32}
                 className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+                priority
               />
               <div className="flex flex-col">
                 <span className="font-bold text-base sm:text-lg text-foreground">

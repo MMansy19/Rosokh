@@ -35,6 +35,7 @@ export function Footer({ locale, messages }: FooterProps) {
                     width={32}
                     height={32}
                     className="w-10 h-10 sm:w-16 sm:h-16 object-contain flex-shrink-0"
+                    priority
                   />
                 </div>
               </>
@@ -47,7 +48,8 @@ export function Footer({ locale, messages }: FooterProps) {
                     alt={messages?.common?.brand?.name || "Rosokh"}
                     width={32}
                     height={32}
-                      className="w-10 h-10 sm:w-16 sm:h-16 object-contain flex-shrink-0"
+                    className="w-10 h-10 sm:w-16 sm:h-16 object-contain flex-shrink-0"
+                    priority
                   />
                   <span className="font-bold text-lg text-foreground">
                     {messages?.common?.brand?.name || "Rosokh"}

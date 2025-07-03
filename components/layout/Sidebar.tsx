@@ -113,6 +113,7 @@ export function Sidebar({
                 width={32}
                 height={32}
                 className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+                priority
               />
               <span
                 className={`font-bold text-lg text-foreground transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden" : "opacity-100"}`}
