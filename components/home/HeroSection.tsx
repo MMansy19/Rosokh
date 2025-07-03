@@ -18,8 +18,8 @@ interface HeroSectionProps {
 const features = [
   { key: "quran", href: "/quran", icon: BookOpen, color: "text-primary" },
   { key: "audio", href: "/audio", icon: Headphones, color: "text-accent" },
-  { key: "calendar", href: "/calendar", icon: Calendar, color: "text-success" },
-  { key: "analytics", href: "/analytics", icon: BarChart3, color: "text-info" },
+  // { key: "calendar", href: "/calendar", icon: Calendar, color: "text-success" },
+  // { key: "analytics", href: "/analytics", icon: BarChart3, color: "text-info" },
 ];
 
 export function HeroSection({ locale, messages }: HeroSectionProps) {

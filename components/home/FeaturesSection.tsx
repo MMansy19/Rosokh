@@ -40,24 +40,24 @@ const mainFeatures = [
     href: "/videos",
     color: "from-success/20 to-success/5",
   },
-  {
-    key: "khatma",
-    icon: Gamepad2,
-    href: "/khatma",
-    color: "from-info/20 to-info/5",
-  },
-  {
-    key: "islamic_calendar",
-    icon: Calendar,
-    href: "/calendar",
-    color: "from-warning/20 to-warning/5",
-  },
-  {
-    key: "analytics",
-    icon: BarChart3,
-    href: "/analytics",
-    color: "from-error/20 to-error/5",
-  },
+  // {
+  //   key: "khatma",
+  //   icon: Gamepad2,
+  //   href: "/khatma",
+  //   color: "from-info/20 to-info/5",
+  // },
+  // {
+  //   key: "islamic_calendar",
+  //   icon: Calendar,
+  //   href: "/calendar",
+  //   color: "from-warning/20 to-warning/5",
+  // },
+  // {
+  //   key: "analytics",
+  //   icon: BarChart3,
+  //   href: "/analytics",
+  //   color: "from-error/20 to-error/5",
+  // },
 ];
 
 const additionalFeatures = [

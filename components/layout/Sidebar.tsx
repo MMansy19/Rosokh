@@ -32,9 +32,9 @@ const navigation = [
   { key: "quran", href: "/quran", icon: BookOpen },
   { key: "audio", href: "/audio", icon: Headphones },
   { key: "youtube", href: "/youtube", icon: Video },
-  { key: "khatma", href: "/khatma", icon: Book },
-  { key: "calendar", href: "/calendar", icon: Calendar },
-  { key: "analytics", href: "/analytics", icon: BarChart3 },
+  // { key: "khatma", href: "/khatma", icon: Book },
+  // { key: "calendar", href: "/calendar", icon: Calendar },
+  // { key: "analytics", href: "/analytics", icon: BarChart3 },
   { key: "contact", href: "/contact", icon: Mail },
 ];
 
