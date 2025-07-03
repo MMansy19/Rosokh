@@ -75,11 +75,15 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
     <div className="min-h-screen text-foreground transition-colors duration-300 arabic-text">
       <div className="container mx-auto md:px-4 py-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 mx-auto">
           <h1 className="text-4xl font-bold text-foreground mb-4">
             {messages?.quran?.title || "Quran Reader"}
           </h1>
-          <div className="text-6xl quran-text text-primary mb-4">﷽</div>
+          <div className="flex justify-center items-center mb-6">
+            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl quran-text text-primary text-center leading-none">
+              ﷽
+            </div>
+          </div>
           <p className="text-lg text-muted max-w-2xl mx-auto">
             {messages?.quran?.description ||
               "Read the Quran with beautiful Arabic text, translations, and audio"}
