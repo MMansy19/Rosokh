@@ -193,7 +193,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
       )}
 
       {/* Surah Content */}
-      <div className="bg-surface rounded-lg border border-border p-8">
+      <div className="bg-surface rounded-lg border border-border p-8 quran-text">
         {/* Bismillah */}
         {currentSurah !== 1 && currentSurah !== 9 && (
           <div className="text-center mb-8">
@@ -201,7 +201,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
               className="text-foreground leading-relaxed"
               style={{
                 fontSize: `${fontSize + 4}px`,
-                fontFamily: "'Amiri Quran', 'Noto Sans Arabic', serif",
+                // fontFamily: "'Amiri Quran', 'Noto Sans Arabic', serif",
                 lineHeight: lineHeight,
               }}
             >
@@ -215,7 +215,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
             className="text-foreground"
             style={{
               fontSize: `${fontSize}px`,
-              fontFamily: "'Amiri Quran', 'Noto Sans Arabic', serif",
+              // fontFamily: "'Amiri Quran', 'Noto Sans Arabic', serif",
               lineHeight: lineHeight,
               wordSpacing: "0.2em",
               letterSpacing: "0.02em",

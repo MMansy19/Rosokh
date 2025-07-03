@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Menu,
@@ -106,9 +107,13 @@ export function Sidebar({
             <div
               className={`flex items-center justify-center gap-4 transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden lg:justify-center lg:w-full" : "opacity-100"}`}
             >
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">R</span>
-              </div>
+              <Image
+                src="/logo/no-bg.png"
+                alt={messages?.common?.brand?.name || "Rosokh"}
+                width={32}
+                height={32}
+                className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+              />
               <span
                 className={`font-bold text-lg text-foreground transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden" : "opacity-100"}`}
               >

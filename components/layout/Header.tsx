@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { GlobalSearch } from "@/components/search";
 import {
@@ -127,11 +128,15 @@ export function Header({
             {/* Logo */}
             <Link
               href={`/${locale}`}
-              className={`${isSidebarCollapsed ? "flex" : "md:hidden"} items-center space-x-2 rtl:space-x-reverse shrink-0`}
+              className={`${isSidebarCollapsed ? "flex" : "flex md:hidden"} items-center space-x-2 rtl:space-x-reverse shrink-0`}
             >
-              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">R</span>
-              </div>
+              <Image
+                src="/logo/no-bg.png"
+                alt={messages?.common?.brand?.name || "Rosokh"}
+                width={32}
+                height={32}
+                className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+              />
               <div className="flex flex-col">
                 <span className="font-bold text-base sm:text-lg text-foreground">
                   {messages?.common?.brand?.name || "Rosokh"}

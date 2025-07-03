@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Heart, Github, Mail, Phone, MapPin } from "lucide-react";
 
 interface FooterProps {
@@ -28,14 +29,26 @@ export function Footer({ locale, messages }: FooterProps) {
                   <span className="font-bold text-lg text-foreground">
                     {messages?.common?.brand?.name || "Rosokh"}
                   </span>
-                  <div className="w-8 h-8 bg-primary rounded-lg flex-shrink-0"></div>
+                  <Image
+                    src="/logo/no-bg.png"
+                    alt={messages?.common?.brand?.name || "Rosokh"}
+                    width={32}
+                    height={32}
+                    className="w-10 h-10 sm:w-16 sm:h-16 object-contain flex-shrink-0"
+                  />
                 </div>
               </>
             ) : (
               <>
                 {" "}
                 <div className="flex items-center justify-center sm:justify-start rtl:sm:justify-end space-x-2 rtl:space-x-reverse">
-                  <div className="w-8 h-8 bg-primary rounded-lg flex-shrink-0"></div>
+                  <Image
+                    src="/logo/no-bg.png"
+                    alt={messages?.common?.brand?.name || "Rosokh"}
+                    width={32}
+                    height={32}
+                      className="w-10 h-10 sm:w-16 sm:h-16 object-contain flex-shrink-0"
+                  />
                   <span className="font-bold text-lg text-foreground">
                     {messages?.common?.brand?.name || "Rosokh"}
                   </span>

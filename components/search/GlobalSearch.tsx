@@ -297,44 +297,44 @@ export function GlobalSearch({
   };
 
   // Get display items for suggestions dropdown
-  const getDisplayItems = () => {
-    const items = [];
+  // const getDisplayItems = () => {
+  //   const items = [];
 
-    if (suggestions.length > 0) {
-      items.push({
-        type: "section",
-        title: getTranslation(messages, "search.suggestions.title", "Suggestions"),
-        items: suggestions,
-        icon: TrendingUp,
-        sectionType: "suggestions",
-      });
-    }
+  //   if (suggestions.length > 0) {
+  //     items.push({
+  //       type: "section",
+  //       title: getTranslation(messages, "search.suggestions.title", "Suggestions"),
+  //       items: suggestions,
+  //       icon: TrendingUp,
+  //       sectionType: "suggestions",
+  //     });
+  //   }
 
-    if (recentSearches.length > 0 && searchTerm.length < 2) {
-      items.push({
-        type: "section",
-        title: getTranslation(messages, "search.history.title", "Recent Searches"),
-        items: recentSearches.slice(0, 5),
-        icon: Clock,
-        sectionType: "recent",
-      });
-    }
+  //   if (recentSearches.length > 0 && searchTerm.length < 2) {
+  //     items.push({
+  //       type: "section",
+  //       title: getTranslation(messages, "search.history.title", "Recent Searches"),
+  //       items: recentSearches.slice(0, 5),
+  //       icon: Clock,
+  //       sectionType: "recent",
+  //     });
+  //   }
 
-    if (popularSearches.length > 0 && searchTerm.length < 2) {
-      items.push({
-        type: "section",
-        title: getTranslation(messages, "search.popular.title", "Popular Searches"),
-        items: popularSearches.slice(0, 5),
-        icon: TrendingUp,
-        sectionType: "popular",
-      });
-    }
+  //   if (popularSearches.length > 0 && searchTerm.length < 2) {
+  //     items.push({
+  //       type: "section",
+  //       title: getTranslation(messages, "search.popular.title", "Popular Searches"),
+  //       items: popularSearches.slice(0, 5),
+  //       icon: TrendingUp,
+  //       sectionType: "popular",
+  //     });
+  //   }
 
-    return items;
-  };
+  //   return items;
+  // };
 
-  const displayItems = getDisplayItems();
-  const hasItems = displayItems.some((section) => section.items.length > 0);
+  // const displayItems = getDisplayItems();
+  // const hasItems = displayItems.some((section) => section.items.length > 0);
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
@@ -499,7 +499,7 @@ export function GlobalSearch({
         )}
       </div>
       {/* Suggestions Dropdown */}
-      {showSuggestions &&
+      {/* {showSuggestions &&
         isExpanded &&
         (hasItems || searchTerm.length >= 2) && (
           <div className="search-suggestions absolute top-full left-0 right-0 mt-2 rounded-lg z-50 max-h-96 overflow-hidden animate-slideDown">
@@ -516,7 +516,6 @@ export function GlobalSearch({
                         ${section.sectionType === 'recent' ? 'search-section-recent' : ''}
                       `}
                     >
-                      {/* Section Header */}
                       <div 
                         className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider flex items-center gap-2 ${
                           section.sectionType === 'popular' 
@@ -544,7 +543,6 @@ export function GlobalSearch({
                         )}
                       </div>
 
-                      {/* Section Items */}
                       {section.items.map((item, itemIndex) => {
                         const globalIndex =
                           displayItems
@@ -585,7 +583,6 @@ export function GlobalSearch({
               </div>
             ) : isLoading && searchTerm.length >= 2 ? (
               <div className="py-4">
-                {/* Loading Shimmer */}
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="px-4 py-2.5 flex items-center gap-3">
                     <div className="search-loading-shimmer w-4 h-4 rounded bg-muted/20"></div>
@@ -606,7 +603,6 @@ export function GlobalSearch({
               </div>
             ) : null}
 
-            {/* Search Button for Current Term */}
             {searchTerm.trim() && (
               <>
                 <div className="border-t border-border" />
@@ -639,7 +635,7 @@ export function GlobalSearch({
               </>
             )}
           </div>
-        )}
+        )} */}
     </div>
   );
 }
