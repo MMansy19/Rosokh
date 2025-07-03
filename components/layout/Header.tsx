@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "@/components/providers/ThemeProvider";
@@ -47,8 +47,59 @@ export function Header({
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const headerRef = useRef<HTMLElement>(null);
   const { theme, toggleTheme } = useTheme();
   const currentLang = languages.find((lang) => lang.code === locale);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Handle scroll behavior for hide/show header
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrollThreshold = 100; // Minimum scroll distance to trigger hide/show
+      
+      // Don't hide header if we're at the top of the page
+      if (currentScrollY < scrollThreshold) {
+        setIsVisible(true);
+        setLastScrollY(currentScrollY);
+        return;
+      }
+
+      // Hide header when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
+        // Scrolling down
+        setIsVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    // Throttle scroll events for better performance
+    let timeoutId: NodeJS.Timeout;
+    const throttledHandleScroll = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(handleScroll, 10);
+    };
+
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', throttledHandleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [lastScrollY]);
 
   useEffect(() => {
     setMounted(true);
@@ -87,8 +138,11 @@ export function Header({
 
   return (
     <header
+      ref={headerRef}
       dir={currentLang?.dir || "ltr"}
-      className="sticky top-0 z-40 bg-surface/95 backdrop-blur-sm border-b border-border"
+      className={`fixed top-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-sm border-b border-border transition-transform duration-300 ease-in-out ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
@@ -297,9 +351,13 @@ export function Header({
           <div
             className="md:hidden fixed inset-0 top-14 sm:top-16 z-30 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsSearchExpanded(false)}
+            style={{ top: headerRef.current?.offsetHeight || 64 }}
           />
           {/* Search Panel */}
-          <div className="md:hidden fixed inset-x-0 top-14 sm:top-16 z-40 bg-surface border-t border-border shadow-2xl">
+          <div 
+            className="md:hidden fixed inset-x-0 z-40 bg-surface border-t border-border shadow-2xl"
+            style={{ top: headerRef.current?.offsetHeight || 64 }}
+          >
             <div className="p-4">
               <GlobalSearch
                 locale={locale}

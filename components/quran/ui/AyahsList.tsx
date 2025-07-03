@@ -66,7 +66,7 @@ export const AyahsList: React.FC<AyahsListProps> = ({
             // Remove Bismillah from the beginning of the ayah text
             ayah = {
               ...ayah,
-              text: ayah.text.substring(40).trim(),
+              text: ayah.text.substring(38).trim(),
             };
           }
           return (
