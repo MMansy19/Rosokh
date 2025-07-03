@@ -136,7 +136,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               onClick={onPlayFullSurah}
               className="px-2 py-1 text-xs bg-primary text-white rounded hover:bg-primary/80 transition-colors"
             >
-              Play All
+              {messages?.youtube.actions.playAll}
             </button>
 
             {/* Reciter Selection - Quick Access */}

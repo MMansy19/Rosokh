@@ -684,6 +684,7 @@
     "actions": {
       "like": "إعجاب",
       "bookmark": "إشارة مرجعية",
+      "playAll": "تشغيل الكل",
       "share": "مشاركة",
       "watchLater": "مشاهدة لاحقاً",
       "viewCount": "مشاهدة"
