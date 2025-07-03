@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Ayah, Translation } from "../types";
-import { API_ENDPOINTS, TRANSLATION_EDITIONS } from "../constants";
+import { quranService } from "@/services/quranService";
+import { TRANSLATION_EDITIONS } from "../constants";
 import { AnalyticsService } from "@/services/AnalyticsService";
 
 export const useAyahs = (surahNumber: number, locale: string) => {
@@ -23,39 +24,46 @@ export const useAyahs = (surahNumber: number, locale: string) => {
           locale,
         });
 
-        // Get Arabic text
-        const arabicResponse = await fetch(API_ENDPOINTS.surah(surahNumber));
-        const arabicData = await arabicResponse.json();
-        setAyahs(arabicData.data.ayahs);
+        // Get translation edition for locale
+        const translationEdition = quranService.getTranslationEdition(locale);
+        
+        // Get Arabic text and translation together using multiple editions
+        const editions = ['quran-uthmani', translationEdition];
+        const surahsData = await quranService.getSurahWithMultipleEditions(surahNumber, editions);
+        
+        if (surahsData && surahsData.length >= 2) {
+          const arabicSurah = surahsData[0];
+          const translationSurah = surahsData[1];
+          
+          // Set Arabic ayahs
+          const arabicAyahs = arabicSurah.ayahs.map(ayah => ({
+            number: ayah.number,
+            text: ayah.text,
+            numberInSurah: ayah.numberInSurah,
+            surah: surahNumber
+          }));
+          setAyahs(arabicAyahs);
 
-        // Get translations based on locale
-        const translationEdition =
-          TRANSLATION_EDITIONS[locale as keyof typeof TRANSLATION_EDITIONS] ||
-          TRANSLATION_EDITIONS.default;
-
-        const translationResponse = await fetch(
-          API_ENDPOINTS.surahWithTranslation(surahNumber, translationEdition),
-        );
-        const translationData = await translationResponse.json();
-
-        if (translationData.data && translationData.data.ayahs) {
-          const translationsArray = translationData.data.ayahs.map(
+          // Set translations
+          const translationsArray = translationSurah.ayahs.map(
             (ayah: any, index: number) => ({
               id: index,
               text: ayah.text,
               language_name: locale,
-              resource_name: translationData.data.edition.name,
+              resource_name: translationSurah.name || 'Translation',
             }),
           );
           setTranslations(translationsArray);
+        
+          analytics.trackEvent("surah_loaded", "content", {
+            surahNumber,
+            ayahsCount: arabicAyahs.length,
+            translationEdition,
+            hasTranslation: translationsArray.length > 0,
+          });
+        } else {
+          throw new Error("Failed to load surah data");
         }
-
-        analytics.trackEvent("surah_loaded", "content", {
-          surahNumber,
-          ayahsCount: arabicData.data.ayahs.length,
-          translationEdition,
-          hasTranslation: !!translationData.data,
-        });
       } catch (err) {
         const errorMessage =
           err instanceof Error ? err.message : "Unknown error";

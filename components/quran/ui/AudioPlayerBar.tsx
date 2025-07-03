@@ -104,13 +104,16 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                   ? currentSurah?.name
                   : currentSurah?.englishName}
               </div>
-              <div className="text-muted">
-                Verse {audioPlayer.currentAyah}
+              <div className="text-muted flex items-center gap-2">
+                <span>Verse {audioPlayer.currentAyah}</span>
                 {repeatMode !== "none" && (
-                  <span className="ml-1 text-accent">
+                  <span className="text-accent">
                     ({repeatMode === "verse" ? "🔂" : "🔁"})
                   </span>
                 )}
+                <span className="text-xs text-muted-foreground">
+                  • {RECITERS.find(r => r.id === audioPlayer.reciter)?.name.split(' ')[0] || audioPlayer.reciter}
+                </span>
               </div>
             </div>
           </div>
@@ -135,6 +138,22 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             >
               Play All
             </button>
+
+            {/* Reciter Selection - Quick Access */}
+            <div className="flex items-center space-x-1">
+              <span className="text-xs text-muted-foreground">Reciter:</span>
+              <select
+                value={audioPlayer.reciter}
+                onChange={(e) => onReciterChange(e.target.value)}
+                className="text-xs bg-secondary border border-border rounded px-2 py-1 max-w-[120px]"
+              >
+                {RECITERS.map((reciter) => (
+                  <option key={reciter.id} value={reciter.id}>
+                    {reciter.name.split(' ')[0]}
+                  </option>
+                ))}
+              </select>
+            </div>
 
             {/* Speed Control */}
             <select

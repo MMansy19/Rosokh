@@ -698,7 +698,13 @@
     "transliteration": "Транслитерация",
     "loading": "Загрузка...",
     "bookmarks": "Закладки",
-    "transliterationNotAvailable": "Транслитерация недоступна"
+    "transliterationNotAvailable": "Транслитерация недоступна",
+    "reciterChanged": "Чтец изменен на {name}",
+    "selectReciter": "Выберите чтеца",
+    "playingFullSurah": "Воспроизведение полной {name}",
+    "errors": {
+      "audioPlay": "Не удалось воспроизвести аудио. Проверьте подключение и попробуйте снова."
+    }
   },
   "notifications": {
     "audio": {

@@ -884,7 +884,13 @@
     "transliteration": "النقل الصوتي",
     "loading": "جاري التحميل...",
     "bookmarks": "المفضلة",
-    "transliterationNotAvailable": "النقل الصوتي غير متاح"
+    "transliterationNotAvailable": "النقل الصوتي غير متاح",
+    "reciterChanged": "تم تغيير القارئ إلى {name}",
+    "selectReciter": "اختر القارئ",
+    "playingFullSurah": "تشغيل {name} كاملة",
+    "errors": {
+      "audioPlay": "فشل في تشغيل الصوت. يرجى التحقق من الاتصال والمحاولة مرة أخرى."
+    }
   },
   "notifications": {
     "audio": {

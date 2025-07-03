@@ -11,6 +11,8 @@ export { ReadingControls } from "./ui/ReadingControls";
 export { SurahHeader } from "./ui/SurahHeader";
 export { AyahItem } from "./ui/AyahItem";
 export { AyahsList } from "./ui/AyahsList";
+export { ReciterSelection } from "./ui/ReciterSelection";
+export { AudioTest } from "./ui/AudioTest";
 
 // Hooks
 export { useSurahs } from "./hooks/useSurahs";
@@ -23,3 +25,6 @@ export * from "./types";
 
 // Constants
 export * from "./constants";
+
+// Services
+export { quranService } from "../../services/quranService";

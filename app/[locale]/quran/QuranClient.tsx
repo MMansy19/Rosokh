@@ -10,6 +10,8 @@ import { QuranRead } from "@/components/quran/QuranRead";
 import { TabNavigation } from "@/components/quran/ui/TabNavigation";
 import { TabType, QuranClientProps } from "@/components/quran/types";
 import { QuranMushaf } from "@/components/quran";
+import { QuranTestPage } from "@/components/quran/QuranTestPage";
+import { AudioTest } from "@/components/quran/ui/AudioTest";
 
 export function QuranClient({ locale, messages }: QuranClientProps) {
   const searchParams = useSearchParams();
@@ -66,6 +68,8 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
         return <QuranSearch locale={locale} messages={messages} />;
       case "mushaf":
         return <QuranMushaf locale={locale} messages={messages} />;
+      case "test":
+        return <QuranTestPage locale={locale} messages={messages} />;
       default:
         return <QuranRead locale={locale} messages={messages} />;
     }

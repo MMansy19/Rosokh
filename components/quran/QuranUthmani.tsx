@@ -9,6 +9,12 @@ import {
 } from "lucide-react";
 import { useSurahs } from "./hooks/useSurahs";
 import { useAyahs } from "./hooks/useAyahs";
+import { useAudioPlayer } from "./hooks/useAudioPlayer";
+import { useBookmarks } from "./hooks/useBookmarks";
+import { AudioPlayerBar } from "./ui/AudioPlayerBar";
+import { AnalyticsService } from "@/services/AnalyticsService";
+import { useNotifications } from "@/contexts/GlobalContext";
+import { RepeatMode, Surah, Ayah } from "./types";
 
 interface QuranUthmaniProps {
   locale: string;
@@ -19,11 +25,11 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
   locale,
   messages,
 }) => {
+  const { notify } = useNotifications();
   const [currentSurah, setCurrentSurah] = useState<number>(1);
   const [fontSize, setFontSize] = useState(32);
   const [showSettings, setShowSettings] = useState(false);
   const [selectedAyah, setSelectedAyah] = useState<number | null>(null);
-  const [playingAyah, setPlayingAyah] = useState<number | null>(null);
   const [lineHeight, setLineHeight] = useState(2.5);
 
   // Use the same hooks as in the learn tab
@@ -33,6 +39,28 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
     loading: ayahsLoading,
     error: ayahsError,
   } = useAyahs(currentSurah, locale);
+
+  // Add audio player hook
+  const { bookmarkedAyahs, toggleBookmark, isBookmarked } = useBookmarks();
+  const {
+    audioRef,
+    audioPlayer,
+    repeatMode,
+    autoPlay,
+    playAyah,
+    playSurah,
+    pauseAudio,
+    togglePlayPause,
+    updateVolume,
+    toggleMute,
+    updateSpeed,
+    updateReciter,
+    setRepeatMode,
+    setAutoPlay,
+  } = useAudioPlayer(messages);
+
+  // Analytics
+  const analytics = AnalyticsService.getInstance();
 
   // Get current surah info from the surahs list
   const currentSurahInfo = surahs.find(
@@ -47,7 +75,6 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
     if (currentSurah > 1) {
       setCurrentSurah(currentSurah - 1);
       setSelectedAyah(null);
-      setPlayingAyah(null);
     }
   };
 
@@ -55,7 +82,6 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
     if (currentSurah < 114) {
       setCurrentSurah(currentSurah + 1);
       setSelectedAyah(null);
-      setPlayingAyah(null);
     }
   };
 
@@ -63,12 +89,59 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
     setSelectedAyah(selectedAyah === ayahNumber ? null : ayahNumber);
   };
 
-  const handlePlayAudio = (ayahNumber: number) => {
-    if (playingAyah === ayahNumber) {
-      setPlayingAyah(null);
-    } else {
-      setPlayingAyah(ayahNumber);
-      // Here you would integrate with actual audio service
+  const handlePlayAyah = (ayahNumber: number) => {
+    analytics.trackEvent("ayah_play", "engagement", {
+      surahNumber: currentSurah,
+      ayahNumber,
+      reciter: audioPlayer.reciter,
+      tabContext: "read",
+    });
+    playAyah(ayahNumber, currentSurah);
+  };
+
+  const playFullSurah = async () => {
+    if (currentSurah) {
+      analytics.trackEvent("surah_full_play", "engagement", {
+        surahNumber: currentSurah,
+        surahName:
+          locale === "ar" ? currentSurahInfo?.name : currentSurahInfo?.englishName,
+        totalAyahs: ayahs.length,
+        reciter: audioPlayer.reciter,
+        tabContext: "read",
+      });
+
+      await playSurah(currentSurah);
+
+      notify.info(
+        messages?.quran?.playingFullSurah?.replace(
+          "{name}",
+          locale === "ar"
+            ? currentSurahInfo?.name
+            : currentSurahInfo?.englishName || `Surah ${currentSurah}`,
+        ) ||
+          `Playing full ${locale === "ar" ? currentSurahInfo?.name : currentSurahInfo?.englishName || `Surah ${currentSurah}`}`,
+      );
+    }
+  };
+
+  const playNextAyah = (currentAyahNumber: number) => {
+    if (repeatMode === "verse") {
+      playAyah(currentAyahNumber, currentSurah);
+      return;
+    }
+    const nextAyah = ayahs.find(
+      (ayah: Ayah) => ayah.numberInSurah === currentAyahNumber + 1,
+    );
+    if (nextAyah) {
+      setTimeout(() => playAyah(nextAyah.numberInSurah, currentSurah), 1000);
+    } else if (repeatMode === "surah") {
+      setTimeout(() => playAyah(1, currentSurah), 1000);
+    }
+  };
+
+  const playPreviousAyah = () => {
+    if (audioPlayer.currentAyah && audioPlayer.currentAyah > 1) {
+      playAyah(audioPlayer.currentAyah - 1, currentSurah);
     }
   };
   if (loading) {
@@ -99,6 +172,35 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
   }
   return (
     <div className="max-w-6xl mx-auto p-4" dir="rtl">
+      {/* Hidden Audio Element */}
+      <audio ref={audioRef} preload="metadata" />
+
+      {/* Audio Player Bar */}
+      {audioPlayer.currentAyah && (
+        <AudioPlayerBar
+          audioPlayer={audioPlayer}
+          repeatMode={repeatMode}
+          autoPlay={autoPlay}
+          currentSurah={currentSurahInfo}
+          onPlayPause={togglePlayPause}
+          onPrevious={playPreviousAyah}
+          onNext={() => playNextAyah(audioPlayer.currentAyah!)}
+          onRepeatModeChange={() => {
+            const modes: RepeatMode[] = ["none", "verse", "surah"];
+            const currentIndex = modes.indexOf(repeatMode);
+            setRepeatMode(modes[(currentIndex + 1) % modes.length]);
+          }}
+          onAutoPlayToggle={() => setAutoPlay(!autoPlay)}
+          onPlayFullSurah={playFullSurah}
+          onSpeedChange={updateSpeed}
+          onVolumeToggle={toggleMute}
+          onReciterChange={updateReciter}
+          onVolumeChange={updateVolume}
+          showSettings={showSettings}
+          messages={messages}
+          locale={locale}
+        />
+      )}
       {/* Header */}
       <div className="flex items-center justify-between mb-6 bg-surface rounded-lg p-4 border border-border">
         <div className="flex items-center gap-4">
@@ -236,7 +338,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
                 </span>{" "}
                 <span
                   className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-bold cursor-pointer transition-all duration-200 mx-2 ${
-                    playingAyah === ayah.numberInSurah
+                    audioPlayer.currentAyah === ayah.numberInSurah && audioPlayer.currentSurah === currentSurah
                       ? "bg-primary text-white"
                       : selectedAyah === ayah.numberInSurah
                         ? "bg-primary/80 text-white"
@@ -267,20 +369,23 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
 
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => handlePlayAudio(selectedAyah)}
+                  onClick={() => handlePlayAyah(selectedAyah!)}
                   className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-colors"
                 >
-                  {playingAyah === selectedAyah ? (
+                  {audioPlayer.currentAyah === selectedAyah && audioPlayer.currentSurah === currentSurah && audioPlayer.isPlaying ? (
                     <Pause className="w-4 h-4" />
                   ) : (
                     <Play className="w-4 h-4" />
                   )}
-                  {playingAyah === selectedAyah
+                  {audioPlayer.currentAyah === selectedAyah && audioPlayer.currentSurah === currentSurah && audioPlayer.isPlaying
                     ? messages?.pause || "إيقاف"
                     : messages?.play || "تشغيل"}
                 </button>
 
-                <button className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-green-500 hover:bg-green-600 text-white transition-colors">
+                <button 
+                  onClick={() => toggleBookmark(currentSurah, selectedAyah!, messages)}
+                  className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-green-500 hover:bg-green-600 text-white transition-colors"
+                >
                   <BookOpen className="w-4 h-4" />
                   إشارة مرجعية
                 </button>

@@ -1,5 +1,5 @@
 import React from "react";
-import { BookOpen, Search, Book, GraduationCap } from "lucide-react";
+import { BookOpen, Search, Book, GraduationCap, Settings } from "lucide-react";
 import { TabType } from "../types";
 
 interface TabNavigationProps {
@@ -41,6 +41,11 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
       id: "mushaf" as TabType,
       icon: Book,
       label: messages?.quran?.mushaf || "Mushaf",
+    },
+    {
+      id: "test" as TabType,
+      icon: Settings,
+      label: messages?.quran?.test || "API Test",
     },
   ];
 

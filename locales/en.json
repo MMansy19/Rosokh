@@ -867,7 +867,13 @@
     "transliteration": "Transliteration",
     "loading": "Loading...",
     "bookmarks": "Bookmarks",
-    "transliterationNotAvailable": "Transliteration not available"
+    "transliterationNotAvailable": "Transliteration not available",
+    "reciterChanged": "Reciter changed to {name}",
+    "selectReciter": "Select Reciter",
+    "playingFullSurah": "Playing full {name}",
+    "errors": {
+      "audioPlay": "Failed to play audio. Please check your connection and try again."
+    }
   },
   "notifications": {
     "audio": {

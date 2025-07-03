@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSurahs } from "./hooks/useSurahs";
 import { useAyahs } from "./hooks/useAyahs";
 import { useAudioPlayer } from "./hooks/useAudioPlayer";
@@ -10,6 +10,8 @@ import { AudioPlayerBar } from "./ui/AudioPlayerBar";
 import { AnalyticsService } from "@/services/AnalyticsService";
 import { useNotifications } from "@/contexts/GlobalContext";
 import { RepeatMode, Surah, Ayah } from "./types";
+import { quranService } from "@/services/quranService";
+import { RECITERS } from "./constants";
 
 interface QuranReadProps {
   locale: string;
@@ -39,6 +41,7 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
     repeatMode,
     autoPlay,
     playAyah,
+    playSurah,
     pauseAudio,
     togglePlayPause,
     updateVolume,
@@ -92,7 +95,7 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
   };
 
   const playFullSurah = async () => {
-    if (ayahs.length > 0) {
+    if (selectedSurah) {
       analytics.trackEvent("surah_full_play", "engagement", {
         surahNumber: selectedSurah,
         surahName:
@@ -101,8 +104,8 @@ export const QuranRead: React.FC<QuranReadProps> = ({ locale, messages }) => {
         reciter: audioPlayer.reciter,
       });
 
-      setAutoPlay(true);
-      await playAyah(1, selectedSurah);
+      // Use the new playSurah method for full surah audio
+      await playSurah(selectedSurah);
 
       notify.info(
         messages?.quran?.playingFullSurah?.replace(

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Surah } from "../types";
-import { API_ENDPOINTS } from "../constants";
+import { quranService } from "@/services/quranService";
 import { AnalyticsService } from "@/services/AnalyticsService";
 
 export const useSurahs = () => {
@@ -16,12 +16,22 @@ export const useSurahs = () => {
           timestamp: new Date().toISOString(),
         });
 
-        const response = await fetch(API_ENDPOINTS.surahs);
-        const data = await response.json();
-        setSurahs(data.data);
+        // Get metadata from Al Quran Cloud API
+        const meta = await quranService.getQuranMeta();
+        const surahsData = meta.surahs.references.map(surah => ({
+          number: surah.number,
+          name: surah.name,
+          englishName: surah.englishName,
+          arabicName: surah.name, // Arabic name from the API
+          revelationType: surah.revelationType,
+          numberOfAyahs: surah.numberOfAyahs,
+          ayahs: [] // Will be loaded separately when needed
+        }));
+        
+        setSurahs(surahsData);
 
         analytics.trackEvent("surahs_loaded", "content", {
-          surahsCount: data.data.length,
+          surahsCount: surahsData.length,
           source: "alquran_cloud_api",
         });
       } catch (err) {
