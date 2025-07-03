@@ -18,6 +18,7 @@ interface HeroSectionProps {
 const features = [
   { key: "quran", href: "/quran", icon: BookOpen, color: "text-primary" },
   { key: "audio", href: "/audio", icon: Headphones, color: "text-accent" },
+  { key: "youtube", href: "/youtube", icon: Play, color: "text-info" },
   // { key: "calendar", href: "/calendar", icon: Calendar, color: "text-success" },
   // { key: "analytics", href: "/analytics", icon: BarChart3, color: "text-info" },
 ];
@@ -82,7 +83,7 @@ export function HeroSection({ locale, messages }: HeroSectionProps) {
             </Link>
           </div>
           {/* Feature Cards Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 pt-16 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 pt-16 max-w-4xl mx-auto">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (

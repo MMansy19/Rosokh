@@ -27,6 +27,14 @@ interface SearchContext {
   route: string;
 }
 
+interface SearchSection {
+  type: string;
+  title: string;
+  items: string[];
+  icon: React.ComponentType<any>;
+  sectionType?: "suggestions" | "recent" | "popular";
+}
+
 interface GlobalSearchProps {
   locale: string;
   messages: any;
@@ -295,27 +303,30 @@ export function GlobalSearch({
     if (suggestions.length > 0) {
       items.push({
         type: "section",
-        title: getTranslation(messages, "search.suggestions", "Suggestions"),
+        title: getTranslation(messages, "search.suggestions.title", "Suggestions"),
         items: suggestions,
         icon: TrendingUp,
+        sectionType: "suggestions",
       });
     }
 
     if (recentSearches.length > 0 && searchTerm.length < 2) {
       items.push({
         type: "section",
-        title: getTranslation(messages, "search.recent", "Recent Searches"),
+        title: getTranslation(messages, "search.history.title", "Recent Searches"),
         items: recentSearches.slice(0, 5),
         icon: Clock,
+        sectionType: "recent",
       });
     }
 
     if (popularSearches.length > 0 && searchTerm.length < 2) {
       items.push({
         type: "section",
-        title: getTranslation(messages, "search.popular", "Popular Searches"),
+        title: getTranslation(messages, "search.popular.title", "Popular Searches"),
         items: popularSearches.slice(0, 5),
         icon: TrendingUp,
+        sectionType: "popular",
       });
     }
 
@@ -498,11 +509,39 @@ export function GlobalSearch({
                   if (section.items.length === 0) return null;
 
                   return (
-                    <div key={section.type + sectionIndex}>
+                    <div 
+                      key={section.type + sectionIndex}
+                      className={`
+                        ${section.sectionType === 'popular' ? 'search-section-popular' : ''}
+                        ${section.sectionType === 'recent' ? 'search-section-recent' : ''}
+                      `}
+                    >
                       {/* Section Header */}
-                      <div className="px-4 py-2 text-xs font-semibold text-muted uppercase tracking-wider flex items-center gap-2">
+                      <div 
+                        className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider flex items-center gap-2 ${
+                          section.sectionType === 'popular' 
+                            ? 'search-section-header-popular text-amber-600 dark:text-amber-400' 
+                            : section.sectionType === 'recent' 
+                            ? 'search-section-header-recent text-blue-600 dark:text-blue-400'
+                            : 'text-muted bg-muted/10'
+                        }`}
+                      >
                         <section.icon className="w-3 h-3" />
                         {section.title}
+                        {section.sectionType === 'popular' && (
+                          <div className="ml-auto">
+                            <span className="text-[10px] px-1.5 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full font-medium">
+                              {getTranslation(messages, "search.popular.title", "Popular")}
+                            </span>
+                          </div>
+                        )}
+                        {section.sectionType === 'recent' && (
+                          <div className="ml-auto">
+                            <span className="text-[10px] px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full font-medium">
+                              {getTranslation(messages, "search.history.title", "Recent")}
+                            </span>
+                          </div>
+                        )}
                       </div>
 
                       {/* Section Items */}
@@ -519,13 +558,23 @@ export function GlobalSearch({
                             onClick={() => handleSearch(item)}
                             className={`
                             search-suggestion-item w-full px-4 py-2.5 text-left hover:bg-muted
-                            flex items-center justify-between group
+                            flex items-center justify-between group transition-all duration-200
                             ${focusedIndex === globalIndex ? "bg-muted" : ""}
+                            ${section.sectionType === 'popular' ? 'border-l-2 border-l-amber-300 dark:border-l-amber-600' : ''}
+                            ${section.sectionType === 'recent' ? 'border-l-2 border-l-blue-300 dark:border-l-blue-600' : ''}
                           `}
                           >
-                            <span className="text-foreground truncate">
-                              {item}
-                            </span>
+                            <div className="flex items-center gap-3 flex-1">
+                              {section.sectionType === 'popular' && (
+                                <div className="search-popular-indicator w-2 h-2 rounded-full" />
+                              )}
+                              {section.sectionType === 'recent' && (
+                                <div className="search-recent-indicator w-2 h-2 rounded-full" />
+                              )}
+                              <span className="text-foreground truncate">
+                                {item}
+                              </span>
+                            </div>
                             <ArrowRight className="w-4 h-4 text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
                           </button>
                         );
@@ -550,7 +599,7 @@ export function GlobalSearch({
                 <p className="text-sm">
                   {getTranslation(
                     messages,
-                    "search.noSuggestions",
+                    "search.suggestions.noSuggestions",
                     "No suggestions found",
                   )}
                 </p>
