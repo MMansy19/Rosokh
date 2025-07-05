@@ -84,6 +84,16 @@ export const useAudioPlayer = (messages: any) => {
         volume: audioPlayer.volume,
       });
 
+      // Validate and get working reciter
+      const workingReciter = await quranService.getWorkingReciter(audioPlayer.reciter);
+      if (workingReciter !== audioPlayer.reciter) {
+        notify.info(
+          messages?.quran?.reciterNotAvailable?.replace("{name}", audioPlayer.reciter) ||
+          `${audioPlayer.reciter} not available, using ${workingReciter}`,
+        );
+        setAudioPlayer(prev => ({ ...prev, reciter: workingReciter }));
+      }
+
       // Calculate absolute ayah number for Al Quran Cloud API
       // Get surah data to calculate correct ayah number
       const surahData = await quranService.getSurah(surahNumber);
@@ -93,8 +103,8 @@ export const useAudioPlayer = (messages: any) => {
         throw new Error(`Ayah ${ayahNumber} not found in Surah ${surahNumber}`);
       }
 
-      // Try different audio URLs with fallback
-      const audioUrls = quranService.getAyahAudioUrls(targetAyah.number, audioPlayer.reciter, surahNumber);
+      // Try different audio URLs with fallback using the working reciter
+      const audioUrls = quranService.getAyahAudioUrls(targetAyah.number, workingReciter, surahNumber);
 
       let audioUrl = "";
       let urlWorked = false;
@@ -107,15 +117,24 @@ export const useAudioPlayer = (messages: any) => {
         try {
           // Skip availability check for proxy URLs as they should work
           const isProxy = url.startsWith('/api/audio/proxy');
-          const isAvailable = isProxy || await quranService.checkAudioAvailability(url);
           
-          console.log(`URL ${url} availability: ${isAvailable}`);
-          
-          if (isAvailable) {
+          if (isProxy) {
+            // For proxy URLs, just try to use them directly
             audioUrl = url;
             urlWorked = true;
-            console.log(`Using audio URL: ${url}`);
+            console.log(`Using proxy URL: ${url}`);
             break;
+          } else {
+            // For direct URLs, check availability first
+            const isAvailable = await quranService.checkAudioAvailability(url);
+            console.log(`URL ${url} availability: ${isAvailable}`);
+            
+            if (isAvailable) {
+              audioUrl = url;
+              urlWorked = true;
+              console.log(`Using audio URL: ${url}`);
+              break;
+            }
           }
         } catch (checkError) {
           console.warn(`Error checking URL ${url}:`, checkError);
@@ -131,6 +150,12 @@ export const useAudioPlayer = (messages: any) => {
           audioUrl = proxyUrls[0];
           urlWorked = true;
           console.log(`Using proxy URL: ${audioUrl}`);
+        } else {
+          // Last resort: try the first URL directly
+          console.warn("No proxy URLs available, trying first URL directly");
+          audioUrl = audioUrls[0];
+          urlWorked = true;
+          console.log(`Using first URL as last resort: ${audioUrl}`);
         }
       }
 
@@ -139,16 +164,19 @@ export const useAudioPlayer = (messages: any) => {
       }
 
       if (audioRef.current) {
-        // Stop current audio if playing
+        // Stop current audio if playing and wait for it to properly stop
         if (!audioRef.current.paused) {
           audioRef.current.pause();
+          // Wait a bit for the pause to take effect
+          await new Promise(resolve => setTimeout(resolve, 100));
         }
 
         let playAttempts = 0;
-        const maxAttempts = 3;
+        const maxAttempts = Math.min(audioUrls.length, 5); // Limit attempts to prevent infinite loops
+        
         const attemptPlay = async (urlToTry: string): Promise<void> => {
           playAttempts++;
-          console.log(`Play attempt ${playAttempts} with URL: ${urlToTry}`);
+          console.log(`Ayah play attempt ${playAttempts}/${maxAttempts} with URL: ${urlToTry}`);
           
           return new Promise((resolve, reject) => {
             if (!audioRef.current) {
@@ -157,6 +185,7 @@ export const useAudioPlayer = (messages: any) => {
             }
 
             const handleSuccess = () => {
+              console.log(`Successfully started playing ayah from: ${urlToTry}`);
               setAudioPlayer((prev) => ({
                 ...prev,
                 isPlaying: true,
@@ -167,41 +196,50 @@ export const useAudioPlayer = (messages: any) => {
             };
 
             const handleError = async (error: any) => {
-              console.error(`Play attempt ${playAttempts} failed:`, error);
+              console.error(`Ayah play attempt ${playAttempts} failed:`, error);
               
-              if (playAttempts < maxAttempts && audioUrls.length > playAttempts) {
+              if (playAttempts < maxAttempts && playAttempts < audioUrls.length) {
                 // Try next URL
                 const nextUrl = audioUrls[playAttempts];
-                console.log(`Trying next URL: ${nextUrl}`);
-                audioRef.current!.src = nextUrl;
-                audioRef.current!.playbackRate = audioPlayer.speed;
-                audioRef.current!.volume = audioPlayer.isMuted ? 0 : audioPlayer.volume;
+                console.log(`Trying next ayah URL: ${nextUrl}`);
                 
-                try {
-                  await attemptPlay(nextUrl);
-                  resolve();
-                } catch (nextError) {
-                  reject(nextError);
-                }
+                // Wait a bit before trying the next URL
+                setTimeout(async () => {
+                  try {
+                    await attemptPlay(nextUrl);
+                    resolve();
+                  } catch (nextError) {
+                    reject(nextError);
+                  }
+                }, 200);
               } else {
                 reject(error);
               }
             };
 
+            // Set up the audio source
             audioRef.current.src = urlToTry;
             audioRef.current.playbackRate = audioPlayer.speed;
             audioRef.current.volume = audioPlayer.isMuted ? 0 : audioPlayer.volume;
-
-            audioRef.current.play()
-              .then(handleSuccess)
-              .catch(handleError);
+            
+            // Load the audio first, then play
+            audioRef.current.load();
+            
+            // Wait a moment for the load to register, then try to play
+            setTimeout(() => {
+              if (audioRef.current) {
+                audioRef.current.play()
+                  .then(handleSuccess)
+                  .catch(handleError);
+              }
+            }, 100);
           });
         };
 
         try {
           await attemptPlay(audioUrl);
         } catch (finalError) {
-          console.error(`All play attempts failed:`, finalError);
+          console.error(`All ayah play attempts failed:`, finalError);
           throw new Error(`Failed to play audio: ${finalError instanceof Error ? finalError.message : 'Unknown playback error'}`);
         }
       }
@@ -232,8 +270,18 @@ export const useAudioPlayer = (messages: any) => {
         reciter: audioPlayer.reciter,
       });
 
-      // Try different audio URLs with fallback
-      const audioUrls = quranService.getSurahAudioUrls(surahNumber, audioPlayer.reciter);
+      // Validate and get working reciter
+      const workingReciter = await quranService.getWorkingReciter(audioPlayer.reciter);
+      if (workingReciter !== audioPlayer.reciter) {
+        notify.info(
+          messages?.quran?.reciterNotAvailable?.replace("{name}", audioPlayer.reciter) ||
+          `${audioPlayer.reciter} not available, using ${workingReciter}`,
+        );
+        setAudioPlayer(prev => ({ ...prev, reciter: workingReciter }));
+      }
+
+      // Try different audio URLs with fallback using the working reciter
+      const audioUrls = quranService.getSurahAudioUrls(surahNumber, workingReciter);
 
       let audioUrl = "";
       let urlWorked = false;
@@ -242,14 +290,26 @@ export const useAudioPlayer = (messages: any) => {
         console.log(`Testing surah audio URL: ${url}`);
         
         try {
-          const isAvailable = await quranService.checkAudioAvailability(url);
-          console.log(`Surah URL ${url} availability: ${isAvailable}`);
+          // Skip availability check for proxy URLs as they should work
+          const isProxy = url.startsWith('/api/audio/proxy');
           
-          if (isAvailable) {
+          if (isProxy) {
+            // For proxy URLs, just try to use them directly
             audioUrl = url;
             urlWorked = true;
-            console.log(`Using surah audio URL: ${url}`);
+            console.log(`Using proxy surah URL: ${url}`);
             break;
+          } else {
+            // For direct URLs, check availability first
+            const isAvailable = await quranService.checkAudioAvailability(url);
+            console.log(`Surah URL ${url} availability: ${isAvailable}`);
+            
+            if (isAvailable) {
+              audioUrl = url;
+              urlWorked = true;
+              console.log(`Using surah audio URL: ${url}`);
+              break;
+            }
           }
         } catch (checkError) {
           console.warn(`Error checking surah URL ${url}:`, checkError);
@@ -257,11 +317,21 @@ export const useAudioPlayer = (messages: any) => {
         }
       }
 
-      // If no URL worked through availability check, try the first URL directly
-      if (!urlWorked && audioUrls.length > 0) {
-        console.warn("No surah URLs passed availability check, trying direct playback with first URL");
-        audioUrl = audioUrls[0];
-        urlWorked = true;
+      // If no URL worked through availability check, try proxy URLs first, then fallback
+      if (!urlWorked) {
+        console.warn("No surah URLs passed availability check, trying proxy URLs directly");
+        const proxyUrls = audioUrls.filter(url => url.startsWith('/api/audio/proxy'));
+        if (proxyUrls.length > 0) {
+          audioUrl = proxyUrls[0];
+          urlWorked = true;
+          console.log(`Using proxy surah URL: ${audioUrl}`);
+        } else if (audioUrls.length > 0) {
+          // Last resort: try the first URL directly
+          console.warn("No proxy URLs available, trying first surah URL directly");
+          audioUrl = audioUrls[0];
+          urlWorked = true;
+          console.log(`Using first surah URL as last resort: ${audioUrl}`);
+        }
       }
 
       if (!urlWorked || !audioUrl) {
@@ -269,42 +339,83 @@ export const useAudioPlayer = (messages: any) => {
       }
 
       if (audioRef.current) {
-        // Stop current audio if playing
+        // Stop current audio if playing and wait for it to properly stop
         if (!audioRef.current.paused) {
           audioRef.current.pause();
+          // Wait a bit for the pause to take effect
+          await new Promise(resolve => setTimeout(resolve, 100));
         }
 
-        audioRef.current.src = audioUrl;
-        audioRef.current.playbackRate = audioPlayer.speed;
-        audioRef.current.volume = audioPlayer.isMuted ? 0 : audioPlayer.volume;
+        let playAttempts = 0;
+        const maxAttempts = audioUrls.length;
+        
+        const attemptPlaySurah = async (urlToTry: string): Promise<void> => {
+          playAttempts++;
+          console.log(`Surah play attempt ${playAttempts}/${maxAttempts} with URL: ${urlToTry}`);
+          
+          return new Promise((resolve, reject) => {
+            if (!audioRef.current) {
+              reject(new Error("Audio element not available"));
+              return;
+            }
+
+            const handleSuccess = () => {
+              console.log(`Successfully started playing surah from: ${urlToTry}`);
+              setAudioPlayer((prev) => ({
+                ...prev,
+                isPlaying: true,
+                currentAyah: 1,
+                currentSurah: surahNumber,
+              }));
+              resolve();
+            };
+
+            const handleError = async (error: any) => {
+              console.error(`Surah play attempt ${playAttempts} failed:`, error);
+              
+              if (playAttempts < maxAttempts) {
+                // Try next URL
+                const nextUrl = audioUrls[playAttempts];
+                console.log(`Trying next surah URL: ${nextUrl}`);
+                
+                // Wait a bit before trying the next URL
+                setTimeout(async () => {
+                  try {
+                    await attemptPlaySurah(nextUrl);
+                    resolve();
+                  } catch (nextError) {
+                    reject(nextError);
+                  }
+                }, 200);
+              } else {
+                reject(error);
+              }
+            };
+
+            // Set up the audio source
+            audioRef.current.src = urlToTry;
+            audioRef.current.playbackRate = audioPlayer.speed;
+            audioRef.current.volume = audioPlayer.isMuted ? 0 : audioPlayer.volume;
+            
+            // Load the audio first, then play
+            audioRef.current.load();
+            
+            // Wait a moment for the load to register, then try to play
+            setTimeout(() => {
+              if (audioRef.current) {
+                audioRef.current.play()
+                  .then(handleSuccess)
+                  .catch(handleError);
+              }
+            }, 100);
+          });
+        };
 
         try {
-          await audioRef.current.play();
-          setAudioPlayer((prev) => ({
-            ...prev,
-            isPlaying: true,
-            currentAyah: 1,
-            currentSurah: surahNumber,
-          }));
-        } catch (playError) {
-          console.error(`Failed to play surah audio from URL: ${audioUrl}`, playError);
-          
-          // Try next URL if available
-          const currentIndex = audioUrls.indexOf(audioUrl);
-          if (currentIndex < audioUrls.length - 1) {
-            console.log("Trying next surah URL...");
-            const nextUrl = audioUrls[currentIndex + 1];
-            audioRef.current.src = nextUrl;
-            await audioRef.current.play();
-            setAudioPlayer((prev) => ({
-              ...prev,
-              isPlaying: true,
-              currentAyah: 1,
-              currentSurah: surahNumber,
-            }));
-          } else {
-            throw new Error(`Failed to play surah audio: ${playError instanceof Error ? playError.message : 'Unknown playback error'}`);
-          }
+          await attemptPlaySurah(audioUrl);
+        } catch (finalError) {
+          console.error(`All surah play attempts failed:`, finalError);
+          throw new Error(`Failed to play surah audio: ${finalError instanceof Error ? finalError.message : 'Unknown playback error'}`);
         }
       }
     } catch (error) {
@@ -379,6 +490,14 @@ export const useAudioPlayer = (messages: any) => {
         messages?.quran?.reciterChanged?.replace("{name}", reciterInfo.name) ||
           `Reciter changed to ${reciterInfo.name}`,
       );
+      
+      // If currently playing, inform user they may need to restart playback
+      if (audioPlayer.isPlaying) {
+        notify.info(
+          messages?.quran?.reciterChangeRestart ||
+          "Reciter changed. Please restart playback to hear the new reciter.",
+        );
+      }
     }
   };
 

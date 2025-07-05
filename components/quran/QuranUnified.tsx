@@ -126,8 +126,42 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
   };
 
   // Handle audio actions
-  const handlePlayAyah = (ayahNumber: number) => {
-    playAyah(ayahNumber, selectedSurah);
+  const handlePlayAyah = async (ayahNumber: number) => {
+    try {
+      // If currently playing the same ayah, pause it
+      if (audioPlayer.currentAyah === ayahNumber && audioPlayer.currentSurah === selectedSurah && audioPlayer.isPlaying) {
+        pauseAudio();
+        setAutoPlay(false);
+        notify.info(messages?.quran?.playbackStopped || "Playback stopped");
+        return;
+      }
+
+      // Set auto-play to true so it continues to next ayahs
+      setAutoPlay(true);
+      
+      // Track the event
+      analytics.trackEvent("ayah_play_from_selected", "engagement", {
+        surahNumber: selectedSurah,
+        startingAyah: ayahNumber,
+        totalAyahs: ayahs.length,
+        reciter: audioPlayer.reciter,
+      });
+
+      // Start playing from the selected ayah
+      await playAyah(ayahNumber, selectedSurah);
+      
+      // Show notification about continuous play
+      notify.info(
+        messages?.quran?.playingFromAyah?.replace("{ayah}", ayahNumber.toString())?.replace("{surah}", currentSurah?.name || `Surah ${selectedSurah}`) ||
+        `Playing from Ayah ${ayahNumber} to end of ${currentSurah?.name || `Surah ${selectedSurah}`}`,
+      );
+    } catch (error) {
+      console.error("Error starting continuous ayah playback:", error);
+      notify.error(
+        messages?.quran?.errors?.audioPlay ||
+        "Failed to play audio. Please check your connection and try again.",
+      );
+    }
   };
 
   const handlePlayFullSurah = async () => {
@@ -561,8 +595,16 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                               audioPlayer.currentSurah === selectedSurah &&
                               audioPlayer.isPlaying
                               ? "إيقاف"
-                              : "تشغيل"}
+                              : "تشغيل من هنا"}
                           </button>
+
+                          {/* Show continuous play indicator */}
+                          {audioPlayer.isPlaying && autoPlay && audioPlayer.currentSurah === selectedSurah && (
+                            <div className="flex items-center gap-1 px-2 py-1 text-xs bg-green-100 text-green-700 rounded-lg">
+                              <span>🔄</span>
+                              <span>تشغيل متواصل</span>
+                            </div>
+                          )}
 
                           <button
                             onClick={() => handleBookmarkToggle(selectedSurah, selectedAyah!)}

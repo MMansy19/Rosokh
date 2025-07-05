@@ -169,29 +169,36 @@ class QuranService {
   getAyahAudioUrls(ayahNumber: number, reciterEdition: string = 'ar.alafasy', surahNumber?: number): string[] {
     const reciter = RECITERS.find(r => r.id === reciterEdition);
     const altReciterId = reciter?.altId || 'Alafasy_128kbps';
+    const shortId = reciter?.shortId || 'afs';
     
     const urls: string[] = [];
     
-    // Start with proxy URLs to handle CORS issues
-    urls.push(API_ENDPOINTS.proxyAyahAudio(128, reciterEdition, ayahNumber));
-    urls.push(API_ENDPOINTS.proxyAyahAudio(64, reciterEdition, ayahNumber));
-    
-    // Alternative sources that are CORS-friendly
-    if (surahNumber) {
-      urls.push(API_ENDPOINTS.everyAyahAudio(altReciterId, surahNumber, ayahNumber));
-    }
-    
-    // QuranCDN alternative
-    urls.push(API_ENDPOINTS.alternativeAyahAudio(reciterEdition, ayahNumber));
-    
-    // Direct CDN URLs (might have CORS issues but worth trying)
+    // Priority 1: Direct CDN URLs (these work best for individual ayahs)
     urls.push(this.getAyahAudioUrl(ayahNumber, reciterEdition, 128));
     urls.push(this.getAyahAudioUrl(ayahNumber, reciterEdition, 64));
     
-    // Fallback to default reciter with proxy
+    // Priority 2: EveryAyah.com (only if we have valid mapping and surah number)
+    if (surahNumber && altReciterId) {
+      urls.push(API_ENDPOINTS.everyAyahAudio(altReciterId, surahNumber, ayahNumber));
+    }
+    
+    // Priority 3: MP3Quran.net alternative sources
+    urls.push(API_ENDPOINTS.mp3QuranAyah(shortId, ayahNumber));
+    
+    // Priority 4: Use proxy URLs as backup (for CORS issues)
+    urls.push(API_ENDPOINTS.proxyAyahAudio(128, reciterEdition, ayahNumber));
+    urls.push(API_ENDPOINTS.proxyAyahAudio(64, reciterEdition, ayahNumber));
+    
+    // Priority 5: Alternative audio sources
+    urls.push(API_ENDPOINTS.alternativeAyahAudio(reciterEdition.replace('ar.', ''), ayahNumber));
+    
+    // Priority 6: Always fallback to Alafasy (guaranteed to work)
     if (reciterEdition !== 'ar.alafasy') {
-      urls.push(API_ENDPOINTS.proxyAyahAudio(128, 'ar.alafasy', ayahNumber));
       urls.push(this.getAyahAudioUrl(ayahNumber, 'ar.alafasy', 128));
+      urls.push(API_ENDPOINTS.mp3QuranAyah('afs', ayahNumber));
+      if (surahNumber) {
+        urls.push(API_ENDPOINTS.everyAyahAudio('Alafasy_128kbps', surahNumber, ayahNumber));
+      }
     }
     
     return urls;
@@ -201,23 +208,34 @@ class QuranService {
   getSurahAudioUrls(surahNumber: number, reciterEdition: string = 'ar.alafasy'): string[] {
     const reciter = RECITERS.find(r => r.id === reciterEdition);
     const altReciterId = reciter?.altId || 'Alafasy_128kbps';
+    const shortId = reciter?.shortId || 'afs';
     
     const urls: string[] = [];
     
-    // Start with proxy URLs to handle CORS issues
+    // Priority 1: MP3Quran.net sources (these work best for full surahs)
+    urls.push(API_ENDPOINTS.mp3QuranSurah(shortId, surahNumber));
+    
+    // Priority 2: Alternative download sources (working ones from test)
+    if (reciterEdition === 'ar.alafasy') {
+      urls.push(`https://server8.mp3quran.net/afs/${surahNumber.toString().padStart(3, '0')}.mp3`);
+    }
+    
+    // Priority 3: Use proxy URLs as backup
     urls.push(API_ENDPOINTS.proxySurahAudio(128, reciterEdition, surahNumber));
     urls.push(API_ENDPOINTS.proxySurahAudio(64, reciterEdition, surahNumber));
     
-    // Alternative sources
-    urls.push(API_ENDPOINTS.alternativeSurahAudio(altReciterId, surahNumber));
-    
-    // Direct CDN URLs (might have CORS issues but worth trying)
+    // Priority 4: Direct CDN URLs (usually don't work but worth trying)
     urls.push(this.getSurahAudioUrl(surahNumber, reciterEdition, 128));
     urls.push(this.getSurahAudioUrl(surahNumber, reciterEdition, 64));
     
-    // Fallback to default reciter with proxy
+    // Priority 5: Alternative sources with different naming conventions
+    urls.push(API_ENDPOINTS.alternativeSurahAudio(altReciterId, surahNumber));
+    urls.push(API_ENDPOINTS.alternativeSurahAudio(reciterEdition.replace('ar.', ''), surahNumber));
+    
+    // Priority 6: Always fallback to Alafasy (guaranteed to work)
     if (reciterEdition !== 'ar.alafasy') {
-      urls.push(API_ENDPOINTS.proxySurahAudio(128, 'ar.alafasy', surahNumber));
+      urls.push(API_ENDPOINTS.mp3QuranSurah('afs', surahNumber));
+      urls.push(`https://server8.mp3quran.net/afs/${surahNumber.toString().padStart(3, '0')}.mp3`);
       urls.push(this.getSurahAudioUrl(surahNumber, 'ar.alafasy', 128));
     }
     
@@ -239,7 +257,7 @@ class QuranService {
         audio.src = '';
         audio.remove();
         resolve(false);
-      }, 3000); // Reduced timeout to 3 seconds for faster fallback
+      }, 5000); // Increased timeout to 5 seconds for better reliability
 
       const cleanup = () => {
         clearTimeout(timeout);
@@ -248,6 +266,11 @@ class QuranService {
       };
 
       audio.addEventListener('loadstart', () => {
+        cleanup();
+        resolve(true);
+      }, { once: true });
+
+      audio.addEventListener('canplay', () => {
         cleanup();
         resolve(true);
       }, { once: true });
@@ -299,6 +322,47 @@ class QuranService {
   // Get cache size
   getCacheSize(): number {
     return this.cache.size;
+  }
+
+  // Validate reciter availability
+  async validateReciter(reciterId: string): Promise<boolean> {
+    try {
+      const audioEditions = await this.getEditions('audio');
+      const availableReciters = audioEditions
+        .filter(edition => edition.type === 'versebyverse')
+        .map(edition => edition.identifier);
+      
+      return availableReciters.includes(reciterId);
+    } catch (error) {
+      console.warn(`Failed to validate reciter ${reciterId}:`, error);
+      return reciterId === 'ar.alafasy'; // Default to true for Alafasy
+    }
+  }
+
+  // Get working reciter ID with fallback
+  async getWorkingReciter(preferredReciter: string): Promise<string> {
+    const isValid = await this.validateReciter(preferredReciter);
+    if (isValid) {
+      return preferredReciter;
+    }
+    
+    // Try common alternatives
+    const alternatives = [
+      'ar.alafasy',
+      'ar.abdulbasit',
+      'ar.sudais',
+      'ar.husary'
+    ];
+    
+    for (const alt of alternatives) {
+      const isAltValid = await this.validateReciter(alt);
+      if (isAltValid) {
+        console.log(`Falling back from ${preferredReciter} to ${alt}`);
+        return alt;
+      }
+    }
+    
+    return 'ar.alafasy'; // Ultimate fallback
   }
 }
 
