@@ -303,6 +303,35 @@ export const useAudioPlayer = (messages: any) => {
     return reciter ? reciter.name : audioPlayer.reciter;
   };
 
+  const playNextAyah = async (currentAyahNumber: number, ayahs: any[] = [], currentSurah: number) => {
+    if (repeatMode === "verse") {
+      // Replay the same verse
+      if (audioPlayer.currentSurah) {
+        await playAyah(currentAyahNumber, audioPlayer.currentSurah);
+      }
+      return;
+    }
+
+    // Find next ayah in the current surah
+    const nextAyah = ayahs.find(
+      (ayah: any) => ayah.numberInSurah === currentAyahNumber + 1,
+    );
+    
+    if (nextAyah && currentSurah) {
+      // Play next ayah after a brief delay
+      setTimeout(() => playAyah(nextAyah.numberInSurah, currentSurah), 500);
+    } else if (repeatMode === "surah" && currentSurah) {
+      // If at end of surah and repeat mode is surah, go back to beginning
+      setTimeout(() => playAyah(1, currentSurah), 500);
+    }
+  };
+
+  const playPreviousAyah = async () => {
+    if (audioPlayer.currentAyah && audioPlayer.currentAyah > 1 && audioPlayer.currentSurah) {
+      await playAyah(audioPlayer.currentAyah - 1, audioPlayer.currentSurah);
+    }
+  };
+
   return {
     audioRef,
     audioPlayer,
@@ -319,5 +348,7 @@ export const useAudioPlayer = (messages: any) => {
     setRepeatMode,
     setAutoPlay,
     getCurrentReciterName,
+    playNextAyah,
+    playPreviousAyah,
   };
 };

@@ -54,21 +54,26 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
 
   return (
     <div className="sticky top-4 z-50 mb-6">
-      <div className="bg-surface/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg">
-        <div className="flex items-center justify-between mb-3">
+      <div className="bg-surface/95 backdrop-blur-sm border border-border rounded-lg shadow-lg">
+        {/* Main Player Bar */}
+        <div className="flex items-center justify-between p-4">
+          {/* Left Section - Playback Controls */}
           <div className="flex items-center space-x-4">
             {/* Previous Button */}
             <button
               onClick={onPrevious}
               disabled={audioPlayer.currentAyah === 1}
-              className="p-2 bg-secondary text-foreground rounded-full bg-hoverButton hover:text-foreground transition-colors disabled:opacity-50"
+              className="p-2 bg-secondary text-foreground rounded-full hover:bg-hoverButton hover:text-foreground transition-colors disabled:opacity-50"
+              title="Previous Verse"
             >
               <SkipBack className="w-4 h-4" />
             </button>
 
+            {/* Play/Pause Button */}
             <button
               onClick={onPlayPause}
-              className="p-2 bg-primary text-white rounded-full hover:bg-primary/80 transition-colors"
+              className="p-3 bg-primary text-white rounded-full hover:bg-primary/80 transition-colors shadow-md"
+              title={audioPlayer.isPlaying ? "Pause" : "Play"}
             >
               {audioPlayer.isPlaying ? (
                 <Pause className="w-5 h-5" />
@@ -80,7 +85,8 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             {/* Next Button */}
             <button
               onClick={onNext}
-              className="p-2 bg-secondary text-foreground rounded-full bg-hoverButton hover:text-foreground transition-colors"
+              className="p-2 bg-secondary text-foreground rounded-full hover:bg-hoverButton hover:text-foreground transition-colors"
+              title="Next Verse"
             >
               <SkipForward className="w-4 h-4" />
             </button>
@@ -91,61 +97,70 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               className={`p-2 rounded-full transition-colors ${
                 repeatMode !== "none"
                   ? "bg-accent text-white"
-                  : "bg-secondary text-foreground bg-hoverButton hover:text-foreground"
+                  : "bg-secondary text-foreground hover:bg-hoverButton hover:text-foreground"
               }`}
               title={`Repeat: ${repeatMode}`}
             >
               <Repeat className="w-4 h-4" />
+              {repeatMode !== "none" && (
+                <span className="absolute -top-1 -right-1 w-2 h-2 bg-accent rounded-full"></span>
+              )}
             </button>
+          </div>
 
-            <div className="text-sm">
-              <div className="font-medium">
-                {locale === "ar"
-                  ? currentSurah?.name
-                  : currentSurah?.englishName}
-              </div>
-              <div className="text-muted flex items-center gap-2">
-                <span>Verse {audioPlayer.currentAyah}</span>
-                {repeatMode !== "none" && (
-                  <span className="text-accent">
-                    ({repeatMode === "verse" ? "🔂" : "🔁"})
-                  </span>
-                )}
-                <span className="text-xs text-muted-foreground">
-                  • {RECITERS.find(r => r.id === audioPlayer.reciter)?.name.split(' ')[0] || audioPlayer.reciter}
+          {/* Center Section - Current Playing Info */}
+          <div className="flex-1 mx-6 text-center">
+            <div className="font-medium text-foreground">
+              {locale === "ar"
+                ? currentSurah?.name
+                : currentSurah?.englishName}
+            </div>
+            <div className="text-sm text-muted flex items-center justify-center gap-2">
+              <span>آية {audioPlayer.currentAyah}</span>
+              {repeatMode !== "none" && (
+                <span className="text-accent">
+                  ({repeatMode === "verse" ? "🔂 آية" : "🔁 سورة"})
                 </span>
-              </div>
+              )}
+              <span className="text-xs text-muted-foreground">
+                • {RECITERS.find(r => r.id === audioPlayer.reciter)?.name.split(' ')[0] || audioPlayer.reciter}
+              </span>
             </div>
           </div>
 
+          {/* Right Section - Settings & Controls */}
           <div className="flex items-center space-x-2">
             {/* Auto-play toggle */}
             <button
               onClick={onAutoPlayToggle}
-              className={`px-2 py-1 text-xs rounded transition-colors ${
+              className={`px-3 py-2 text-xs rounded-lg transition-colors flex items-center gap-1 ${
                 autoPlay
                   ? "bg-accent text-white"
-                  : "bg-secondary text-foreground bg-hoverButton hover:text-foreground"
+                  : "bg-secondary text-foreground hover:bg-hoverButton hover:text-foreground"
               }`}
+              title="Auto-play next verse"
             >
-              Auto
+              <span>🔄</span>
+              <span>Auto</span>
             </button>
 
             {/* Play Full Surah */}
             <button
               onClick={onPlayFullSurah}
-              className="px-2 py-1 text-xs bg-primary text-white rounded hover:bg-primary/80 transition-colors"
+              className="px-3 py-2 text-xs bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors flex items-center gap-1"
+              title="Play entire Surah"
             >
-              {messages?.youtube.actions.playAll}
+              <span>▶️</span>
+              <span>{messages?.youtube?.actions?.playAll || messages?.quran?.playAll || "Play All"}</span>
             </button>
 
-            {/* Reciter Selection - Quick Access */}
+            {/* Quick Reciter Selection */}
             <div className="flex items-center space-x-1">
-              <span className="text-xs text-muted-foreground">Reciter:</span>
+              <span className="text-xs text-muted-foreground">القارئ:</span>
               <select
                 value={audioPlayer.reciter}
                 onChange={(e) => onReciterChange(e.target.value)}
-                className="text-xs bg-secondary border border-border rounded px-2 py-1 max-w-[120px]"
+                className="text-xs bg-secondary border border-border rounded px-2 py-1 max-w-[120px] focus:ring-2 focus:ring-primary"
               >
                 {RECITERS.map((reciter) => (
                   <option key={reciter.id} value={reciter.id}>
@@ -159,7 +174,8 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             <select
               value={audioPlayer.speed}
               onChange={(e) => onSpeedChange(parseFloat(e.target.value))}
-              className="text-xs bg-secondary border border-border rounded px-2 py-1"
+              className="text-xs bg-secondary border border-border rounded px-2 py-1 focus:ring-2 focus:ring-primary"
+              title="Playback speed"
             >
               <option value={0.5}>0.5x</option>
               <option value={0.75}>0.75x</option>
@@ -171,7 +187,8 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             {/* Volume Control */}
             <button
               onClick={onVolumeToggle}
-              className="p-1 hover:bg-secondary rounded"
+              className="p-2 hover:bg-secondary rounded-lg transition-colors"
+              title={audioPlayer.isMuted ? "Unmute" : "Mute"}
             >
               {audioPlayer.isMuted ? (
                 <VolumeX className="w-4 h-4" />
@@ -182,18 +199,28 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
           </div>
         </div>
 
-        {/* Settings Panel */}
+        {/* Progress Bar */}
+        <div className="px-4 pb-4">
+          <div className="w-full bg-secondary rounded-full h-2 overflow-hidden">
+            <div 
+              className="bg-primary h-2 rounded-full transition-all duration-300 ease-out" 
+              style={{ width: "33%" }}
+            ></div>
+          </div>
+        </div>
+
+        {/* Expanded Settings Panel */}
         {showSettings && (
-          <div className="mt-4 p-4 bg-secondary rounded-lg">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="border-t border-border p-4 bg-secondary/50">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
-                  Reciter
+                  القارئ المفضل
                 </label>
                 <select
                   value={audioPlayer.reciter}
                   onChange={(e) => onReciterChange(e.target.value)}
-                  className="w-full bg-background border border-border rounded-lg px-3 py-2"
+                  className="w-full bg-background border border-border rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary"
                 >
                   {RECITERS.map((reciter) => (
                     <option key={reciter.id} value={reciter.id}>
@@ -205,7 +232,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
 
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
-                  Volume
+                  مستوى الصوت ({Math.round(audioPlayer.volume * 100)}%)
                 </label>
                 <input
                   type="range"
@@ -214,17 +241,12 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                   step="0.1"
                   value={audioPlayer.volume}
                   onChange={(e) => onVolumeChange(parseFloat(e.target.value))}
-                  className="w-full"
+                  className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer slider"
                 />
               </div>
             </div>
           </div>
         )}
-
-        {/* Progress Bar */}
-        <div className="w-full bg-secondary rounded-full h-1">
-          <div className="bg-primary h-1 rounded-full w-1/3"></div>
-        </div>
       </div>
     </div>
   );

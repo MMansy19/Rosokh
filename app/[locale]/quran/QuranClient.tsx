@@ -4,9 +4,8 @@ import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { AnalyticsService } from "@/services/AnalyticsService";
 import { NotificationService } from "@/services/NotificationService";
-import { QuranUthmani } from "@/components/quran/QuranUthmani";
+import { QuranUnified } from "@/components/quran/QuranUnified";
 import QuranSearch from "@/components/quran/QuranSearch";
-import { QuranRead } from "@/components/quran/QuranRead";
 import { TabNavigation } from "@/components/quran/ui/TabNavigation";
 import { TabType, QuranClientProps } from "@/components/quran/types";
 import { QuranMushaf } from "@/components/quran";
@@ -61,9 +60,9 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
   const renderTabContent = () => {
     switch (activeTab) {
       case "learn":
-        return <QuranRead locale={locale} messages={messages} />;
+        return <QuranUnified locale={locale} messages={messages} mode="learn" />;
       case "read":
-        return <QuranUthmani locale={locale} messages={messages} />;
+        return <QuranUnified locale={locale} messages={messages} mode="read" />;
       case "search":
         return <QuranSearch locale={locale} messages={messages} />;
       case "mushaf":
@@ -71,7 +70,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
       case "test":
         return <QuranTestPage locale={locale} messages={messages} />;
       default:
-        return <QuranRead locale={locale} messages={messages} />;
+        return <QuranUnified locale={locale} messages={messages} mode="read" />;
     }
   };
 

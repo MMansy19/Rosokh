@@ -19,6 +19,7 @@ interface AyahsListProps {
   locale: string;
   messages: any;
   loading?: boolean;
+  showTafsir?: boolean;
 }
 
 export const AyahsList: React.FC<AyahsListProps> = ({
@@ -37,6 +38,7 @@ export const AyahsList: React.FC<AyahsListProps> = ({
   locale,
   messages,
   loading = false,
+  showTafsir = false,
 }) => {
   if (loading) {
     return (
@@ -94,6 +96,7 @@ export const AyahsList: React.FC<AyahsListProps> = ({
                 onShare={onShare}
                 locale={locale}
                 messages={messages}
+                showTafsir={showTafsir}
               />
             </React.Fragment>
           );

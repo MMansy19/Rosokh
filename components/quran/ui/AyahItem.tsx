@@ -17,6 +17,7 @@ interface AyahItemProps {
   onShare: (surah: number, ayah: number, text: string) => void;
   locale: string;
   messages: any;
+  showTafsir?: boolean;
 }
 
 export const AyahItem: React.FC<AyahItemProps> = ({
@@ -33,6 +34,7 @@ export const AyahItem: React.FC<AyahItemProps> = ({
   onShare,
   locale,
   messages,
+  showTafsir = false,
 }) => {
   return (
     <div
@@ -88,6 +90,23 @@ export const AyahItem: React.FC<AyahItemProps> = ({
                 {messages?.quran?.transliterationNotAvailable ||
                   "Transliteration not available"}
               </p>
+            </div>
+          )}
+
+          {/* Tafsir */}
+          {showTafsir && (
+            <div className="mb-4 p-4 bg-accent/5 rounded-lg border border-accent/20">
+              <h4 className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+                <span>التفسير</span>
+                <span className="text-xs text-muted-foreground">({surahNumber}:{ayah.numberInSurah})</span>
+              </h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {messages?.quran?.tafsirPlaceholder || 
+                 "Tafsir content will be available soon. This feature will provide detailed commentary and interpretation of the verse."}
+              </p>
+              <div className="mt-2 text-xs text-muted-foreground">
+                <span>المصدر: تفسير ابن كثير</span>
+              </div>
             </div>
           )}
         </div>
