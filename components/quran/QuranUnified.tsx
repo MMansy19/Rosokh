@@ -493,11 +493,98 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                 messages={messages}
               />
             )}
+            {/* Surah Navigation */}
+            <div className="flex justify-between items-center mt-6 mx-4" dir={locale === "ar" ? "rtl" : "ltr"}>
+              <button
+                onClick={goToPreviousSurah}
+                disabled={selectedSurah <= 1}
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface hover:bg-surface/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                {/* السورة السابقة */}
+              </button>
 
+              <div className="text-center">
+                <select
+                  value={selectedSurah}
+                  onChange={(e) => handleSurahSelect(Number(e.target.value))}
+                  className="px-4 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-center"
+                  dir={locale === "ar" ? "rtl" : "ltr"}
+                >
+                  {surahs.map((surah) => (
+                    <option key={surah.number} value={surah.number}>
+                      {surah.number}. {surah.name || surah.arabicName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <button
+                onClick={goToNextSurah}
+                disabled={selectedSurah >= 114}
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface hover:bg-surface/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
+              >
+                <ChevronRight className="w-4 h-4" />
+                {/* السورة التالية */}
+              </button>
+            </div>
             <div className="p-2 sm:p-6">
               {currentMode === "read" ? (
                 /* Read Mode - Continuous Text */
                 <div className="text-justify leading-loose quran-text">
+                  {/* Ayah Actions Panel */}
+                  {selectedAyah && (
+                    <div className="mt-6 p-4 bg-background/50 rounded-lg border border-border/50">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-sm font-medium text-foreground mb-1">
+                            آية {selectedAyah} - سورة {currentSurah?.name}
+                          </h3>
+                          <p className="text-xs text-muted-foreground">
+                            {selectedSurah}:{selectedAyah}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handlePlayAyah(selectedAyah!)}
+                            className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-colors"
+                          >
+                            {audioPlayer.currentAyah === selectedAyah &&
+                              audioPlayer.currentSurah === selectedSurah &&
+                              audioPlayer.isPlaying ? (
+                              <Pause className="w-4 h-4" />
+                            ) : (
+                              <Play className="w-4 h-4" />
+                            )}
+                            {audioPlayer.currentAyah === selectedAyah &&
+                              audioPlayer.currentSurah === selectedSurah &&
+                              audioPlayer.isPlaying
+                              ? "إيقاف"
+                              : "تشغيل"}
+                          </button>
+
+                          <button
+                            onClick={() => handleBookmarkToggle(selectedSurah, selectedAyah!)}
+                            className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-green-500 hover:bg-green-600 text-white transition-colors"
+                          >
+                            <BookOpen className="w-4 h-4" />
+                            إشارة مرجعية
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Tafsir */}
+                      {showTafsir && (
+                        <div className="mt-4 p-1 sm:p-4 bg-accent/5 rounded-lg border border-accent/20">
+                          <h4 className="text-sm font-medium text-foreground mb-2">التفسير</h4>
+                          <p className="text-sm text-muted-foreground">
+                            {messages?.quran?.tafsirPlaceholder || "Tafsir content will be available soon"}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   {/* Bismillah */}
                   {selectedSurah !== 1 && selectedSurah !== 9 && (
                     <div className="text-center mb-8">
@@ -523,91 +610,47 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                       letterSpacing: "0.02em",
                     }}
                   >
-                    {ayahs.map((ayah, index) => (
-                      <span key={ayah.number}>
-                        <span
-                          className={`cursor-pointer transition-all duration-200 hover:bg-primary/10 rounded px-1 ${
-                            selectedAyah === ayah.numberInSurah
-                              ? "bg-primary/20 shadow-sm"
-                              : ""
-                          }`}
-                          onClick={() => handleAyahClick(ayah.numberInSurah)}
-                          title={`آية ${ayah.numberInSurah}`}
-                        >
-                          {ayah.text}
-                        </span>{" "}
-                        <span
-                          className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-bold cursor-pointer transition-all duration-200 mx-2 ${
-                            audioPlayer.currentAyah === ayah.numberInSurah && 
-                            audioPlayer.currentSurah === selectedSurah
-                              ? "bg-primary text-white"
-                              : selectedAyah === ayah.numberInSurah
-                                ? "bg-primary/80 text-white"
-                                : "bg-primary/20 text-primary hover:bg-primary/30"
-                          }`}
-                          onClick={() => handleAyahClick(ayah.numberInSurah)}
-                          style={{ fontSize: "12px" }}
-                        >
-                          {ayah.numberInSurah}
+                    {ayahs.map((ayah, index) => {
+                      const withoutBismillah = selectedSurah !== 1 && selectedSurah !== 9;
+                      if (index === 0 && withoutBismillah) {
+                        // Remove Bismillah from the beginning of the ayah text
+                        ayah = {
+                          ...ayah,
+                          text: ayah.text.substring(38).trim(),
+                        };
+                      }
+                      return (
+                        <span key={ayah.number}>
+                          <span
+                            className={`cursor-pointer transition-all duration-200 hover:bg-primary/10 rounded px-1 ${
+                              selectedAyah === ayah.numberInSurah
+                                ? "bg-primary/20 shadow-sm"
+                                : ""
+                            }`}
+                            onClick={() => handleAyahClick(ayah.numberInSurah)}
+                            title={`آية ${ayah.numberInSurah}`}
+                          >
+                            {ayah.text}
+                          </span>{" "}
+                          <span
+                            className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-bold cursor-pointer transition-all duration-200 mx-2 ${
+                              audioPlayer.currentAyah === ayah.numberInSurah && 
+                              audioPlayer.currentSurah === selectedSurah
+                                ? "bg-primary text-white"
+                                : selectedAyah === ayah.numberInSurah
+                                  ? "bg-primary/80 text-white"
+                                  : "bg-primary/20 text-primary hover:bg-primary/30"
+                            }`}
+                            onClick={() => handleAyahClick(ayah.numberInSurah)}
+                            style={{ fontSize: "12px" }}
+                          >
+                            {ayah.numberInSurah}
+                          </span>
+                          {index < ayahs.length - 1 && " "}
                         </span>
-                        {index < ayahs.length - 1 && " "}
-                      </span>
-                    ))}
+                      );
+                    })}
                   </p>
-
-                  {/* Ayah Actions Panel */}
-                  {selectedAyah && (
-                    <div className="mt-6 p-4 bg-background/50 rounded-lg border border-border/50">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h3 className="text-sm font-medium text-foreground mb-1">
-                            آية {selectedAyah} - سورة {currentSurah?.name}
-                          </h3>
-                          <p className="text-xs text-muted-foreground">
-                            {selectedSurah}:{selectedAyah}
-                          </p>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handlePlayAyah(selectedAyah!)}
-                            className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-colors"
-                          >
-                            {audioPlayer.currentAyah === selectedAyah && 
-                             audioPlayer.currentSurah === selectedSurah && 
-                             audioPlayer.isPlaying ? (
-                              <Pause className="w-4 h-4" />
-                            ) : (
-                              <Play className="w-4 h-4" />
-                            )}
-                            {audioPlayer.currentAyah === selectedAyah && 
-                             audioPlayer.currentSurah === selectedSurah && 
-                             audioPlayer.isPlaying
-                              ? "إيقاف"
-                              : "تشغيل"}
-                          </button>
-
-                          <button 
-                            onClick={() => handleBookmarkToggle(selectedSurah, selectedAyah!)}
-                            className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-green-500 hover:bg-green-600 text-white transition-colors"
-                          >
-                            <BookOpen className="w-4 h-4" />
-                            إشارة مرجعية
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Tafsir */}
-                      {showTafsir && (
-                        <div className="mt-4 p-1 sm:p-4 bg-accent/5 rounded-lg border border-accent/20">
-                          <h4 className="text-sm font-medium text-foreground mb-2">التفسير</h4>
-                          <p className="text-sm text-muted-foreground">
-                            {messages?.quran?.tafsirPlaceholder || "Tafsir content will be available soon"}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  )}
                 </div>
               ) : (
                 /* Learn Mode - Ayah by Ayah */
@@ -633,41 +676,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
             </div>
           </div>
 
-          {/* Surah Navigation */}
-          <div className="flex justify-between items-center mt-6">
-            <button
-              onClick={goToPreviousSurah}
-              disabled={selectedSurah <= 1}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface hover:bg-surface/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
-            >
-              <ChevronRight className="w-4 h-4" />
-              السورة السابقة
-            </button>
 
-            <div className="text-center">
-              <select
-                value={selectedSurah}
-                onChange={(e) => handleSurahSelect(Number(e.target.value))}
-                className="px-4 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-center"
-                dir={locale === "ar" ? "rtl" : "ltr"}
-              >
-                {surahs.map((surah) => (
-                  <option key={surah.number} value={surah.number}>
-                    {surah.number}. {surah.name || surah.arabicName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <button
-              onClick={goToNextSurah}
-              disabled={selectedSurah >= 114}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface hover:bg-surface/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
-            >
-              السورة التالية
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-          </div>
 
           {/* Bookmarks Summary */}
           {bookmarkedAyahs.size > 0 && (

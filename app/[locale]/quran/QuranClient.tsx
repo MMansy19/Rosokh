@@ -77,7 +77,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
             {messages?.quran?.title || "Quran Reader"}
           </h1>
           <div className="flex justify-center items-center mb-6">
-            <div className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl quran-text text-primary text-center leading-none">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl quran-text text-primary text-center leading-none">
               ﷽
             </div>
           </div>
