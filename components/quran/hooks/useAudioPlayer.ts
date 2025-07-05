@@ -100,11 +100,15 @@ export const useAudioPlayer = (messages: any) => {
       let urlWorked = false;
 
       // Test each URL to find one that works
-      for (const url of audioUrls) {
-        console.log(`Testing audio URL: ${url}`);
+      for (let i = 0; i < audioUrls.length; i++) {
+        const url = audioUrls[i];
+        console.log(`Testing audio URL ${i + 1}/${audioUrls.length}: ${url}`);
         
         try {
-          const isAvailable = await quranService.checkAudioAvailability(url);
+          // Skip availability check for proxy URLs as they should work
+          const isProxy = url.startsWith('/api/audio/proxy');
+          const isAvailable = isProxy || await quranService.checkAudioAvailability(url);
+          
           console.log(`URL ${url} availability: ${isAvailable}`);
           
           if (isAvailable) {
@@ -119,11 +123,15 @@ export const useAudioPlayer = (messages: any) => {
         }
       }
 
-      // If no URL worked through availability check, try the first URL directly
-      if (!urlWorked && audioUrls.length > 0) {
-        console.warn("No URLs passed availability check, trying direct playback with first URL");
-        audioUrl = audioUrls[0];
-        urlWorked = true;
+      // If no URL worked through availability check, try proxy URLs directly
+      if (!urlWorked) {
+        console.warn("No URLs passed availability check, trying proxy URLs directly");
+        const proxyUrls = audioUrls.filter(url => url.startsWith('/api/audio/proxy'));
+        if (proxyUrls.length > 0) {
+          audioUrl = proxyUrls[0];
+          urlWorked = true;
+          console.log(`Using proxy URL: ${audioUrl}`);
+        }
       }
 
       if (!urlWorked || !audioUrl) {
@@ -136,37 +144,65 @@ export const useAudioPlayer = (messages: any) => {
           audioRef.current.pause();
         }
 
-        audioRef.current.src = audioUrl;
-        audioRef.current.playbackRate = audioPlayer.speed;
-        audioRef.current.volume = audioPlayer.isMuted ? 0 : audioPlayer.volume;
+        let playAttempts = 0;
+        const maxAttempts = 3;
+        const attemptPlay = async (urlToTry: string): Promise<void> => {
+          playAttempts++;
+          console.log(`Play attempt ${playAttempts} with URL: ${urlToTry}`);
+          
+          return new Promise((resolve, reject) => {
+            if (!audioRef.current) {
+              reject(new Error("Audio element not available"));
+              return;
+            }
+
+            const handleSuccess = () => {
+              setAudioPlayer((prev) => ({
+                ...prev,
+                isPlaying: true,
+                currentAyah: ayahNumber,
+                currentSurah: surahNumber,
+              }));
+              resolve();
+            };
+
+            const handleError = async (error: any) => {
+              console.error(`Play attempt ${playAttempts} failed:`, error);
+              
+              if (playAttempts < maxAttempts && audioUrls.length > playAttempts) {
+                // Try next URL
+                const nextUrl = audioUrls[playAttempts];
+                console.log(`Trying next URL: ${nextUrl}`);
+                audioRef.current!.src = nextUrl;
+                audioRef.current!.playbackRate = audioPlayer.speed;
+                audioRef.current!.volume = audioPlayer.isMuted ? 0 : audioPlayer.volume;
+                
+                try {
+                  await attemptPlay(nextUrl);
+                  resolve();
+                } catch (nextError) {
+                  reject(nextError);
+                }
+              } else {
+                reject(error);
+              }
+            };
+
+            audioRef.current.src = urlToTry;
+            audioRef.current.playbackRate = audioPlayer.speed;
+            audioRef.current.volume = audioPlayer.isMuted ? 0 : audioPlayer.volume;
+
+            audioRef.current.play()
+              .then(handleSuccess)
+              .catch(handleError);
+          });
+        };
 
         try {
-          await audioRef.current.play();
-          setAudioPlayer((prev) => ({
-            ...prev,
-            isPlaying: true,
-            currentAyah: ayahNumber,
-            currentSurah: surahNumber,
-          }));
-        } catch (playError) {
-          console.error(`Failed to play audio from URL: ${audioUrl}`, playError);
-          
-          // Try next URL if available
-          const currentIndex = audioUrls.indexOf(audioUrl);
-          if (currentIndex < audioUrls.length - 1) {
-            console.log("Trying next URL...");
-            const nextUrl = audioUrls[currentIndex + 1];
-            audioRef.current.src = nextUrl;
-            await audioRef.current.play();
-            setAudioPlayer((prev) => ({
-              ...prev,
-              isPlaying: true,
-              currentAyah: ayahNumber,
-              currentSurah: surahNumber,
-            }));
-          } else {
-            throw new Error(`Failed to play audio: ${playError instanceof Error ? playError.message : 'Unknown playback error'}`);
-          }
+          await attemptPlay(audioUrl);
+        } catch (finalError) {
+          console.error(`All play attempts failed:`, finalError);
+          throw new Error(`Failed to play audio: ${finalError instanceof Error ? finalError.message : 'Unknown playback error'}`);
         }
       }
     } catch (error) {

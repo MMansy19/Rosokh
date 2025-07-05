@@ -48,7 +48,7 @@ export interface QuranClientProps {
   messages: any;
 }
 
-export type TabType = "learn" | "read" | "search" | "mushaf" | "test";
+export type TabType = "read" | "search" | "mushaf";
 export type RepeatMode = "none" | "verse" | "surah";
 
 export interface Reciter {

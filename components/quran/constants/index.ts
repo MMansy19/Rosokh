@@ -73,7 +73,7 @@ export const API_ENDPOINTS = {
   surahAudio: (bitrate: number, edition: string, surahNumber: number) =>
     `https://cdn.islamic.network/quran/audio-surah/${bitrate}/${edition}/${surahNumber}.mp3`,
   
-  // Alternative audio sources for fallback
+  // Alternative audio sources for fallback (CORS-friendly)
   alternativeAyahAudio: (reciter: string, ayahNumber: number) =>
     `https://audio.qurancdn.com/${reciter}/${ayahNumber}.mp3`,
   alternativeSurahAudio: (reciter: string, surahNumber: number) => 
@@ -82,6 +82,12 @@ export const API_ENDPOINTS = {
   // EveryAyah.com alternative (reliable backup)
   everyAyahAudio: (reciter: string, surahNumber: number, ayahNumber: number) =>
     `https://everyayah.com/data/${reciter}/${surahNumber.toString().padStart(3, '0')}${ayahNumber.toString().padStart(3, '0')}.mp3`,
+  
+  // Proxy endpoints for CORS issues
+  proxyAyahAudio: (bitrate: number, edition: string, ayahNumber: number) =>
+    `/api/audio/proxy?url=${encodeURIComponent(`https://cdn.islamic.network/quran/audio/${bitrate}/${edition}/${ayahNumber}.mp3`)}`,
+  proxySurahAudio: (bitrate: number, edition: string, surahNumber: number) =>
+    `/api/audio/proxy?url=${encodeURIComponent(`https://cdn.islamic.network/quran/audio-surah/${bitrate}/${edition}/${surahNumber}.mp3`)}`,
   
   // Ayah images
   ayahImage: (surah: number, ayah: number) =>

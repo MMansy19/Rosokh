@@ -172,11 +172,11 @@ class QuranService {
     
     const urls: string[] = [];
     
-    // Primary source - Islamic Network CDN
-    urls.push(this.getAyahAudioUrl(ayahNumber, reciterEdition, 128));
-    urls.push(this.getAyahAudioUrl(ayahNumber, reciterEdition, 64));
+    // Start with proxy URLs to handle CORS issues
+    urls.push(API_ENDPOINTS.proxyAyahAudio(128, reciterEdition, ayahNumber));
+    urls.push(API_ENDPOINTS.proxyAyahAudio(64, reciterEdition, ayahNumber));
     
-    // Alternative sources
+    // Alternative sources that are CORS-friendly
     if (surahNumber) {
       urls.push(API_ENDPOINTS.everyAyahAudio(altReciterId, surahNumber, ayahNumber));
     }
@@ -184,10 +184,14 @@ class QuranService {
     // QuranCDN alternative
     urls.push(API_ENDPOINTS.alternativeAyahAudio(reciterEdition, ayahNumber));
     
-    // Fallback to default reciter
+    // Direct CDN URLs (might have CORS issues but worth trying)
+    urls.push(this.getAyahAudioUrl(ayahNumber, reciterEdition, 128));
+    urls.push(this.getAyahAudioUrl(ayahNumber, reciterEdition, 64));
+    
+    // Fallback to default reciter with proxy
     if (reciterEdition !== 'ar.alafasy') {
+      urls.push(API_ENDPOINTS.proxyAyahAudio(128, 'ar.alafasy', ayahNumber));
       urls.push(this.getAyahAudioUrl(ayahNumber, 'ar.alafasy', 128));
-      urls.push(this.getAyahAudioUrl(ayahNumber, 'ar.alafasy', 64));
     }
     
     return urls;
@@ -200,17 +204,21 @@ class QuranService {
     
     const urls: string[] = [];
     
-    // Primary source - Islamic Network CDN
-    urls.push(this.getSurahAudioUrl(surahNumber, reciterEdition, 128));
-    urls.push(this.getSurahAudioUrl(surahNumber, reciterEdition, 64));
+    // Start with proxy URLs to handle CORS issues
+    urls.push(API_ENDPOINTS.proxySurahAudio(128, reciterEdition, surahNumber));
+    urls.push(API_ENDPOINTS.proxySurahAudio(64, reciterEdition, surahNumber));
     
     // Alternative sources
     urls.push(API_ENDPOINTS.alternativeSurahAudio(altReciterId, surahNumber));
     
-    // Fallback to default reciter
+    // Direct CDN URLs (might have CORS issues but worth trying)
+    urls.push(this.getSurahAudioUrl(surahNumber, reciterEdition, 128));
+    urls.push(this.getSurahAudioUrl(surahNumber, reciterEdition, 64));
+    
+    // Fallback to default reciter with proxy
     if (reciterEdition !== 'ar.alafasy') {
+      urls.push(API_ENDPOINTS.proxySurahAudio(128, 'ar.alafasy', surahNumber));
       urls.push(this.getSurahAudioUrl(surahNumber, 'ar.alafasy', 128));
-      urls.push(this.getSurahAudioUrl(surahNumber, 'ar.alafasy', 64));
     }
     
     return urls;
@@ -229,29 +237,45 @@ class QuranService {
       const audio = new Audio();
       const timeout = setTimeout(() => {
         audio.src = '';
+        audio.remove();
         resolve(false);
-      }, 5000); // 5 second timeout
+      }, 3000); // Reduced timeout to 3 seconds for faster fallback
+
+      const cleanup = () => {
+        clearTimeout(timeout);
+        audio.src = '';
+        audio.remove();
+      };
 
       audio.addEventListener('loadstart', () => {
-        clearTimeout(timeout);
+        cleanup();
         resolve(true);
       }, { once: true });
 
-      audio.addEventListener('error', () => {
-        clearTimeout(timeout);
+      audio.addEventListener('canplaythrough', () => {
+        cleanup();
+        resolve(true);
+      }, { once: true });
+
+      audio.addEventListener('error', (e) => {
+        console.warn(`Audio availability check failed for ${url}:`, e);
+        cleanup();
         resolve(false);
       }, { once: true });
 
       audio.addEventListener('abort', () => {
-        clearTimeout(timeout);
+        cleanup();
         resolve(false);
       }, { once: true });
 
       try {
         audio.preload = 'metadata';
+        audio.volume = 0; // Mute during testing
         audio.src = url;
+        audio.load(); // Explicitly load the audio
       } catch (error) {
-        clearTimeout(timeout);
+        console.warn(`Error setting audio source ${url}:`, error);
+        cleanup();
         resolve(false);
       }
     });

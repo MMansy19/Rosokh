@@ -9,15 +9,13 @@ import QuranSearch from "@/components/quran/QuranSearch";
 import { TabNavigation } from "@/components/quran/ui/TabNavigation";
 import { TabType, QuranClientProps } from "@/components/quran/types";
 import { QuranMushaf } from "@/components/quran";
-import { QuranTestPage } from "@/components/quran/QuranTestPage";
-import { AudioTest } from "@/components/quran/ui/AudioTest";
 
 export function QuranClient({ locale, messages }: QuranClientProps) {
   const searchParams = useSearchParams();
   const analytics = useMemo(() => AnalyticsService.getInstance(), []);
   const notifications = useMemo(() => NotificationService.getInstance(), []);
 
-  const [activeTab, setActiveTab] = useState<TabType>("learn");
+  const [activeTab, setActiveTab] = useState<TabType>("read");
 
   // Initialize active tab based on URL parameters (for global search integration)
   useEffect(() => {
@@ -59,16 +57,12 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
   // Render tab content
   const renderTabContent = () => {
     switch (activeTab) {
-      case "learn":
-        return <QuranUnified locale={locale} messages={messages} mode="learn" />;
       case "read":
         return <QuranUnified locale={locale} messages={messages} mode="read" />;
       case "search":
         return <QuranSearch locale={locale} messages={messages} />;
       case "mushaf":
         return <QuranMushaf locale={locale} messages={messages} />;
-      case "test":
-        return <QuranTestPage locale={locale} messages={messages} />;
       default:
         return <QuranUnified locale={locale} messages={messages} mode="read" />;
     }
@@ -83,7 +77,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
             {messages?.quran?.title || "Quran Reader"}
           </h1>
           <div className="flex justify-center items-center mb-6">
-            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl quran-text text-primary text-center leading-none">
+            <div className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl quran-text text-primary text-center leading-none">
               ﷽
             </div>
           </div>

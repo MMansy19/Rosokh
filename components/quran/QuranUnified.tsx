@@ -8,7 +8,6 @@ import {
   Pause,
   Book,
   GraduationCap,
-  Volume2,
   Eye,
 } from "lucide-react";
 import { useSurahs } from "./hooks/useSurahs";
@@ -22,7 +21,6 @@ import { AudioPlayerBar } from "./ui/AudioPlayerBar";
 import { AnalyticsService } from "@/services/AnalyticsService";
 import { useNotifications } from "@/contexts/GlobalContext";
 import { RepeatMode, Surah, Ayah } from "./types";
-import { quranService } from "@/services/quranService";
 
 interface QuranUnifiedProps {
   locale: string;
@@ -257,12 +255,11 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-4" dir={locale === "ar" ? "rtl" : "ltr"}>
+    <div className="max-w-7xl mx-auto p-2 sm:p-4" dir={locale === "ar" ? "rtl" : "ltr"}>
       {/* Hidden Audio Element */}
       <audio 
         ref={audioRef} 
         preload="metadata"
-        crossOrigin="anonymous"
         onEnded={() => {
           if (autoPlay && audioPlayer.currentAyah) {
             playNextAyah(audioPlayer.currentAyah, ayahs, selectedSurah);
@@ -270,13 +267,16 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
         }}
         onError={(e) => {
           console.error("Audio element error:", e);
-          notify.error(messages?.quran?.errors?.audioLoad || "Failed to load audio");
+          // Don't show error notification immediately - let the fallback system handle it
         }}
         onLoadStart={() => {
           console.log("Audio loading started");
         }}
         onCanPlay={() => {
           console.log("Audio can play");
+        }}
+        onLoadedMetadata={() => {
+          console.log("Audio metadata loaded");
         }}
       />
 
@@ -462,7 +462,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
       )}
 
       {/* Main Content */}
-      <div className={`grid gap-8 ${currentMode === "learn" ? "grid-cols-1 lg:grid-cols-4" : "grid-cols-1"}`}>
+      <div className={`grid gap-2 sm:gap-4 md:gap-8 ${currentMode === "learn" ? "grid-cols-1 lg:grid-cols-4" : "grid-cols-1"}`}>
         {/* Surahs List (only for learn mode) */}
         {currentMode === "learn" && (
           <div className="lg:col-span-1">
@@ -494,7 +494,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
               />
             )}
 
-            <div className="p-6">
+            <div className="p-2 sm:p-6">
               {currentMode === "read" ? (
                 /* Read Mode - Continuous Text */
                 <div className="text-justify leading-loose quran-text">
@@ -599,7 +599,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
 
                       {/* Tafsir */}
                       {showTafsir && (
-                        <div className="mt-4 p-4 bg-accent/5 rounded-lg border border-accent/20">
+                        <div className="mt-4 p-1 sm:p-4 bg-accent/5 rounded-lg border border-accent/20">
                           <h4 className="text-sm font-medium text-foreground mb-2">التفسير</h4>
                           <p className="text-sm text-muted-foreground">
                             {messages?.quran?.tafsirPlaceholder || "Tafsir content will be available soon"}
