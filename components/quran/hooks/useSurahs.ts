@@ -17,8 +17,8 @@ export const useSurahs = () => {
         });
 
         // Get metadata from Al Quran Cloud API
-        const meta = await quranService.getQuranMeta();
-        const surahsData = meta.surahs.references.map(surah => ({
+        const surahsData = await quranService.getSurahs();
+        const mappedSurahs = surahsData.map((surah: any) => ({
           number: surah.number,
           name: surah.name,
           englishName: surah.englishName,
@@ -28,10 +28,10 @@ export const useSurahs = () => {
           ayahs: [] // Will be loaded separately when needed
         }));
         
-        setSurahs(surahsData);
+        setSurahs(mappedSurahs);
 
         analytics.trackEvent("surahs_loaded", "content", {
-          surahsCount: surahsData.length,
+          surahsCount: mappedSurahs.length,
           source: "alquran_cloud_api",
         });
       } catch (err) {

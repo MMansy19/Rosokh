@@ -104,57 +104,58 @@ class QuranService {
       url += `?${params.toString()}`;
     }
 
-    return this.fetchWithCache<Edition[]>(url, `editions_${format}_${language}_${type}`);
+    return this.fetchWithCache<Edition[]>(url);
   }
 
-  // Get Quran metadata (list of all surahs)
-  async getQuranMeta(): Promise<QuranMeta> {
-    return this.fetchWithCache<QuranMeta>(API_ENDPOINTS.meta, 'quran_meta');
+  // Get all surahs (chapters)
+  async getSurahs(): Promise<QuranMeta['surahs']['references']> {
+    const response = await this.fetchWithCache<QuranMeta>(API_ENDPOINTS.meta);
+    return response.surahs.references;
   }
 
-  // Get full Quran in specific edition
-  async getFullQuran(edition: string = 'quran-uthmani'): Promise<{ surahs: Surah[] }> {
-    const url = API_ENDPOINTS.fullQuran(edition);
-    return this.fetchWithCache<{ surahs: Surah[] }>(url, `full_quran_${edition}`);
-  }
-
-  // Get specific surah
+  // Get specific surah with optional edition
   async getSurah(surahNumber: number, edition?: string): Promise<Surah> {
     const url = API_ENDPOINTS.surah(surahNumber, edition);
-    return this.fetchWithCache<Surah>(url, `surah_${surahNumber}_${edition || 'default'}`);
+    return this.fetchWithCache<Surah>(url);
   }
 
-  // Get surah with multiple editions (Arabic + translations)
-  async getSurahWithMultipleEditions(
-    surahNumber: number, 
-    editions: string[] = ['quran-uthmani', 'en.sahih']
-  ): Promise<Surah[]> {
+  // Get surah with multiple editions (e.g., Arabic + translation)
+  async getSurahMultipleEditions(surahNumber: number, editions: string[]): Promise<Surah[]> {
     const url = API_ENDPOINTS.surahMultipleEditions(surahNumber, editions);
-    return this.fetchWithCache<Surah[]>(url, `surah_multi_${surahNumber}_${editions.join('_')}`);
+    return this.fetchWithCache<Surah[]>(url);
   }
 
   // Get specific ayah
   async getAyah(reference: string | number, edition?: string): Promise<Ayah> {
     const url = API_ENDPOINTS.ayah(reference, edition);
-    return this.fetchWithCache<Ayah>(url, `ayah_${reference}_${edition || 'default'}`);
+    const response = await this.fetchWithCache<{ ayah: Ayah }>(url);
+    return response.ayah;
   }
 
-  // Get ayah with multiple editions
-  async getAyahWithMultipleEditions(
-    reference: string | number,
-    editions: string[] = ['quran-uthmani', 'en.sahih']
-  ): Promise<Ayah[]> {
-    const url = API_ENDPOINTS.ayahMultipleEditions(reference, editions);
-    return this.fetchWithCache<Ayah[]>(url, `ayah_multi_${reference}_${editions.join('_')}`);
+  // Search in Quran
+  async search(query: string, surah?: number, lang?: string): Promise<any[]> {
+    if (!query.trim()) return [];
+    
+    try {
+      let searchUrl = `${this.baseUrl}/search/${encodeURIComponent(query)}`;
+      
+      const params = new URLSearchParams();
+      if (surah) params.append('surah', surah.toString());
+      if (lang) params.append('lang', lang);
+      
+      if (params.toString()) {
+        searchUrl += `?${params.toString()}`;
+      }
+
+      const response = await this.fetchWithCache<any>(searchUrl);
+      return response.matches || [];
+    } catch (error) {
+      console.error('Search error:', error);
+      return [];
+    }
   }
 
-  // Get specific juz
-  async getJuz(juzNumber: number, edition?: string): Promise<{ ayahs: Ayah[] }> {
-    const url = API_ENDPOINTS.juz(juzNumber, edition);
-    return this.fetchWithCache<{ ayahs: Ayah[] }>(url, `juz_${juzNumber}_${edition || 'default'}`);
-  }
-
-  // Get audio URL for specific ayah
+  // Get audio URL for single ayah
   getAyahAudioUrl(ayahNumber: number, reciterEdition: string = 'ar.alafasy', bitrate: number = 128): string {
     return API_ENDPOINTS.ayahAudio(bitrate, reciterEdition, ayahNumber);
   }
@@ -164,6 +165,57 @@ class QuranService {
     return API_ENDPOINTS.surahAudio(bitrate, reciterEdition, surahNumber);
   }
 
+  // Get multiple audio URL options for an ayah with fallbacks
+  getAyahAudioUrls(ayahNumber: number, reciterEdition: string = 'ar.alafasy', surahNumber?: number): string[] {
+    const reciter = RECITERS.find(r => r.id === reciterEdition);
+    const altReciterId = reciter?.altId || 'Alafasy_128kbps';
+    
+    const urls: string[] = [];
+    
+    // Primary source - Islamic Network CDN
+    urls.push(this.getAyahAudioUrl(ayahNumber, reciterEdition, 128));
+    urls.push(this.getAyahAudioUrl(ayahNumber, reciterEdition, 64));
+    
+    // Alternative sources
+    if (surahNumber) {
+      urls.push(API_ENDPOINTS.everyAyahAudio(altReciterId, surahNumber, ayahNumber));
+    }
+    
+    // QuranCDN alternative
+    urls.push(API_ENDPOINTS.alternativeAyahAudio(reciterEdition, ayahNumber));
+    
+    // Fallback to default reciter
+    if (reciterEdition !== 'ar.alafasy') {
+      urls.push(this.getAyahAudioUrl(ayahNumber, 'ar.alafasy', 128));
+      urls.push(this.getAyahAudioUrl(ayahNumber, 'ar.alafasy', 64));
+    }
+    
+    return urls;
+  }
+
+  // Get multiple surah audio URL options with fallbacks
+  getSurahAudioUrls(surahNumber: number, reciterEdition: string = 'ar.alafasy'): string[] {
+    const reciter = RECITERS.find(r => r.id === reciterEdition);
+    const altReciterId = reciter?.altId || 'Alafasy_128kbps';
+    
+    const urls: string[] = [];
+    
+    // Primary source - Islamic Network CDN
+    urls.push(this.getSurahAudioUrl(surahNumber, reciterEdition, 128));
+    urls.push(this.getSurahAudioUrl(surahNumber, reciterEdition, 64));
+    
+    // Alternative sources
+    urls.push(API_ENDPOINTS.alternativeSurahAudio(altReciterId, surahNumber));
+    
+    // Fallback to default reciter
+    if (reciterEdition !== 'ar.alafasy') {
+      urls.push(this.getSurahAudioUrl(surahNumber, 'ar.alafasy', 128));
+      urls.push(this.getSurahAudioUrl(surahNumber, 'ar.alafasy', 64));
+    }
+    
+    return urls;
+  }
+
   // Get ayah image URL
   getAyahImageUrl(surahNumber: number, ayahNumber: number, highRes: boolean = false): string {
     return highRes 
@@ -171,23 +223,38 @@ class QuranService {
       : API_ENDPOINTS.ayahImage(surahNumber, ayahNumber);
   }
 
-  // Check if audio URL is available
+  // Check if audio URL is available using audio element to avoid CORS issues
   async checkAudioAvailability(url: string): Promise<boolean> {
-    try {
-      const response = await fetch(url, { method: 'HEAD' });
-      // Accept 200 (OK), 206 (Partial Content), and 416 (Range Not Satisfiable) as valid for audio files
-      const validStatuses = [200, 206, 416];
-      const isValid = validStatuses.includes(response.status);
-      
-      if (!isValid) {
-        console.warn(`Audio URL check failed for ${url}: Status ${response.status}`);
+    return new Promise((resolve) => {
+      const audio = new Audio();
+      const timeout = setTimeout(() => {
+        audio.src = '';
+        resolve(false);
+      }, 5000); // 5 second timeout
+
+      audio.addEventListener('loadstart', () => {
+        clearTimeout(timeout);
+        resolve(true);
+      }, { once: true });
+
+      audio.addEventListener('error', () => {
+        clearTimeout(timeout);
+        resolve(false);
+      }, { once: true });
+
+      audio.addEventListener('abort', () => {
+        clearTimeout(timeout);
+        resolve(false);
+      }, { once: true });
+
+      try {
+        audio.preload = 'metadata';
+        audio.src = url;
+      } catch (error) {
+        clearTimeout(timeout);
+        resolve(false);
       }
-      
-      return isValid;
-    } catch (error) {
-      console.error(`Error checking audio availability for ${url}:`, error);
-      return false;
-    }
+    });
   }
 
   // Get available reciters
@@ -198,41 +265,6 @@ class QuranService {
   // Get translation for current locale
   getTranslationEdition(locale: string = 'en'): string {
     return TRANSLATION_EDITIONS[locale as keyof typeof TRANSLATION_EDITIONS] || TRANSLATION_EDITIONS.default;
-  }
-
-  // Search functionality (basic implementation)
-  async searchQuran(query: string, edition: string = 'en.sahih'): Promise<Ayah[]> {
-    try {
-      // Get full Quran and search in memory (for basic implementation)
-      const quran = await this.getFullQuran(edition);
-      const results: Ayah[] = [];
-      
-      const searchTerm = query.toLowerCase();
-      
-      quran.surahs.forEach(surah => {
-        surah.ayahs.forEach(ayah => {
-          if (ayah.text.toLowerCase().includes(searchTerm)) {
-            results.push({
-              ...ayah,
-              // Add surah context
-              text: `${surah.englishName} (${surah.number}:${ayah.numberInSurah}) - ${ayah.text}`
-            });
-          }
-        });
-      });
-      
-      return results.slice(0, 50); // Limit results
-    } catch (error) {
-      console.error('Search error:', error);
-      return [];
-    }
-  }
-
-  // Utility: Convert surah:ayah format to absolute ayah number
-  convertToAbsoluteAyahNumber(surahNumber: number, ayahInSurah: number): number {
-    // This is a simplified calculation - you might want to use the actual mapping
-    // For now, we'll use the API's surah:ayah format directly
-    return parseInt(`${surahNumber}${ayahInSurah.toString().padStart(3, '0')}`);
   }
 
   // Clear cache

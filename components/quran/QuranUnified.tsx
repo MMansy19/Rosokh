@@ -261,11 +261,22 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
       {/* Hidden Audio Element */}
       <audio 
         ref={audioRef} 
-        preload="metadata" 
+        preload="metadata"
+        crossOrigin="anonymous"
         onEnded={() => {
           if (autoPlay && audioPlayer.currentAyah) {
             playNextAyah(audioPlayer.currentAyah, ayahs, selectedSurah);
           }
+        }}
+        onError={(e) => {
+          console.error("Audio element error:", e);
+          notify.error(messages?.quran?.errors?.audioLoad || "Failed to load audio");
+        }}
+        onLoadStart={() => {
+          console.log("Audio loading started");
+        }}
+        onCanPlay={() => {
+          console.log("Audio can play");
         }}
       />
 

@@ -29,7 +29,7 @@ export const useAyahs = (surahNumber: number, locale: string) => {
         
         // Get Arabic text and translation together using multiple editions
         const editions = ['quran-uthmani', translationEdition];
-        const surahsData = await quranService.getSurahWithMultipleEditions(surahNumber, editions);
+        const surahsData = await quranService.getSurahMultipleEditions(surahNumber, editions);
         
         if (surahsData && surahsData.length >= 2) {
           const arabicSurah = surahsData[0];

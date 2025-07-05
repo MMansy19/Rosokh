@@ -1,14 +1,14 @@
 // Available reciters with their API IDs (Al Quran Cloud API compatible)
 export const RECITERS = [
-  { id: "ar.alafasy", name: "Mishary Rashid Alafasy", arabicName: "مشاري راشد العفاسي" },
-  { id: "ar.abdulsamad", name: "Abdul Basit Abdul Samad", arabicName: "عبد الباسط عبد الصمد" },
-  { id: "ar.sudais", name: "Abdul Rahman Al-Sudais", arabicName: "عبد الرحمن السديس" },
-  { id: "ar.shaatree", name: "Abu Bakr Ash-Shaatree", arabicName: "أبو بكر الشاطري" },
-  { id: "ar.mahermuaiqly", name: "Maher Al Mueaqly", arabicName: "ماهر المعيقلي" },
-  { id: "ar.saadalghamdi", name: "Saad Al Ghamdi", arabicName: "سعد الغامدي" },
-  { id: "ar.shuraym", name: "Sa'ud Ash-Shuraym", arabicName: "سعود الشريم" },
-  { id: "ar.husary", name: "Mahmoud Khalil Al-Husary", arabicName: "محمود خليل الحصري" },
-  { id: "ar.minshawi", name: "Mohamed Siddiq El-Minshawi", arabicName: "محمد صديق المنشاوي" },
+  { id: "ar.alafasy", name: "Mishary Rashid Alafasy", arabicName: "مشاري راشد العفاسي", altId: "Alafasy_128kbps" },
+  { id: "ar.abdulsamad", name: "Abdul Basit Abdul Samad", arabicName: "عبد الباسط عبد الصمد", altId: "Abdul_Basit_Murattal_128kbps" },
+  { id: "ar.sudais", name: "Abdul Rahman Al-Sudais", arabicName: "عبد الرحمن السديس", altId: "Sudais_128kbps" },
+  { id: "ar.shaatree", name: "Abu Bakr Ash-Shaatree", arabicName: "أبو بكر الشاطري", altId: "Ash-Shaatree_128kbps" },
+  { id: "ar.mahermuaiqly", name: "Maher Al Mueaqly", arabicName: "ماهر المعيقلي", altId: "MaherAlMuaiqly128kbps" },
+  { id: "ar.saadalghamdi", name: "Saad Al Ghamdi", arabicName: "سعد الغامدي", altId: "Ghamadi_40kbps" },
+  { id: "ar.shuraym", name: "Sa'ud Ash-Shuraym", arabicName: "سعود الشريم", altId: "Saud_ash-Shuraym_128kbps" },
+  { id: "ar.husary", name: "Mahmoud Khalil Al-Husary", arabicName: "محمود خليل الحصري", altId: "Husary_128kbps" },
+  { id: "ar.minshawi", name: "Mohamed Siddiq El-Minshawi", arabicName: "محمد صديق المنشاوي", altId: "Minshawi_Murattal_128kbps" },
 ];
 
 // Translation editions by locale (Al Quran Cloud API editions)
@@ -67,11 +67,21 @@ export const API_ENDPOINTS = {
   // Metadata
   meta: "https://api.alquran.cloud/v1/meta",
   
-  // CDN Audio endpoints (fixed audio URLs)
+  // CDN Audio endpoints (multiple sources for better fallback)
   ayahAudio: (bitrate: number, edition: string, ayahNumber: number) =>
     `https://cdn.islamic.network/quran/audio/${bitrate}/${edition}/${ayahNumber}.mp3`,
   surahAudio: (bitrate: number, edition: string, surahNumber: number) =>
     `https://cdn.islamic.network/quran/audio-surah/${bitrate}/${edition}/${surahNumber}.mp3`,
+  
+  // Alternative audio sources for fallback
+  alternativeAyahAudio: (reciter: string, ayahNumber: number) =>
+    `https://audio.qurancdn.com/${reciter}/${ayahNumber}.mp3`,
+  alternativeSurahAudio: (reciter: string, surahNumber: number) => 
+    `https://download.quranicaudio.com/quran/${reciter}/${surahNumber.toString().padStart(3, '0')}.mp3`,
+  
+  // EveryAyah.com alternative (reliable backup)
+  everyAyahAudio: (reciter: string, surahNumber: number, ayahNumber: number) =>
+    `https://everyayah.com/data/${reciter}/${surahNumber.toString().padStart(3, '0')}${ayahNumber.toString().padStart(3, '0')}.mp3`,
   
   // Ayah images
   ayahImage: (surah: number, ayah: number) =>

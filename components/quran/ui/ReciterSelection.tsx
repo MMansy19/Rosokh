@@ -41,7 +41,8 @@ export const ReciterSelection: React.FC<ReciterSelectionProps> = ({
           .map(edition => ({
             id: edition.identifier,
             name: edition.englishName,
-            arabicName: edition.name
+            arabicName: edition.name,
+            altId: edition.identifier // Use the same ID as fallback
           }));
 
         setAvailableReciters([...filtered, ...additionalReciters]);
