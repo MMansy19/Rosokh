@@ -70,20 +70,20 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
 
   return (
     <div className="min-h-screen text-foreground transition-colors duration-300 arabic-text">
-      <div className="container mx-auto md:px-4 py-8 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-8 mx-auto">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            {messages?.quran?.title || "Quran Reader"}
+      <div className="max-w-7xl mx-auto">
+        {/* Mobile-Optimized Header */}
+        <div className="text-center py-4 sm:py-6 px-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
+            {messages?.quran?.title || "القرآن الكريم"}
           </h1>
-          <div className="flex justify-center items-center mb-6">
+          <div className="flex justify-center items-center mb-3 sm:mb-4">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl quran-text text-primary text-center leading-none">
-              ﷽
+          ﷽
             </div>
           </div>
-          <p className="text-lg text-muted max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-lg  text-muted max-w-2xl mx-auto px-4">
             {messages?.quran?.description ||
-              "Read the Quran with beautiful Arabic text, translations, and audio"}
+              "اقرأ القرآن الكريم بالنص العربي الجميل والترجمات والصوت"}
           </p>
         </div>
 
@@ -96,7 +96,9 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
         />
 
         {/* Tab Content */}
-        {renderTabContent()}
+        <div className="px-2 sm:px-4 lg:px-6 pb-6">
+          {renderTabContent()}
+        </div>
       </div>
     </div>
   );

@@ -21,39 +21,44 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     }
     setActiveTab(tab);
   };
+  
   const tabs = [
     {
       id: "read" as TabType,
       icon: BookOpen,
-      label: messages?.quran?.read || "Read",
+      label: messages?.quran?.read || "قراءة",
+      shortLabel: "قراءة",
     },
     {
       id: "search" as TabType,
       icon: Search,
-      label: messages?.quran?.search || "Search",
+      label: messages?.quran?.search || "بحث",
+      shortLabel: "بحث",
     },
     {
       id: "mushaf" as TabType,
       icon: Book,
-      label: messages?.quran?.mushaf || "Mushaf",
+      label: messages?.quran?.mushaf || "مصحف",
+      shortLabel: "مصحف",
     },
   ];
 
   return (
-    <div className="flex justify-center mb-8 mx-auto items-center">
-      <div className="flex flex-row md:gap-4 gap-2 bg-surface rounded-lg p-1 border border-border">
-        {tabs.map(({ id, icon: Icon, label }) => (
+    <div className="flex justify-center items-center py-2">
+      <div className="flex bg-gray-100 rounded-lg p-1 overflow-x-auto">
+        {tabs.map(({ id, icon: Icon, label, shortLabel }) => (
           <button
             key={id}
             onClick={() => handleTabClick(id)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
+            className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 whitespace-nowrap text-sm sm:text-base font-medium ${
               activeTab === id
                 ? "bg-primary text-white shadow-md"
-                : "text-muted hover:text-foreground hover:bg-secondary"
+                : "text-gray-600 hover:text-gray-900 hover:bg-gray-200"
             }`}
           >
-            <Icon className="w-5 h-5" />
-            {label}
+            <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">{label}</span>
+            <span className="sm:hidden">{shortLabel}</span>
           </button>
         ))}
       </div>

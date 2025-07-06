@@ -42,7 +42,8 @@ export const ReciterSelection: React.FC<ReciterSelectionProps> = ({
             id: edition.identifier,
             name: edition.englishName,
             arabicName: edition.name,
-            altId: edition.identifier // Use the same ID as fallback
+            altId: edition.identifier, // Use the same ID as fallback
+            shortId: edition.identifier // Add the required shortId property
           }));
 
         setAvailableReciters([...filtered, ...additionalReciters]);
@@ -69,13 +70,13 @@ export const ReciterSelection: React.FC<ReciterSelectionProps> = ({
 
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+      <label className="block text-sm font-medium text-gray-700">
         {messages?.quran?.selectReciter || 'Select Reciter'}
       </label>
       <select
         value={currentReciter}
         onChange={(e) => onReciterChange(e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-900"
       >
         {availableReciters.map((reciter) => (
           <option key={reciter.id} value={reciter.id}>
@@ -85,7 +86,7 @@ export const ReciterSelection: React.FC<ReciterSelectionProps> = ({
       </select>
       
       {/* Audio quality selection */}
-      <div className="text-xs text-gray-500 dark:text-gray-400">
+      <div className="text-xs text-gray-500">
         <p>🎵 Audio will automatically fallback to available quality (128kbps → 64kbps)</p>
       </div>
     </div>

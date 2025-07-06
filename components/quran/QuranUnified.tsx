@@ -338,95 +338,96 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
       )}
 
       {/* Mode Toggle & Header */}
-      <div className="mb-8">
+      <div className="mb-4 sm:mb-6">
         {/* Mode Toggle */}
-        <div className="flex justify-center mb-6">
-          <div className="flex bg-surface rounded-lg p-1 border border-border shadow-sm">
+        <div className="flex justify-center mb-4">
+          <div className="bg-surface p-1 rounded-lg flex">
             <button
               onClick={() => handleModeToggle("read")}
-              className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-lg transition-all duration-200 text-sm sm:text-base ${
+              className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 text-sm sm:text-base font-medium ${
                 currentMode === "read"
-                  ? "bg-primary text-white shadow-md transform scale-105"
-                  : "text-muted hover:text-foreground hover:bg-secondary"
+                  ? "bg-primary text-white shadow-md"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
             >
-              <BookOpen className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="hidden sm:inline">{messages?.quran?.read || "Read"}</span>
-              <span className="sm:hidden">قراءة</span>
+              <BookOpen className="w-4 h-4" />
+              <span className="hidden sm:inline">{messages?.quran?.read || "قراءة"}</span>
+              <span className="sm:hidden">{messages?.quran?.read || "قراءة"}</span>
             </button>
             <button
               onClick={() => handleModeToggle("learn")}
-              className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-lg transition-all duration-200 text-sm sm:text-base ${
+              className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 text-sm sm:text-base font-medium ${
                 currentMode === "learn"
-                  ? "bg-primary text-white shadow-md transform scale-105"
-                  : "text-muted hover:text-foreground hover:bg-secondary"
+                  ? "bg-primary text-white shadow-md"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
             >
-              <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="hidden sm:inline">{messages?.quran?.learn || "Learn"}</span>
-              <span className="sm:hidden">تعلم</span>
+              <GraduationCap className="w-4 h-4" />
+              <span className="hidden sm:inline">{messages?.quran?.learn || "تعلم"}</span>
+              <span className="sm:hidden">{messages?.quran?.learn || "تعلم"}</span>
             </button>
           </div>
         </div>
 
         {/* Enhanced Header with Navigation */}
-        <div className="flex flex-col sm:flex-row items-center justify-between mb-6 bg-surface rounded-lg p-4 border border-border gap-4">
-          <div className="flex items-center gap-2 sm:gap-4 order-2 sm:order-1">
+        <div className="bg-white rounded-lg p-3 sm:p-4 border border-gray-200 shadow-sm">
+          {/* Surah Navigation */}
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
             <button
               onClick={goToPreviousSurah}
               disabled={selectedSurah <= 1}
-              className="p-2 rounded-lg bg-background hover:bg-background/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
+              className="p-2 rounded-lg bg-gray-50 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
-            <div className="text-center">
-              <h1 className="text-lg sm:text-2xl font-bold text-foreground mb-1">
-                سورة {currentSurah?.name || currentSurah?.arabicName}
+            
+            <div className="text-center flex-1 mx-4">
+              <h1 className="text-lg sm:text-2xl font-bold text-gray-900 mb-1">
+                {messages?.quran?.surah || "سورة"} {currentSurah?.name || currentSurah?.arabicName}
               </h1>
-              <p className="text-xs sm:text-sm text-muted-foreground">
-                {currentSurah?.revelationType === "Meccan" ? "مكية" : "مدنية"} • {currentSurah?.numberOfAyahs} آيات
+              <p className="text-xs sm:text-sm text-gray-600">
+                {currentSurah?.revelationType === "Meccan" ? (messages?.quran?.meccan || "مكية") : (messages?.quran?.medinan || "مدنية")} • {currentSurah?.numberOfAyahs} {messages?.quran?.verses || "آيات"}
               </p>
             </div>
+            
             <button
               onClick={goToNextSurah}
               disabled={selectedSurah >= 114}
-              className="p-2 rounded-lg bg-background hover:bg-background/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
+              className="p-2 rounded-lg bg-gray-50 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
 
-          {/* Controls */}
-          <div className="flex items-center gap-2 order-1 sm:order-2 flex-wrap justify-center">
+          {/* Controls Row */}
+          <div className="flex items-center justify-center gap-2 flex-wrap">
             {/* Tafsir Toggle */}
             <button
               onClick={() => setShowTafsir(!showTafsir)}
-              className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm rounded-lg transition-colors ${
+              className={`flex items-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm rounded-lg transition-colors ${
                 showTafsir
-                  ? "bg-accent text-white"
-                  : "bg-background text-foreground hover:bg-secondary border border-border"
+                  ? "bg-primary text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
               <Book className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">التفسير</span>
-              <span className="sm:hidden">📖</span>
+              <span className="hidden sm:inline">{messages?.quran?.tafsir || "التفسير"}</span>
             </button>
 
             {/* View Mode Toggle (only for learn mode) */}
             {currentMode === "learn" && (
               <button
                 onClick={() => setViewMode(viewMode === "continuous" ? "ayah-by-ayah" : "continuous")}
-                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm rounded-lg bg-background text-foreground hover:bg-secondary border border-border transition-colors"
+                className="flex items-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
               >
                 <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">{viewMode === "continuous" ? "متصل" : "آية بآية"}</span>
-                <span className="sm:hidden">👁️</span>
+                <span className="hidden sm:inline">{viewMode === "continuous" ? (messages?.quran?.continuousReading || "متصل") : (messages?.quran?.verseByVerse || "آية بآية")}</span>
               </button>
             )}
 
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="p-2 rounded-lg bg-background hover:bg-background/80 transition-colors border border-border"
+              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
             >
               <Settings className="w-3 h-3 sm:w-4 sm:h-4" />
             </button>
@@ -436,58 +437,61 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
 
       {/* Settings Panel */}
       {showSettings && (
-        <div className="mb-6 p-4 bg-surface rounded-lg border border-border">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <div className="space-y-4">
+            {/* Font Size Control */}
             <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-foreground">حجم الخط</label>
+              <label className="text-sm font-medium text-gray-700">{messages?.quran?.fontSize || "حجم الخط"}</label>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setFontSize(Math.max(16, fontSize - 2))}
-                  className="px-3 py-1 text-sm rounded bg-background border border-border hover:bg-surface transition-colors"
+                  className="px-3 py-1 text-sm rounded bg-white border border-gray-300 hover:bg-gray-50 transition-colors"
                 >
                   -
                 </button>
-                <span className="text-sm min-w-[3ch] text-center">{fontSize}</span>
+                <span className="text-sm min-w-[3ch] text-center font-medium">{fontSize}</span>
                 <button
                   onClick={() => setFontSize(Math.min(60, fontSize + 2))}
-                  className="px-3 py-1 text-sm rounded bg-background border border-border hover:bg-surface transition-colors"
+                  className="px-3 py-1 text-sm rounded bg-white border border-gray-300 hover:bg-gray-50 transition-colors"
                 >
                   +
                 </button>
               </div>
             </div>
 
+            {/* Line Height Control */}
             <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-foreground">تباعد الأسطر</label>
+              <label className="text-sm font-medium text-gray-700">{messages?.quran?.lineSpacing || "تباعد الأسطر"}</label>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setLineHeight(Math.max(1.5, lineHeight - 0.1))}
-                  className="px-3 py-1 text-sm rounded bg-background border border-border hover:bg-surface transition-colors"
+                  className="px-3 py-1 text-sm rounded bg-white border border-gray-300 hover:bg-gray-50 transition-colors"
                 >
                   -
                 </button>
-                <span className="text-sm min-w-[3ch] text-center">{lineHeight.toFixed(1)}</span>
+                <span className="text-sm min-w-[3ch] text-center font-medium">{lineHeight.toFixed(1)}</span>
                 <button
                   onClick={() => setLineHeight(Math.min(3.5, lineHeight + 0.1))}
-                  className="px-3 py-1 text-sm rounded bg-background border border-border hover:bg-surface transition-colors"
+                  className="px-3 py-1 text-sm rounded bg-white border border-gray-300 hover:bg-gray-50 transition-colors"
                 >
                   +
                 </button>
               </div>
             </div>
 
+            {/* Translation Toggle (only for learn mode) */}
             {currentMode === "learn" && (
               <div className="flex items-center justify-between">
-                <label className="text-sm font-medium text-foreground">الترجمة</label>
+                <label className="text-sm font-medium text-gray-700">{messages?.quran?.translation || "الترجمة"}</label>
                 <button
                   onClick={() => setShowTranslation(!showTranslation)}
-                  className={`px-3 py-1 text-sm rounded transition-colors ${
+                  className={`px-4 py-2 text-sm rounded-lg transition-colors ${
                     showTranslation
                       ? "bg-primary text-white"
-                      : "bg-background border border-border hover:bg-surface"
+                      : "bg-white border border-gray-300 hover:bg-gray-50 text-gray-700"
                   }`}
                 >
-                  {showTranslation ? "إخفاء" : "إظهار"}
+                  {showTranslation ? (messages?.quran?.hideTranslation || "إخفاء") : (messages?.quran?.showTranslation || "إظهار")}
                 </button>
               </div>
             )}
@@ -512,7 +516,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
 
         {/* Content Panel */}
         <div className={currentMode === "learn" ? "lg:col-span-3" : "col-span-1"}>
-          <div className="bg-surface rounded-lg shadow-lg border border-border">
+          <div className="bg-white rounded-lg shadow-lg border border-gray-300">
             {/* Reading Controls (only for learn mode) */}
             {currentMode === "learn" && (
               <ReadingControls
@@ -532,7 +536,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
               <button
                 onClick={goToPreviousSurah}
                 disabled={selectedSurah <= 1}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface hover:bg-surface/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-gray-300"
               >
                 <ChevronLeft className="w-4 h-4" />
                 {/* السورة السابقة */}
@@ -542,7 +546,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                 <select
                   value={selectedSurah}
                   onChange={(e) => handleSurahSelect(Number(e.target.value))}
-                  className="px-4 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-center"
+                  className="px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary text-center"
                   dir={locale === "ar" ? "rtl" : "ltr"}
                 >
                   {surahs.map((surah) => (
@@ -556,7 +560,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
               <button
                 onClick={goToNextSurah}
                 disabled={selectedSurah >= 114}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface hover:bg-surface/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-border"
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-gray-300"
               >
                 <ChevronRight className="w-4 h-4" />
                 {/* السورة التالية */}
@@ -568,13 +572,13 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                 <div className="text-justify leading-loose quran-text">
                   {/* Ayah Actions Panel */}
                   {selectedAyah && (
-                    <div className="mt-6 p-4 bg-background/50 rounded-lg border border-border/50">
+                    <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="text-sm font-medium text-foreground mb-1">
-                            آية {selectedAyah} - سورة {currentSurah?.name}
+                          <h3 className="text-sm font-medium text-gray-900 mb-1">
+                            {messages?.quran?.ayah || "آية"} {selectedAyah} - {messages?.quran?.surah || "سورة"} {currentSurah?.name}
                           </h3>
-                          <p className="text-xs text-muted-foreground">
+                          <p className="text-xs text-gray-600">
                             {selectedSurah}:{selectedAyah}
                           </p>
                         </div>
@@ -582,7 +586,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handlePlayAyah(selectedAyah!)}
-                            className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-colors"
+                            className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-primary hover:bg-primary/80 text-white transition-colors"
                           >
                             {audioPlayer.currentAyah === selectedAyah &&
                               audioPlayer.currentSurah === selectedSurah &&
@@ -594,33 +598,33 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                             {audioPlayer.currentAyah === selectedAyah &&
                               audioPlayer.currentSurah === selectedSurah &&
                               audioPlayer.isPlaying
-                              ? "إيقاف"
-                              : "تشغيل من هنا"}
+                              ? (messages?.quran?.stop || "إيقاف")
+                              : (messages?.quran?.playFromHere || "تشغيل من هنا")}
                           </button>
 
                           {/* Show continuous play indicator */}
                           {audioPlayer.isPlaying && autoPlay && audioPlayer.currentSurah === selectedSurah && (
                             <div className="flex items-center gap-1 px-2 py-1 text-xs bg-green-100 text-green-700 rounded-lg">
                               <span>🔄</span>
-                              <span>تشغيل متواصل</span>
+                              <span>{messages?.quran?.continuousPlay || "تشغيل متواصل"}</span>
                             </div>
                           )}
 
                           <button
                             onClick={() => handleBookmarkToggle(selectedSurah, selectedAyah!)}
-                            className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-green-500 hover:bg-green-600 text-white transition-colors"
+                            className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-secondary hover:bg-secondary/80 text-white transition-colors"
                           >
                             <BookOpen className="w-4 h-4" />
-                            إشارة مرجعية
+                            {messages?.quran?.bookmark || "إشارة مرجعية"}
                           </button>
                         </div>
                       </div>
 
                       {/* Tafsir */}
                       {showTafsir && (
-                        <div className="mt-4 p-1 sm:p-4 bg-accent/5 rounded-lg border border-accent/20">
-                          <h4 className="text-sm font-medium text-foreground mb-2">التفسير</h4>
-                          <p className="text-sm text-muted-foreground">
+                        <div className="mt-4 p-1 sm:p-4 bg-gray-50 rounded-lg border border-gray-200">
+                          <h4 className="text-sm font-medium text-gray-900 mb-2">{messages?.quran?.tafsir || "التفسير"}</h4>
+                          <p className="text-sm text-gray-600">
                             {messages?.quran?.tafsirPlaceholder || "Tafsir content will be available soon"}
                           </p>
                         </div>
@@ -631,7 +635,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                   {selectedSurah !== 1 && selectedSurah !== 9 && (
                     <div className="text-center mb-8">
                       <p
-                        className="text-foreground leading-relaxed"
+                        className="text-gray-900 leading-relaxed"
                         style={{
                           fontSize: `${fontSize + 4}px`,
                           lineHeight: lineHeight,
@@ -644,7 +648,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
 
                   {/* Continuous Verses */}
                   <p
-                    className="text-foreground"
+                    className="text-gray-900"
                     style={{
                       fontSize: `${fontSize}px`,
                       lineHeight: lineHeight,
@@ -652,7 +656,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                       letterSpacing: "0.02em",
                     }}
                   >
-                    {ayahs.map((ayah, index) => {
+                    {ayahs.map((ayah: any, index: number) => {
                       const withoutBismillah = selectedSurah !== 1 && selectedSurah !== 9;
                       if (index === 0 && withoutBismillah) {
                         // Remove Bismillah from the beginning of the ayah text
@@ -670,7 +674,7 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
                                 : ""
                             }`}
                             onClick={() => handleAyahClick(ayah.numberInSurah)}
-                            title={`آية ${ayah.numberInSurah}`}
+                            title={`${messages?.quran?.ayah || "آية"} ${ayah.numberInSurah}`}
                           >
                             {ayah.text}
                           </span>{" "}
@@ -722,15 +726,15 @@ export const QuranUnified: React.FC<QuranUnifiedProps> = ({
 
           {/* Bookmarks Summary */}
           {bookmarkedAyahs.size > 0 && (
-            <div className="mt-8 p-4 bg-accent/10 border border-accent/20 rounded-lg">
-              <h3 className="font-semibold text-foreground mb-2">
+            <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+              <h3 className="font-semibold text-gray-900 mb-2">
                 {messages?.quran?.bookmarks || "Bookmarks"} ({bookmarkedAyahs.size})
               </h3>
               <div className="flex flex-wrap gap-2">
                 {[...bookmarkedAyahs].map((bookmark) => (
                   <span
                     key={bookmark}
-                    className="inline-block px-3 py-1 bg-accent text-white text-sm rounded-full"
+                    className="inline-block px-3 py-1 bg-primary text-white text-sm rounded-full"
                   >
                     {bookmark}
                   </span>

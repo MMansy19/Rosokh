@@ -1,0 +1,88 @@
+/* Volume slider styling for mobile */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+input[type="range"]:hover {
+  opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  input[type="range"]::-webkit-slider-thumb {
+    background: #60a5fa;
+    border: 2px solid #1f2937;
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    background: #60a5fa;
+    border: 2px solid #1f2937;
+  }
+}
+
+/* Mobile touch improvements */
+@media (max-width: 640px) {
+  input[type="range"]::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Responsive text improvements */
+.quran-text {
+  line-height: 1.8;
+  word-spacing: 0.1em;
+}
+
+@media (max-width: 640px) {
+  .quran-text {
+    line-height: 1.6;
+    word-spacing: 0.05em;
+  }
+}
+
+/* Button touch targets for mobile */
+@media (max-width: 640px) {
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .audio-control-btn {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
