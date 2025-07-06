@@ -232,7 +232,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
             {/* Search Input */}
             <div className="relative mb-4">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
+                <Search className="h-5 w-5 text-muted" />
               </div>
               <input
                 type="text"
@@ -252,7 +252,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
                   onClick={clearSearch}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
                 >
-                  <X className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                  <X className="h-5 w-5 text-muted hover:text-foreground" />
                 </button>
               )}
             </div>
@@ -348,7 +348,7 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
                           {messages?.search?.surah || "Surah"}{" "}
                           {result.surahNumber}:{result.verseNumber}
                         </span>
-                        <span className="px-2 py-1 bg-info text-white rounded-full text-xs">
+                        <span className="px-2 py-1 bg-info text-foreground rounded-full text-xs">
                           {result.relevanceScore}%{" "}
                           {messages?.search?.match || "match"}
                         </span>
@@ -375,13 +375,13 @@ export default function QuranSearch({ locale, messages }: QuranSearchProps) {
 
                   {/* Action Buttons */}
                   <div className="flex gap-2 mt-4">
-                    <button className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm transition-colors duration-200">
+                    <button className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-foreground rounded-lg text-sm transition-colors duration-200">
                       {messages?.search?.readMore || "Read More"}
                     </button>
-                    <button className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm transition-colors duration-200">
+                    <button className="px-4 py-2 bg-green-500 hover:bg-green-600 text-foreground rounded-lg text-sm transition-colors duration-200">
                       {messages?.search?.playAudio || "Play Audio"}
                     </button>
-                    <button className="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg text-sm transition-colors duration-200">
+                    <button className="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-foreground rounded-lg text-sm transition-colors duration-200">
                       {messages?.search?.bookmark || "Bookmark"}
                     </button>
                   </div>

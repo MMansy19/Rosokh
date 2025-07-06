@@ -140,7 +140,7 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
         className={`
           relative w-full pb-[56.25%] 
           overflow-hidden rounded-lg shadow-md 
-          bg-gray-100 dark:bg-gray-900
+          bg-surface
           transition-shadow duration-200 
           hover:shadow-lg focus-within:shadow-lg
           focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-opacity-50
@@ -203,7 +203,7 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
           <div className="flex flex-col items-center space-y-3">
             <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center">
               <svg
-                className="w-6 h-6 text-white"
+                className="w-6 h-6 text-foreground"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"

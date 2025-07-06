@@ -76,7 +76,7 @@ export const showNotification = (
     error: "bg-red-600",
   };
 
-  notification.className = `fixed top-4 right-4 ${colors[type]} text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm`;
+  notification.className = `fixed top-4 right-4 ${colors[type]} text-foreground px-4 py-2 rounded-lg shadow-lg z-50 text-sm`;
   notification.innerHTML = `
     <div class="flex items-center gap-2">
       <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">

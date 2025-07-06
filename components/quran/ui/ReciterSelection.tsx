@@ -63,20 +63,20 @@ export const ReciterSelection: React.FC<ReciterSelectionProps> = ({
     return (
       <div className="flex items-center space-x-2">
         <div className="animate-spin h-4 w-4 border-2 border-blue-500 border-t-transparent rounded-full"></div>
-        <span className="text-sm text-gray-600">Loading reciters...</span>
+        <span className="text-sm text-muted">Loading reciters...</span>
       </div>
     );
   }
 
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium text-foreground">
         {messages?.quran?.selectReciter || 'Select Reciter'}
       </label>
       <select
         value={currentReciter}
         onChange={(e) => onReciterChange(e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-900"
+        className="w-full px-3 py-2 border border-border rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:border-primary bg-background text-foreground"
       >
         {availableReciters.map((reciter) => (
           <option key={reciter.id} value={reciter.id}>
@@ -86,7 +86,7 @@ export const ReciterSelection: React.FC<ReciterSelectionProps> = ({
       </select>
       
       {/* Audio quality selection */}
-      <div className="text-xs text-gray-500">
+      <div className="text-xs text-muted">
         <p>🎵 Audio will automatically fallback to available quality (128kbps → 64kbps)</p>
       </div>
     </div>

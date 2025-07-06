@@ -341,7 +341,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
                     audioPlayer.currentAyah === ayah.numberInSurah && audioPlayer.currentSurah === currentSurah
                       ? "bg-primary text-white"
                       : selectedAyah === ayah.numberInSurah
-                        ? "bg-primary/80 text-white"
+                        ? "bg-primary/80 text-foreground"
                         : "bg-primary/20 text-primary hover:bg-primary/30"
                   }`}
                   onClick={() => handleAyahClick(ayah.numberInSurah)}
@@ -370,7 +370,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handlePlayAyah(selectedAyah!)}
-                  className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-blue-500 hover:bg-blue-600 text-foreground transition-colors"
                 >
                   {audioPlayer.currentAyah === selectedAyah && audioPlayer.currentSurah === currentSurah && audioPlayer.isPlaying ? (
                     <Pause className="w-4 h-4" />
@@ -384,7 +384,7 @@ export const QuranUthmani: React.FC<QuranUthmaniProps> = ({
 
                 <button 
                   onClick={() => toggleBookmark(currentSurah, selectedAyah!, messages)}
-                  className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-green-500 hover:bg-green-600 text-white transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-green-500 hover:bg-green-600 text-foreground transition-colors"
                 >
                   <BookOpen className="w-4 h-4" />
                   إشارة مرجعية

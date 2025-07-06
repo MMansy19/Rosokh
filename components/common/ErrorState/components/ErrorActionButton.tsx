@@ -49,12 +49,12 @@ export const RetryButton: React.FC<RetryButtonProps> = ({
     <ErrorActionButton
       onClick={onClick}
       disabled={isRetrying || !canRetry}
-      className={`text-white focus:ring-blue-500 ${buttonColor}`}
+      className={`text-foreground focus:ring-blue-500 ${buttonColor}`}
       ariaLabel={isRetrying ? "Retrying..." : retryText}
     >
       {isRetrying ? (
         <span className="flex items-center">
-          <LoadingSpinner className="-ml-1 mr-2 text-white" />
+          <LoadingSpinner className="-ml-1 mr-2 text-foreground" />
           Retrying...
         </span>
       ) : (

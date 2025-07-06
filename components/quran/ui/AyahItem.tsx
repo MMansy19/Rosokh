@@ -9,7 +9,6 @@ interface AyahItemProps {
   isBookmarked: boolean;
   isCurrentlyPlaying: boolean;
   showTranslation: boolean;
-  showTransliteration: boolean;
   fontSize: number;
   surahNumber: number;
   onPlayAudio: (ayahNumber: number) => void;
@@ -26,7 +25,6 @@ export const AyahItem: React.FC<AyahItemProps> = ({
   isBookmarked,
   isCurrentlyPlaying,
   showTranslation,
-  showTransliteration,
   fontSize,
   surahNumber,
   onPlayAudio,
@@ -83,36 +81,24 @@ export const AyahItem: React.FC<AyahItemProps> = ({
             </div>
           )}
 
-          {/* Transliteration placeholder */}
-          {showTransliteration && (
-            <div className="mb-4 p-3 bg-background/50 rounded-lg">
-              <p className="text-lg text-muted italic">
-                {messages?.quran?.transliterationNotAvailable ||
-                  "Transliteration not available"}
-              </p>
-            </div>
-          )}
 
           {/* Tafsir */}
           {showTafsir && (
             <div className="mb-4 p-4 bg-accent/5 rounded-lg border border-accent/20">
               <h4 className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
-                <span>التفسير</span>
+                <span>{messages?.quran?.tafsir || "التفسير"}</span>
                 <span className="text-xs text-muted-foreground">({surahNumber}:{ayah.numberInSurah})</span>
               </h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {messages?.quran?.tafsirPlaceholder || 
                  "Tafsir content will be available soon. This feature will provide detailed commentary and interpretation of the verse."}
               </p>
-              <div className="mt-2 text-xs text-muted-foreground">
-                <span>المصدر: تفسير ابن كثير</span>
-              </div>
             </div>
           )}
         </div>
 
         {/* Traditional Action Buttons (still available) */}
-        <div className="flex-shrink-0 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex-col gap-2 hidden group-hover:flex transition-opacity">
           {/* Play Audio */}
           <button
             onClick={() => onPlayAudio(ayah.numberInSurah)}
@@ -127,8 +113,8 @@ export const AyahItem: React.FC<AyahItemProps> = ({
             onClick={() => onBookmark(surahNumber, ayah.numberInSurah)}
             className={`p-2 rounded-full transition-colors ${
               isBookmarked
-                ? "bg-accent text-white"
-                : "bg-secondary text-foreground bg-hoverButton hover:text-white"
+          ? "bg-accent text-white"
+          : "bg-secondary text-foreground bg-hoverButton hover:text-white"
             }`}
             title="Bookmark"
           >

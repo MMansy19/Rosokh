@@ -144,7 +144,7 @@ export function Header({
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Sidebar Toggle & Logo */}
           <div className="flex items-center gap-3">
@@ -189,14 +189,14 @@ export function Header({
                 alt={messages?.common?.brand?.name || "Rosokh"}
                 width={32}
                 height={32}
-                className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+                className="w-12 h-12 sm:w-20 sm:h-20 object-contain"
                 priority
               />
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <span className="font-bold text-base sm:text-lg text-foreground">
                   {messages?.common?.brand?.name || "Rosokh"}
                 </span>
-              </div>
+              </div> */}
             </Link>
           </div>
 

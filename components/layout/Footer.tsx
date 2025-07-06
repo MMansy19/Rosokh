@@ -26,9 +26,9 @@ export function Footer({ locale, messages }: FooterProps) {
               <>
                 {" "}
                 <div className="flex items-center justify-center sm:justify-start rtl:sm:justify-end space-x-2 rtl:space-x-reverse">
-                  <span className="font-bold text-lg text-foreground">
+                  {/* <span className="font-bold text-lg text-foreground">
                     {messages?.common?.brand?.name || "Rosokh"}
-                  </span>
+                  </span> */}
                   <Image
                     src="/logo/no-bg.png"
                     alt={messages?.common?.brand?.name || "Rosokh"}

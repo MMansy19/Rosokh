@@ -76,25 +76,25 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-lg">
+    <div className="bg-background border-t border-border shadow-lg">
       {/* Main Player Controls */}
       <div className="px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Current Track Info */}
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-medium text-gray-900 dark:text-white truncate">
+            <div className="text-sm font-medium text-foreground truncate">
               {currentSurah && (
                 <>
                   {currentSurah.englishName} - {currentSurah.name}
                 </>
               )}
               {audioPlayer.currentAyah && (
-                <span className="text-gray-500 dark:text-gray-400 ml-2">
+                <span className="text-muted ml-2">
                   Ayah {audioPlayer.currentAyah}
                 </span>
               )}
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">
+            <div className="text-xs text-muted">
               {currentReciter?.name} - {currentReciter?.arabicName}
             </div>
           </div>
@@ -103,15 +103,15 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
           <div className="flex items-center space-x-2">
             <button
               onClick={onPrevious}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-full hover:bg-surface transition-colors"
               title="Previous Ayah"
             >
-              <BackwardIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+              <BackwardIcon className="h-5 w-5 text-muted" />
             </button>
 
             <button
               onClick={audioPlayer.isPlaying ? onPause : onPlay}
-              className="p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors"
+              className="p-3 bg-blue-600 hover:bg-blue-700 text-foreground rounded-full transition-colors"
               title={audioPlayer.isPlaying ? 'Pause' : 'Play'}
             >
               {audioPlayer.isPlaying ? (
@@ -123,23 +123,23 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
 
             <button
               onClick={onNext}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-full hover:bg-surface transition-colors"
               title="Next Ayah"
             >
-              <ForwardIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+              <ForwardIcon className="h-5 w-5 text-muted" />
             </button>
 
             {/* Volume Control */}
             <div className="flex items-center space-x-2">
               <button
                 onClick={onMuteToggle}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="p-2 rounded-full hover:bg-surface transition-colors"
                 title={audioPlayer.isMuted ? 'Unmute' : 'Mute'}
               >
                 {audioPlayer.isMuted ? (
-                  <SpeakerXMarkIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                  <SpeakerXMarkIcon className="h-5 w-5 text-muted" />
                 ) : (
-                  <SpeakerWaveIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                  <SpeakerWaveIcon className="h-5 w-5 text-muted" />
                 )}
               </button>
               <input
@@ -149,14 +149,14 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
                 step="0.1"
                 value={audioPlayer.volume}
                 onChange={(e) => onVolumeChange(parseFloat(e.target.value))}
-                className="w-20 h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer"
+                className="w-20 h-2 bg-surface rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
             {/* Settings Toggle */}
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-full hover:bg-surface transition-colors"
               title="Audio Settings"
             >
               ⚙️
@@ -166,7 +166,7 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
 
         {/* Progress Bar Placeholder */}
         <div className="mt-3">
-          <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1">
+          <div className="w-full bg-surface rounded-full h-1">
             <div 
               className="bg-blue-600 h-1 rounded-full transition-all duration-300"
               style={{ width: audioPlayer.isPlaying ? '30%' : '0%' }}
@@ -177,7 +177,7 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
 
       {/* Settings Panel */}
       {showSettings && (
-        <div className="border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-4 py-4">
+        <div className="border-t border-border bg-background px-4 py-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Reciter Selection */}
             <div>
@@ -190,13 +190,13 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
 
             {/* Playback Speed */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-muted mb-2">
                 {messages?.quran?.playbackSpeed || 'Playback Speed'}
               </label>
               <select
                 value={audioPlayer.speed}
                 onChange={(e) => onSpeedChange(parseFloat(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 py-2 border border-border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-background dark:text-foreground"
               >
                 {speedOptions.map((speed) => (
                   <option key={speed} value={speed}>
@@ -208,7 +208,7 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
 
             {/* Repeat Mode */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-muted mb-2">
                 {messages?.quran?.repeatMode || 'Repeat Mode'}
               </label>
               <div className="space-y-2">
@@ -222,7 +222,7 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
                       onChange={() => onRepeatModeChange(mode)}
                       className="form-radio h-4 w-4 text-blue-600"
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                    <span className="text-sm text-muted">
                       {getRepeatModeIcon(mode)} {getRepeatModeText(mode)}
                     </span>
                   </label>
@@ -232,7 +232,7 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
           </div>
 
           {/* Auto Play Toggle */}
-          <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="mt-4 pt-4 border-t border-border">
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -240,7 +240,7 @@ export const EnhancedAudioPlayer: React.FC<EnhancedAudioPlayerProps> = ({
                 onChange={(e) => onAutoPlayChange(e.target.checked)}
                 className="form-checkbox h-4 w-4 text-blue-600"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">
+              <span className="text-sm text-muted">
                 {messages?.quran?.autoPlay || 'Auto-play next ayah'}
               </span>
             </label>

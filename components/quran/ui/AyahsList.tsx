@@ -9,7 +9,6 @@ interface AyahsListProps {
   currentSurah?: Surah;
   selectedSurah: number;
   showTranslation: boolean;
-  showTransliteration: boolean;
   fontSize: number;
   bookmarkedAyahs: Set<string>;
   currentPlayingAyah: number | null;
@@ -28,7 +27,6 @@ export const AyahsList: React.FC<AyahsListProps> = ({
   currentSurah,
   selectedSurah,
   showTranslation,
-  showTransliteration,
   fontSize,
   bookmarkedAyahs,
   currentPlayingAyah,
@@ -88,7 +86,6 @@ export const AyahsList: React.FC<AyahsListProps> = ({
                 isBookmarked={isBookmarked}
                 isCurrentlyPlaying={isCurrentlyPlaying}
                 showTranslation={showTranslation}
-                showTransliteration={showTransliteration}
                 fontSize={fontSize}
                 surahNumber={selectedSurah}
                 onPlayAudio={onPlayAudio}

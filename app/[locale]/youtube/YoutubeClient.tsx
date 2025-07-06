@@ -559,12 +559,12 @@ export default function YoutubeClient({
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                        <PlaySquare className="w-12 h-12 text-white" />
+                        <PlaySquare className="w-12 h-12 text-foreground" />
                       </div>
-                      <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs">
+                      <div className="absolute bottom-2 right-2 bg-black/80 text-foreground px-2 py-1 rounded text-xs">
                         {playlist.videoCount} videos
                       </div>
-                      <div className="absolute bottom-2 left-2 bg-black/80 text-white px-2 py-1 rounded text-xs">
+                      <div className="absolute bottom-2 left-2 bg-black/80 text-foreground px-2 py-1 rounded text-xs">
                         <PlaySquare className="w-3 h-3 inline mr-1" />
                         Playlist
                       </div>
@@ -635,13 +635,13 @@ export default function YoutubeClient({
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                        <Play className="w-12 h-12 text-white" />
+                        <Play className="w-12 h-12 text-foreground" />
                       </div>
-                      <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs">
+                      <div className="absolute bottom-2 right-2 bg-black/80 text-foreground px-2 py-1 rounded text-xs">
                         {formatDuration(video.duration)}
                       </div>
                       {selectedPlaylist && "playlistIndex" in video && (
-                        <div className="absolute top-2 left-2 bg-black/80 text-white px-2 py-1 rounded text-xs">
+                        <div className="absolute top-2 left-2 bg-black/80 text-foreground px-2 py-1 rounded text-xs">
                           {(video as any).playlistIndex}
                         </div>
                       )}

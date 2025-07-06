@@ -265,7 +265,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
             </div>
           )}
           {filters.showFavoritesOnly && (
-            <div className="flex items-center gap-1 px-2 py-1 bg-error text-white border border-error rounded-full text-xs font-medium">
+            <div className="flex items-center gap-1 px-2 py-1 bg-error text-foreground border border-error rounded-full text-xs font-medium">
               <Heart className="w-3 h-3 fill-current flex-shrink-0" />
               <span className="hidden sm:inline">
                 {getTranslation(

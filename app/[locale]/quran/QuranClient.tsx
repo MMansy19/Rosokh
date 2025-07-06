@@ -72,7 +72,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
     <div className="min-h-screen text-foreground transition-colors duration-300 arabic-text">
       <div className="max-w-7xl mx-auto">
         {/* Mobile-Optimized Header */}
-        <div className="text-center py-4 sm:py-6 px-4">
+        <div className="text-center py-4 sm:py-6 px-1">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
             {messages?.quran?.title || "القرآن الكريم"}
           </h1>
@@ -96,7 +96,7 @@ export function QuranClient({ locale, messages }: QuranClientProps) {
         />
 
         {/* Tab Content */}
-        <div className="px-2 sm:px-4 lg:px-6 pb-6">
+        <div className="sm:px-2 lg:px-4 pb-6">
           {renderTabContent()}
         </div>
       </div>

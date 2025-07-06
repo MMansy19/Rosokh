@@ -334,7 +334,7 @@ export default function ContactClient({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full hover:bg-hoverButton active:bg-buttonActive bg-button text-white hover:text-foreground py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full hover:bg-hoverButton active:bg-buttonActive bg-button text-foreground hover:text-foreground py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">

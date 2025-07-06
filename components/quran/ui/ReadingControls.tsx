@@ -3,30 +3,29 @@ import { Settings } from "lucide-react";
 
 interface ReadingControlsProps {
   showTranslation: boolean;
-  showTransliteration: boolean;
   fontSize: number;
   showSettings: boolean;
   onTranslationToggle: () => void;
-  onTransliterationToggle: () => void;
   onFontSizeChange: (size: number) => void;
   onSettingsToggle: () => void;
   messages: any;
+  currentMode: "read" | "learn";
 }
 
 export const ReadingControls: React.FC<ReadingControlsProps> = ({
   showTranslation,
-  showTransliteration,
   fontSize,
   showSettings,
   onTranslationToggle,
-  onTransliterationToggle,
   onFontSizeChange,
   onSettingsToggle,
   messages,
+  currentMode
 }) => {
   return (
     <div className="p-6 border-b border-border">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className={`flex flex-wrap justify-between gap-4 ${currentMode === "learn" ? "flex-wrap md:justify-between justify-center" : "justify-center"}`}>
+        {currentMode === "learn" && (
         <div className="flex flex-wrap gap-2">
           <button
             onClick={onTranslationToggle}
@@ -38,23 +37,12 @@ export const ReadingControls: React.FC<ReadingControlsProps> = ({
           >
             {messages?.quran?.translation || "Translation"}
           </button>
-
-          <button
-            onClick={onTransliterationToggle}
-            className={`px-4 py-2 rounded-lg transition-all duration-200 ${
-              showTransliteration
-                ? "bg-primary text-white"
-                : "bg-secondary text-foreground hover:bg-hoverButton"
-            }`}
-          >
-            {messages?.quran?.transliteration || "Transliteration"}
-          </button>
         </div>
-
+        )}
         <div className="flex items-center gap-2">
           {/* Font Size Control */}
           <div className="flex items-center space-x-2">
-            <span className="text-sm text-muted">Font:</span>
+            <span className="text-sm text-muted">{messages?.quran?.fontSize || "Font:"}</span>
             <input
               type="range"
               min="16"

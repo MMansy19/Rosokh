@@ -856,6 +856,7 @@
   },
   "quran": {
     "title": "Quran Reader",
+    "repeat": "Repeat",
     "description": "Read and explore the Holy Quran with Arabic text, translations, and audio recitations",
     "learn": "Learn",
     "read": "Read",

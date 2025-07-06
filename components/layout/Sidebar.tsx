@@ -112,14 +112,14 @@ export function Sidebar({
                 alt={messages?.common?.brand?.name || "Rosokh"}
                 width={32}
                 height={32}
-                className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+                className="w-12 h-12 sm:w-20 sm:h-20 object-contain"
                 priority
               />
-              <span
+              {/* <span
                 className={`font-bold text-lg text-foreground transition-all duration-200 ${isCollapsed ? "lg:opacity-0 lg:w-0 lg:overflow-hidden" : "opacity-100"}`}
               >
                 {messages?.common?.brand?.name || "Rosokh"}
-              </span>
+              </span> */}
             </div>
 
             {/* Mobile Close Button */}

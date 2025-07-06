@@ -207,7 +207,7 @@ export function VerseInteraction({
 
       {/* Quick Action Buttons */}
       {showActions && (
-        <div className="absolute right-0 top-0 flex gap-1 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-lg p-1 shadow-lg border border-border">
+        <div className="absolute right-0 top-0 flex gap-1 bg-background/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-lg p-1 shadow-lg border border-border">
           <button
             onClick={handlePlayAudio}
             className="p-1 hover:bg-primary/10 rounded"
@@ -252,7 +252,7 @@ export function VerseInteraction({
 
       {/* Notes Input */}
       {showNotes && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-800 border border-border rounded-lg p-3 shadow-lg z-10">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-background dark:bg-slate-800 border border-border rounded-lg p-3 shadow-lg z-10">
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}

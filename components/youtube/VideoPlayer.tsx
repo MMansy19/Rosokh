@@ -432,7 +432,7 @@ export function VideoPlayer({
           <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
             <button
               onClick={togglePlayPause}
-              className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors"
+              className="w-20 h-20 bg-background/90 rounded-full flex items-center justify-center hover:bg-background transition-colors"
             >
               <Play className="w-8 h-8 text-black ml-1" />
             </button>
@@ -453,7 +453,7 @@ export function VideoPlayer({
           {/* Progress Bar */}
           <div
             ref={progressRef}
-            className="w-full h-1 bg-white/30 rounded cursor-pointer mb-3"
+            className="w-full h-1 bg-background/30 rounded cursor-pointer mb-3"
             onClick={handleProgressClick}
           >
             <div
@@ -467,14 +467,14 @@ export function VideoPlayer({
             <div className="flex items-center gap-3">
               <button
                 onClick={skipBackward}
-                className="text-white hover:text-gray-300 transition-colors"
+                className="text-foreground hover:text-gray-300 transition-colors"
               >
                 <SkipBack className="w-5 h-5" />
               </button>
 
               <button
                 onClick={togglePlayPause}
-                className="text-white hover:text-gray-300 transition-colors"
+                className="text-foreground hover:text-gray-300 transition-colors"
               >
                 {isPlaying ? (
                   <Pause className="w-6 h-6" />
@@ -485,7 +485,7 @@ export function VideoPlayer({
 
               <button
                 onClick={skipForward}
-                className="text-white hover:text-gray-300 transition-colors"
+                className="text-foreground hover:text-gray-300 transition-colors"
               >
                 <SkipForward className="w-5 h-5" />
               </button>
@@ -493,7 +493,7 @@ export function VideoPlayer({
               <div className="flex items-center gap-2 ml-3">
                 <button
                   onClick={toggleMute}
-                  className="text-white hover:text-gray-300 transition-colors"
+                  className="text-foreground hover:text-gray-300 transition-colors"
                 >
                   {isMuted || volume === 0 ? (
                     <VolumeX className="w-5 h-5" />
@@ -513,11 +513,11 @@ export function VideoPlayer({
                     setVolume(newVolume);
                     setIsMuted(newVolume === 0);
                   }}
-                  className="w-20 h-1 bg-white/30 rounded-lg appearance-none cursor-pointer"
+                  className="w-20 h-1 bg-background/30 rounded-lg appearance-none cursor-pointer"
                 />
               </div>
 
-              <div className="text-white text-sm ml-3">
+              <div className="text-foreground text-sm ml-3">
                 {formatDuration(currentTime)} / {formatDuration(duration)}
               </div>
             </div>
@@ -525,13 +525,13 @@ export function VideoPlayer({
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowSettings(!showSettings)}
-                className="text-white hover:text-gray-300 transition-colors"
+                className="text-foreground hover:text-gray-300 transition-colors"
               >
                 <Settings className="w-5 h-5" />
               </button>
               <button
                 onClick={toggleFullscreen}
-                className="text-white hover:text-gray-300 transition-colors"
+                className="text-foreground hover:text-gray-300 transition-colors"
               >
                 {isFullscreen ? (
                   <Minimize className="w-5 h-5" />
@@ -546,7 +546,7 @@ export function VideoPlayer({
 
       {/* Settings Menu */}
       {showSettings && (
-        <div className="absolute bottom-16 right-4 bg-black/90 text-white rounded-lg p-4 min-w-48">
+        <div className="absolute bottom-16 right-4 bg-black/90 text-foreground rounded-lg p-4 min-w-48">
           <h4 className="font-semibold mb-3">Settings</h4>
 
           <div className="space-y-3">

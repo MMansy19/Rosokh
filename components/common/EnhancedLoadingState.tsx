@@ -64,7 +64,7 @@ export const EnhancedLoadingState: React.FC<LoadingStateProps> = ({
 
   const renderSpinner = () => (
     <div
-      className={`animate-spin rounded-full border-2 border-gray-300 border-t-blue-600 ${sizeClasses[size]}`}
+      className={`animate-spin rounded-full border-2 border-border border-t-blue-600 ${sizeClasses[size]}`}
     />
   );
 
@@ -141,7 +141,7 @@ export const EnhancedLoadingState: React.FC<LoadingStateProps> = ({
       {(showCancel || timeoutReached) && onCancel && (
         <button
           onClick={onCancel}
-          className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="px-4 py-2 text-sm font-medium text-gray-700 bg-background border border-border rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           aria-label="Cancel loading operation"
         >
           Cancel
@@ -180,7 +180,7 @@ export const InlineLoader: React.FC<{
 }> = ({ message = "Loading...", size = "small" }) => (
   <span className="inline-flex items-center space-x-2">
     <div
-      className={`animate-spin rounded-full border-2 border-gray-300 border-t-blue-600 ${
+      className={`animate-spin rounded-full border-2 border-border border-t-blue-600 ${
         size === "small" ? "w-3 h-3" : "w-4 h-4"
       }`}
     />
@@ -191,7 +191,7 @@ export const InlineLoader: React.FC<{
 export const FullPageLoader: React.FC<{ message?: string }> = ({
   message = "Loading application...",
 }) => (
-  <div className="fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50">
+  <div className="fixed inset-0 bg-background bg-opacity-75 flex items-center justify-center z-50">
     <EnhancedLoadingState
       message={message}
       size="large"
