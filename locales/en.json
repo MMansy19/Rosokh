@@ -901,6 +901,9 @@
     "verses_count": "{count} verses",
     "surah": "Surah",
     "bismillah": "In the name of Allah, the Most Gracious, the Most Merciful",
+    "autoPlay": "Auto Play",
+    "reciter": "Reciter",
+    "playAll": "Play All",
     "errors": {
       "audioPlay": "Failed to play audio. Please check your connection and try again.",
       "surahsLoad": "Failed to load Quran chapters",

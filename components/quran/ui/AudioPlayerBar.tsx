@@ -70,11 +70,6 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               </div>
               <div className="text-xs sm:text-sm flex items-center gap-2">
                 <span>آية {audioPlayer.currentAyah}</span>
-                {repeatMode !== "none" && (
-                  <span className="text-xs">
-                    {repeatMode === "verse" ? "🔂" : "🔁"}
-                  </span>
-                )}
               </div>
             </div>
             
@@ -130,7 +125,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                 className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-xs sm:text-sm flex items-center gap-1"
                 title="تشغيل السورة كاملة"
               >
-                <span className="hidden sm:inline">تشغيل الكل</span>
+                <span className="">{messages?.quran?.playAll || "تشغيل الكل"}</span>
                 <span className="sm:hidden">▶️</span>
               </button>
 
@@ -167,7 +162,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               {/* Reciter Selection */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
-                  القارئ
+                  {messages?.quran?.reciter || "القارئ"}
                 </label>
                 <select
                   value={audioPlayer.reciter}
@@ -176,7 +171,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                 >
                   {RECITERS.map((reciter) => (
                     <option key={reciter.id} value={reciter.id}>
-                      {reciter.name}
+                      {reciter.name} - {reciter.arabicName}
                     </option>
                   ))}
                 </select>
@@ -195,7 +190,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                   title="وضع التكرار"
                 >
                   <Repeat className="w-4 h-4" />
-                  <span className="hidden sm:inline">{messages?.quran?.repeat || "تكرار"}</span>
+                  <span className="">{messages?.quran?.repeat || "تكرار"}</span>
                 </button>
 
                 {/* Auto Play */}
@@ -208,7 +203,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                   }`}
                   title="التشغيل التلقائي"
                 >
-                  <span className="hidden sm:inline">{messages?.youtube?.autoPlay || "التشغيل التلقائي"}</span>
+                  <span className="">{messages?.quran?.autoPlay || "التشغيل التلقائي"}</span>
                 </button>
 
                 {/* Speed Control */}
