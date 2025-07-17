@@ -11,7 +11,6 @@ export { ReadingControls } from "./ui/ReadingControls";
 export { SurahHeader } from "./ui/SurahHeader";
 export { AyahItem } from "./ui/AyahItem";
 export { AyahsList } from "./ui/AyahsList";
-export { ReciterSelection } from "./ui/ReciterSelection";
 
 // Hooks
 export { useSurahs } from "./hooks/useSurahs";
