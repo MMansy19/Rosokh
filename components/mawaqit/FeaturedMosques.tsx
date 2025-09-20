@@ -60,14 +60,19 @@ export function FeaturedMosques({ locale, messages, onMosqueSelect }: FeaturedMo
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+    <div className="card group rounded-lg shadow-lg p-6">
       <div className="mb-6">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          {messages?.mawaqit?.featured_mosques?.title || 'Featured Mosques'}
+        <h3 className="text-2xl font-bold text-foreground mb-2">
+          {messages?.mawaqit?.featured_mosques?.title || 
+            (locale === 'ar' ? 'المساجد المميزة' : 
+             locale === 'ru' ? 'Рекомендуемые мечети' : 
+             'Featured Mosques')}
         </h3>
-        <p className="text-gray-600 dark:text-gray-300">
+        <p className="text-muted">
           {messages?.mawaqit?.featured_mosques?.description || 
-            'Discover prayer times for renowned mosques around the world'}
+            (locale === 'ar' ? 'اكتشف أوقات الصلاة للمساجد المشهورة حول العالم' : 
+             locale === 'ru' ? 'Откройте для себя время молитв в знаменитых мечетях по всему миру' : 
+             'Discover prayer times for renowned mosques around the world')}
         </p>
       </div>
 
@@ -76,30 +81,32 @@ export function FeaturedMosques({ locale, messages, onMosqueSelect }: FeaturedMo
           <div
             key={mosque.id}
             onClick={() => onMosqueSelect(mosque.id)}
-            className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:bg-emerald-50 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200 group hover:shadow-md"
+            className="border border-primary/20 rounded-lg p-4 hover:bg-surface cursor-pointer transition-all duration-200 group hover:shadow-md"
           >
             <div className="flex items-start space-x-3">
-              <div className="bg-emerald-100 dark:bg-emerald-900 p-2 rounded-lg group-hover:bg-emerald-200 dark:group-hover:bg-emerald-800 transition-colors">
-                <ClockIcon className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+              <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
+                <ClockIcon className="h-5 w-5 text-primary" />
               </div>
               
               <div className="flex-1 min-w-0">
-                <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                   {mosque.name}
                 </h4>
                 
-                <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300 mt-1">
+                <div className="flex items-center space-x-2 text-sm text-muted mt-1">
                   <MapPinIcon className="h-4 w-4" />
                   <span>{mosque.location}, {mosque.country}</span>
                 </div>
                 
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-2">
+                <p className="text-sm text-muted mt-2 line-clamp-2">
                   {mosque.description}
                 </p>
                 
                 <div className="mt-3">
-                  <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                    Click to view prayer times →
+                  <span className="text-xs text-primary font-medium">
+                    {locale === 'ar' ? 'انقر لعرض أوقات الصلاة ←' : 
+                     locale === 'ru' ? 'Нажмите, чтобы увидеть время молитв →' : 
+                     'Click to view prayer times →'}
                   </span>
                 </div>
               </div>
@@ -108,11 +115,13 @@ export function FeaturedMosques({ locale, messages, onMosqueSelect }: FeaturedMo
         ))}
       </div>
 
-      <div className="mt-6 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+      <div className="mt-6 p-4 bg-primary/10 rounded-lg">
         <div className="flex items-center space-x-2 text-sm">
-          <ClockIcon className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-          <span className="text-emerald-800 dark:text-emerald-200 font-medium">
-            All prayer times are powered by Mawaqit.net and updated in real-time
+          <ClockIcon className="h-4 w-4 text-primary" />
+          <span className="text-foreground font-medium">
+            {locale === 'ar' ? 'جميع أوقات الصلاة مدعومة من Mawaqit.net ومحدّثة في الوقت الفعلي' : 
+             locale === 'ru' ? 'Все время молитв предоставлены Mawaqit.net и обновляются в реальном времени' : 
+             'All prayer times are powered by Mawaqit.net and updated in real-time'}
           </span>
         </div>
       </div>

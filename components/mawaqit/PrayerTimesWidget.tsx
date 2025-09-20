@@ -58,17 +58,21 @@ export function PrayerTimesWidget({ mosqueId, locale, messages }: PrayerTimesWid
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+    <div className="card group rounded-lg shadow-lg overflow-hidden">
       {/* Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-white">
+      <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-primary-foreground">
         <div className="flex items-center space-x-3 mb-2">
           <ClockIcon className="h-6 w-6" />
           <h3 className="text-2xl font-bold">
-            {messages?.mawaqit?.prayer_times?.title || 'Prayer Times'}
+            {messages?.mawaqit?.prayer_times?.title || 
+              (locale === 'ar' ? 'أوقات الصلاة' : locale === 'ru' ? 'Время молитв' : 'Prayer Times')}
           </h3>
         </div>
-        <p className="text-emerald-50">
-          {messages?.mawaqit?.prayer_times?.description || 'Live prayer times and mosque information'}
+        <p className="text-primary-foreground/90">
+          {messages?.mawaqit?.prayer_times?.description || 
+            (locale === 'ar' ? 'أوقات الصلاة المباشرة ومعلومات المسجد' : 
+             locale === 'ru' ? 'Время молитв в реальном времени и информация о мечети' : 
+             'Live prayer times and mosque information')}
         </p>
       </div>
 
@@ -76,28 +80,36 @@ export function PrayerTimesWidget({ mosqueId, locale, messages }: PrayerTimesWid
       <div className="p-6">
         {isLoading && (
           <div className="flex flex-col items-center justify-center py-12 space-y-4">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
-            <p className="text-gray-600 dark:text-gray-300">
-              {messages?.mawaqit?.prayer_times?.loading || 'Loading prayer times...'}
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <p className="text-muted">
+              {messages?.mawaqit?.prayer_times?.loading || 
+                (locale === 'ar' ? 'جاري تحميل أوقات الصلاة...' : 
+                 locale === 'ru' ? 'Загрузка времени молитв...' : 
+                 'Loading prayer times...')}
             </p>
           </div>
         )}
 
         {hasError && (
           <div className="flex flex-col items-center justify-center py-12 space-y-4">
-            <div className="text-red-500">
+            <div className="text-destructive">
               <GlobeAltIcon className="h-12 w-12 mx-auto mb-2" />
             </div>
-            <p className="text-gray-600 dark:text-gray-300 text-center">
-              {messages?.mawaqit?.prayer_times?.error || 'Unable to load prayer times. Please try again later.'}
+            <p className="text-muted text-center">
+              {messages?.mawaqit?.prayer_times?.error || 
+                (locale === 'ar' ? 'تعذر تحميل أوقات الصلاة. يرجى المحاولة مرة أخرى لاحقاً.' : 
+                 locale === 'ru' ? 'Не удалось загрузить время молитв. Пожалуйста, попробуйте позже.' : 
+                 'Unable to load prayer times. Please try again later.')}
             </p>
             <a
               href={getMosquePageUrl(mosqueId)}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700 transition-colors"
+              className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors"
             >
-              View on Mawaqit.net
+              {locale === 'ar' ? 'عرض على Mawaqit.net' : 
+               locale === 'ru' ? 'Посмотреть на Mawaqit.net' : 
+               'View on Mawaqit.net'}
             </a>
           </div>
         )}
@@ -109,7 +121,7 @@ export function PrayerTimesWidget({ mosqueId, locale, messages }: PrayerTimesWid
               src={getMosqueUrl(mosqueId)}
               frameBorder="0"
               scrolling="no"
-              className="w-full h-96 rounded-lg border-0"
+              className="w-full h-96 rounded-lg border border-primary/20"
               title={`Prayer Times - ${mosqueId}`}
               onLoad={handleIframeLoad}
               onError={handleIframeError}
@@ -122,11 +134,15 @@ export function PrayerTimesWidget({ mosqueId, locale, messages }: PrayerTimesWid
 
         {/* Footer Actions */}
         {!isLoading && !hasError && (
-          <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-600">
+          <div className="mt-6 pt-4 border-t border-primary/20">
             <div className="flex flex-col sm:flex-row gap-3 justify-between items-center">
-              <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300">
+              <div className="flex items-center space-x-2 text-sm text-muted">
                 <MapPinIcon className="h-4 w-4" />
-                <span>Powered by Mawaqit.net</span>
+                <span>
+                  {locale === 'ar' ? 'مدعوم من Mawaqit.net' : 
+                   locale === 'ru' ? 'При поддержке Mawaqit.net' : 
+                   'Powered by Mawaqit.net'}
+                </span>
               </div>
               
               <div className="flex space-x-3">
@@ -134,18 +150,22 @@ export function PrayerTimesWidget({ mosqueId, locale, messages }: PrayerTimesWid
                   href={getMosquePageUrl(mosqueId)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 text-sm font-medium transition-colors"
+                  className="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
                 >
-                  View Full Details
+                  {locale === 'ar' ? 'عرض التفاصيل الكاملة' : 
+                   locale === 'ru' ? 'Посмотреть подробности' : 
+                   'View Full Details'}
                 </a>
-                <span className="text-gray-300 dark:text-gray-600">|</span>
+                <span className="text-muted">|</span>
                 <a
                   href="https://mawaqit.net/map"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 text-sm font-medium transition-colors"
+                  className="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
                 >
-                  Find Other Mosques
+                  {locale === 'ar' ? 'البحث عن مساجد أخرى' : 
+                   locale === 'ru' ? 'Найти другие мечети' : 
+                   'Find Other Mosques'}
                 </a>
               </div>
             </div>
