@@ -12,6 +12,7 @@
       "youtube": "YouTube",
       "games": "Games",
       "khatma": "Khatma",
+      "mawaqit": "Prayer Times",
       "calendar": "Calendar",
       "analytics": "Analytics",
       "contact": "Contact Us",
@@ -58,6 +59,7 @@
         "youtube": "Watch curated Islamic video content from trusted sources",
         "games": "Interactive games to enhance Quran memorization",
         "khatma": "Track your Quran reading progress",
+        "mawaqit": "Find accurate prayer times for mosques worldwide",
         "calendar": "Stay updated with Hijri dates and prayer times",
         "analytics": "Monitor your views and downloads with analytics",
         "contact": "Get in touch with us for support"
@@ -575,6 +577,25 @@
         "arabicTitle": "عيد الأضحى",
         "description": "The festival of sacrifice"
       }
+    }
+  },
+  "mawaqit": {
+    "title": "Prayer Times - Mawaqit",
+    "description": "Find accurate prayer times for mosques worldwide. Locate nearby mosques and access their prayer schedules with Mawaqit integration.",
+    "mosque_finder": {
+      "title": "Find Mosques",
+      "search_placeholder": "Search mosque, city, or country...",
+      "find_button": "Find Mosques"
+    },
+    "prayer_times": {
+      "title": "Prayer Times",
+      "description": "Live prayer times and mosque information",
+      "loading": "Loading prayer times...",
+      "error": "Unable to load prayer times. Please try again later."
+    },
+    "featured_mosques": {
+      "title": "Featured Mosques",
+      "description": "Discover prayer times for renowned mosques around the world"
     }
   },
   "analytics": {
