@@ -118,6 +118,7 @@ export function Footer({ locale, messages }: FooterProps) {
                 { key: "quran", href: "/quran" },
                 { key: "audio", href: "/audio" },
                 { key: "youtube", href: "/youtube" },
+                { key: "mawaqit", href: "/mawaqit" },
                 // { key: "calendar", href: "/calendar" },
                 // { key: "khatma", href: "/khatma" },
               ].map((link) => (
