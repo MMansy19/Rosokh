@@ -22,10 +22,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:turbo": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node init && next dev",
+    "dev:turbo": "node init && next dev --turbopack",
+    "build": "node init && next build",
+    "start": "node init && next start",
     "lint": "next lint",
     "update-playlist-manifest": "node scripts/update-playlist-manifest.js"
   },
