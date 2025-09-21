@@ -1,0 +1,116 @@
+{
+  "name": "Rosokh - Islamic Multimedia Platform",
+  "short_name": "Rosokh",
+  "description": "Comprehensive Islamic multimedia platform for Quran reading, audio recitations, educational videos, and spiritual learning",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10B981",
+  "orientation": "portrait-primary",
+  "categories": ["education", "religion", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Rosokh Desktop Interface"
+    },
+    {
+      "src": "/logo/no-bg.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Rosokh Mobile Interface"
+    }
+  ],
+  "scope": "/",
+  "id": "/",
+  "shortcuts": [
+    {
+      "name": "Quran Reader",
+      "short_name": "Quran",
+      "description": "Read and study the Holy Quran",
+      "url": "/quran",
+      "icons": [{ "src": "/logo/no-bg.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Audio Library",
+      "short_name": "Audio",
+      "description": "Listen to Islamic lectures and recitations",
+      "url": "/audio",
+      "icons": [{ "src": "/logo/no-bg.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Prayer Times",
+      "short_name": "Salah",
+      "description": "Check prayer times for your location",
+      "url": "/mawaqit",
+      "icons": [{ "src": "/logo/no-bg.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Hijri Calendar",
+      "short_name": "Calendar",
+      "description": "View Islamic calendar and important dates",
+      "url": "/calendar",
+      "icons": [{ "src": "/logo/no-bg.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

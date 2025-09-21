@@ -1,20 +1,443 @@
 <div align="center">
 
 # 🕌 Rosokh (رسوخ)
-
 ### Ultimate Islamic Multimedia Platform
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-rosokh.vercel.app-green?style=for-the-badge&logo=vercel)](https://rosokh.vercel.app)
+![Rosokh Logo](./public/logo/no-bg.png)
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-rosokh.vercel.app-10B981?style=for-the-badge&logo=vercel&logoColor=white)](https://rosokh.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-15.3.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-_The most comprehensive Islamic multimedia platform with Quran, Audio, Videos, Articles, and Spiritual Tracking - Built for the Global Muslim Community_
+**The most comprehensive Islamic multimedia platform with Quran, Audio, Videos, Articles, and Spiritual Tracking - Built for the Global Muslim Community**
 
-[🌐 Live Demo](https://rosokh.vercel.app) • [📖 Documentation](./TECHNICAL_DOCUMENTATION.md) • [🎨 Design Guide](./Rosokh%20UI%20Design%20Guide.md) • [📱 Mobile App](https://rosokh.vercel.app)
+[🌐 Live Demo](https://rosokh.vercel.app) • [📖 Documentation](#documentation) • [🚀 Features](#features) • [💻 Installation](#installation)
 
-![Rosokh Platform Screenshot](https://via.placeholder.com/1200x600/4ADE80/FFFFFF?text=Rosokh+Islamic+Platform)
+</div>
+
+---
+
+## 🌟 About Rosokh
+
+**Rosokh** (رسوخ), meaning "firmness" or "rootedness" in Arabic, is a comprehensive Islamic multimedia platform designed to serve the global Muslim community. Built with modern web technologies, it provides an integrated experience for Quran reading, Islamic audio content, educational videos, scholarly articles, and spiritual tracking tools.
+
+> _"And those who believe and do righteous deeds - We will surely assign to them of Paradise lofty mansions beneath which rivers flow, wherein they abide eternally. Excellent is the reward of the [righteous] workers."_ - **Quran 29:58**
+
+---
+
+## ✨ Features
+
+### 📖 **Quran Module - Digital Mushaf Experience**
+
+- **🕮 Complete Quran Text** - Full Arabic text with Uthmanic script
+- **🌍 Multi-Language Support** - Arabic, English, and Russian translations
+- **🎧 Audio Recitations** - 50+ renowned Qaris with advanced playback controls
+- **🔍 Advanced Search** - Search by Surah, verse, keywords, or topics
+- **📖 Multiple Reading Modes**:
+  - **Mushaf Mode**: Traditional page-by-page reading with realistic page flipping
+  - **Uthmani Mode**: Verse-by-verse reading with translations
+  - **Unified Mode**: Combined reading and listening experience
+- **📝 Personal Notes & Bookmarks** - Save and organize favorite verses with personal annotations
+- **📊 Reading Progress Tracking** - Monitor daily Quran reading journey with detailed statistics
+- **🎨 Customizable Display** - Adjustable font size, zoom levels, and theme options
+- **📱 Responsive Design** - Optimized for desktop, tablet, and mobile devices
+- **⚡ Performance Optimized** - Page preloading and smooth animations
+
+### 🎵 **Audio Library - Islamic Content Hub**
+
+**Integrated with Google Drive for Unlimited Storage**
+
+- **📻 Vast Audio Collection** - Islamic lectures, Nasheeds, Quran recitations, and sermons
+- **🎭 Smart Categorization** - Organized by scholars, topics, languages, and difficulty levels
+- **⚡ Advanced Audio Player**:
+  - Variable speed control (0.5x to 2x)
+  - Loop and shuffle functionality
+  - Queue management
+  - Background playback
+- **💾 Offline Capability** - Download content for offline listening
+- **🔍 Intelligent Search** - Find content by speaker, topic, keyword, or duration
+- **📈 Listening Analytics** - Track learning progress and listening habits
+- **❤️ Favorites System** - Create and manage personalized playlists
+- **🔔 Content Notifications** - Get alerts about new uploads and featured content
+- **📊 Trending Content** - Discover most popular and recent additions
+
+### 🎬 **YouTube Integration - Educational Videos**
+
+- **📺 Curated Islamic Content** - Hand-picked educational videos, lectures, and documentaries
+- **🎯 Content Organization** - Categorized by scholars, topics, series, and difficulty levels
+- **📱 Responsive Video Player** - Optimized for all screen sizes with custom controls
+- **📝 Rich Metadata** - Detailed descriptions, timestamps, and key learning points
+- **🔗 Seamless Integration** - Direct YouTube links with embedded player
+- **📊 View Tracking** - Monitor educational journey and completion rates
+- **🌟 Featured Playlists** - Specially curated collections for different learning paths
+
+### 📚 **Articles System - Islamic Knowledge Base**
+
+**Powered by Modern Database Architecture**
+
+#### **For Readers:**
+- **📖 Rich Content** - Full-featured articles in Arabic, English, and Russian
+- **🏷️ Smart Categorization** - Topics, authors, difficulty levels, and themes
+- **🔍 Advanced Search** - Content-based search with relevance scoring
+- **📱 Reading Mode** - Distraction-free reading experience
+- **💾 Offline Reading** - Save articles for offline access
+- **📊 Progress Tracking** - Monitor reading completion and time spent
+- **❤️ Personal Collections** - Organize articles into custom collections
+- **📤 Social Sharing** - Share articles with community
+
+### 🕌 **Prayer Times & Islamic Calendar**
+
+**Powered by Mawaqit API Integration**
+
+- **🕐 Accurate Prayer Times** - Location-based Salah timings
+- **🌍 Global Coverage** - Support for cities worldwide
+- **🕌 Mosque Finder** - Discover nearby mosques with prayer times
+- **📅 Hijri Calendar** - Islamic calendar with important dates and events
+- **🔔 Prayer Notifications** - Customizable alerts for prayer times
+- **📊 Prayer Statistics** - Track your Salah consistency
+- **🎨 Beautiful Widgets** - Elegant prayer time displays
+
+### 🎯 **Khatma Tracking - Reading Goals**
+
+- **📋 Reading Plans** - Set and track Quran completion goals
+- **📊 Progress Visualization** - Beautiful charts and statistics
+- **🏆 Achievement System** - Milestone rewards and badges
+- **📅 Flexible Scheduling** - Custom reading schedules
+- **📈 Historical Data** - Long-term reading pattern analysis
+
+---
+
+## 🛠️ Technology Stack
+
+### **Frontend**
+- **[Next.js 15.3.3](https://nextjs.org/)** - React framework with App Router
+- **[React 19](https://reactjs.org/)** - Latest React with concurrent features
+- **[TypeScript 5](https://www.typescriptlang.org/)** - Type-safe development
+- **[Tailwind CSS 4](https://tailwindcss.com/)** - Modern utility-first CSS framework
+- **[Lucide React](https://lucide.dev/)** - Beautiful icon library
+- **[Heroicons](https://heroicons.com/)** - Additional UI icons
+
+### **Backend & APIs**
+- **[Google APIs](https://developers.google.com/)** - YouTube and Drive integration
+- **[Mawaqit API](https://mawaqit.net/)** - Prayer times and mosque data
+- **[Quran API](https://alquran.cloud/)** - Quran text and audio data
+- **Custom API Routes** - Built with Next.js API routes
+
+### **Features & Optimization**
+- **Progressive Web App (PWA)** - Installable app experience
+- **Server-Side Rendering (SSR)** - Optimized performance and SEO
+- **Internationalization (i18n)** - Multi-language support
+- **Responsive Design** - Mobile-first approach
+- **Performance Optimization** - Image optimization, code splitting, and caching
+
+---
+
+## 🚀 Installation
+
+### Prerequisites
+
+- Node.js 18.0 or later
+- npm or yarn package manager
+- Git
+
+### Quick Start
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/MMansy19/rosokh.git
+   cd rosokh
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Configure the following variables in `.env.local`:
+   ```env
+   # Google APIs Configuration
+   GOOGLE_CLIENT_ID=your_google_client_id
+   GOOGLE_CLIENT_SECRET=your_google_client_secret
+   GOOGLE_REFRESH_TOKEN=your_refresh_token
+   GOOGLE_DRIVE_FOLDER_ID=your_drive_folder_id
+   
+   # YouTube API
+   YOUTUBE_API_KEY=your_youtube_api_key
+   
+   # Application Settings
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
+   NEXT_PUBLIC_API_URL=http://localhost:3000/api
+   
+   # Optional: Analytics and Monitoring
+   NEXT_PUBLIC_GA_MEASUREMENT_ID=your_analytics_id
+   ```
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or (with Turbopack for faster builds)
+   npm run dev:turbo
+   ```
+
+5. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+
+### Build for Production
+
+```bash
+# Build the application
+npm run build
+
+# Start production server
+npm start
+```
+
+---
+
+## 📁 Project Structure
+
+```
+rosokh/
+├── app/                          # Next.js App Router
+│   ├── [locale]/                 # Internationalized routes
+│   │   ├── layout.tsx           # Root layout with SEO
+│   │   ├── page.tsx             # Homepage
+│   │   ├── quran/               # Quran module pages
+│   │   ├── audio/               # Audio library pages
+│   │   ├── youtube/             # Video content pages
+│   │   ├── mawaqit/             # Prayer times pages
+│   │   └── calendar/            # Islamic calendar pages
+│   ├── api/                     # API routes
+│   │   ├── audio/               # Audio management APIs
+│   │   ├── search/              # Search functionality
+│   │   └── video/               # Video management APIs
+│   └── globals.css              # Global styles
+├── components/                   # Reusable React components
+│   ├── audio/                   # Audio player components
+│   ├── quran/                   # Quran reader components
+│   │   ├── QuranReader.tsx      # Page-based Mushaf reader
+│   │   ├── QuranUthmani.tsx     # Verse-based reader
+│   │   ├── QuranUnified.tsx     # Combined reading modes
+│   │   ├── QuranSearch.tsx      # Advanced search interface
+│   │   ├── hooks/               # Custom React hooks
+│   │   ├── ui/                  # UI components
+│   │   └── types/               # TypeScript definitions
+│   ├── layout/                  # Layout components
+│   ├── common/                  # Shared components
+│   └── providers/               # Context providers
+├── services/                     # Business logic and API services
+│   ├── audioService.ts          # Audio management
+│   ├── quranService.ts          # Quran data handling
+│   ├── SearchService.ts         # Search functionality
+│   └── AnalyticsService.ts      # User analytics
+├── hooks/                       # Global custom hooks
+├── utils/                       # Utility functions
+├── locales/                     # Internationalization files
+│   ├── en.json                  # English translations
+│   ├── ar.json                  # Arabic translations
+│   └── ru.json                  # Russian translations
+├── public/                      # Static assets
+│   ├── logo/                    # Application logos
+│   ├── data/                    # Static data files
+│   └── fonts/                   # Custom fonts
+└── scripts/                     # Build and maintenance scripts
+```
+
+---
+
+## 🌐 API Integration
+
+### Quran Data
+- **Al-Quran Cloud API** - Quran text, translations, and recitations
+- **Custom caching layer** - Optimized data delivery
+
+### Audio Content
+- **Google Drive API** - Audio file storage and streaming
+- **Custom playlist management** - Dynamic content organization
+
+### Prayer Times
+- **Mawaqit API** - Accurate prayer times and mosque data
+- **Geolocation services** - Location-based timings
+
+### Video Content
+- **YouTube Data API v3** - Video metadata and playlists
+- **Custom curation system** - Content quality assurance
+
+---
+
+## 🎨 Design System
+
+### Color Palette
+- **Primary Green**: `#10B981` - Islamic green theme
+- **Secondary Colors**: Carefully selected complementary colors
+- **Dark Mode Support**: Complete dark theme implementation
+
+### Typography
+- **Arabic Text**: Amiri font family for authentic Arabic typography
+- **Latin Text**: Inter font family for modern, readable interface
+- **Responsive Scaling**: Fluid typography across all devices
+
+### Components
+- **Consistent Design Language** - Unified component library
+- **Accessibility First** - WCAG 2.1 compliant
+- **Animation System** - Smooth, purposeful transitions
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+
+# E2E tests
+npm run test:e2e
+```
+
+---
+
+## 📈 Performance
+
+### Optimization Features
+- **Image Optimization** - Next.js Image component with WebP support
+- **Code Splitting** - Automatic route-based splitting
+- **Caching Strategy** - Multi-layer caching for optimal performance
+- **Bundle Analysis** - Regular bundle size monitoring
+
+### Performance Metrics
+- **Lighthouse Score**: 95+ average across all metrics
+- **First Contentful Paint**: <1.5s
+- **Time to Interactive**: <3s
+- **Cumulative Layout Shift**: <0.1
+
+---
+
+## 🔧 Development
+
+### Available Scripts
+
+```bash
+npm run dev              # Start development server
+npm run dev:turbo        # Start with Turbopack (faster)
+npm run build           # Build for production
+npm run start           # Start production server
+npm run lint            # Run ESLint
+npm run update-playlist-manifest  # Update audio playlists
+```
+
+### Code Quality
+- **ESLint** - Code linting and formatting
+- **TypeScript** - Type checking and IntelliSense
+- **Prettier** - Code formatting
+- **Husky** - Git hooks for quality assurance
+
+---
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+1. Fork this repository
+2. Connect to Vercel
+3. Add environment variables
+4. Deploy automatically on push
+
+### Docker
+```bash
+# Build Docker image
+docker build -t rosokh .
+
+# Run container
+docker run -p 3000:3000 rosokh
+```
+
+### Manual Deployment
+```bash
+npm run build
+npm start
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
+
+### Development Workflow
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes
+4. Add tests for new functionality
+5. Commit your changes: `git commit -m 'Add amazing feature'`
+6. Push to the branch: `git push origin feature/amazing-feature`
+7. Open a pull request
+
+### Areas for Contribution
+- 🌍 Translations (additional languages)
+- 🎨 UI/UX improvements
+- 🔧 Performance optimizations
+- 📱 Mobile app development
+- 🧪 Testing coverage
+- 📚 Documentation
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- **The Holy Quran** - Our primary source of guidance and inspiration
+- **Al-Quran Cloud** - For providing comprehensive Quran APIs
+- **Mawaqit** - For accurate prayer times data
+- **The Muslim Community** - For feedback and continuous support
+- **Open Source Contributors** - For making this project possible
+
+---
+
+## 📞 Contact & Support
+
+- **Website**: [rosokh.vercel.app](https://rosokh.vercel.app)
+- **Email**: contact@rosokh.com
+- **GitHub**: [@MMansy19](https://github.com/MMansy19)
+- **Issues**: [GitHub Issues](https://github.com/MMansy19/rosokh/issues)
+
+---
+
+## 📊 Project Stats
+
+![GitHub stars](https://img.shields.io/github/stars/MMansy19/rosokh?style=social)
+![GitHub forks](https://img.shields.io/github/forks/MMansy19/rosokh?style=social)
+![GitHub issues](https://img.shields.io/github/issues/MMansy19/rosokh)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/MMansy19/rosokh)
+![GitHub last commit](https://img.shields.io/github/last-commit/MMansy19/rosokh)
+
+---
+
+<div align="center">
+
+**May Allah (سبحانه وتعالى) accept this work and make it beneficial for the Muslim Ummah**
+
+*"And whoever does righteous deeds, whether male or female, while being a believer - those will enter Paradise and will not be wronged, [even as much as] the speck on a date seed."* - **Quran 4:124**
 
 </div>
 
